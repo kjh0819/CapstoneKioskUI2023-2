@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-
 namespace Kiosk_UI
 {
     public partial class MainForm : Form
@@ -18,8 +17,18 @@ namespace Kiosk_UI
         {
             InitializeComponent();
         }
-
-        public void AddItem(string name, int cost, categories category, string icon)
+        /*
+        public categories Category { get => _category; set => _category = value; }
+        public Image Icon { get => txtImg.Image; set => txtImg.Image = value; }
+        public string Title { get => lblTitle.Text; set => lblTitle.Text = value; }
+        public int Cost { get => _cost; set { _cost = value; lblCost.Text =Convert.ToString(_cost)+"원"; } }
+        public bool Caffein { get; set; }
+        public bool Milk { get; set; }
+        public bool Sweet { get; set; }
+        //Tag는 Object클래스 이름으로 사용됨 => Detial로 변경
+        public string[] Detail { get; set; }
+        */
+        public void AddItem(string name, int cost, categories category, string icon, string[] detail)
         {
             MenuPanel.Controls.Add(new item()
             {
@@ -27,7 +36,7 @@ namespace Kiosk_UI
                 Cost = cost,
                 Category = category,
                 Icon = Image.FromFile("icons/" + icon),
-                
+                Detail=detail
 
             });
             
@@ -37,50 +46,64 @@ namespace Kiosk_UI
             
             
         }
-        class CsvParser
+        class MenuParser
         {
-            public static string parser(string csv)
+            public static string[] parser(string csv)
             {
-                var test = File.ReadAllText(csv);
+                var lines = File.ReadAllText(csv);
+                string[] results = lines.Split('\n');
 
-                return "0";
+                int j = 0;
+                foreach (string line in lines.Split('\n'))
+                {
+                    string[] tmp=new string[5];
+                    int i = 0;
+                    foreach (string text in line.Split(','))
+                    {
+                        tmp[i] = text;
+                        i++;
+                    }
+                    results[j]=tmp[j];
+                    j++;
+                }
+                return results;
             }
         }
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            CsvParser.parser("Resources/menu.csv");
+            MenuParser.parser("Resources/menu.csv");
         //음료
         AddItem("아메리카노", 2000, categories.drink, "americano.png");
-            AddItem("에스프레소", 2000, categories.drink, "espresso.png");
-            AddItem("카푸치노", 3000, categories.drink, "cappuccino.png");
-            AddItem("녹차라떼", 3500, categories.drink, "greentealatte.png");
-            AddItem("아이스초코", 2500, categories.drink, "icedchocolate.png");
-            AddItem("카페라떼", 2500, categories.drink, "cafelatte.png");
-            AddItem("카라멜 마끼아또", 2500, categories.drink, "caramelmacchiato.png");
-            AddItem("커피 플렛치노", 2500, categories.drink, "coffeeflatccino.png");
-            AddItem("아이스티", 2500, categories.drink, "icedtea.png");
-            AddItem("밀크티", 2500, categories.drink, "milktea.png");
-            AddItem("요거트 플렛치노", 2500, categories.drink, "yogurtflatccino.png");
-            AddItem("민트초코", 2500, categories.drink, "mintchocolate.png");
-            AddItem("아인슈페너", 2500, categories.drink, "einspenner.png");
-            AddItem("레몬그라스차", 2500, categories.drink, "lemongrasstea.png");
-            AddItem("페퍼민트차", 2500, categories.drink, "pepperminttea.png");
-            AddItem("로즈마리차", 2500, categories.drink, "rosemarytea.png");
-            AddItem("캐모마일차", 2500, categories.drink, "chamomiletea.png");
+        AddItem("에스프레소", 2000, categories.drink, "espresso.png");
+        AddItem("카푸치노", 3000, categories.drink, "cappuccino.png");
+        AddItem("녹차라떼", 3500, categories.drink, "greentealatte.png");
+        AddItem("아이스초코", 2500, categories.drink, "icedchocolate.png");
+        AddItem("카페라떼", 2500, categories.drink, "cafelatte.png");
+        AddItem("카라멜 마끼아또", 2500, categories.drink, "caramelmacchiato.png");
+        AddItem("커피 플렛치노", 2500, categories.drink, "coffeeflatccino.png");
+        AddItem("아이스티", 2500, categories.drink, "icedtea.png");
+        AddItem("밀크티", 2500, categories.drink, "milktea.png");
+        AddItem("요거트 플렛치노", 2500, categories.drink, "yogurtflatccino.png");
+        AddItem("민트초코", 2500, categories.drink, "mintchocolate.png");
+        AddItem("아인슈페너", 2500, categories.drink, "einspenner.png");
+        AddItem("레몬그라스차", 2500, categories.drink, "lemongrasstea.png");
+        AddItem("페퍼민트차", 2500, categories.drink, "pepperminttea.png");
+        AddItem("로즈마리차", 2500, categories.drink, "rosemarytea.png");
+        AddItem("캐모마일차", 2500, categories.drink, "chamomiletea.png");
 
-            //디저트
-            AddItem("베이글", 1500, categories.dessert, "bagel.png");
-            AddItem("블루베리 베이글", 1500, categories.dessert, "blueberrybagel.png");
-            AddItem("조각 치즈케이크", 1500, categories.dessert, "cheesecake.png");
-            AddItem("조각 초콜릿케이크", 1500, categories.dessert, "chocolatecake.png");
-            AddItem("조각 딸기케이크", 1500, categories.dessert, "strawberrycake.png");
-            AddItem("초코칩쿠키", 1500, categories.dessert, "cookie.png");
-            AddItem("더블초코칩 쿠키", 1500, categories.dessert, "doublecookie.png");
-            AddItem("녹차 쿠키", 1500, categories.dessert, "greenteacookie.png");
-            AddItem("허니브레드", 1500, categories.dessert, "honeybread.png");
-            AddItem("딸기마카롱", 1500, categories.dessert, "strawberrymacaron.png");
-            AddItem("초코마카롱", 1500, categories.dessert, "chocomacaron.png");
-            AddItem("녹차마카롱", 1500, categories.dessert, "greenteamacaron.png");
+        //디저트
+        AddItem("베이글", 1500, categories.dessert, "bagel.png");
+        AddItem("블루베리 베이글", 1500, categories.dessert, "blueberrybagel.png");
+        AddItem("조각 치즈케이크", 1500, categories.dessert, "cheesecake.png");
+        AddItem("조각 초콜릿케이크", 1500, categories.dessert, "chocolatecake.png");
+        AddItem("조각 딸기케이크", 1500, categories.dessert, "strawberrycake.png");
+        AddItem("초코칩쿠키", 1500, categories.dessert, "cookie.png");
+        AddItem("더블초코칩 쿠키", 1500, categories.dessert, "doublecookie.png");
+        AddItem("녹차 쿠키", 1500, categories.dessert, "greenteacookie.png");
+        AddItem("허니브레드", 1500, categories.dessert, "honeybread.png");
+        AddItem("딸기마카롱", 1500, categories.dessert, "strawberrymacaron.png");
+        AddItem("초코마카롱", 1500, categories.dessert, "chocomacaron.png");
+        AddItem("녹차마카롱", 1500, categories.dessert, "greenteamacaron.png");
             
 
         }
