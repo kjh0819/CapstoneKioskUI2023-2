@@ -108,7 +108,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Resources\menu.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -259,6 +258,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\menu.csv" />
     <None Include="icons\cocktail.png" />
     <Content Include="icons\icons8-메뉴-500.png" />
     <Content Include="icons\menu.png" />
