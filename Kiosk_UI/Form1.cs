@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 
 namespace Kiosk_UI
@@ -31,16 +32,25 @@ namespace Kiosk_UI
             });
             
         }
-        class Program
+        class Search
         {
-            static string menu_Csv = "../../test_menu/test_menu/All_menu.csv";
-           
+            
+            
         }
+        class CsvParser
+        {
+            public static string parser(string csv)
+            {
+                var test = File.ReadAllText(csv);
 
+                return "0";
+            }
+        }
         private void MainForm_Shown(object sender, EventArgs e)
         {
+            CsvParser.parser("Resources/menu.csv");
         //음료
-        /*AddItem("아메리카노", 2000, categories.drink, "americano.png");
+        AddItem("아메리카노", 2000, categories.drink, "americano.png");
             AddItem("에스프레소", 2000, categories.drink, "espresso.png");
             AddItem("카푸치노", 3000, categories.drink, "cappuccino.png");
             AddItem("녹차라떼", 3500, categories.drink, "greentealatte.png");
@@ -70,7 +80,8 @@ namespace Kiosk_UI
             AddItem("허니브레드", 1500, categories.dessert, "honeybread.png");
             AddItem("딸기마카롱", 1500, categories.dessert, "strawberrymacaron.png");
             AddItem("초코마카롱", 1500, categories.dessert, "chocomacaron.png");
-            AddItem("녹차마카롱", 1500, categories.dessert, "greenteamacaron.png");*/
+            AddItem("녹차마카롱", 1500, categories.dessert, "greenteamacaron.png");
+            
 
         }
 
