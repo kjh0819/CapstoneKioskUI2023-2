@@ -44,17 +44,30 @@ namespace Kiosk_UI
             });
             
         }
-        public void Search(string searchString)
+        public void Search(string searchString,bool include)
         {
             foreach (var item in MenuPanel.Controls)
             {
-                var itm = (item)item;
-                if(itm.Title == searchString)                    
-                    itm.Visible = true;
-                else if (itm.Detail.Contains(searchString))
-                    itm.Visible = true;
+                if (include == true)
+                {
+                    var itm = (item)item;
+                    if (itm.Title == searchString)
+                        itm.Visible = true;
+                    else if (itm.Detail.Contains(searchString))
+                        itm.Visible = true;
+                    else
+                        itm.Visible = false;
+                }
                 else
-                    itm.Visible = false;
+                {
+                    var itm = (item)item;
+                    if (itm.Title == searchString)
+                        itm.Visible = false;
+                    else if (itm.Detail.Contains(searchString))
+                        itm.Visible = false;
+                    else
+                        itm.Visible = true;
+                }
             }
 
         }
@@ -79,7 +92,7 @@ namespace Kiosk_UI
                     }
                 }
             }
-            Search("우유");
+            Search("우유",true);
         ////음료
         //AddItem("아메리카노", 2000, categories.drink, "americano.png",detail:new string[]{ "커피","카페인"});
         //AddItem("에스프레소", 2000, categories.drink, "espresso.png");
