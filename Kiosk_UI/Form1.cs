@@ -29,8 +29,9 @@ namespace Kiosk_UI
         //Tag는 Object클래스 이름으로 사용됨 => Detial로 변경
         public string[] Detail { get; set; }
         */
-        public void AddItem(string name, int cost, categories category, string icon)
-        //public void AddItem(string name, int cost, categories category, string icon, string[] detail)
+
+        //public void AddItem(string name, int cost, categories category, string icon)
+        public void AddItem(string name, int cost, categories category, string icon, string[] detail)
         {
             MenuPanel.Controls.Add(new item()
             {
@@ -38,7 +39,7 @@ namespace Kiosk_UI
                 Cost = cost,
                 Category = category,
                 Icon = Image.FromFile("icons/" + icon),
-                //Detail=detail
+                Detail=detail
 
             });
             
@@ -53,16 +54,15 @@ namespace Kiosk_UI
                 foreach (string line in lines.Split('\n'))
                 {
                     string[] result = line.Split(',');
-                    MainForm mf = new MainForm();
                     if (result[2] == "categories.drink")
                     {
-                        //AddItem(result[0], Convert.ToInt32(result[1]), (categories)categoryValue, result[3], result[4].Split('/'));
-                        AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3]);
+                        AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3], result[4].Split('/'));
+                        //AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3]);
                     }
                     else if(result[2] == "categories.dessert")
                     {
-                        //AddItem(result[0], Convert.ToInt32(result[1]), (categories)categoryValue, result[3], result[4].Split('/'));
-                        AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3]);
+                        AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3], result[4].Split('/'));
+                        //AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3]);
                     }
                 }
             }
