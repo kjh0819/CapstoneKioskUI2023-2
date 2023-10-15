@@ -143,7 +143,7 @@ namespace Kiosk_UI
             foreach (var type in MenuPanel.Controls)
             {
                 var itm = (item)type;
-                if (itm.Tag.ToString() == "dessert")
+                if (itm.Category.ToString() == "dessert")
                 {
                     itm.Visible = false;
                 }
@@ -156,7 +156,7 @@ namespace Kiosk_UI
             foreach (var type in MenuPanel.Controls)
             {
                 var itm = (item)type;
-                if (itm.Tag.ToString() == "dessert")
+                if (itm.Category.ToString() == "dessert")
                 {
                     itm.Visible = true;
                 }
