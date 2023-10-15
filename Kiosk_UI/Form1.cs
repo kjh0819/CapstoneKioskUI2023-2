@@ -44,7 +44,20 @@ namespace Kiosk_UI
             });
             
         }
+        public void Search(string searchString)
+        {
+            foreach (var item in MenuPanel.Controls)
+            {
+                var itm = (item)item;
+                if(itm.Title == searchString)                    
+                    itm.Visible = true;
+                else if (itm.Detail.Contains(searchString))
+                    itm.Visible = true;
+                else
+                    itm.Visible = false;
+            }
 
+        }
         private void MainForm_Shown(object sender, EventArgs e)
         {
             var csv = "../../resources/menu.csv";
@@ -66,6 +79,7 @@ namespace Kiosk_UI
                     }
                 }
             }
+            Search("우유");
         ////음료
         //AddItem("아메리카노", 2000, categories.drink, "americano.png",detail:new string[]{ "커피","카페인"});
         //AddItem("에스프레소", 2000, categories.drink, "espresso.png");
@@ -85,27 +99,30 @@ namespace Kiosk_UI
         //AddItem("로즈마리차", 2500, categories.drink, "rosemarytea.png");
         //AddItem("캐모마일차", 2500, categories.drink, "chamomiletea.png");
 
-        ////디저트
-        //AddItem("베이글", 1500, categories.dessert, "bagel.png");
-        //AddItem("블루베리 베이글", 1500, categories.dessert, "blueberrybagel.png");
-        //AddItem("조각 치즈케이크", 1500, categories.dessert, "cheesecake.png");
-        //AddItem("조각 초콜릿케이크", 1500, categories.dessert, "chocolatecake.png");
-        //AddItem("조각 딸기케이크", 1500, categories.dessert, "strawberrycake.png");
-        //AddItem("초코칩쿠키", 1500, categories.dessert, "cookie.png");
-        //AddItem("더블초코칩 쿠키", 1500, categories.dessert, "doublecookie.png");
-        //AddItem("녹차 쿠키", 1500, categories.dessert, "greenteacookie.png");
-        //AddItem("허니브레드", 1500, categories.dessert, "honeybread.png");
-        //AddItem("딸기마카롱", 1500, categories.dessert, "strawberrymacaron.png");
-        //AddItem("초코마카롱", 1500, categories.dessert, "chocomacaron.png");
-        //AddItem("녹차마카롱", 1500, categories.dessert, "greenteamacaron.png");
-            
+            ////디저트
+            //AddItem("베이글", 1500, categories.dessert, "bagel.png");
+            //AddItem("블루베리 베이글", 1500, categories.dessert, "blueberrybagel.png");
+            //AddItem("조각 치즈케이크", 1500, categories.dessert, "cheesecake.png");
+            //AddItem("조각 초콜릿케이크", 1500, categories.dessert, "chocolatecake.png");
+            //AddItem("조각 딸기케이크", 1500, categories.dessert, "strawberrycake.png");
+            //AddItem("초코칩쿠키", 1500, categories.dessert, "cookie.png");
+            //AddItem("더블초코칩 쿠키", 1500, categories.dessert, "doublecookie.png");
+            //AddItem("녹차 쿠키", 1500, categories.dessert, "greenteacookie.png");
+            //AddItem("허니브레드", 1500, categories.dessert, "honeybread.png");
+            //AddItem("딸기마카롱", 1500, categories.dessert, "strawberrymacaron.png");
+            //AddItem("초코마카롱", 1500, categories.dessert, "chocomacaron.png");
+            //AddItem("녹차마카롱", 1500, categories.dessert, "greenteamacaron.png");
+
 
         }
 
         private void AllmenuButton_Click(object sender, EventArgs e)
         {
             foreach (var type in MenuPanel.Controls)
-            { var itm = (item)type; itm.Visible = true; }
+            { 
+                var itm = (item)type; 
+                itm.Visible = true; 
+            }
         }
 
         private void DrinkButton_Click(object sender, EventArgs e)
