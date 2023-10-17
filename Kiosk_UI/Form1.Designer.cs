@@ -146,7 +146,7 @@
             this.CartPanel.TabIndex = 3;
             // 
             // MainForm
-            // 
+            // zxfghj
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(221)))));
