@@ -5,7 +5,7 @@
         /// <summary>
         /// 필수 디자이너 변수입니다.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+    private System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// 사용 중인 모든 리소스를 정리합니다.
@@ -47,20 +47,21 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MenuPanel.AutoScroll = true;
-            this.MenuPanel.Location = new System.Drawing.Point(131, 193);
+            this.MenuPanel.BackColor = System.Drawing.Color.White;
+            this.MenuPanel.Location = new System.Drawing.Point(112, 193);
             this.MenuPanel.Name = "MenuPanel";
-            this.MenuPanel.Size = new System.Drawing.Size(346, 356);
+            this.MenuPanel.Size = new System.Drawing.Size(365, 356);
             this.MenuPanel.TabIndex = 0;
             // 
             // SelectbarPanel
             // 
             this.SelectbarPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.SelectbarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.SelectbarPanel.BackColor = System.Drawing.Color.White;
             this.SelectbarPanel.Controls.Add(this.panel1);
-            this.SelectbarPanel.Location = new System.Drawing.Point(9, 83);
+            this.SelectbarPanel.Location = new System.Drawing.Point(9, 66);
             this.SelectbarPanel.Name = "SelectbarPanel";
-            this.SelectbarPanel.Size = new System.Drawing.Size(116, 666);
+            this.SelectbarPanel.Size = new System.Drawing.Size(97, 483);
             this.SelectbarPanel.TabIndex = 1;
             // 
             // panel1
@@ -73,23 +74,24 @@
             this.panel1.Controls.Add(this.DessertButton);
             this.panel1.Controls.Add(this.DrinkButton);
             this.panel1.Controls.Add(this.AllmenuButton);
-            this.panel1.Location = new System.Drawing.Point(3, 62);
+            this.panel1.Location = new System.Drawing.Point(3, 17);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(110, 422);
+            this.panel1.Size = new System.Drawing.Size(91, 463);
             this.panel1.TabIndex = 3;
             // 
             // VoiceButton
             // 
-            this.VoiceButton.Location = new System.Drawing.Point(0, 333);
+            this.VoiceButton.Location = new System.Drawing.Point(0, 393);
             this.VoiceButton.Name = "VoiceButton";
             this.VoiceButton.Size = new System.Drawing.Size(110, 58);
             this.VoiceButton.TabIndex = 5;
             this.VoiceButton.Text = "음성검색";
             this.VoiceButton.UseVisualStyleBackColor = true;
+            this.VoiceButton.Click += new System.EventHandler(this.VoiceButton_Click);
             // 
             // DessertButton
             // 
-            this.DessertButton.Location = new System.Drawing.Point(0, 233);
+            this.DessertButton.Location = new System.Drawing.Point(0, 273);
             this.DessertButton.Name = "DessertButton";
             this.DessertButton.Size = new System.Drawing.Size(110, 58);
             this.DessertButton.TabIndex = 4;
@@ -100,7 +102,7 @@
             // DrinkButton
             // 
             this.DrinkButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.DrinkButton.Location = new System.Drawing.Point(0, 133);
+            this.DrinkButton.Location = new System.Drawing.Point(0, 160);
             this.DrinkButton.Name = "DrinkButton";
             this.DrinkButton.Size = new System.Drawing.Size(110, 58);
             this.DrinkButton.TabIndex = 1;
@@ -110,17 +112,17 @@
             // 
             // AllmenuButton
             // 
+            this.AllmenuButton.BackColor = System.Drawing.Color.Gainsboro;
             this.AllmenuButton.FlatAppearance.BorderSize = 0;
             this.AllmenuButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AllmenuButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.AllmenuButton.ForeColor = System.Drawing.Color.Black;
             this.AllmenuButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.AllmenuButton.Location = new System.Drawing.Point(0, 33);
+            this.AllmenuButton.Location = new System.Drawing.Point(0, 49);
             this.AllmenuButton.Name = "AllmenuButton";
             this.AllmenuButton.Size = new System.Drawing.Size(110, 58);
             this.AllmenuButton.TabIndex = 0;
             this.AllmenuButton.Text = "모든메뉴";
-            this.AllmenuButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.AllmenuButton.UseVisualStyleBackColor = true;
+            this.AllmenuButton.UseVisualStyleBackColor = false;
             this.AllmenuButton.Click += new System.EventHandler(this.AllmenuButton_Click);
             // 
             // TopPanel
@@ -138,15 +140,16 @@
             this.CartPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CartPanel.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.CartPanel.Location = new System.Drawing.Point(131, 555);
+            this.CartPanel.Location = new System.Drawing.Point(9, 555);
             this.CartPanel.Name = "CartPanel";
-            this.CartPanel.Size = new System.Drawing.Size(346, 194);
+            this.CartPanel.Size = new System.Drawing.Size(468, 194);
             this.CartPanel.TabIndex = 3;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(221)))));
             this.ClientSize = new System.Drawing.Size(484, 761);
             this.Controls.Add(this.CartPanel);
             this.Controls.Add(this.TopPanel);
