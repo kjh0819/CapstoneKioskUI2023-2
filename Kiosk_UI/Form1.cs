@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using Kiosk_UI.Properties;
 using TTSLib;
+using System.Collections;
 
 namespace Kiosk_UI
 {    
@@ -45,28 +46,33 @@ namespace Kiosk_UI
             });
             
         }
-        public void Search(string searchString,bool include)
+        public List<string> Search(string searchString,bool include)
         {
-            foreach (var item in MenuPanel.Controls)
-            {
-                if (include == true)
+            List<string> result = new List<string>();
+            if (include == true)
+                foreach (var item in MenuPanel.Controls)
                 {
-                    var itm = (item)item;
-                    if (itm.Title == searchString)
-                        itm.Visible = true;
-                    else if (itm.Detail.Contains(searchString))
-                        itm.Visible = true;
+                
+                    {
+                        var itm = (item)item;
+                        if (itm.Title == searchString)
+                            result.Add(itm.Title);
+                        else if (itm.Detail.Contains(searchString))
+                            result.Add(itm.Title);
+                    }
                 }
-                else
-                {
-                    var itm = (item)item;
-                    if (itm.Title == searchString)
-                        itm.Visible = false;
-                    else if (itm.Detail.Contains(searchString))
-                        itm.Visible = false;
+            else
+                foreach (var item in MenuPanel.Controls)
+                {                  
+                    {
+                        var itm = (item)item;
+                        if (itm.Title != searchString)
+                            result.Add(itm.Title);
+                        else if (!itm.Detail.Contains(searchString))
+                            result.Add(itm.Title);
+                    }
                 }
-            }
-
+            return result;
         }
         private void MainForm_Shown(object sender, EventArgs e)
         {
@@ -178,9 +184,9 @@ namespace Kiosk_UI
 
         private async void VoiceButton_Click(object sender, EventArgs e)
         {
+            //모든 메뉴 가리기
             foreach (var item in MenuPanel.Controls)
             {
-                // "YourControlType"을 실제 컨트롤 유형으로 대체하십시오.
                 var control = (item)item;
                 if (control != null)
                 {
@@ -189,21 +195,61 @@ namespace Kiosk_UI
             }
 
             var tts = new TextToSpeechConverter();
-            tts.Speak("음성인식을 시작합니다.");
+            tts.Speak("음성인식을 시작합니다");
             Console.WriteLine("음성인식 시작");
 
-            // Tokenizer.VoiceTokenizer()가 Task<string>를 반환하고 await할 수 있도록 확인하십시오.
             string token = await Tokenizer.VoiceTokenizer();
             Console.WriteLine(token);
 
-            string[] texts = token.Split(' ');
 
-            foreach (var text in texts)
-            {
-                string[] morps = text.Split('/');
-                if (morps.Length >= 2 && morps[1] == "NNP")
+            List<string> searchResults = new List<string>();
+            token=token.Replace('+', ' ');
+            Console.WriteLine(token);
+            string[] texts = token.Split(' ');
+            bool flagForSearch = false; // 검색 결과 초기화를 위한 플래그
+            if (texts.Contains("들어가/VV"))
+                foreach (var text in texts)
                 {
-                    Search(morps[0], true);
+                    string[] morps = text.Split('/');
+                    List<string> Result = Search(morps[0], true);
+                    if (morps.Length >= 2 && (morps[1] == "NNP" || morps[1] == "NNG"))
+                    {
+
+
+                        if (flagForSearch)
+                        {
+                            // 이미 결과가 존재하면 결과와 교차(intersect)시키기
+                            searchResults = searchResults.Intersect(Result).ToList();
+                        }
+                        else
+                        {
+                            // 처음 검색 결과를 설정
+                            searchResults = Result;
+                            flagForSearch = true;
+                        }
+                    }
+
+                }
+            else
+                foreach (var text in texts)
+                {
+                    string[] morps = text.Split('/');
+                    List<string> Result = Search(morps[0], true);
+                    if ((morps.Length >= 2 && (morps[1] == "NNP" || morps[1] == "NNG")))
+                    {
+                        searchResults = Result;
+                    }
+                }
+            foreach (var item in MenuPanel.Controls)
+            {
+                var control = (item)item;
+                if (control != null)
+                {
+                    foreach(var text in searchResults) 
+                    {
+                        if (text == control.Title)
+                            control.Visible = true;
+                    }
                 }
             }
         }
