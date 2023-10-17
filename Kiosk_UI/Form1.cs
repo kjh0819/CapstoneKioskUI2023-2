@@ -178,8 +178,24 @@ namespace Kiosk_UI
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            string token = Tokenizer.VoiceTokenizer().Result;
+            string[] texts = token.Split(' ');
+            string[] word = new string[0]; // 빈 문자열 배열로 초기화
 
+            foreach (var text in texts)
+            {
+                word = word.Concat(text.Split('+')).ToArray(); // 결과를 새로운 배열에 할당
+            }
+            foreach(var text in word)
+            {
+                string[] morps=text.Split('/');
+                if (morps[1] == "NNP")
+                {
+                    Search(morps[0],true);
+                }
+            }
         }
+
 
         private void VoiceButton_Click(object sender, EventArgs e)
         {
