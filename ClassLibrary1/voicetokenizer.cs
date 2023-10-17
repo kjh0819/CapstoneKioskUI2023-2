@@ -98,6 +98,7 @@ public class Tokenizer
             phraseList.AddPhrase($"{i}원");
         }
         phraseList.AddPhrase($"카페라떼");
+        phraseList.AddPhrase($"우유");
 
         Console.WriteLine("Speak into your microphone.");
         var speechRecognitionResult = await speechRecognizer.RecognizeOnceAsync();
