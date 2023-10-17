@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Kiosk_UI.Properties;
-
+using TTSLib;
 
 namespace Kiosk_UI
 {    

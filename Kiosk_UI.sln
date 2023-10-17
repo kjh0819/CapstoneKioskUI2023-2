@@ -5,6 +5,10 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiosk_UI", "Kiosk_UI\Kiosk_UI.csproj", "{8134968B-1F91-48DA-A599-BF6D162FED82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceTokenizer", "ClassLibrary1\VoiceTokenizer.csproj", "{3744F4ED-F8C7-4D1B-B585-C349528F5ED9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTSLib", "TTSLib\TTSLib.csproj", "{C124252E-C298-40A6-B3DF-C4D3CFB99F0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{8134968B-1F91-48DA-A599-BF6D162FED82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8134968B-1F91-48DA-A599-BF6D162FED82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8134968B-1F91-48DA-A599-BF6D162FED82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3744F4ED-F8C7-4D1B-B585-C349528F5ED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3744F4ED-F8C7-4D1B-B585-C349528F5ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3744F4ED-F8C7-4D1B-B585-C349528F5ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3744F4ED-F8C7-4D1B-B585-C349528F5ED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C124252E-C298-40A6-B3DF-C4D3CFB99F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C124252E-C298-40A6-B3DF-C4D3CFB99F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C124252E-C298-40A6-B3DF-C4D3CFB99F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C124252E-C298-40A6-B3DF-C4D3CFB99F0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
