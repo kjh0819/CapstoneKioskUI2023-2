@@ -10,10 +10,9 @@ using System.Windows.Forms;
 using System.IO;
 using Kiosk_UI.Properties;
 
-namespace Kiosk_UI
-{
 
-    
+namespace Kiosk_UI
+{    
     public partial class MainForm : Form
     {
         public MainForm()
@@ -57,8 +56,6 @@ namespace Kiosk_UI
                         itm.Visible = true;
                     else if (itm.Detail.Contains(searchString))
                         itm.Visible = true;
-                    else
-                        itm.Visible = false;
                 }
                 else
                 {
@@ -67,8 +64,6 @@ namespace Kiosk_UI
                         itm.Visible = false;
                     else if (itm.Detail.Contains(searchString))
                         itm.Visible = false;
-                    else
-                        itm.Visible = true;
                 }
             }
 
@@ -178,28 +173,39 @@ namespace Kiosk_UI
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            string token = Tokenizer.VoiceTokenizer().Result;
+            
+        }
+
+        private async void VoiceButton_Click(object sender, EventArgs e)
+        {
+            foreach (var item in MenuPanel.Controls)
+            {
+                // "YourControlType"을 실제 컨트롤 유형으로 대체하십시오.
+                var control = (item)item;
+                if (control != null)
+                {
+                    control.Visible = false;
+                }
+            }
+
+            var tts = new TextToSpeechConverter();
+            tts.Speak("음성인식을 시작합니다.");
+            Console.WriteLine("음성인식 시작");
+
+            // Tokenizer.VoiceTokenizer()가 Task<string>를 반환하고 await할 수 있도록 확인하십시오.
+            string token = await Tokenizer.VoiceTokenizer();
+            Console.WriteLine(token);
+
             string[] texts = token.Split(' ');
-            string[] word = new string[0]; // 빈 문자열 배열로 초기화
 
             foreach (var text in texts)
             {
-                word = word.Concat(text.Split('+')).ToArray(); // 결과를 새로운 배열에 할당
-            }
-            foreach(var text in word)
-            {
-                string[] morps=text.Split('/');
-                if (morps[1] == "NNP")
+                string[] morps = text.Split('/');
+                if (morps.Length >= 2 && morps[1] == "NNP")
                 {
-                    Search(morps[0],true);
+                    Search(morps[0], true);
                 }
             }
-        }
-
-
-        private void VoiceButton_Click(object sender, EventArgs e)
-        {
-            
         }
 
     }
