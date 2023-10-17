@@ -49,16 +49,15 @@ namespace Kiosk_UI
         public List<string> Search(string searchString,bool include)
         {
             List<string> result = new List<string>();
-            if (include == true)
+            if (include)
                 foreach (var item in MenuPanel.Controls)
                 {
-                
                     {
                         var itm = (item)item;
-                        if (itm.Title == searchString)
+                        if (itm.Title == searchString || itm.Detail.Contains(searchString))
+                        {
                             result.Add(itm.Title);
-                        else if (itm.Detail.Contains(searchString))
-                            result.Add(itm.Title);
+                        }
                     }
                 }
             else
@@ -66,10 +65,10 @@ namespace Kiosk_UI
                 {                  
                     {
                         var itm = (item)item;
-                        if (itm.Title != searchString)
+                        if (!(itm.Title == searchString || itm.Detail.Contains(searchString)))
+                        {
                             result.Add(itm.Title);
-                        else if (!itm.Detail.Contains(searchString))
-                            result.Add(itm.Title);
+                        }
                     }
                 }
             return result;
@@ -204,7 +203,6 @@ namespace Kiosk_UI
 
             List<string> searchResults = new List<string>();
             token=token.Replace('+', ' ');
-            Console.WriteLine(token);
             string[] texts = token.Split(' ');
             bool flagForSearch = false; // 검색 결과 초기화를 위한 플래그
             if (texts.Contains("들어가/VV"))
@@ -212,10 +210,8 @@ namespace Kiosk_UI
                 {
                     string[] morps = text.Split('/');
                     List<string> Result = Search(morps[0], true);
-                    if (morps.Length >= 2 && (morps[1] == "NNP" || morps[1] == "NNG"))
+                    if ((morps[1] == "NNP" || morps[1] == "NNG"))
                     {
-
-
                         if (flagForSearch)
                         {
                             // 이미 결과가 존재하면 결과와 교차(intersect)시키기
@@ -226,6 +222,10 @@ namespace Kiosk_UI
                             // 처음 검색 결과를 설정
                             searchResults = Result;
                             flagForSearch = true;
+                        }
+                        foreach (var tmp in searchResults)
+                        {
+                            Console.WriteLine($"{tmp}");
                         }
                     }
 
