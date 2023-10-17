@@ -12,6 +12,8 @@ using Kiosk_UI.Properties;
 
 namespace Kiosk_UI
 {
+
+    
     public partial class MainForm : Form
     {
         public MainForm()
@@ -178,6 +180,12 @@ namespace Kiosk_UI
         {
 
         }
+
+        private void VoiceButton_Click(object sender, EventArgs e)
+        {
+            
+        }
+
     }
 
 }
