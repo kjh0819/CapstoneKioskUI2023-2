@@ -25,7 +25,7 @@ namespace Kiosk_UI
         public bool Caffein { get; set; }
         public bool Milk { get; set; }
         public bool Sweet { get; set; }
-        //Tag는 Object클래스 이름으로 사용됨 => Detail로 변경
+        //Tag는 Object클래스 이름으로 사용됨 => Detial로 변경
         public string[] Detail { get; set; }
         public item()
         {
