@@ -37,6 +37,7 @@
             this.AllmenuButton = new System.Windows.Forms.Button();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.CartPanel = new System.Windows.Forms.Panel();
+            this.Searchbox = new System.Windows.Forms.TextBox();
             this.SelectbarPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -145,12 +146,20 @@
             this.CartPanel.Size = new System.Drawing.Size(468, 194);
             this.CartPanel.TabIndex = 3;
             // 
+            // Searchbox
+            // 
+            this.Searchbox.Location = new System.Drawing.Point(164, 132);
+            this.Searchbox.Name = "Searchbox";
+            this.Searchbox.Size = new System.Drawing.Size(251, 21);
+            this.Searchbox.TabIndex = 5;
+            // 
             // MainForm
-            // zxfghj
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(221)))));
             this.ClientSize = new System.Drawing.Size(484, 761);
+            this.Controls.Add(this.Searchbox);
             this.Controls.Add(this.CartPanel);
             this.Controls.Add(this.TopPanel);
             this.Controls.Add(this.SelectbarPanel);
@@ -162,6 +171,7 @@
             this.SelectbarPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -176,6 +186,7 @@
         private System.Windows.Forms.Button VoiceButton;
         private System.Windows.Forms.Button DessertButton;
         private System.Windows.Forms.Button DrinkButton;
+        private System.Windows.Forms.TextBox Searchbox;
     }
 }
 

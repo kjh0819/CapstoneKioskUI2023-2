@@ -20,17 +20,7 @@ namespace Kiosk_UI
         {
             InitializeComponent();
         }
-        /*
-        public categories Category { get => _category; set => _category = value; }
-        public Image Icon { get => txtImg.Image; set => txtImg.Image = value; }
-        public string Title { get => lblTitle.Text; set => lblTitle.Text = value; }
-        public int Cost { get => _cost; set { _cost = value; lblCost.Text =Convert.ToString(_cost)+"원"; } }
-        public bool Caffein { get; set; }
-        public bool Milk { get; set; }
-        public bool Sweet { get; set; }
-        //Tag는 Object클래스 이름으로 사용됨 => Detial로 변경
-        public string[] Detail { get; set; }
-        */
+
 
         //public void AddItem(string name, int cost, categories category, string icon)
         public void AddItem(string name, int cost, categories category, string icon, string[] detail)
@@ -166,31 +156,13 @@ namespace Kiosk_UI
             }
         }
 
-
-        private void textBox1_Enter(object sender, EventArgs e)
-        {
-            foreach (var type in MenuPanel.Controls)
-            {
-                var itm = (item)type;
-
-            }
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private async void VoiceButton_Click(object sender, EventArgs e)
         {
             //모든 메뉴 가리기
-            foreach (var item in MenuPanel.Controls)
+            foreach (var type in MenuPanel.Controls)
             {
-                var control = (item)item;
-                if (control != null)
-                {
-                    control.Visible = false;
-                }
+                var itm = (item)type;
+                itm.Visible = false;
             }
 
             var tts = new TextToSpeechConverter();
@@ -253,6 +225,7 @@ namespace Kiosk_UI
                 }
             }
         }
+
 
     }
 
