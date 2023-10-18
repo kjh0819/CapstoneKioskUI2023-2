@@ -193,13 +193,9 @@ namespace Kiosk_UI
                 }
             }
 
-            var tts = new TextToSpeechConverter();
-            tts.Speak("음성인식을 시작합니다");
-            Console.WriteLine("음성인식 시작");
 
             string token = await Tokenizer.VoiceTokenizer();
             Console.WriteLine(token);
-
 
             List<string> searchResults = new List<string>();
             token=token.Replace('+', ' ');
@@ -210,7 +206,7 @@ namespace Kiosk_UI
                 {
                     string[] morps = text.Split('/');
                     List<string> Result = Search(morps[0], true);
-                    if ((morps[1] == "NNP" || morps[1] == "NNG"))
+                    if (morps.Length >= 2 && (morps[1] == "NNP" || morps[1] == "NNG"))
                     {
                         if (flagForSearch)
                         {

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Xml.Linq;
+using TTSLib;
 
 public class Tokenizer
 {
@@ -100,7 +101,8 @@ public class Tokenizer
         phraseList.AddPhrase($"카페라떼");
         phraseList.AddPhrase($"우유");
 
-        Console.WriteLine("Speak into your microphone.");
+        var tts = new TextToSpeechConverter();
+        tts.Speak("음성인식을 시작합니다");
         var speechRecognitionResult = await speechRecognizer.RecognizeOnceAsync();
         string result = await OutputSpeechRecognitionResult(speechRecognitionResult);
         try
