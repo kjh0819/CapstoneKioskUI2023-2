@@ -54,10 +54,19 @@ namespace Kiosk_UI
                 {
                     {
                         var itm = (item)item;
-                        if (itm.Title == searchString || itm.Detail.Contains(searchString))
+                        if (itm.Title == searchString)
                         {
                             result.Add(itm.Title);
                         }
+                        else
+                            foreach(var d in itm.Detail)
+                            {
+                                Console.WriteLine(itm.Title+":"+d+" and "+searchString);
+                                if (d == searchString)
+                                {
+                                    result.Add(itm.Title);
+                                }
+                            }
                     }
                 }
             else
@@ -78,13 +87,15 @@ namespace Kiosk_UI
             var csv = "../../resources/menu.csv";
             {
                 var lines = File.ReadAllText(csv);
-
+                
                 foreach (string line in lines.Split('\n'))
                 {
                     string[] result = line.Split(',');
+                    string[] details=result[4].Split('/');
+                    details[details.Length - 1] = details[details.Length - 1].Replace('\n', ' ').Trim();
                     if (result[2] == "categories.drink")
                     {
-                        AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3], result[4].Split('/'));
+                        AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3], details);
                         //AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3]);
                     }
                     else if(result[2] == "categories.dessert")
@@ -136,7 +147,7 @@ namespace Kiosk_UI
             foreach (var type in MenuPanel.Controls)
             { 
                 var itm = (item)type; 
-                itm.Visible = true; 
+                itm.Visible = true;
             }
         }
 
@@ -208,12 +219,14 @@ namespace Kiosk_UI
                     List<string> Result = Search(morps[0], true);
                     if (morps.Length >= 2 && (morps[1] == "NNP" || morps[1] == "NNG"))
                     {
-                        if (flagForSearch)
+                        foreach (var r in Result)
+                            Console.WriteLine(r);
+                        if (flagForSearch && Result.Count > 0)
                         {
                             // 이미 결과가 존재하면 결과와 교차(intersect)시키기
-                            searchResults = searchResults.Intersect(Result).ToList();
+                                searchResults = searchResults.Intersect(Result).ToList();
                         }
-                        else
+                        else if(Result.Count>0)
                         {
                             // 처음 검색 결과를 설정
                             searchResults = Result;
@@ -223,6 +236,7 @@ namespace Kiosk_UI
                         {
                             Console.WriteLine($"{tmp}");
                         }
+                        Console.WriteLine("\n");
                     }
 
                 }
