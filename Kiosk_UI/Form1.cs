@@ -62,7 +62,6 @@ namespace Kiosk_UI
                         else
                             foreach(var d in itm.Detail)
                             {
-                                Console.WriteLine(itm.Title+":"+d+" and "+searchString);
                                 if (d == searchString)
                                 {
                                     result.Add(itm.Title);
@@ -160,6 +159,7 @@ namespace Kiosk_UI
 
         private async void VoiceButton_Click(object sender, EventArgs e)
         {
+            var tts = new TextToSpeechConverter();
             //모든 메뉴 가리기
             foreach (var item in MenuPanel.Controls)
             {
@@ -199,6 +199,27 @@ namespace Kiosk_UI
                             flagForSearch = true;
                         }
                     }
+                }
+            else if (texts.Contains("없/VA"))
+                foreach (var text in texts)
+                {
+                    string[] morps = text.Split('/');
+                    List<string> Result = Search(morps[0], true);
+                    if (morps.Length >= 2 && (morps[1] == "NNP" || morps[1] == "NNG"))
+                    {
+                        if (flagForSearch && Result.Count > 0)
+                        {
+                            // 이미 결과가 존재하면 결과와 교차(intersect)시키기
+                            searchResults = searchResults.Intersect(Result).ToList();
+                        }
+                        else if (!flagForSearch&&Result.Count > 0)
+                        {
+                            Result = Search(morps[0], false);
+                            // 처음 검색 결과를 설정
+                            searchResults = Result;
+                            flagForSearch = true;
+                        }
+                    }
 
                 }
             else
@@ -221,11 +242,12 @@ namespace Kiosk_UI
                         if (text == control.Title)
                             control.Visible = true;
                     }
-                    foreach (var text in searchResults)
-                    {
-                        tts.Speak(text);
-                    }
+                    
                 }
+            }
+            foreach (var text in searchResults)
+            {
+                tts.Speak(text);
             }
             if (searchResults.Count == 0)
             {
