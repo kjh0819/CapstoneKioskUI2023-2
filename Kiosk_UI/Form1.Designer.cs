@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.MenuPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SelectbarPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -37,6 +38,7 @@
             this.AllmenuButton = new System.Windows.Forms.Button();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.CartPanel = new System.Windows.Forms.Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SelectbarPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -145,8 +147,12 @@
             this.CartPanel.Size = new System.Drawing.Size(468, 194);
             this.CartPanel.TabIndex = 3;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.button_Tick);
+            // 
             // MainForm
-            // zxfghj
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(221)))));
@@ -176,6 +182,7 @@
         private System.Windows.Forms.Button VoiceButton;
         private System.Windows.Forms.Button DessertButton;
         private System.Windows.Forms.Button DrinkButton;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
