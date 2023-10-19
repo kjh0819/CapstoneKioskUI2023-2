@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiosk_UI", "Kiosk_UI\Kiosk_UI.csproj", "{8134968B-1F91-48DA-A599-BF6D162FED82}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3744F4ED-F8C7-4D1B-B585-C349528F5ED9} = {3744F4ED-F8C7-4D1B-B585-C349528F5ED9}
+		{5DC360F4-4C4E-48F5-BFA4-4965533EE6C7} = {5DC360F4-4C4E-48F5-BFA4-4965533EE6C7}
+		{C124252E-C298-40A6-B3DF-C4D3CFB99F0E} = {C124252E-C298-40A6-B3DF-C4D3CFB99F0E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceTokenizer", "ClassLibrary1\VoiceTokenizer.csproj", "{3744F4ED-F8C7-4D1B-B585-C349528F5ED9}"
 EndProject

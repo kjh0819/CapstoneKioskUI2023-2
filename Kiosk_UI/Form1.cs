@@ -14,6 +14,7 @@ using System.Collections;
 
 namespace Kiosk_UI
 {    
+
     public partial class MainForm : Form
     {
         public MainForm()
@@ -54,10 +55,18 @@ namespace Kiosk_UI
                 {
                     {
                         var itm = (item)item;
-                        if (itm.Title == searchString || itm.Detail.Contains(searchString))
+                        if (itm.Title == searchString)
                         {
                             result.Add(itm.Title);
                         }
+                        else
+                            foreach(var d in itm.Detail)
+                            {
+                                if (d == searchString)
+                                {
+                                    result.Add(itm.Title);
+                                }
+                            }
                     }
                 }
             else
@@ -78,13 +87,15 @@ namespace Kiosk_UI
             var csv = "../../resources/menu.csv";
             {
                 var lines = File.ReadAllText(csv);
-
+                
                 foreach (string line in lines.Split('\n'))
                 {
                     string[] result = line.Split(',');
+                    string[] details=result[4].Split('/');
+                    details[details.Length - 1] = details[details.Length - 1].Replace('\n', ' ').Trim();
                     if (result[2] == "categories.drink")
                     {
-                        AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3], result[4].Split('/'));
+                        AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3], details);
                         //AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3]);
                     }
                     else if(result[2] == "categories.dessert")
@@ -94,41 +105,6 @@ namespace Kiosk_UI
                     }
                 }
             }
-            Search("우유",true);
-        ////음료
-        //AddItem("아메리카노", 2000, categories.drink, "americano.png",detail:new string[]{ "커피","카페인"});
-        //AddItem("에스프레소", 2000, categories.drink, "espresso.png");
-        //AddItem("카푸치노", 3000, categories.drink, "cappuccino.png");
-        //AddItem("녹차라떼", 3500, categories.drink, "greentealatte.png");
-        //AddItem("아이스초코", 2500, categories.drink, "icedchocolate.png");
-        //AddItem("카페라떼", 2500, categories.drink, "cafelatte.png");
-        //AddItem("카라멜 마끼아또", 2500, categories.drink, "caramelmacchiato.png");
-        //AddItem("커피 플렛치노", 2500, categories.drink, "coffeeflatccino.png");
-        //AddItem("아이스티", 2500, categories.drink, "icedtea.png");
-        //AddItem("밀크티", 2500, categories.drink, "milktea.png");
-        //AddItem("요거트 플렛치노", 2500, categories.drink, "yogurtflatccino.png");
-        //AddItem("민트초코", 2500, categories.drink, "mintchocolate.png");
-        //AddItem("아인슈페너", 2500, categories.drink, "einspenner.png");
-        //AddItem("레몬그라스차", 2500, categories.drink, "lemongrasstea.png");
-        //AddItem("페퍼민트차", 2500, categories.drink, "pepperminttea.png");
-        //AddItem("로즈마리차", 2500, categories.drink, "rosemarytea.png");
-        //AddItem("캐모마일차", 2500, categories.drink, "chamomiletea.png");
-
-            ////디저트
-            //AddItem("베이글", 1500, categories.dessert, "bagel.png");
-            //AddItem("블루베리 베이글", 1500, categories.dessert, "blueberrybagel.png");
-            //AddItem("조각 치즈케이크", 1500, categories.dessert, "cheesecake.png");
-            //AddItem("조각 초콜릿케이크", 1500, categories.dessert, "chocolatecake.png");
-            //AddItem("조각 딸기케이크", 1500, categories.dessert, "strawberrycake.png");
-            //AddItem("초코칩쿠키", 1500, categories.dessert, "cookie.png");
-            //AddItem("더블초코칩 쿠키", 1500, categories.dessert, "doublecookie.png");
-            //AddItem("녹차 쿠키", 1500, categories.dessert, "greenteacookie.png");
-            //AddItem("허니브레드", 1500, categories.dessert, "honeybread.png");
-            //AddItem("딸기마카롱", 1500, categories.dessert, "strawberrymacaron.png");
-            //AddItem("초코마카롱", 1500, categories.dessert, "chocomacaron.png");
-            //AddItem("녹차마카롱", 1500, categories.dessert, "greenteamacaron.png");
-
-
         }
 
         private void AllmenuButton_Click(object sender, EventArgs e)
@@ -136,7 +112,7 @@ namespace Kiosk_UI
             foreach (var type in MenuPanel.Controls)
             { 
                 var itm = (item)type; 
-                itm.Visible = true; 
+                itm.Visible = true;
             }
         }
 
@@ -183,6 +159,7 @@ namespace Kiosk_UI
 
         private async void VoiceButton_Click(object sender, EventArgs e)
         {
+            var tts = new TextToSpeechConverter();
             //모든 메뉴 가리기
             foreach (var item in MenuPanel.Controls)
             {
@@ -193,13 +170,9 @@ namespace Kiosk_UI
                 }
             }
 
-            var tts = new TextToSpeechConverter();
-            tts.Speak("음성인식을 시작합니다");
-            Console.WriteLine("음성인식 시작");
 
             string token = await Tokenizer.VoiceTokenizer();
             Console.WriteLine(token);
-
 
             List<string> searchResults = new List<string>();
             token=token.Replace('+', ' ');
@@ -210,22 +183,41 @@ namespace Kiosk_UI
                 {
                     string[] morps = text.Split('/');
                     List<string> Result = Search(morps[0], true);
-                    if ((morps[1] == "NNP" || morps[1] == "NNG"))
+                    if (morps.Length >= 2 && (morps[1] == "NNP" || morps[1] == "NNG"))
                     {
-                        if (flagForSearch)
+                        foreach (var r in Result)
+                            Console.WriteLine(r);
+                        if (flagForSearch && Result.Count > 0)
                         {
                             // 이미 결과가 존재하면 결과와 교차(intersect)시키기
-                            searchResults = searchResults.Intersect(Result).ToList();
+                                searchResults = searchResults.Intersect(Result).ToList();
                         }
-                        else
+                        else if(Result.Count>0)
                         {
                             // 처음 검색 결과를 설정
                             searchResults = Result;
                             flagForSearch = true;
                         }
-                        foreach (var tmp in searchResults)
+                    }
+                }
+            else if (texts.Contains("없/VA"))
+                foreach (var text in texts)
+                {
+                    string[] morps = text.Split('/');
+                    List<string> Result = Search(morps[0], true);
+                    if (morps.Length >= 2 && (morps[1] == "NNP" || morps[1] == "NNG"))
+                    {
+                        if (flagForSearch && Result.Count > 0)
                         {
-                            Console.WriteLine($"{tmp}");
+                            // 이미 결과가 존재하면 결과와 교차(intersect)시키기
+                            searchResults = searchResults.Intersect(Result).ToList();
+                        }
+                        else if (!flagForSearch&&Result.Count > 0)
+                        {
+                            Result = Search(morps[0], false);
+                            // 처음 검색 결과를 설정
+                            searchResults = Result;
+                            flagForSearch = true;
                         }
                     }
 
@@ -250,7 +242,16 @@ namespace Kiosk_UI
                         if (text == control.Title)
                             control.Visible = true;
                     }
+                    
                 }
+            }
+            foreach (var text in searchResults)
+            {
+                tts.Speak(text);
+            }
+            if (searchResults.Count == 0)
+            {
+                tts.Speak("죄송합니다 메뉴를 찾을수 없었습니다.");
             }
         }
 
