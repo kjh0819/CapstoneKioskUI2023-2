@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.MenuPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SelectbarPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -37,6 +38,11 @@
             this.AllmenuButton = new System.Windows.Forms.Button();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.CartPanel = new System.Windows.Forms.Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.menu_radio = new System.Windows.Forms.RadioButton();
+            this.drink_radio = new System.Windows.Forms.RadioButton();
+            this.dessert_radio = new System.Windows.Forms.RadioButton();
+            this.voice_radio = new System.Windows.Forms.RadioButton();
             this.SelectbarPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -48,9 +54,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MenuPanel.AutoScroll = true;
             this.MenuPanel.BackColor = System.Drawing.Color.White;
-            this.MenuPanel.Location = new System.Drawing.Point(112, 193);
+            this.MenuPanel.Location = new System.Drawing.Point(132, 132);
             this.MenuPanel.Name = "MenuPanel";
-            this.MenuPanel.Size = new System.Drawing.Size(365, 356);
+            this.MenuPanel.Size = new System.Drawing.Size(345, 417);
             this.MenuPanel.TabIndex = 0;
             // 
             // SelectbarPanel
@@ -61,7 +67,7 @@
             this.SelectbarPanel.Controls.Add(this.panel1);
             this.SelectbarPanel.Location = new System.Drawing.Point(9, 66);
             this.SelectbarPanel.Name = "SelectbarPanel";
-            this.SelectbarPanel.Size = new System.Drawing.Size(97, 483);
+            this.SelectbarPanel.Size = new System.Drawing.Size(117, 483);
             this.SelectbarPanel.TabIndex = 1;
             // 
             // panel1
@@ -76,7 +82,7 @@
             this.panel1.Controls.Add(this.AllmenuButton);
             this.panel1.Location = new System.Drawing.Point(3, 17);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(91, 463);
+            this.panel1.Size = new System.Drawing.Size(111, 463);
             this.panel1.TabIndex = 3;
             // 
             // VoiceButton
@@ -145,12 +151,65 @@
             this.CartPanel.Size = new System.Drawing.Size(468, 194);
             this.CartPanel.TabIndex = 3;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.button_tick);
+            // 
+            // menu_radio
+            // 
+            this.menu_radio.AutoSize = true;
+            this.menu_radio.Location = new System.Drawing.Point(168, 55);
+            this.menu_radio.Name = "menu_radio";
+            this.menu_radio.Size = new System.Drawing.Size(92, 16);
+            this.menu_radio.TabIndex = 0;
+            this.menu_radio.TabStop = true;
+            this.menu_radio.Text = "radioButton1";
+            this.menu_radio.UseVisualStyleBackColor = true;
+            this.menu_radio.CheckedChanged += new System.EventHandler(this.menu_radio_CheckedChanged);
+            // 
+            // drink_radio
+            // 
+            this.drink_radio.AutoSize = true;
+            this.drink_radio.Location = new System.Drawing.Point(168, 77);
+            this.drink_radio.Name = "drink_radio";
+            this.drink_radio.Size = new System.Drawing.Size(92, 16);
+            this.drink_radio.TabIndex = 4;
+            this.drink_radio.TabStop = true;
+            this.drink_radio.Text = "radioButton2";
+            this.drink_radio.UseVisualStyleBackColor = true;
+            // 
+            // dessert_radio
+            // 
+            this.dessert_radio.AutoSize = true;
+            this.dessert_radio.Location = new System.Drawing.Point(168, 99);
+            this.dessert_radio.Name = "dessert_radio";
+            this.dessert_radio.Size = new System.Drawing.Size(92, 16);
+            this.dessert_radio.TabIndex = 5;
+            this.dessert_radio.TabStop = true;
+            this.dessert_radio.Text = "radioButton3";
+            this.dessert_radio.UseVisualStyleBackColor = true;
+            // 
+            // voice_radio
+            // 
+            this.voice_radio.AutoSize = true;
+            this.voice_radio.Location = new System.Drawing.Point(168, 121);
+            this.voice_radio.Name = "voice_radio";
+            this.voice_radio.Size = new System.Drawing.Size(92, 16);
+            this.voice_radio.TabIndex = 6;
+            this.voice_radio.TabStop = true;
+            this.voice_radio.Text = "radioButton4";
+            this.voice_radio.UseVisualStyleBackColor = true;
+            // 
             // MainForm
-            // zxfghj
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(221)))));
             this.ClientSize = new System.Drawing.Size(484, 761);
+            this.Controls.Add(this.voice_radio);
+            this.Controls.Add(this.dessert_radio);
+            this.Controls.Add(this.drink_radio);
+            this.Controls.Add(this.menu_radio);
             this.Controls.Add(this.CartPanel);
             this.Controls.Add(this.TopPanel);
             this.Controls.Add(this.SelectbarPanel);
@@ -162,6 +221,7 @@
             this.SelectbarPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -176,6 +236,11 @@
         private System.Windows.Forms.Button VoiceButton;
         private System.Windows.Forms.Button DessertButton;
         private System.Windows.Forms.Button DrinkButton;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.RadioButton menu_radio;
+        private System.Windows.Forms.RadioButton drink_radio;
+        private System.Windows.Forms.RadioButton dessert_radio;
+        private System.Windows.Forms.RadioButton voice_radio;
     }
 }
 
