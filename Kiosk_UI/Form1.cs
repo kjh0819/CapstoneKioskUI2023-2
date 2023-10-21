@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,7 @@ using TTSLib;
 using System.Collections;
 
 namespace Kiosk_UI
-{    
-
+{
 
     public partial class MainForm : Form
     {
@@ -22,15 +22,8 @@ namespace Kiosk_UI
         {
             InitializeComponent();
         }
-
-        static bool flag1 = !((flag2 || flag3) || (flag3||flag4));
-        static bool flag2 = !((flag1 || flag3) || (flag3 || flag4));
-        static bool flag3 = !((flag1 || flag2) || (flag2 || flag4));
-        static bool flag4 = !((flag1 || flag2) || (flag2 || flag3));
-
-        static int max_width;
-        int min_width = max_width / 2;
-
+        //속도조절
+        
         public void AddItem(string name, int cost, categories category, string icon, string[] detail)
         {
             MenuPanel.Controls.Add(new item()
@@ -81,8 +74,11 @@ namespace Kiosk_UI
         }
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            flag1 = true; flag2 = false; flag3 = false; flag4 = false;
-            max_width = VoiceButton.Width;
+
+            GraphicsPath p = new GraphicsPath();
+            p.AddEllipse(1, 1, AllmenuButton.Width - 1, AllmenuButton.Height - 1);
+            AllmenuButton.Region = new Region(p);
+
             var csv = "../../resources/menu.csv";
             {
                 var lines = File.ReadAllText(csv);
@@ -108,7 +104,6 @@ namespace Kiosk_UI
 
         private void AllmenuButton_Click(object sender, EventArgs e)
         {
-            flag1 = true;
             foreach (var type in MenuPanel.Controls)
             { 
                 var itm = (item)type; 
@@ -118,7 +113,6 @@ namespace Kiosk_UI
 
         private void DrinkButton_Click(object sender, EventArgs e)
         {
-            flag2 = true;
             foreach (var type in MenuPanel.Controls)
             {
                 var itm = (item)type;
@@ -132,7 +126,6 @@ namespace Kiosk_UI
 
         private void DessertButton_Click(object sender, EventArgs e)
         {
-            flag3 = true;
             foreach (var type in MenuPanel.Controls)
             {
                 var itm = (item)type;
@@ -161,7 +154,6 @@ namespace Kiosk_UI
 
         private async void VoiceButton_Click(object sender, EventArgs e)
         {
-            flag4 = true;
             var tts = new TextToSpeechConverter();
             //모든 메뉴 가리기
             foreach (var item in MenuPanel.Controls)
@@ -258,13 +250,7 @@ namespace Kiosk_UI
             }
         }
 
-        private void button_Tick(object sender, EventArgs e)
-        {
-            if (flag1)
-            {
-                
-            }
-        }
+
     }
 
 }

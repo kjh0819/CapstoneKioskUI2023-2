@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.MenuPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SelectbarPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -38,7 +37,6 @@
             this.AllmenuButton = new System.Windows.Forms.Button();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.CartPanel = new System.Windows.Forms.Panel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SelectbarPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -50,9 +48,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MenuPanel.AutoScroll = true;
             this.MenuPanel.BackColor = System.Drawing.Color.White;
-            this.MenuPanel.Location = new System.Drawing.Point(112, 193);
+            this.MenuPanel.Location = new System.Drawing.Point(119, 132);
             this.MenuPanel.Name = "MenuPanel";
-            this.MenuPanel.Size = new System.Drawing.Size(365, 356);
+            this.MenuPanel.Size = new System.Drawing.Size(358, 417);
             this.MenuPanel.TabIndex = 0;
             // 
             // SelectbarPanel
@@ -63,7 +61,7 @@
             this.SelectbarPanel.Controls.Add(this.panel1);
             this.SelectbarPanel.Location = new System.Drawing.Point(9, 66);
             this.SelectbarPanel.Name = "SelectbarPanel";
-            this.SelectbarPanel.Size = new System.Drawing.Size(97, 483);
+            this.SelectbarPanel.Size = new System.Drawing.Size(113, 483);
             this.SelectbarPanel.TabIndex = 1;
             // 
             // panel1
@@ -78,12 +76,12 @@
             this.panel1.Controls.Add(this.AllmenuButton);
             this.panel1.Location = new System.Drawing.Point(3, 17);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(91, 463);
+            this.panel1.Size = new System.Drawing.Size(107, 463);
             this.panel1.TabIndex = 3;
             // 
             // VoiceButton
             // 
-            this.VoiceButton.Location = new System.Drawing.Point(0, 393);
+            this.VoiceButton.Location = new System.Drawing.Point(-3, 381);
             this.VoiceButton.Name = "VoiceButton";
             this.VoiceButton.Size = new System.Drawing.Size(110, 58);
             this.VoiceButton.TabIndex = 5;
@@ -147,10 +145,6 @@
             this.CartPanel.Size = new System.Drawing.Size(468, 194);
             this.CartPanel.TabIndex = 3;
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.button_Tick);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -182,7 +176,6 @@
         private System.Windows.Forms.Button VoiceButton;
         private System.Windows.Forms.Button DessertButton;
         private System.Windows.Forms.Button DrinkButton;
-        private System.Windows.Forms.Timer timer1;
     }
 }
 
