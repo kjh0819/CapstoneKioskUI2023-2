@@ -28,41 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MenuPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.SelectbarPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.VoiceButton = new System.Windows.Forms.Button();
-            this.DessertButton = new System.Windows.Forms.Button();
-            this.DrinkButton = new System.Windows.Forms.Button();
-            this.AllmenuButton = new System.Windows.Forms.Button();
+            this.VoiceButton = new Kiosk_UI.Custom_button.Custom_button();
+            this.DessertButton = new Kiosk_UI.Custom_button.Custom_button();
+            this.DrinkButton = new Kiosk_UI.Custom_button.Custom_button();
+            this.AllmenuButton = new Kiosk_UI.Custom_button.Custom_button();
             this.TopPanel = new System.Windows.Forms.Panel();
-            this.CartPanel = new System.Windows.Forms.Panel();
-            this.SelectbarPanel.SuspendLayout();
+            this.MenuPanel = new Kiosk_UI.Custom_button.Custom_panel();
+            this.SelectbarPanel = new System.Windows.Forms.Panel();
+            this.CartPanel = new Kiosk_UI.Custom_button.Custom_panel();
             this.panel1.SuspendLayout();
+            this.SelectbarPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // MenuPanel
-            // 
-            this.MenuPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.MenuPanel.AutoScroll = true;
-            this.MenuPanel.BackColor = System.Drawing.Color.White;
-            this.MenuPanel.Location = new System.Drawing.Point(119, 132);
-            this.MenuPanel.Name = "MenuPanel";
-            this.MenuPanel.Size = new System.Drawing.Size(358, 417);
-            this.MenuPanel.TabIndex = 0;
-            // 
-            // SelectbarPanel
-            // 
-            this.SelectbarPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.SelectbarPanel.BackColor = System.Drawing.Color.White;
-            this.SelectbarPanel.Controls.Add(this.panel1);
-            this.SelectbarPanel.Location = new System.Drawing.Point(9, 66);
-            this.SelectbarPanel.Name = "SelectbarPanel";
-            this.SelectbarPanel.Size = new System.Drawing.Size(113, 483);
-            this.SelectbarPanel.TabIndex = 1;
             // 
             // panel1
             // 
@@ -76,50 +53,64 @@
             this.panel1.Controls.Add(this.AllmenuButton);
             this.panel1.Location = new System.Drawing.Point(3, 17);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(107, 463);
+            this.panel1.Size = new System.Drawing.Size(107, 397);
             this.panel1.TabIndex = 3;
             // 
             // VoiceButton
             // 
-            this.VoiceButton.Location = new System.Drawing.Point(-3, 381);
+            this.VoiceButton.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.VoiceButton.FlatAppearance.BorderSize = 0;
+            this.VoiceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.VoiceButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.VoiceButton.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.VoiceButton.Location = new System.Drawing.Point(0, 324);
             this.VoiceButton.Name = "VoiceButton";
-            this.VoiceButton.Size = new System.Drawing.Size(110, 58);
-            this.VoiceButton.TabIndex = 5;
+            this.VoiceButton.Size = new System.Drawing.Size(107, 56);
+            this.VoiceButton.TabIndex = 8;
             this.VoiceButton.Text = "음성검색";
-            this.VoiceButton.UseVisualStyleBackColor = true;
+            this.VoiceButton.UseVisualStyleBackColor = false;
             this.VoiceButton.Click += new System.EventHandler(this.VoiceButton_Click);
             // 
             // DessertButton
             // 
-            this.DessertButton.Location = new System.Drawing.Point(0, 273);
+            this.DessertButton.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.DessertButton.FlatAppearance.BorderSize = 0;
+            this.DessertButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DessertButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.DessertButton.ForeColor = System.Drawing.Color.White;
+            this.DessertButton.Location = new System.Drawing.Point(0, 224);
             this.DessertButton.Name = "DessertButton";
-            this.DessertButton.Size = new System.Drawing.Size(110, 58);
-            this.DessertButton.TabIndex = 4;
+            this.DessertButton.Size = new System.Drawing.Size(107, 56);
+            this.DessertButton.TabIndex = 7;
             this.DessertButton.Text = "디저트";
-            this.DessertButton.UseVisualStyleBackColor = true;
+            this.DessertButton.UseVisualStyleBackColor = false;
             this.DessertButton.Click += new System.EventHandler(this.DessertButton_Click);
             // 
             // DrinkButton
             // 
-            this.DrinkButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.DrinkButton.Location = new System.Drawing.Point(0, 160);
+            this.DrinkButton.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.DrinkButton.FlatAppearance.BorderSize = 0;
+            this.DrinkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DrinkButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.DrinkButton.ForeColor = System.Drawing.Color.White;
+            this.DrinkButton.Location = new System.Drawing.Point(0, 124);
             this.DrinkButton.Name = "DrinkButton";
-            this.DrinkButton.Size = new System.Drawing.Size(110, 58);
-            this.DrinkButton.TabIndex = 1;
+            this.DrinkButton.Size = new System.Drawing.Size(107, 56);
+            this.DrinkButton.TabIndex = 6;
             this.DrinkButton.Text = "음료";
-            this.DrinkButton.UseVisualStyleBackColor = true;
+            this.DrinkButton.UseVisualStyleBackColor = false;
             this.DrinkButton.Click += new System.EventHandler(this.DrinkButton_Click);
             // 
             // AllmenuButton
             // 
-            this.AllmenuButton.BackColor = System.Drawing.Color.Gainsboro;
+            this.AllmenuButton.BackColor = System.Drawing.Color.MediumAquamarine;
             this.AllmenuButton.FlatAppearance.BorderSize = 0;
             this.AllmenuButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AllmenuButton.ForeColor = System.Drawing.Color.Black;
-            this.AllmenuButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.AllmenuButton.Location = new System.Drawing.Point(0, 49);
+            this.AllmenuButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.AllmenuButton.ForeColor = System.Drawing.Color.White;
+            this.AllmenuButton.Location = new System.Drawing.Point(0, 24);
             this.AllmenuButton.Name = "AllmenuButton";
-            this.AllmenuButton.Size = new System.Drawing.Size(110, 58);
+            this.AllmenuButton.Size = new System.Drawing.Size(107, 56);
             this.AllmenuButton.TabIndex = 0;
             this.AllmenuButton.Text = "모든메뉴";
             this.AllmenuButton.UseVisualStyleBackColor = false;
@@ -135,15 +126,42 @@
             this.TopPanel.Size = new System.Drawing.Size(468, 37);
             this.TopPanel.TabIndex = 2;
             // 
+            // MenuPanel
+            // 
+            this.MenuPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.MenuPanel.AutoScroll = true;
+            this.MenuPanel.BackColor = System.Drawing.Color.White;
+            this.MenuPanel.BorderColor = System.Drawing.Color.White;
+            this.MenuPanel.Edge = 20;
+            this.MenuPanel.Location = new System.Drawing.Point(125, 132);
+            this.MenuPanel.Name = "MenuPanel";
+            this.MenuPanel.Size = new System.Drawing.Size(352, 417);
+            this.MenuPanel.TabIndex = 4;
+            // 
+            // SelectbarPanel
+            // 
+            this.SelectbarPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.SelectbarPanel.BackColor = System.Drawing.Color.Transparent;
+            this.SelectbarPanel.Controls.Add(this.panel1);
+            this.SelectbarPanel.Location = new System.Drawing.Point(9, 132);
+            this.SelectbarPanel.Name = "SelectbarPanel";
+            this.SelectbarPanel.Size = new System.Drawing.Size(113, 417);
+            this.SelectbarPanel.TabIndex = 1;
+            // 
             // CartPanel
             // 
             this.CartPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.CartPanel.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.CartPanel.BackColor = System.Drawing.Color.Silver;
+            this.CartPanel.BorderColor = System.Drawing.Color.Transparent;
+            this.CartPanel.Edge = 20;
             this.CartPanel.Location = new System.Drawing.Point(9, 555);
             this.CartPanel.Name = "CartPanel";
             this.CartPanel.Size = new System.Drawing.Size(468, 194);
-            this.CartPanel.TabIndex = 3;
+            this.CartPanel.TabIndex = 5;
             // 
             // MainForm
             // 
@@ -152,30 +170,29 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(221)))));
             this.ClientSize = new System.Drawing.Size(484, 761);
             this.Controls.Add(this.CartPanel);
+            this.Controls.Add(this.MenuPanel);
             this.Controls.Add(this.TopPanel);
             this.Controls.Add(this.SelectbarPanel);
-            this.Controls.Add(this.MenuPanel);
             this.Name = "MainForm";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Shown += new System.EventHandler(this.MainForm_Shown);
-            this.SelectbarPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.SelectbarPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.FlowLayoutPanel MenuPanel;
-        private System.Windows.Forms.Panel SelectbarPanel;
         private System.Windows.Forms.Panel TopPanel;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button AllmenuButton;
-        private System.Windows.Forms.Panel CartPanel;
-        private System.Windows.Forms.Button VoiceButton;
-        private System.Windows.Forms.Button DessertButton;
-        private System.Windows.Forms.Button DrinkButton;
+        private Custom_button.Custom_button AllmenuButton;
+        private Custom_button.Custom_button DrinkButton;
+        private Custom_button.Custom_button VoiceButton;
+        private Custom_button.Custom_button DessertButton;
+        private Custom_button.Custom_panel MenuPanel;
+        private System.Windows.Forms.Panel SelectbarPanel;
+        private Custom_button.Custom_panel CartPanel;
     }
 }
 
