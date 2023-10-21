@@ -327,10 +327,10 @@ namespace Kiosk_UI.Properties {
         ///녹차라떼,3500,categories.drink,greentealatte.png,녹차/카페인/라떼
         ///아이스초코,2500,categories.drink,icedchocolate.png,초코/우유/초콜릿
         ///카페라떼,2500,categories.drink,cafelatte.png,커피/카페인/라떼/우유
-        ///카라멜마끼아또,2500,categories.drink,caramelmacchiato.png,커피/우유/카페인
+        ///카라멜마끼아또,2500,categories.drink,caramelmacchiato.png,커피/우유/카페인asdsdg
         ///커피플렛치노,2500,categories.drink,coffeeflatccino.png,커피/우유/카페인
         ///아이스티,2500,categories.drink,icedtea.png,차/카페인
-        ///밀크티,2500,categories.[나머지 문자열은 잘림]&quot;;과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///밀크티,2500,categ[나머지 문자열은 잘림]&quot;;과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string menu1 {
             get {
@@ -355,6 +355,16 @@ namespace Kiosk_UI.Properties {
             get {
                 object obj = ResourceManager.GetObject("mintchocolate", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] NotoSansKR_VariableFont_wght {
+            get {
+                object obj = ResourceManager.GetObject("NotoSansKR_VariableFont_wght", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

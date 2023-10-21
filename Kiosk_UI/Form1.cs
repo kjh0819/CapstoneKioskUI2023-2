@@ -105,8 +105,8 @@ namespace Kiosk_UI
         private void AllmenuButton_Click(object sender, EventArgs e)
         {
             foreach (var type in MenuPanel.Controls)
-            { 
-                var itm = (item)type; 
+            {
+                var itm = (item)type;
                 itm.Visible = true;
             }
         }
@@ -123,7 +123,6 @@ namespace Kiosk_UI
                 else { itm.Visible = true; }
             }
         }
-
         private void DessertButton_Click(object sender, EventArgs e)
         {
             foreach (var type in MenuPanel.Controls)
@@ -249,7 +248,6 @@ namespace Kiosk_UI
                 tts.Speak("죄송합니다 메뉴를 찾을수 없었습니다.");
             }
         }
-
 
     }
 

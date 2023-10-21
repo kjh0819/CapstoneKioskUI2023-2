@@ -80,7 +80,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Custom_button\Custom_button.cs">
+    <Compile Include="Custom\Custom_button.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Custom\Custom_panel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Form1.cs">
@@ -123,6 +126,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\NotoSansKR-VariableFont_wght.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -273,6 +277,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\font.bmp" />
     <None Include="Resources\menu.csv" />
     <None Include="icons\cocktail.png" />
     <Content Include="icons\icons8-메뉴-500.png" />
