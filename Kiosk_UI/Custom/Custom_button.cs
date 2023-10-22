@@ -9,14 +9,14 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.ComponentModel;
 
-namespace Kiosk_UI.Custom_button
+namespace Kiosk_UI.Custom
 {
     public class Custom_button : Button
     {
         //Fields
         private int borderSize = 0;
         private int borderRadius = 20;
-        private Color borderColor = Color.PaleVioletRed;
+        private Color borderColor = Color.Black;
         
         public Custom_button()
         {

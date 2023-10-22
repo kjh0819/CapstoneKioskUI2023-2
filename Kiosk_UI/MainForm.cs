@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using System.Windows.Forms;
 using System.IO;
 using Kiosk_UI.Properties;
@@ -249,6 +250,12 @@ namespace Kiosk_UI
             }
         }
 
+        private void custom_button1_Click(object sender, EventArgs e)
+        {
+            PayCheck Obj = new PayCheck();
+            Obj.Show();
+            this.Hide();
+        }
     }
 
 }
