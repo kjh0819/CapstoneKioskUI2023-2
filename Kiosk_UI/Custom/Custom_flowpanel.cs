@@ -9,9 +9,10 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.ComponentModel;
 
+
 namespace Kiosk_UI.Custom
 {
-    public class Custom_panel : Panel
+    public class Custom_flowpanel : FlowLayoutPanel
     {
         Pen pen;
         float penWidth = 2.0f;
@@ -44,7 +45,7 @@ namespace Kiosk_UI.Custom
             }
         }
 
-        public Custom_panel()
+        public Custom_flowpanel()
         {
             pen = new Pen(_borderColor, penWidth);
         }
@@ -109,3 +110,4 @@ namespace Kiosk_UI.Custom
         }
     }
 }
+
