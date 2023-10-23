@@ -4,7 +4,7 @@
 녹차라떼,3500,categories.drink,greentealatte.png,녹차/카페인/라떼
 아이스초코,2500,categories.drink,icedchocolate.png,초코/우유/초콜릿
 카페라떼,2500,categories.drink,cafelatte.png,커피/카페인/라떼/우유
-카라멜마끼아또,2500,categories.drink,caramelmacchiato.png,커피/우유/카페인asdsdg
+카라멜마끼아또,2500,categories.drink,caramelmacchiato.png,커피/우유/카페인
 커피플렛치노,2500,categories.drink,coffeeflatccino.png,커피/우유/카페인
 아이스티,2500,categories.drink,icedtea.png,차/카페인
 밀크티,2500,categories.drink,milktea.png,차/카페인/홍차/우유
@@ -16,7 +16,7 @@
 로즈마리차,2500,categories.drink,rosemarytea.png,로즈마리/차
 캐모마일차,2500,categories.drink,chamomiletea.png,캐모마일/차/카모마일
 베이글,1500,categories.dessert,bagel.png,베이글/빵
-블루베리베이글,1500,categories.dessert,blueberrybagel.png,베이글/빵/블루베리
+베이글,1500,categories.dessert,bagel.png,베이글/빵
 조각치즈케이크,1500,categories.dessert,cheesecake.png,치즈/케이크/빵
 조각초콜릿케이크,1500,categories.dessert,chocolatecake.png,초콜릿/케이크/빵
 조각딸기케이크,1500,categories.dessert,strawberrycake.png,딸기/케이크/빵
@@ -27,3 +27,4 @@
 딸기마카롱,1500,categories.dessert,strawberrymacaron.png,딸기/쿠키/마카롱
 초코마카롱,1500,categories.dessert,chocomacaron.png,초코/쿠키/마카롱
 녹차마카롱,1500,categories.dessert,greenteamacaron.png,녹차/쿠키/마카롱
+새 메뉴,3000,categories.drink,noImage.png,새메뉴/삭제/요망
