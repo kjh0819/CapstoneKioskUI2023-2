@@ -22,6 +22,7 @@ namespace Kiosk_UI
         private MqttClient client = new MqttClient("kjh0819.duckdns.org");
         const string csv = "../../resources/menu.csv";
         bool flagForNewFile=false;
+
         public MainForm()
         {
             InitializeComponent();
@@ -66,7 +67,71 @@ namespace Kiosk_UI
             }
             
         }
-        
+        public void RemoveItem(string name)
+        {
+            foreach (var control in MenuPanel.Controls)
+            {
+                if (control is item menuItem && menuItem.Title == name)
+                {
+                    // 메뉴 항목을 MenuPanel.Controls에서 제거
+                    MenuPanel.Controls.Remove(menuItem);
+                    break;
+                }
+            }
+        }
+        public void RemoveItemAll()
+        {
+            foreach (var control in MenuPanel.Controls)
+            {
+                if (control is item menuItem)
+                {
+                    // 메뉴 항목을 MenuPanel.Controls에서 제거
+                    MenuPanel.Controls.Clear();
+                }
+            }
+        }
+
+        public void updateItem()
+        {
+            RemoveItemAll();
+            foreach (var item in MenuPanel.Controls)
+            {
+                var control = (item)item;
+                if (control != null)
+                {
+                    control.Visible = false;
+                }
+            }
+
+            var lines = File.ReadAllText(csv);
+
+            foreach (string line in lines.Split('\n'))
+            {
+                string[] result = line.Split(',');
+                string[] details = result[4].Split('/');
+                details[details.Length - 1] = details[details.Length - 1].Replace('\n', ' ').Trim();
+                if (result[2] == "categories.drink")
+                {
+                    AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3], details);
+                    //AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3]);
+                }
+                else if (result[2] == "categories.dessert")
+                {
+                    AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3], result[4].Split('/'));
+                    //AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3]);
+                }
+            }
+
+            foreach (var item in MenuPanel.Controls)
+            {
+                var control = (item)item;
+                if (control != null)
+                {
+                    control.Visible = true;
+                }
+            }
+        }
+
         public List<string> Search(string searchString,bool include)
         {
             List<string> result = new List<string>();
@@ -134,6 +199,9 @@ namespace Kiosk_UI
                     File.WriteAllText(csv, m);
                     flagForNewFile = true;
                     break;
+                case "Menu/Update":
+                    updateItem();
+                    break;
             }
         }
         private void MainForm_Shown(object sender, EventArgs e)
@@ -167,10 +235,14 @@ namespace Kiosk_UI
                 }
                 flagForNewFile=false;
             }
+
+
+
         }
 
         private void AllmenuButton_Click(object sender, EventArgs e)
         {
+            updateItem();
             foreach (var type in MenuPanel.Controls)
             { 
                 var itm = (item)type; 
