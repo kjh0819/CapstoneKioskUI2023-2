@@ -11,12 +11,17 @@ using System.IO;
 using Kiosk_UI.Properties;
 using TTSLib;
 using System.Collections;
+using uPLibrary.Networking.M2Mqtt;
+using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace Kiosk_UI
 {    
 
     public partial class MainForm : Form
     {
+        private MqttClient client = new MqttClient("kjh0819.duckdns.org");
+        const string csv = "../../resources/menu.csv";
+        bool flagForNewFile=false;
         public MainForm()
         {
             InitializeComponent();
@@ -36,17 +41,32 @@ namespace Kiosk_UI
         //public void AddItem(string name, int cost, categories category, string icon)
         public void AddItem(string name, int cost, categories category, string icon, string[] detail)
         {
-            MenuPanel.Controls.Add(new item()
+            try
             {
-                Title = name,
-                Cost = cost,
-                Category = category,
-                Icon = Image.FromFile("icons/" + icon),
-                Detail=detail
+                MenuPanel.Controls.Add(new item()
+                {
+                    Title = name,
+                    Cost = cost,
+                    Category = category,
+                    Icon = Image.FromFile("icons/" + icon),
+                    Detail = detail
 
-            });
+                });
+            }
+            catch {
+                MenuPanel.Controls.Add(new item()
+                {
+                    Title = name,
+                    Cost = cost,
+                    Category = category,
+                    Icon = Image.FromFile("icons/" + "americano.png"),
+                    Detail = detail
+
+                });
+            }
             
         }
+        
         public List<string> Search(string searchString,bool include)
         {
             List<string> result = new List<string>();
@@ -82,9 +102,50 @@ namespace Kiosk_UI
                 }
             return result;
         }
+
+        void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+        {
+            // e.Topic : 토픽 이름
+            // e.Message : 메시지 내용 (바이트 배열)
+            // e.DupFlag : 중복 플래그
+            // e.QosLevel : QoS 레벨
+            // e.Retain : retain 플래그
+            string m = Encoding.UTF8.GetString(e.Message);
+            string t = e.Topic;
+
+            switch (t)
+            {
+                case "Menu/exist":
+                    Console.WriteLine(m);
+                    break;
+                case "Menu/request":
+                    string message = File.ReadAllText(csv);
+                    string topic = "Menu/exist";
+                    Console.Write(message);
+                    client.Publish(topic, Encoding.UTF8.GetBytes(message), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    break;
+                case "Menu/NewImage":
+                    Console.WriteLine(m);
+
+                    File.WriteAllBytes("../../../test.png", e.Message);
+                    break;
+                case "Menu/NewFile":
+                    Console.WriteLine(m);
+                    File.WriteAllText(csv, m);
+                    flagForNewFile = true;
+                    break;
+            }
+        }
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            var csv = "../../resources/menu.csv";
+            string clientId = Guid.NewGuid().ToString();
+            string username = "IndukKioskB";
+            string password = "08190919";
+            byte code = client.Connect(clientId, username, password);
+            client.MqttMsgPublishReceived += client_MqttMsgPublishReceived; // 메시지 수신 이벤트 핸들러 등록
+            client.Subscribe(new string[] { "Menu/NewImage", "Menu/exist", "Menu/request", "Menu/NewFile" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE }); // test/topic 토픽을 QoS 1로 구독
+            client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+            do { } while (!flagForNewFile);
             {
                 var lines = File.ReadAllText(csv);
                 
@@ -104,6 +165,7 @@ namespace Kiosk_UI
                         //AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3]);
                     }
                 }
+                flagForNewFile=false;
             }
         }
 
