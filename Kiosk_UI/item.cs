@@ -36,6 +36,7 @@ namespace Kiosk_UI
         private void txtImg_Click(object sender, EventArgs e)
         {
             OnSelect?.Invoke(this, e);
+            
         }
     }
 }
