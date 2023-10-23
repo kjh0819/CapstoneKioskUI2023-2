@@ -27,7 +27,7 @@ namespace Kiosk_UI
         
         public void AddItem(string name, int cost, categories category, string icon, string[] detail)
         {
-            MenuPanel.Controls.Add(new item()
+            var i = new item()
             {
                 Title = name,
                 Cost = cost,
@@ -35,8 +35,34 @@ namespace Kiosk_UI
                 Icon = Image.FromFile("icons/" + icon),
                 Detail=detail
 
-            });
-            
+            };
+            MenuPanel.Controls.Add(i);
+
+            i.OnSelect += (ss, ee) =>
+            {
+                var itm = (item)ss;
+                foreach (DataGridViewRow rows in dataGridView1.Rows)
+                {
+                    if (rows.Cells[0].Value.ToString() == itm.Title)
+                    {
+                        rows.Cells[1].Value = int.Parse(rows.Cells[1].Value.ToString()) + 1;
+                        rows.Cells[2].Value = (int.Parse(rows.Cells[2].Value.ToString())) + int.Parse(rows.Cells[2].Value.ToString());
+                        Calculate();
+                        return;
+                    }
+                }
+                dataGridView1.Rows.Add(new object[] { itm.Title, 1, itm.Cost});
+                Calculate();
+            };
+        }
+        void Calculate()
+        {
+            int W = 0;
+            foreach (DataGridViewRow rows in dataGridView1.Rows)
+            {
+                W += int.Parse(rows.Cells[2].Value.ToString().Replace("원", ""));
+            }
+            //lblW.Text = txt.Tostring()
         }
         public List<string> Search(string searchString,bool include)
         {
@@ -249,6 +275,8 @@ namespace Kiosk_UI
                 tts.Speak("죄송합니다 메뉴를 찾을수 없었습니다.");
             }
         }
+
+        
 
         private void custom_button1_Click(object sender, EventArgs e)
         {

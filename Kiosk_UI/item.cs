@@ -18,6 +18,7 @@ namespace Kiosk_UI
 
         public event EventHandler OnSelect = null;
 
+
         public categories Category { get => _category; set => _category = value; }
         public Image Icon { get => txtImg.Image; set => txtImg.Image = value; }
         public string Title { get => lblTitle.Text; set => lblTitle.Text = value; }
@@ -30,6 +31,11 @@ namespace Kiosk_UI
         public item()
         {
             InitializeComponent();
+        }
+
+        private void txtImg_Click(object sender, EventArgs e)
+        {
+            OnSelect?.Invoke(this, e);
         }
     }
 }
