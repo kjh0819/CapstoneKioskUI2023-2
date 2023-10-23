@@ -23,8 +23,18 @@ namespace Kiosk_UI
         {
             InitializeComponent();
         }
-        //속도조절
-        
+
+        public void AddItem2(string name2, int cost2, int count, string icon2)
+        {
+            checkPanel.Controls.Add(new select_item()
+            {
+                Title2 = name2,
+                Cost2 = cost2,
+                Count = count,
+                Icon2 = Image.FromFile("icons/" + icon2)
+            });
+        }
+
         public void AddItem(string name, int cost, categories category, string icon, string[] detail)
         {
             var i = new item()
@@ -40,8 +50,19 @@ namespace Kiosk_UI
 
             i.OnSelect += (ss, ee) =>
             {
-                var itm = (item)ss;
-                foreach (DataGridViewRow rows in dataGridView1.Rows)
+                int a = 1;
+                foreach (var sl in checkPanel.Controls)
+                 {
+                      var sl_itm = (select_item)sl;
+                    if (sl_itm.Title2 == name.ToString()) 
+                      {
+                        a = +1;
+                      }
+                }
+                AddItem2(name, cost, a, icon);
+
+
+                /*foreach (DataGridViewRow rows in dataGridView1.Rows)
                 {
                     if (rows.Cells[0].Value.ToString() == itm.Title)
                     {
@@ -52,10 +73,11 @@ namespace Kiosk_UI
                     }
                 }
                 dataGridView1.Rows.Add(new object[] { itm.Title, 1, itm.Cost});
-                Calculate();
+                Calculate();*/
             };
         }
-        void Calculate()
+
+       /* void Calculate()
         {
             int W = 0;
             foreach (DataGridViewRow rows in dataGridView1.Rows)
@@ -63,7 +85,7 @@ namespace Kiosk_UI
                 W += int.Parse(rows.Cells[2].Value.ToString().Replace("원", ""));
             }
             //lblW.Text = txt.Tostring()
-        }
+        }*/
         public List<string> Search(string searchString,bool include)
         {
             List<string> result = new List<string>();
