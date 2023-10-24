@@ -16,7 +16,7 @@
 로즈마리차,2500,categories.drink,rosemarytea.png,로즈마리/차
 캐모마일차,2500,categories.drink,chamomiletea.png,캐모마일/차/카모마일
 베이글,1500,categories.dessert,bagel.png,베이글/빵
-베이글,1500,categories.dessert,bagel.png,베이글/빵
+블루베리베이글,1500,categories.dessert,blueberrybagel.png,베이글/빵/블루베리
 조각치즈케이크,1500,categories.dessert,cheesecake.png,치즈/케이크/빵
 조각초콜릿케이크,1500,categories.dessert,chocolatecake.png,초콜릿/케이크/빵
 조각딸기케이크,1500,categories.dessert,strawberrycake.png,딸기/케이크/빵
@@ -27,4 +27,3 @@
 딸기마카롱,1500,categories.dessert,strawberrymacaron.png,딸기/쿠키/마카롱
 초코마카롱,1500,categories.dessert,chocomacaron.png,초코/쿠키/마카롱
 녹차마카롱,1500,categories.dessert,greenteamacaron.png,녹차/쿠키/마카롱
-새메뉴,3000,categories.drink,n,test/need/remove
