@@ -30,15 +30,17 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.item_count = new System.Windows.Forms.Label();
-            this.txtImg2 = new System.Windows.Forms.PictureBox();
             this.minus_button = new Kiosk_UI.Custom.Custom_circle();
             this.plus_button = new Kiosk_UI.Custom.Custom_circle();
+            this.txtImg2 = new System.Windows.Forms.PictureBox();
+            this.lblTxt = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtImg2)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblTxt);
             this.panel1.Controls.Add(this.item_count);
             this.panel1.Controls.Add(this.minus_button);
             this.panel1.Controls.Add(this.plus_button);
@@ -53,21 +55,11 @@
             this.item_count.AutoSize = true;
             this.item_count.BackColor = System.Drawing.Color.OldLace;
             this.item_count.Font = new System.Drawing.Font("Noto Sans KR", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.item_count.Location = new System.Drawing.Point(68, 125);
+            this.item_count.Location = new System.Drawing.Point(64, 126);
             this.item_count.Name = "item_count";
             this.item_count.Size = new System.Drawing.Size(19, 24);
             this.item_count.TabIndex = 3;
             this.item_count.Text = "1";
-            // 
-            // txtImg2
-            // 
-            this.txtImg2.Image = global::Kiosk_UI.Properties.Resources.americano;
-            this.txtImg2.Location = new System.Drawing.Point(24, 16);
-            this.txtImg2.Name = "txtImg2";
-            this.txtImg2.Size = new System.Drawing.Size(100, 100);
-            this.txtImg2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.txtImg2.TabIndex = 0;
-            this.txtImg2.TabStop = false;
             // 
             // minus_button
             // 
@@ -75,7 +67,7 @@
             this.minus_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.minus_button.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.minus_button.ForeColor = System.Drawing.Color.White;
-            this.minus_button.Location = new System.Drawing.Point(98, 121);
+            this.minus_button.Location = new System.Drawing.Point(94, 122);
             this.minus_button.Name = "minus_button";
             this.minus_button.Size = new System.Drawing.Size(30, 30);
             this.minus_button.TabIndex = 2;
@@ -89,13 +81,33 @@
             this.plus_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.plus_button.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.plus_button.ForeColor = System.Drawing.Color.White;
-            this.plus_button.Location = new System.Drawing.Point(24, 121);
+            this.plus_button.Location = new System.Drawing.Point(20, 122);
             this.plus_button.Name = "plus_button";
             this.plus_button.Size = new System.Drawing.Size(30, 30);
             this.plus_button.TabIndex = 1;
             this.plus_button.Text = "+";
             this.plus_button.UseVisualStyleBackColor = false;
             this.plus_button.Click += new System.EventHandler(this.plus_button_Click);
+            // 
+            // txtImg2
+            // 
+            this.txtImg2.Image = global::Kiosk_UI.Properties.Resources.americano;
+            this.txtImg2.Location = new System.Drawing.Point(24, 27);
+            this.txtImg2.Name = "txtImg2";
+            this.txtImg2.Size = new System.Drawing.Size(100, 94);
+            this.txtImg2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.txtImg2.TabIndex = 0;
+            this.txtImg2.TabStop = false;
+            // 
+            // lblTxt
+            // 
+            this.lblTxt.Font = new System.Drawing.Font("Noto Sans KR", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblTxt.Location = new System.Drawing.Point(0, 0);
+            this.lblTxt.Name = "lblTxt";
+            this.lblTxt.Size = new System.Drawing.Size(147, 24);
+            this.lblTxt.TabIndex = 4;
+            this.lblTxt.Text = "아메리카노";
+            this.lblTxt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // select_item
             // 
@@ -119,5 +131,6 @@
         private System.Windows.Forms.Label item_count;
         private Custom.Custom_circle minus_button;
         private Custom.Custom_circle plus_button;
+        private System.Windows.Forms.Label lblTxt;
     }
 }
