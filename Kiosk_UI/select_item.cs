@@ -28,7 +28,7 @@ namespace Kiosk_UI
 
 
 
-        public string Title2 { get; set; }
+        public string Title2 { get => lblTxt.Text; set => lblTxt.Text = value; }
         public int Count { get => _count; set { _count = value; item_count.Text = Convert.ToString(_count); } }
         public int Cost2 { get; set; }
         public Image Icon2 { get => txtImg2.Image; set => txtImg2.Image = value; }
