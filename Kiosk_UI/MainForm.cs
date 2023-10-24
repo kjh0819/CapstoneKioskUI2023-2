@@ -106,11 +106,11 @@ namespace Kiosk_UI
 
             var lines = File.ReadAllText(csv);
 
-            foreach (string line in lines.Split('\n'))
+            foreach (string line in lines.Split('*'))
             {
                 string[] result = line.Split(',');
                 string[] details = result[4].Split('/');
-                details[details.Length - 1] = details[details.Length - 1].Replace('\n', ' ').Trim();
+                details[details.Length - 1] = details[details.Length - 1].Replace("*", "").Trim();
                 if (result[2] == "categories.drink")
                 {
                     AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3], details);
@@ -120,15 +120,6 @@ namespace Kiosk_UI
                 {
                     AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3], result[4].Split('/'));
                     //AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3]);
-                }
-            }
-
-            foreach (var item in MenuPanel.Controls)
-            {
-                var control = (item)item;
-                if (control != null)
-                {
-                    control.Visible = true;
                 }
             }
         }
@@ -141,13 +132,15 @@ namespace Kiosk_UI
                 {
                     {
                         var itm = (item)item;
-                        if (itm.Title == searchString)
+                        //if (itm.Title.Contains( searchString))
+                        if(itm.Title==searchString)
                         {
                             result.Add(itm.Title);
                         }
                         else
                             foreach(var d in itm.Detail)
                             {
+                                Console.WriteLine(itm.Title +"in"+d);
                                 if (d == searchString)
                                 {
                                     result.Add(itm.Title);
@@ -216,31 +209,10 @@ namespace Kiosk_UI
             client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
             do { } while (!flagForNewFile);
             {
-                var lines = File.ReadAllText(csv);
-                
-                foreach (string line in lines.Split('\n'))
-                {
-                    string[] result = line.Split(',');
-                    string[] details=result[4].Split('/');
-                    details[details.Length - 1] = details[details.Length - 1].Replace('\n', ' ').Trim();
-                    if (result[2] == "categories.drink")
-                    {
-                        AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3], details);
-                        //AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3]);
-                    }
-                    else if(result[2] == "categories.dessert")
-                    {
-                        AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3], result[4].Split('/'));
-                        //AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3]);
-                    }
-                }
-                flagForNewFile=false;
+                updateItem();
             }
-
-
-
+            flagForNewFile = false;
         }
-
         private void AllmenuButton_Click(object sender, EventArgs e)
         {
             updateItem();
