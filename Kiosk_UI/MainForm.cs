@@ -45,7 +45,7 @@ namespace Kiosk_UI
         {
             try
             {
-                MenuPanel.Controls.Add(new item()
+                var i = new item()
                 {
                     Title = name,
                     Cost = cost,
@@ -53,10 +53,24 @@ namespace Kiosk_UI
                     Icon = Image.FromFile("icons/" + icon),
                     Detail = detail
 
-                });
+                };
+                MenuPanel.Controls.Add(i);
+                i.OnSelect += (ss, ee) =>
+                {
+                    int a = 1;
+                    foreach (var sl in checkPanel.Controls)
+                    {
+                        var sl_itm = (select_item)sl;
+                        if (sl_itm.Title2 == name.ToString())
+                        {
+                            a = +1;
+                        }
+                    }
+                    AddItem2(name, cost, a, icon);
+                };
             }
             catch {
-                MenuPanel.Controls.Add(new item()
+                var i = new item()
                 {
                     Title = name,
                     Cost = cost,
@@ -64,10 +78,23 @@ namespace Kiosk_UI
                     Icon = Image.FromFile("icons/" + "americano.png"),
                     Detail = detail
 
-                });
-            }
-            
-        }
+                };
+                MenuPanel.Controls.Add(i);
+                i.OnSelect += (ss, ee) =>
+                {
+                    int a = 1;
+                    foreach (var sl in checkPanel.Controls)
+                    {
+                        var sl_itm = (select_item)sl;
+                        if (sl_itm.Title2 == name.ToString())
+                        {
+                            a = +1;
+                        }
+                    }
+                    AddItem2(name, cost, a, icon);
+                };
+            };
+                }
         public void RemoveItem(string name)
         {
             foreach (var control in MenuPanel.Controls)
@@ -221,17 +248,24 @@ namespace Kiosk_UI
                 foreach (string line in lines.Split('\n'))
                 {
                     string[] result = line.Split(',');
-                    string[] details=result[4].Split('/');
-                    details[details.Length - 1] = details[details.Length - 1].Replace('\n', ' ').Trim();
-                    if (result[2] == "categories.drink")
+                    try
                     {
-                        AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3], details);
-                        //AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3]);
+                        string[] details = result[4].Split('/');
+                        details[details.Length - 1] = details[details.Length - 1].Replace('\n', ' ').Trim();
+                        if (result[2] == "categories.drink")
+                        {
+                            AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3], details);
+                            //AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3]);
+                        }
+                        else if (result[2] == "categories.dessert")
+                        {
+                            AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3], result[4].Split('/'));
+                            //AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3]);
+                        }
                     }
-                    else if(result[2] == "categories.dessert")
+                    catch
                     {
-                        AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3], result[4].Split('/'));
-                        //AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3]);
+
                     }
                 }
                 flagForNewFile=false;
