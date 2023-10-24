@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.VoiceButton = new Kiosk_UI.Custom.Custom_button();
+            this.DessertButton = new Kiosk_UI.Custom.Custom_button();
+            this.DrinkButton = new Kiosk_UI.Custom.Custom_button();
+            this.AllmenuButton = new Kiosk_UI.Custom.Custom_button();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.SelectbarPanel = new System.Windows.Forms.Panel();
             this.checkPanel = new Kiosk_UI.Custom.Custom_flowpanel();
             this.custom_button1 = new Kiosk_UI.Custom.Custom_button();
             this.MenuPanel = new Kiosk_UI.Custom.Custom_flowpanel();
-            this.VoiceButton = new Kiosk_UI.Custom.Custom_button();
-            this.DessertButton = new Kiosk_UI.Custom.Custom_button();
-            this.DrinkButton = new Kiosk_UI.Custom.Custom_button();
-            this.AllmenuButton = new Kiosk_UI.Custom.Custom_button();
             this.panel1.SuspendLayout();
             this.SelectbarPanel.SuspendLayout();
             this.SuspendLayout();
@@ -56,6 +56,66 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(107, 397);
             this.panel1.TabIndex = 3;
+            // 
+            // VoiceButton
+            // 
+            this.VoiceButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(151)))), ((int)(((byte)(115)))));
+            this.VoiceButton.FlatAppearance.BorderSize = 0;
+            this.VoiceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.VoiceButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.VoiceButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.VoiceButton.Location = new System.Drawing.Point(0, 324);
+            this.VoiceButton.Name = "VoiceButton";
+            this.VoiceButton.Size = new System.Drawing.Size(124, 56);
+            this.VoiceButton.TabIndex = 8;
+            this.VoiceButton.Text = "음성검색";
+            this.VoiceButton.UseVisualStyleBackColor = false;
+            this.VoiceButton.Click += new System.EventHandler(this.VoiceButton_Click);
+            // 
+            // DessertButton
+            // 
+            this.DessertButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(151)))), ((int)(((byte)(115)))));
+            this.DessertButton.FlatAppearance.BorderSize = 0;
+            this.DessertButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DessertButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.DessertButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.DessertButton.Location = new System.Drawing.Point(0, 224);
+            this.DessertButton.Name = "DessertButton";
+            this.DessertButton.Size = new System.Drawing.Size(124, 56);
+            this.DessertButton.TabIndex = 7;
+            this.DessertButton.Text = "디저트";
+            this.DessertButton.UseVisualStyleBackColor = false;
+            this.DessertButton.Click += new System.EventHandler(this.DessertButton_Click);
+            // 
+            // DrinkButton
+            // 
+            this.DrinkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(151)))), ((int)(((byte)(115)))));
+            this.DrinkButton.FlatAppearance.BorderSize = 0;
+            this.DrinkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DrinkButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.DrinkButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.DrinkButton.Location = new System.Drawing.Point(0, 124);
+            this.DrinkButton.Name = "DrinkButton";
+            this.DrinkButton.Size = new System.Drawing.Size(124, 56);
+            this.DrinkButton.TabIndex = 6;
+            this.DrinkButton.Text = "음료";
+            this.DrinkButton.UseVisualStyleBackColor = false;
+            this.DrinkButton.Click += new System.EventHandler(this.DrinkButton_Click);
+            // 
+            // AllmenuButton
+            // 
+            this.AllmenuButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(151)))), ((int)(((byte)(115)))));
+            this.AllmenuButton.FlatAppearance.BorderSize = 0;
+            this.AllmenuButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AllmenuButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.AllmenuButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.AllmenuButton.Location = new System.Drawing.Point(0, 24);
+            this.AllmenuButton.Name = "AllmenuButton";
+            this.AllmenuButton.Size = new System.Drawing.Size(124, 56);
+            this.AllmenuButton.TabIndex = 0;
+            this.AllmenuButton.Text = "모든메뉴";
+            this.AllmenuButton.UseVisualStyleBackColor = false;
+            this.AllmenuButton.Click += new System.EventHandler(this.AllmenuButton_Click);
             // 
             // TopPanel
             // 
@@ -121,66 +181,6 @@
             this.MenuPanel.Size = new System.Drawing.Size(347, 417);
             this.MenuPanel.TabIndex = 4;
             // 
-            // VoiceButton
-            // 
-            this.VoiceButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(151)))), ((int)(((byte)(115)))));
-            this.VoiceButton.FlatAppearance.BorderSize = 0;
-            this.VoiceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.VoiceButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.VoiceButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.VoiceButton.Location = new System.Drawing.Point(0, 324);
-            this.VoiceButton.Name = "VoiceButton";
-            this.VoiceButton.Size = new System.Drawing.Size(124, 56);
-            this.VoiceButton.TabIndex = 8;
-            this.VoiceButton.Text = "음성검색";
-            this.VoiceButton.UseVisualStyleBackColor = false;
-            this.VoiceButton.Click += new System.EventHandler(this.VoiceButton_Click);
-            // 
-            // DessertButton
-            // 
-            this.DessertButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(151)))), ((int)(((byte)(115)))));
-            this.DessertButton.FlatAppearance.BorderSize = 0;
-            this.DessertButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DessertButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.DessertButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.DessertButton.Location = new System.Drawing.Point(0, 224);
-            this.DessertButton.Name = "DessertButton";
-            this.DessertButton.Size = new System.Drawing.Size(124, 56);
-            this.DessertButton.TabIndex = 7;
-            this.DessertButton.Text = "디저트";
-            this.DessertButton.UseVisualStyleBackColor = false;
-            this.DessertButton.Click += new System.EventHandler(this.DessertButton_Click);
-            // 
-            // DrinkButton
-            // 
-            this.DrinkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(151)))), ((int)(((byte)(115)))));
-            this.DrinkButton.FlatAppearance.BorderSize = 0;
-            this.DrinkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DrinkButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.DrinkButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.DrinkButton.Location = new System.Drawing.Point(0, 124);
-            this.DrinkButton.Name = "DrinkButton";
-            this.DrinkButton.Size = new System.Drawing.Size(124, 56);
-            this.DrinkButton.TabIndex = 6;
-            this.DrinkButton.Text = "음료";
-            this.DrinkButton.UseVisualStyleBackColor = false;
-            this.DrinkButton.Click += new System.EventHandler(this.DrinkButton_Click);
-            // 
-            // AllmenuButton
-            // 
-            this.AllmenuButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(151)))), ((int)(((byte)(115)))));
-            this.AllmenuButton.FlatAppearance.BorderSize = 0;
-            this.AllmenuButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AllmenuButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.AllmenuButton.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.AllmenuButton.Location = new System.Drawing.Point(0, 24);
-            this.AllmenuButton.Name = "AllmenuButton";
-            this.AllmenuButton.Size = new System.Drawing.Size(124, 56);
-            this.AllmenuButton.TabIndex = 0;
-            this.AllmenuButton.Text = "모든메뉴";
-            this.AllmenuButton.UseVisualStyleBackColor = false;
-            this.AllmenuButton.Click += new System.EventHandler(this.AllmenuButton_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -214,6 +214,14 @@
         private System.Windows.Forms.Panel SelectbarPanel;
         private Custom.Custom_button custom_button1;
         private Custom.Custom_flowpanel checkPanel;
+        
+        private void initializeComponent()
+        {
+            this.MenuPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MenuPanel.BorderColor = System.Drawing.Color.DarkGreen;
+           
+        }
+        
     }
 }
 
