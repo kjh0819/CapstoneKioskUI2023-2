@@ -100,6 +100,8 @@ public class Tokenizer
         }
         phraseList.AddPhrase($"카페라떼");
         phraseList.AddPhrase($"우유");
+        phraseList.AddPhrase($"녹차마카롱");
+        phraseList.AddPhrase($"녹차뚱카롱");
 
         var tts = new TextToSpeechConverter();
         tts.Speak("음성인식을 시작합니다");

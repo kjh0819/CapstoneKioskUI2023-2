@@ -225,7 +225,7 @@ namespace Kiosk_UI
                     break;
             }
         }
-        private void MainForm_Shown(object sender, EventArgs e)
+        private async void MainForm_Shown(object sender, EventArgs e)
         {
             string clientId = Guid.NewGuid().ToString();
             string username = "IndukKioskB";
@@ -240,7 +240,7 @@ namespace Kiosk_UI
             }
             flagForNewFile = false;
         }
-        private void AllmenuButton_Click(object sender, EventArgs e)
+        private async void AllmenuButton_Click(object sender, EventArgs e)
         {
             updateItem();
             foreach (var type in MenuPanel.Controls)
@@ -250,7 +250,7 @@ namespace Kiosk_UI
             }
         }
 
-        private void DrinkButton_Click(object sender, EventArgs e)
+        private async void DrinkButton_Click(object sender, EventArgs e)
         {
             foreach (var type in MenuPanel.Controls)
             {
@@ -262,7 +262,7 @@ namespace Kiosk_UI
                 else { itm.Visible = true; }
             }
         }
-        private void DessertButton_Click(object sender, EventArgs e)
+        private async void DessertButton_Click(object sender, EventArgs e)
         {
             foreach (var type in MenuPanel.Controls)
             {
@@ -275,20 +275,6 @@ namespace Kiosk_UI
             }
         }
 
-
-        private void textBox1_Enter(object sender, EventArgs e)
-        {
-            foreach (var type in MenuPanel.Controls)
-            {
-                var itm = (item)type;
-
-            }
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
 
         private async void VoiceButton_Click(object sender, EventArgs e)
         {
@@ -388,9 +374,7 @@ namespace Kiosk_UI
             }
         }
 
-        
-
-        private void custom_button1_Click(object sender, EventArgs e)
+        private async void custom_button1_Click(object sender, EventArgs e)
         {
             PayCheck Obj = new PayCheck();
             Obj.Show();

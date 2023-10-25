@@ -38,6 +38,7 @@
             this.checkPanel = new Kiosk_UI.Custom.Custom_flowpanel();
             this.custom_button1 = new Kiosk_UI.Custom.Custom_button();
             this.MenuPanel = new Kiosk_UI.Custom.Custom_flowpanel();
+            this.custom_panel1 = new Kiosk_UI.Custom.Custom_panel();
             this.panel1.SuspendLayout();
             this.SelectbarPanel.SuspendLayout();
             this.SuspendLayout();
@@ -47,14 +48,15 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.VoiceButton);
             this.panel1.Controls.Add(this.DessertButton);
             this.panel1.Controls.Add(this.DrinkButton);
             this.panel1.Controls.Add(this.AllmenuButton);
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(6, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(107, 397);
+            this.panel1.Size = new System.Drawing.Size(127, 396);
             this.panel1.TabIndex = 3;
             // 
             // VoiceButton
@@ -133,22 +135,22 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.SelectbarPanel.BackColor = System.Drawing.Color.Transparent;
             this.SelectbarPanel.Controls.Add(this.panel1);
-            this.SelectbarPanel.Location = new System.Drawing.Point(9, 132);
+            this.SelectbarPanel.Location = new System.Drawing.Point(9, 150);
             this.SelectbarPanel.Name = "SelectbarPanel";
-            this.SelectbarPanel.Size = new System.Drawing.Size(113, 417);
+            this.SelectbarPanel.Size = new System.Drawing.Size(133, 399);
             this.SelectbarPanel.TabIndex = 1;
             // 
             // checkPanel
             // 
             this.checkPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(219)))), ((int)(((byte)(159)))));
+            this.checkPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(209)))), ((int)(((byte)(209)))));
             this.checkPanel.BorderColor = System.Drawing.Color.White;
             this.checkPanel.Edge = 20;
             this.checkPanel.Location = new System.Drawing.Point(9, 576);
             this.checkPanel.Name = "checkPanel";
             this.checkPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.checkPanel.Size = new System.Drawing.Size(360, 173);
+            this.checkPanel.Size = new System.Drawing.Size(234, 173);
             this.checkPanel.TabIndex = 5;
             // 
             // custom_button1
@@ -158,9 +160,9 @@
             this.custom_button1.FlatAppearance.BorderSize = 0;
             this.custom_button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.custom_button1.ForeColor = System.Drawing.Color.White;
-            this.custom_button1.Location = new System.Drawing.Point(384, 603);
+            this.custom_button1.Location = new System.Drawing.Point(384, 577);
             this.custom_button1.Name = "custom_button1";
-            this.custom_button1.Size = new System.Drawing.Size(97, 146);
+            this.custom_button1.Size = new System.Drawing.Size(97, 172);
             this.custom_button1.TabIndex = 0;
             this.custom_button1.Text = "custom_button1";
             this.custom_button1.UseVisualStyleBackColor = false;
@@ -175,11 +177,22 @@
             this.MenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(224)))), ((int)(((byte)(220)))));
             this.MenuPanel.BorderColor = System.Drawing.Color.White;
             this.MenuPanel.Edge = 20;
-            this.MenuPanel.Location = new System.Drawing.Point(125, 132);
+            this.MenuPanel.Location = new System.Drawing.Point(125, 150);
             this.MenuPanel.Name = "MenuPanel";
             this.MenuPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.MenuPanel.Size = new System.Drawing.Size(347, 417);
+            this.MenuPanel.Size = new System.Drawing.Size(347, 399);
             this.MenuPanel.TabIndex = 4;
+            // 
+            // custom_panel1
+            // 
+            this.custom_panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.custom_panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.custom_panel1.BorderColor = System.Drawing.Color.White;
+            this.custom_panel1.Edge = 20;
+            this.custom_panel1.Location = new System.Drawing.Point(249, 577);
+            this.custom_panel1.Name = "custom_panel1";
+            this.custom_panel1.Size = new System.Drawing.Size(129, 172);
+            this.custom_panel1.TabIndex = 6;
             // 
             // MainForm
             // 
@@ -188,6 +201,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(484, 761);
+            this.Controls.Add(this.custom_panel1);
             this.Controls.Add(this.checkPanel);
             this.Controls.Add(this.custom_button1);
             this.Controls.Add(this.MenuPanel);
@@ -199,6 +213,7 @@
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.panel1.ResumeLayout(false);
             this.SelectbarPanel.ResumeLayout(false);
+            this.SelectbarPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -221,7 +236,8 @@
             this.MenuPanel.BorderColor = System.Drawing.Color.DarkGreen;
            
         }
-        
+
+        private Custom.Custom_panel custom_panel1;
     }
 }
 
