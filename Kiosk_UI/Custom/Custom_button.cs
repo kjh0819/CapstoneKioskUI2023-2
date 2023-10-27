@@ -75,11 +75,6 @@ namespace Kiosk_UI.Custom
                 }
             }
         }
-        protected override void OnHandleCreated(EventArgs e)
-        {
-            base.OnHandleCreated(e);
-            this.Parent.BackColorChanged += new EventHandler(Container_BackColorChanged);
-        }
         private void Container_BackColorChanged(Object sender, EventArgs e)
         {
             if(this.DesignMode)

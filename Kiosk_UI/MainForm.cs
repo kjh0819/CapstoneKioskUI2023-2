@@ -21,6 +21,8 @@ namespace Kiosk_UI
 
     public partial class MainForm : Form
     {
+        int count_flag = 1
+            ;
         private MqttClient client = new MqttClient("kjh0819.duckdns.org");
         const string csv = "../../resources/menu.csv";
         bool flagForNewFile=false;
@@ -57,16 +59,24 @@ namespace Kiosk_UI
                 MenuPanel.Controls.Add(i);
                 i.OnSelect += (ss, ee) =>
                 {
-                    int a = 1;
+                    
                     foreach (var sl in checkPanel.Controls)
                     {
                         var sl_itm = (select_item)sl;
-                        if (sl_itm.Title2 == name.ToString())
+                        if(name.ToString() == sl_itm.Title2)
                         {
-                            a = +1;
+                            sl_itm.Count += 1;
+                            count_flag = sl_itm.Count;
                         }
                     }
-                    AddItem2(name, cost, a, icon);
+                    if (count_flag == 1)
+                    {
+                        AddItem2(name, cost, count_flag, icon);
+                    }
+                    else
+                    {
+                        count_flag = 1;
+                    }
                 };
             }
             catch {
