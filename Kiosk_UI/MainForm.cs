@@ -34,13 +34,18 @@ namespace Kiosk_UI
 
         public void AddItem2(string name2, int cost2, int count, string icon2)
         {
-            checkPanel.Controls.Add(new select_item()
+            var n  = new select_item()
             {
                 Title2 = name2,
                 Cost2 = cost2,
                 Count = count,
                 Icon2 = Image.FromFile("icons/" + icon2)
-            });
+            };
+            checkPanel.Controls.Add(n);
+            n.OnSelect += (ss, ee) =>
+            {
+                checkPanel.Controls.Remove(n);
+            };
         }
 
         public void AddItem(string name, int cost, categories category, string icon, string[] detail)
