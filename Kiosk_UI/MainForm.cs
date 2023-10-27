@@ -300,30 +300,34 @@ namespace Kiosk_UI
             bool flagForSearch = false; // 검색 결과 초기화를 위한 플래그
 
             string[][] words = new string[texts.Length][];
-            for (int i = 0; i < texts.Length; i++)
+            for (int i = 0; i < texts.Length-1; i++)
             {
                 string[] word = texts[i].Split('/');
                 words[i]= word;
 
             }
-            for (int i = 0; i < texts.Length; i++)
+            bool foundNNGOrNNP = false;
+            for (int i = 0; i < texts.Length-1; i++)
             {
-                bool foundNNGOrNNP = false;
-                if (words[i][1] == "NNG" || words[i][1] == "NNP")
+                Console.WriteLine(words[i][0] + words[i][1]);
+                if (!foundNNGOrNNP && (words[i][1] == "NNG" || words[i][1] == "NNP"))
                 {
                     foundNNGOrNNP = true;
                     continue;
                 }
-                if (foundNNGOrNNP && (words[i][1] == "NNG" || words[i][1] == "NNP"))
+                else if (words[i][1] == "SP")
+                    foundNNGOrNNP = foundNNGOrNNP;
+                else if (foundNNGOrNNP && (words[i][1] == "NNG" || words[i][1] == "NNP"))
                 {
-                    searchResults = Search(words[i][0] + words[i][0],true);
-                    if(searchResults.Count==0)
-                        searchResults = Search(words[i][0]+" "+ words[i][0], true);
+                    searchResults = Search(words[i-1][0] + words[i][0], true);
+                    if (searchResults.Count == 0)
+                        searchResults = Search(words[i-2][0] + words[i][0], true);
+                    flagForSearch=true;
 
                 }
                 else
                 {
-                    foundNNGOrNNP= false;
+                    foundNNGOrNNP = false;
                 }
             }
             if (texts.Contains("들어가/VV"))
@@ -370,7 +374,7 @@ namespace Kiosk_UI
                     }
 
                 }
-            else if(searchResults.Count>0)
+            else if(searchResults.Count>0&& !flagForSearch)
                 foreach (var text in texts)
                 {
                     string[] morps = text.Split('/');
