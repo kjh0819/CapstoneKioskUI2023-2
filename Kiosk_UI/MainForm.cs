@@ -306,7 +306,40 @@ namespace Kiosk_UI
             List<string> searchResults = new List<string>();
             token=token.Replace('+', ' ');
             string[] texts = token.Split(' ');
+
             bool flagForSearch = false; // 검색 결과 초기화를 위한 플래그
+
+            string[][] words = new string[texts.Length][];
+            for (int i = 0; i < texts.Length-1; i++)
+            {
+                string[] word = texts[i].Split('/');
+                words[i]= word;
+
+            }
+            bool foundNNGOrNNP = false;
+            for (int i = 0; i < texts.Length-1; i++)
+            {
+                Console.WriteLine(words[i][0] + words[i][1]);
+                if (!foundNNGOrNNP && (words[i][1] == "NNG" || words[i][1] == "NNP"))
+                {
+                    foundNNGOrNNP = true;
+                    continue;
+                }
+                else if (words[i][1] == "SP")
+                    foundNNGOrNNP = foundNNGOrNNP;
+                else if (foundNNGOrNNP && (words[i][1] == "NNG" || words[i][1] == "NNP"))
+                {
+                    searchResults = Search(words[i-1][0] + words[i][0], true);
+                    if (searchResults.Count == 0)
+                        searchResults = Search(words[i-2][0] + words[i][0], true);
+                    flagForSearch=true;
+
+                }
+                else
+                {
+                    foundNNGOrNNP = false;
+                }
+            }
             if (texts.Contains("들어가/VV"))
                 foreach (var text in texts)
                 {
@@ -351,7 +384,7 @@ namespace Kiosk_UI
                     }
 
                 }
-            else
+            else if(searchResults.Count>0&& !flagForSearch)
                 foreach (var text in texts)
                 {
                     string[] morps = text.Split('/');
@@ -361,6 +394,8 @@ namespace Kiosk_UI
                         searchResults = Result;
                     }
                 }
+
+            //검색 결과 출력
             foreach (var item in MenuPanel.Controls)
             {
                 var control = (item)item;
