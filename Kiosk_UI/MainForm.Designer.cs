@@ -39,8 +39,10 @@
             this.custom_button1 = new Kiosk_UI.Custom.Custom_button();
             this.MenuPanel = new Kiosk_UI.Custom.Custom_flowpanel();
             this.custom_panel1 = new Kiosk_UI.Custom.Custom_panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SelectbarPanel.SuspendLayout();
+            this.custom_panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -188,11 +190,21 @@
             this.custom_panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.custom_panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.custom_panel1.BorderColor = System.Drawing.Color.White;
+            this.custom_panel1.Controls.Add(this.label1);
             this.custom_panel1.Edge = 20;
             this.custom_panel1.Location = new System.Drawing.Point(249, 577);
             this.custom_panel1.Name = "custom_panel1";
             this.custom_panel1.Size = new System.Drawing.Size(129, 172);
             this.custom_panel1.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(39, 80);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "label1";
             // 
             // MainForm
             // 
@@ -214,6 +226,8 @@
             this.panel1.ResumeLayout(false);
             this.SelectbarPanel.ResumeLayout(false);
             this.SelectbarPanel.PerformLayout();
+            this.custom_panel1.ResumeLayout(false);
+            this.custom_panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -238,6 +252,7 @@
         }
 
         private Custom.Custom_panel custom_panel1;
+        private System.Windows.Forms.Label label1;
     }
 }
 
