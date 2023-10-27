@@ -48,7 +48,15 @@ namespace Kiosk_UI
 
         private void minus_button_Click(object sender, EventArgs e)
         {
-            OnSelect?.Invoke(this, e);
+            if (Count > 1)
+            {
+                Count -= 1;
+            }
+            else
+            {
+                OnSelect?.Invoke(this, e);
+            }
+            
         }
     }
 
