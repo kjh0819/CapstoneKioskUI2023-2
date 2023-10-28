@@ -30,11 +30,13 @@ namespace Kiosk_UI
 
         public MainForm()
         {
-            
             InitializeComponent();
-
+            this.FormClosing += MainForm_FormClosing;
         }
-
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
         public void AddItem2(string name2, int cost2, int count, string icon2)
         {
             try {
@@ -183,14 +185,6 @@ namespace Kiosk_UI
             if (flagForNewFile)
             {
                 RemoveItemAll();
-                foreach (var item in MenuPanel.Controls)
-                {
-                    var control = (item)item;
-                    if (control != null)
-                    {
-                        control.Visible = false;
-                    }
-                }
                 var lines = File.ReadAllText(csv);
                 foreach (string line in lines.Split('*'))
                 {
@@ -364,7 +358,16 @@ namespace Kiosk_UI
 
             string token = await Tokenizer.VoiceTokenizer();
             Console.WriteLine(token);
-
+            if (token.Contains("error"))
+            {
+                tts.Speak("에러가 발생하였습니다."); 
+                foreach (var type in MenuPanel.Controls)
+                {
+                    var itm = (item)type;
+                    itm.Visible = true;
+                }
+                return;
+            }
             List<string> searchResults = new List<string>();
             token=token.Replace('+', ' ');
             string[] texts = token.Split(' ');
@@ -461,6 +464,12 @@ namespace Kiosk_UI
             if (searchResults.Count == 0)
             {
                 tts.Speak("죄송합니다 메뉴를 찾을수 없었습니다.");
+                foreach (var type in MenuPanel.Controls)
+                {
+                    var itm = (item)type;
+                    itm.Visible = true;
+                }
+                return;
             }
             else {
                 foreach (var item in MenuPanel.Controls)
