@@ -21,8 +21,8 @@ namespace Kiosk_UI
 
     public partial class MainForm : Form
     {
-        int count_flag = 1
-            ;
+        int count_flag = 1;
+
         private MqttClient client = new MqttClient("kjh0819.duckdns.org");
         const string csv = "../../resources/menu.csv";
         bool flagForNewFile=false;
@@ -109,7 +109,11 @@ namespace Kiosk_UI
                     AddItem2(name, cost, a, icon);
                 };
             };
-                }
+         }
+        private void cancel_button_Click(object sender, EventArgs e)
+        {
+            checkPanel.Controls.Clear();
+        }
         public void RemoveItem(string name)
         {
             foreach (var control in MenuPanel.Controls)
@@ -254,6 +258,7 @@ namespace Kiosk_UI
                 updateItem();
             }
             flagForNewFile = false;
+
         }
         private async void AllmenuButton_Click(object sender, EventArgs e)
         {
@@ -430,6 +435,7 @@ namespace Kiosk_UI
             Obj.Show();
             this.Hide();
         }
+
     }
 
 }

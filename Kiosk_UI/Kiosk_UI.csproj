@@ -309,9 +309,12 @@
     <None Include="Resources\font.bmp" />
     <None Include="Resources\menu.csv" />
     <None Include="icons\cocktail.png" />
+    <None Include="icons\choco_ddung.png" />
+    <None Include="icons\greentea_ddung.png" />
     <Content Include="icons\icons8-메뉴-500.png" />
     <Content Include="icons\menu.png" />
     <None Include="icons\menu_3.png" />
+    <None Include="icons\strawberry_ddung.png" />
     <Content Include="icons\z_icons8_menu.png" />
   </ItemGroup>
   <ItemGroup>
