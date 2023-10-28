@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.custom_panel1 = new Kiosk_UI.Custom.Custom_panel();
-            this.custom_button2 = new Kiosk_UI.Custom.Custom_button();
-            this.custom_button1 = new Kiosk_UI.Custom.Custom_button();
+            this.Nobutton = new Kiosk_UI.Custom.Custom_button();
+            this.Yesbutton = new Kiosk_UI.Custom.Custom_button();
             this.paygrid = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,8 +51,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.custom_panel1.BackColor = System.Drawing.Color.White;
             this.custom_panel1.BorderColor = System.Drawing.Color.White;
-            this.custom_panel1.Controls.Add(this.custom_button2);
-            this.custom_panel1.Controls.Add(this.custom_button1);
+            this.custom_panel1.Controls.Add(this.Nobutton);
+            this.custom_panel1.Controls.Add(this.Yesbutton);
             this.custom_panel1.Controls.Add(this.paygrid);
             this.custom_panel1.Edge = 20;
             this.custom_panel1.Location = new System.Drawing.Point(0, 107);
@@ -61,33 +61,34 @@
             this.custom_panel1.Size = new System.Drawing.Size(484, 654);
             this.custom_panel1.TabIndex = 9;
             // 
-            // custom_button2
+            // Nobutton
             // 
-            this.custom_button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.custom_button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(168)))), ((int)(((byte)(169)))));
-            this.custom_button2.FlatAppearance.BorderSize = 0;
-            this.custom_button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.custom_button2.ForeColor = System.Drawing.Color.White;
-            this.custom_button2.Location = new System.Drawing.Point(268, 543);
-            this.custom_button2.Name = "custom_button2";
-            this.custom_button2.Size = new System.Drawing.Size(176, 63);
-            this.custom_button2.TabIndex = 8;
-            this.custom_button2.Text = "custom_button2";
-            this.custom_button2.UseVisualStyleBackColor = false;
+            this.Nobutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Nobutton.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.Nobutton.FlatAppearance.BorderSize = 0;
+            this.Nobutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Nobutton.ForeColor = System.Drawing.Color.White;
+            this.Nobutton.Location = new System.Drawing.Point(268, 543);
+            this.Nobutton.Name = "Nobutton";
+            this.Nobutton.Size = new System.Drawing.Size(176, 63);
+            this.Nobutton.TabIndex = 8;
+            this.Nobutton.Text = "custom_button2";
+            this.Nobutton.UseVisualStyleBackColor = false;
             // 
-            // custom_button1
+            // Yesbutton
             // 
-            this.custom_button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.custom_button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(179)))), ((int)(((byte)(138)))));
-            this.custom_button1.FlatAppearance.BorderSize = 0;
-            this.custom_button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.custom_button1.ForeColor = System.Drawing.Color.White;
-            this.custom_button1.Location = new System.Drawing.Point(46, 543);
-            this.custom_button1.Name = "custom_button1";
-            this.custom_button1.Size = new System.Drawing.Size(176, 63);
-            this.custom_button1.TabIndex = 7;
-            this.custom_button1.Text = "custom_button1";
-            this.custom_button1.UseVisualStyleBackColor = false;
+            this.Yesbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.Yesbutton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(168)))), ((int)(((byte)(169)))));
+            this.Yesbutton.FlatAppearance.BorderSize = 0;
+            this.Yesbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Yesbutton.ForeColor = System.Drawing.Color.White;
+            this.Yesbutton.Location = new System.Drawing.Point(46, 543);
+            this.Yesbutton.Name = "Yesbutton";
+            this.Yesbutton.Size = new System.Drawing.Size(176, 63);
+            this.Yesbutton.TabIndex = 7;
+            this.Yesbutton.Text = "custom_button1";
+            this.Yesbutton.UseVisualStyleBackColor = false;
+            this.Yesbutton.Click += new System.EventHandler(this.Yesbutton_Click);
             // 
             // paygrid
             // 
@@ -100,50 +101,50 @@
             this.paygrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.paygrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.paygrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(151)))), ((int)(((byte)(115)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("나눔스퀘어", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.BurlyWood;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.paygrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(151)))), ((int)(((byte)(115)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("나눔스퀘어", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.BurlyWood;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.paygrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.paygrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.paygrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.paygrid.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.paygrid.DefaultCellStyle = dataGridViewCellStyle7;
             this.paygrid.EnableHeadersVisualStyles = false;
             this.paygrid.GridColor = System.Drawing.Color.WhiteSmoke;
             this.paygrid.Location = new System.Drawing.Point(46, 48);
             this.paygrid.Name = "paygrid";
             this.paygrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Noto Sans KR", 16F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.paygrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Noto Sans KR", 16F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.paygrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.paygrid.RowTemplate.Height = 23;
             this.paygrid.Size = new System.Drawing.Size(398, 450);
             this.paygrid.TabIndex = 6;
             // 
             // Column1
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Noto Sans KR", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Noto Sans KR", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle6;
             this.Column1.HeaderText = "음식";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
@@ -199,8 +200,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private Custom.Custom_panel custom_panel1;
-        private Custom.Custom_button custom_button2;
-        private Custom.Custom_button custom_button1;
+        private Custom.Custom_button Nobutton;
+        private Custom.Custom_button Yesbutton;
         private System.Windows.Forms.Label label1;
 
        

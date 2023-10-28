@@ -38,9 +38,12 @@
             this.checkPanel = new Kiosk_UI.Custom.Custom_flowpanel();
             this.custom_button1 = new Kiosk_UI.Custom.Custom_button();
             this.MenuPanel = new Kiosk_UI.Custom.Custom_flowpanel();
-            this.custom_panel1 = new Kiosk_UI.Custom.Custom_panel();
+            this.cost_panel = new Kiosk_UI.Custom.Custom_panel();
+            this.cost_lbl = new System.Windows.Forms.Label();
+            this.cancel_button = new Kiosk_UI.Custom.Custom_button();
             this.panel1.SuspendLayout();
             this.SelectbarPanel.SuspendLayout();
+            this.cost_panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -147,10 +150,10 @@
             this.checkPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(209)))), ((int)(((byte)(209)))));
             this.checkPanel.BorderColor = System.Drawing.Color.White;
             this.checkPanel.Edge = 20;
-            this.checkPanel.Location = new System.Drawing.Point(9, 576);
+            this.checkPanel.Location = new System.Drawing.Point(85, 576);
             this.checkPanel.Name = "checkPanel";
             this.checkPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.checkPanel.Size = new System.Drawing.Size(234, 173);
+            this.checkPanel.Size = new System.Drawing.Size(158, 173);
             this.checkPanel.TabIndex = 5;
             // 
             // custom_button1
@@ -183,16 +186,43 @@
             this.MenuPanel.Size = new System.Drawing.Size(347, 399);
             this.MenuPanel.TabIndex = 4;
             // 
-            // custom_panel1
+            // cost_panel
             // 
-            this.custom_panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.custom_panel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.custom_panel1.BorderColor = System.Drawing.Color.White;
-            this.custom_panel1.Edge = 20;
-            this.custom_panel1.Location = new System.Drawing.Point(249, 577);
-            this.custom_panel1.Name = "custom_panel1";
-            this.custom_panel1.Size = new System.Drawing.Size(129, 172);
-            this.custom_panel1.TabIndex = 6;
+            this.cost_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cost_panel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cost_panel.BorderColor = System.Drawing.Color.White;
+            this.cost_panel.Controls.Add(this.cost_lbl);
+            this.cost_panel.Edge = 20;
+            this.cost_panel.Location = new System.Drawing.Point(249, 577);
+            this.cost_panel.Name = "cost_panel";
+            this.cost_panel.Size = new System.Drawing.Size(129, 172);
+            this.cost_panel.TabIndex = 6;
+            // 
+            // cost_lbl
+            // 
+            this.cost_lbl.AutoSize = true;
+            this.cost_lbl.Font = new System.Drawing.Font("Noto Sans KR", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.cost_lbl.Location = new System.Drawing.Point(22, 73);
+            this.cost_lbl.Name = "cost_lbl";
+            this.cost_lbl.Size = new System.Drawing.Size(84, 35);
+            this.cost_lbl.TabIndex = 0;
+            this.cost_lbl.Text = "label1";
+            // 
+            // cancel_button
+            // 
+            this.cancel_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cancel_button.BackColor = System.Drawing.Color.IndianRed;
+            this.cancel_button.FlatAppearance.BorderSize = 0;
+            this.cancel_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cancel_button.Font = new System.Drawing.Font("Noto Sans KR", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.cancel_button.ForeColor = System.Drawing.Color.White;
+            this.cancel_button.Location = new System.Drawing.Point(9, 576);
+            this.cancel_button.Name = "cancel_button";
+            this.cancel_button.Size = new System.Drawing.Size(70, 172);
+            this.cancel_button.TabIndex = 7;
+            this.cancel_button.Text = "전체\r\n취소";
+            this.cancel_button.UseVisualStyleBackColor = false;
+            this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
             // 
             // MainForm
             // 
@@ -201,7 +231,8 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(484, 761);
-            this.Controls.Add(this.custom_panel1);
+            this.Controls.Add(this.cancel_button);
+            this.Controls.Add(this.cost_panel);
             this.Controls.Add(this.checkPanel);
             this.Controls.Add(this.custom_button1);
             this.Controls.Add(this.MenuPanel);
@@ -214,6 +245,8 @@
             this.panel1.ResumeLayout(false);
             this.SelectbarPanel.ResumeLayout(false);
             this.SelectbarPanel.PerformLayout();
+            this.cost_panel.ResumeLayout(false);
+            this.cost_panel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -237,7 +270,9 @@
            
         }
 
-        private Custom.Custom_panel custom_panel1;
+        private Custom.Custom_panel cost_panel;
+        private System.Windows.Forms.Label cost_lbl;
+        private Custom.Custom_button cancel_button;
     }
 }
 
