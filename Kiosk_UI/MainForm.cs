@@ -170,14 +170,7 @@ namespace Kiosk_UI
         }
         public void RemoveItemAll()
         {
-            foreach (var control in MenuPanel.Controls)
-            {
-                if (control is item menuItem)
-                {
-                    // 메뉴 항목을 MenuPanel.Controls에서 제거
-                    MenuPanel.Controls.Clear();
-                }
-            }
+            MenuPanel.Controls.Clear();
         }
 
         public void updateItem()
@@ -194,12 +187,10 @@ namespace Kiosk_UI
                     if (result[2] == "categories.drink")
                     {
                         AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3], details);
-                        //AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3]);
                     }
                     else if (result[2] == "categories.dessert")
                     {
                         AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3], result[4].Split('/'));
-                        //AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3]);
                     }
                 }
                 flagForNewFile = true;
@@ -301,13 +292,15 @@ namespace Kiosk_UI
 
 
         }
-        private async void AllmenuButton_Click(object sender, EventArgs e)
+        private void AllmenuButton_Click(object sender, EventArgs e)
         {
+            /*
             client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
             do{
                 updateItem();
             } while (!flagForNewFile);
             flagForNewFile = false;
+            */
             foreach (var type in MenuPanel.Controls)
             {
                 var itm = (item)type;
@@ -316,7 +309,7 @@ namespace Kiosk_UI
             
         }
 
-        private async void DrinkButton_Click(object sender, EventArgs e)
+        private void DrinkButton_Click(object sender, EventArgs e)
         {
             foreach (var type in MenuPanel.Controls)
             {
@@ -328,7 +321,7 @@ namespace Kiosk_UI
                 else { itm.Visible = true; }
             }
         }
-        private async void DessertButton_Click(object sender, EventArgs e)
+        private void DessertButton_Click(object sender, EventArgs e)
         {
             foreach (var type in MenuPanel.Controls)
             {
@@ -346,13 +339,10 @@ namespace Kiosk_UI
         {
             var tts = new TextToSpeechConverter();
             //모든 메뉴 가리기
-            foreach (var item in MenuPanel.Controls)
+            foreach (var type in MenuPanel.Controls)
             {
-                var control = (item)item;
-                if (control != null)
-                {
-                    control.Visible = false;
-                }
+                var itm = (item)type;
+                itm.Visible = false;
             }
 
 
