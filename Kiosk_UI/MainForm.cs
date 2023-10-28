@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 using System.Windows.Forms;
 using System.IO;
@@ -18,9 +19,11 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace Kiosk_UI
 {
+    
 
     public partial class MainForm : Form
     {
+
         int count_flag = 1;
         int cost_flag = 0;
 
