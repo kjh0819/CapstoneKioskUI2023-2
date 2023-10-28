@@ -16,6 +16,9 @@ namespace Kiosk_UI
         static void Main()
         {
             var csv = "resources/menu.csv";
+
+            if (!Directory.Exists("resources"))
+                Directory.CreateDirectory("resources");
             if (!File.Exists(csv))
             {
                 File.WriteAllText(csv, string.Empty);
