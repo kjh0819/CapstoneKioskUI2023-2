@@ -143,6 +143,16 @@ namespace Kiosk_UI.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap choco_ddung {
+            get {
+                object obj = ResourceManager.GetObject("choco_ddung", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap chocolatecake {
             get {
                 object obj = ResourceManager.GetObject("chocolatecake", resourceCulture);
@@ -216,6 +226,16 @@ namespace Kiosk_UI.Properties {
         internal static System.Drawing.Bitmap espresso {
             get {
                 object obj = ResourceManager.GetObject("espresso", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap greentea_ddung {
+            get {
+                object obj = ResourceManager.GetObject("greentea_ddung", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -375,6 +395,16 @@ namespace Kiosk_UI.Properties {
         internal static System.Drawing.Bitmap rosemarytea {
             get {
                 object obj = ResourceManager.GetObject("rosemarytea", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap strawberry_ddung {
+            get {
+                object obj = ResourceManager.GetObject("strawberry_ddung", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

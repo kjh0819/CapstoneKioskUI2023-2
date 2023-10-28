@@ -14,6 +14,7 @@ namespace Kiosk_UI
     public partial class select_item : UserControl
     {
         private int _count;
+        public event EventHandler OnSelect = null;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
@@ -42,12 +43,20 @@ namespace Kiosk_UI
 
         private void plus_button_Click(object sender, EventArgs e)
         {
-
+            Count += 1;
         }
 
         private void minus_button_Click(object sender, EventArgs e)
         {
-
+            if (Count > 1)
+            {
+                Count -= 1;
+            }
+            else
+            {
+                OnSelect?.Invoke(this, e);
+            }
+            
         }
     }
 
