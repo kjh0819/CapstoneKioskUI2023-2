@@ -35,7 +35,7 @@ namespace Kiosk_UI
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            System.Environment.Exit(0);
         }
         public void AddItem2(string name2, int cost2, int count, string icon2)
         {
@@ -306,7 +306,6 @@ namespace Kiosk_UI
                 var itm = (item)type;
                 itm.Visible = true;
             }
-            
         }
 
         private void DrinkButton_Click(object sender, EventArgs e)
@@ -314,11 +313,11 @@ namespace Kiosk_UI
             foreach (var type in MenuPanel.Controls)
             {
                 var itm = (item)type;
-                if (itm.Category.ToString() == "dessert")
+                if (itm.Category.ToString() == "drink")
                 {
-                    itm.Visible = false;
+                    itm.Visible = true;
                 }
-                else { itm.Visible = true; }
+                else { itm.Visible = false; }
             }
         }
         private void DessertButton_Click(object sender, EventArgs e)
