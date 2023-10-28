@@ -379,15 +379,13 @@ namespace Kiosk_UI
                     foundNNGOrNNP = true;
                     continue;
                 }
-                else if (words[i][1] == "SP")
-                    foundNNGOrNNP = foundNNGOrNNP;
+                else if (words[i][1] == "SP") { }
                 else if (foundNNGOrNNP && (words[i][1] == "NNG" || words[i][1] == "NNP"))
                 {
-                    searchResults = Search(words[i-1][0] + words[i][0], true);
+                    searchResults = Search(words[i - 1][0] + words[i][0], true);
                     if (searchResults.Count == 0)
-                        searchResults = Search(words[i-2][0] + words[i][0], true);
-                    flagForSearch=true;
-
+                        searchResults = Search(words[i - 2][0] + words[i][0], true);
+                    flagForSearch = true;
                 }
                 else
                 {
