@@ -407,7 +407,7 @@ namespace Kiosk_UI
                     }
 
                 }
-            else if(searchResults.Count>0&& !flagForSearch)
+            else if(searchResults.Count==0&& !flagForSearch)
                 foreach (var text in texts)
                 {
                     string[] morps = text.Split('/');
@@ -419,28 +419,31 @@ namespace Kiosk_UI
                 }
 
             //검색 결과 출력
-            foreach (var item in MenuPanel.Controls)
-            {
-                var control = (item)item;
-                if (control != null)
-                {
-                    foreach(var text in searchResults) 
-                    {
-                        if (text == control.Title)
-                            control.Visible = true;
-                    }
-                    
-                }
-            }
-            foreach (var text in searchResults)
-            {
-                tts.Speak(text);
-            }
             if (searchResults.Count == 0)
             {
                 tts.Speak("죄송합니다 메뉴를 찾을수 없었습니다.");
             }
-        }
+            else {
+                foreach (var item in MenuPanel.Controls)
+                {
+                    var control = (item)item;
+                    if (control != null)
+                    {
+                        foreach (var text in searchResults)
+                        {
+                            if (text == control.Title)
+                                control.Visible = true;
+                        }
+
+                    }
+                }
+                foreach (var text in searchResults)
+                {
+                    tts.Speak(text);
+                }
+            }
+
+            }
 
         private async void custom_button1_Click(object sender, EventArgs e)
         {
