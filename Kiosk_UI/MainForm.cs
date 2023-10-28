@@ -22,6 +22,7 @@ namespace Kiosk_UI
     public partial class MainForm : Form
     {
         int count_flag = 1;
+        int cost_flag = 0;
 
         private MqttClient client = new MqttClient("kjh0819.duckdns.org");
         const string csv = "../../resources/menu.csv";
@@ -34,19 +35,39 @@ namespace Kiosk_UI
 
         public void AddItem2(string name2, int cost2, int count, string icon2)
         {
-            var n  = new select_item()
+            try {
+                var n = new select_item()
+                {
+                    Title2 = name2,
+                    Cost2 = cost2,
+                    Count = count,
+                    Icon2 = Image.FromFile("icons/" + icon2)
+                };
+                checkPanel.Controls.Add(n);
+                n.OnSelect += (ss, ee) =>
+                {
+                    checkPanel.Controls.Remove(n);
+                };
+
+            }
+            catch
             {
-                Title2 = name2,
-                Cost2 = cost2,
-                Count = count,
-                Icon2 = Image.FromFile("icons/" + icon2)
-            };
-            checkPanel.Controls.Add(n);
-            n.OnSelect += (ss, ee) =>
-            {
-                checkPanel.Controls.Remove(n);
-            };
+                var n = new select_item()
+                {
+                    Title2 = name2,
+                    Cost2 = cost2,
+                    Count = count,
+                    Icon2 = Image.FromFile("icons/" + "americano.png")
+                };
+                checkPanel.Controls.Add(n);
+                n.OnSelect += (ss, ee) =>
+                {
+                    checkPanel.Controls.Remove(n);
+                };
+
+            }
         }
+        
 
         public void AddItem(string name, int cost, categories category, string icon, string[] detail)
         {
@@ -62,6 +83,7 @@ namespace Kiosk_UI
 
                 };
                 MenuPanel.Controls.Add(i);
+
                 i.OnSelect += (ss, ee) =>
                 {
                     
@@ -72,11 +94,14 @@ namespace Kiosk_UI
                         {
                             sl_itm.Count += 1;
                             count_flag = sl_itm.Count;
+                            cost_flag = cost_flag + sl_itm.Cost2 * sl_itm.Count;
                         }
                     }
                     if (count_flag == 1)
                     {
                         AddItem2(name, cost, count_flag, icon);
+                        cost_flag = cost_flag + cost * count_flag;
+                        
                     }
                     else
                     {
@@ -97,23 +122,36 @@ namespace Kiosk_UI
                 MenuPanel.Controls.Add(i);
                 i.OnSelect += (ss, ee) =>
                 {
-                    int a = 1;
+
                     foreach (var sl in checkPanel.Controls)
                     {
                         var sl_itm = (select_item)sl;
-                        if (sl_itm.Title2 == name.ToString())
+                        if (name.ToString() == sl_itm.Title2)
                         {
-                            a = +1;
+                            sl_itm.Count += 1;
+                            count_flag = sl_itm.Count;
+                            cost_flag = cost_flag + sl_itm.Cost2 * sl_itm.Count;
                         }
                     }
-                    AddItem2(name, cost, a, icon);
+                    if (count_flag == 1)
+                    {
+                        AddItem2(name, cost, count_flag, icon);
+                        cost_flag = cost_flag + cost * count_flag;
+
+                    }
+                    else
+                    {
+                        count_flag = 1;
+                    }
                 };
-            };
+            }
          }
+
         private void cancel_button_Click(object sender, EventArgs e)
         {
             checkPanel.Controls.Clear();
         }
+
         public void RemoveItem(string name)
         {
             foreach (var control in MenuPanel.Controls)
