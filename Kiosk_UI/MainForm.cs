@@ -208,6 +208,7 @@ namespace Kiosk_UI
                         //AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3]);
                     }
                 }
+                flagForNewFile = true;
             }
         }
         public List<string> Search(string searchString,bool include)
@@ -226,7 +227,6 @@ namespace Kiosk_UI
                         else
                             foreach(var d in itm.Detail)
                             {
-                                Console.WriteLine(itm.Title +"in"+d);
                                 if (d == searchString)
                                 {
                                     result.Add(itm.Title);
@@ -261,7 +261,6 @@ namespace Kiosk_UI
             switch (t)
             {
                 case "Menu/exist":
-                    Console.WriteLine(m);
                     break;
                 case "Menu/request":
                     try
@@ -277,11 +276,9 @@ namespace Kiosk_UI
                     }
                     break;
                 case "Menu/NewImage":
-                    Console.WriteLine(m);
                     File.WriteAllBytes("../../../test.png", e.Message);
                     break;
                 case "Menu/NewFile":
-                    Console.WriteLine(m);
                     File.WriteAllText(csv, m);
                     flagForNewFile = true;
                     break;
@@ -290,7 +287,7 @@ namespace Kiosk_UI
                     break;
             }
         }
-        private async void MainForm_Shown(object sender, EventArgs e)
+        private void MainForm_Shown(object sender, EventArgs e)
         {
             string clientId = Guid.NewGuid().ToString();
             string username = "IndukKioskB";
@@ -299,17 +296,21 @@ namespace Kiosk_UI
             client.MqttMsgPublishReceived += client_MqttMsgPublishReceived; // 메시지 수신 이벤트 핸들러 등록
             client.Subscribe(new string[] { "Menu/NewImage", "Menu/exist", "Menu/request", "Menu/NewFile" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE }); // test/topic 토픽을 QoS 1로 구독
             client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
-            do { } while (!flagForNewFile);
-            {
-                updateItem();
-            }
+            do { updateItem(); } while (!flagForNewFile);
+                
             flagForNewFile = false;
+            foreach (var type in MenuPanel.Controls)
+            {
+                var itm = (item)type;
+                itm.Visible = true;
+            }
+
 
         }
         private async void AllmenuButton_Click(object sender, EventArgs e)
         {
-            client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false); do
-            {
+            client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+            do{
                 updateItem();
             } while (!flagForNewFile);
             flagForNewFile = false;
