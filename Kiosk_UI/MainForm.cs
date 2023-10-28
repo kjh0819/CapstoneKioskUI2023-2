@@ -250,17 +250,17 @@ namespace Kiosk_UI
         }
         private async void AllmenuButton_Click(object sender, EventArgs e)
         {
-            client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+            client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false); do
+            {
+                updateItem();
+            } while (!flagForNewFile);
+            flagForNewFile = false;
             foreach (var type in MenuPanel.Controls)
             {
                 var itm = (item)type;
                 itm.Visible = true;
             }
-            do { } while (!flagForNewFile);
-            {
-                updateItem();
-            }
-            flagForNewFile = false;
+            
         }
 
         private async void DrinkButton_Click(object sender, EventArgs e)
