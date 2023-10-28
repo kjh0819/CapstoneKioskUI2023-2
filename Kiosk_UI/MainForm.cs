@@ -25,12 +25,14 @@ namespace Kiosk_UI
         int cost_flag = 0;
 
         private MqttClient client = new MqttClient("kjh0819.duckdns.org");
-        const string csv = "../../resources/menu.csv";
+        const string csv = "resources/menu.csv";
         bool flagForNewFile=false;
 
         public MainForm()
         {
+            
             InitializeComponent();
+
         }
 
         public void AddItem2(string name2, int cost2, int count, string icon2)
@@ -178,36 +180,36 @@ namespace Kiosk_UI
 
         public void updateItem()
         {
-            RemoveItemAll();
-            foreach (var item in MenuPanel.Controls)
+            if (flagForNewFile)
             {
-                var control = (item)item;
-                if (control != null)
+                RemoveItemAll();
+                foreach (var item in MenuPanel.Controls)
                 {
-                    control.Visible = false;
+                    var control = (item)item;
+                    if (control != null)
+                    {
+                        control.Visible = false;
+                    }
                 }
-            }
-
-            var lines = File.ReadAllText(csv);
-
-            foreach (string line in lines.Split('*'))
-            {
-                string[] result = line.Split(',');
-                string[] details = result[4].Split('/');
-                details[details.Length - 1] = details[details.Length - 1].Replace("*", "").Trim();
-                if (result[2] == "categories.drink")
+                var lines = File.ReadAllText(csv);
+                foreach (string line in lines.Split('*'))
                 {
-                    AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3], details);
-                    //AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3]);
-                }
-                else if (result[2] == "categories.dessert")
-                {
-                    AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3], result[4].Split('/'));
-                    //AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3]);
+                    string[] result = line.Split(',');
+                    string[] details = result[4].Split('/');
+                    details[details.Length - 1] = details[details.Length - 1].Replace("*", "").Trim();
+                    if (result[2] == "categories.drink")
+                    {
+                        AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3], details);
+                        //AddItem(result[0], Convert.ToInt32(result[1]), categories.drink, result[3]);
+                    }
+                    else if (result[2] == "categories.dessert")
+                    {
+                        AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3], result[4].Split('/'));
+                        //AddItem(result[0], Convert.ToInt32(result[1]), categories.dessert, result[3]);
+                    }
                 }
             }
         }
-
         public List<string> Search(string searchString,bool include)
         {
             List<string> result = new List<string>();
@@ -262,14 +264,20 @@ namespace Kiosk_UI
                     Console.WriteLine(m);
                     break;
                 case "Menu/request":
-                    string message = File.ReadAllText(csv);
-                    string topic = "Menu/exist";
-                    Console.Write(message);
-                    client.Publish(topic, Encoding.UTF8.GetBytes(message), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    try
+                    {
+                        string message = File.ReadAllText(csv);
+                        string topic = "Menu/exist";
+                        Console.Write(message);
+                        client.Publish(topic, Encoding.UTF8.GetBytes(message), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                    }
+                    catch
+                    {
+                        break;
+                    }
                     break;
                 case "Menu/NewImage":
                     Console.WriteLine(m);
-
                     File.WriteAllBytes("../../../test.png", e.Message);
                     break;
                 case "Menu/NewFile":
@@ -300,12 +308,17 @@ namespace Kiosk_UI
         }
         private async void AllmenuButton_Click(object sender, EventArgs e)
         {
-            updateItem();
+            client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false); do
+            {
+                updateItem();
+            } while (!flagForNewFile);
+            flagForNewFile = false;
             foreach (var type in MenuPanel.Controls)
             {
                 var itm = (item)type;
                 itm.Visible = true;
             }
+            
         }
 
         private async void DrinkButton_Click(object sender, EventArgs e)
@@ -432,7 +445,7 @@ namespace Kiosk_UI
                     }
 
                 }
-            else if(searchResults.Count>0&& !flagForSearch)
+            else if(searchResults.Count==0&& !flagForSearch)
                 foreach (var text in texts)
                 {
                     string[] morps = text.Split('/');
@@ -444,28 +457,31 @@ namespace Kiosk_UI
                 }
 
             //검색 결과 출력
-            foreach (var item in MenuPanel.Controls)
-            {
-                var control = (item)item;
-                if (control != null)
-                {
-                    foreach(var text in searchResults) 
-                    {
-                        if (text == control.Title)
-                            control.Visible = true;
-                    }
-                    
-                }
-            }
-            foreach (var text in searchResults)
-            {
-                tts.Speak(text);
-            }
             if (searchResults.Count == 0)
             {
                 tts.Speak("죄송합니다 메뉴를 찾을수 없었습니다.");
             }
-        }
+            else {
+                foreach (var item in MenuPanel.Controls)
+                {
+                    var control = (item)item;
+                    if (control != null)
+                    {
+                        foreach (var text in searchResults)
+                        {
+                            if (text == control.Title)
+                                control.Visible = true;
+                        }
+
+                    }
+                }
+                foreach (var text in searchResults)
+                {
+                    tts.Speak(text);
+                }
+            }
+
+            }
 
         private async void custom_button1_Click(object sender, EventArgs e)
         {
