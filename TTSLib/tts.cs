@@ -33,7 +33,7 @@ namespace TTSLib
             }
         }
 
-        public void Speak(string text, string voiceName)
+        public async void Speak(string text, string voiceName)
         {
             if (speechSynthesizer != null)
             {
@@ -54,7 +54,7 @@ namespace TTSLib
             }
         }
 
-        public void Speak(string text)
+        public async void Speak(string text)
         {
             Speak(text, null); // Use the provided voice or the default voice
         }

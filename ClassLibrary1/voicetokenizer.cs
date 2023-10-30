@@ -94,10 +94,8 @@ public class Tokenizer
         {
             phraseList.AddPhrase($"{i}잔");
         }
-        for (int i = 0; i < 20000; i += 100)
-        {
-            phraseList.AddPhrase($"{i}원");
-        }
+        for (int i = 0; i < 10000; i+=100)
+            phraseList.AddPhrase($"{i}");
         phraseList.AddPhrase($"카페라떼");
         phraseList.AddPhrase($"우유");
         phraseList.AddPhrase($"녹차");
