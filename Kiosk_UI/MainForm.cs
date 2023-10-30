@@ -182,6 +182,7 @@ namespace Kiosk_UI
             {
                 RemoveItemAll();
                 var lines = File.ReadAllText(csv);
+                if (lines.Length < 100 ) { return;}
                 foreach (string line in lines.Split('*'))
                 {
                     string[] result = line.Split(',');
@@ -366,6 +367,8 @@ namespace Kiosk_UI
 
             bool flagForSearch = false; // 검색 결과 초기화를 위한 플래그
 
+
+
             string[][] words = new string[texts.Length][];
             for (int i = 0; i < texts.Length-1; i++)
             {
@@ -395,6 +398,73 @@ namespace Kiosk_UI
                     foundNNGOrNNP = false;
                 }
             }
+            if (texts.Contains("원/NNB") && texts.Contains("이상/NNG"))
+            {
+                for (int i = 0; i < texts.Length - 1; i++)
+                {
+                    if (texts[i] == "원/NNB")
+                    {
+                        int price = Int32.Parse(texts[i - 1].Split('/')[0]);
+                        foreach (var item in MenuPanel.Controls)
+                        {
+
+                            var itm = (item)item;
+                            //if (itm.Title.Contains( searchString))
+                            if (itm.Cost >= price)
+                            {
+                                searchResults.Add(itm.Title);
+                                flagForSearch = true;
+                            }
+
+                        }
+
+                    }
+                    foreach (var text in texts)
+                    {
+                        string[] morps = text.Split('/');
+                        List<string> Result = Search(morps[0], true);
+                        if (flagForSearch && Result.Count > 0)
+                        {
+                            // 이미 결과가 존재하면 결과와 교차(intersect)시키기
+                            searchResults = searchResults.Intersect(Result).ToList();
+                        }
+                    }
+                }
+            }
+            else if (texts.Contains("원/NNB") && texts.Contains("이하/NNG"))
+            {
+                for (int i = 0; i < texts.Length - 1; i++)
+                {
+                    if (texts[i] == "원/NNB")
+                    {
+                        int price = Int32.Parse(texts[i - 1].Split('/')[0]);
+                        foreach (var item in MenuPanel.Controls)
+                        {
+
+                            var itm = (item)item;
+                            //if (itm.Title.Contains( searchString))
+                            if (itm.Cost <= price)
+                            {
+                                searchResults.Add(itm.Title);
+                                flagForSearch = true;
+                            }
+
+                        }
+
+                    }
+                    foreach (var text in texts)
+                    {
+                        string[] morps = text.Split('/');
+                        List<string> Result = Search(morps[0], true);
+                        if (flagForSearch && Result.Count > 0)
+                        {
+                            // 이미 결과가 존재하면 결과와 교차(intersect)시키기
+                            searchResults = searchResults.Intersect(Result).ToList();
+                        }
+                    }
+                }
+            }
+        
             if (texts.Contains("들어가/VV"))
                 foreach (var text in texts)
                 {
@@ -439,7 +509,7 @@ namespace Kiosk_UI
                     }
 
                 }
-            else if(searchResults.Count==0&& !flagForSearch)
+            else if(searchResults.Count==0)
                 foreach (var text in texts)
                 {
                     string[] morps = text.Split('/');
@@ -449,6 +519,7 @@ namespace Kiosk_UI
                         searchResults = Result;
                     }
                 }
+
 
             //검색 결과 출력
             if (searchResults.Count == 0)
@@ -475,9 +546,13 @@ namespace Kiosk_UI
 
                     }
                 }
+                int count = 0;
                 foreach (var text in searchResults)
                 {
+                    if (count == 3)
+                        break;
                     tts.Speak(text);
+                    count++;
                 }
             }
 
