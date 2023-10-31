@@ -437,19 +437,23 @@ namespace Kiosk_UI
                 {
                     if (texts[i] == "원/NNB")
                     {
-                        int price = Int32.Parse(texts[i - 1].Split('/')[0]);
-                        foreach (var item in MenuPanel.Controls)
+                        try
                         {
-
-                            var itm = (item)item;
-                            //if (itm.Title.Contains( searchString))
-                            if (itm.Cost <= price)
+                            int price = Int32.Parse(texts[i - 1].Split('/')[0]);
+                            foreach (var item in MenuPanel.Controls)
                             {
-                                searchResults.Add(itm.Title);
-                                flagForSearch = true;
-                            }
 
+                                var itm = (item)item;
+                                //if (itm.Title.Contains( searchString))
+                                if (itm.Cost <= price)
+                                {
+                                    searchResults.Add(itm.Title);
+                                    flagForSearch = true;
+                                }
+
+                            }
                         }
+                        catch { }
 
                     }
                     foreach (var text in texts)
@@ -555,8 +559,7 @@ namespace Kiosk_UI
                     count++;
                 }
             }
-
-            }
+        }
 
         private async void custom_button1_Click(object sender, EventArgs e)
         {
