@@ -19,13 +19,25 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace Kiosk_UI
 {
-    
+
+
 
     public partial class MainForm : Form
     {
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams handleParams = base.CreateParams;
+                handleParams.ExStyle |= 0x02000000;
+                return handleParams;
+            }
+        }
+
 
         int count_flag = 1;
         int cost_flag = 0;
+        
 
         private MqttClient client = new MqttClient("kjh0819.duckdns.org");
         const string csv = "resources/menu.csv";
@@ -35,6 +47,8 @@ namespace Kiosk_UI
         {
             InitializeComponent();
             this.FormClosing += MainForm_FormClosing;
+
+            new Touch(MenuPanel);
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
