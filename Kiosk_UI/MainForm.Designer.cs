@@ -41,6 +41,7 @@
             this.cost_panel = new Kiosk_UI.Custom.Custom_panel();
             this.cost_lbl = new System.Windows.Forms.Label();
             this.cancel_button = new Kiosk_UI.Custom.Custom_button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SelectbarPanel.SuspendLayout();
             this.cost_panel.SuspendLayout();
@@ -48,8 +49,8 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.Color.Transparent;
@@ -68,7 +69,7 @@
             this.VoiceButton.FlatAppearance.BorderSize = 0;
             this.VoiceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.VoiceButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.VoiceButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.VoiceButton.ForeColor = System.Drawing.Color.White;
             this.VoiceButton.Location = new System.Drawing.Point(0, 324);
             this.VoiceButton.Name = "VoiceButton";
             this.VoiceButton.Size = new System.Drawing.Size(124, 56);
@@ -83,7 +84,7 @@
             this.DessertButton.FlatAppearance.BorderSize = 0;
             this.DessertButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DessertButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.DessertButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.DessertButton.ForeColor = System.Drawing.Color.White;
             this.DessertButton.Location = new System.Drawing.Point(0, 224);
             this.DessertButton.Name = "DessertButton";
             this.DessertButton.Size = new System.Drawing.Size(124, 56);
@@ -98,7 +99,7 @@
             this.DrinkButton.FlatAppearance.BorderSize = 0;
             this.DrinkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DrinkButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.DrinkButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.DrinkButton.ForeColor = System.Drawing.Color.White;
             this.DrinkButton.Location = new System.Drawing.Point(0, 124);
             this.DrinkButton.Name = "DrinkButton";
             this.DrinkButton.Size = new System.Drawing.Size(124, 56);
@@ -113,7 +114,7 @@
             this.AllmenuButton.FlatAppearance.BorderSize = 0;
             this.AllmenuButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AllmenuButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.AllmenuButton.ForeColor = System.Drawing.Color.LemonChiffon;
+            this.AllmenuButton.ForeColor = System.Drawing.Color.White;
             this.AllmenuButton.Location = new System.Drawing.Point(0, 24);
             this.AllmenuButton.Name = "AllmenuButton";
             this.AllmenuButton.Size = new System.Drawing.Size(124, 56);
@@ -124,7 +125,7 @@
             // 
             // TopPanel
             // 
-            this.TopPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.TopPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TopPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(93)))), ((int)(((byte)(64)))));
             this.TopPanel.Location = new System.Drawing.Point(9, 12);
@@ -134,7 +135,7 @@
             // 
             // SelectbarPanel
             // 
-            this.SelectbarPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.SelectbarPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.SelectbarPanel.BackColor = System.Drawing.Color.Transparent;
             this.SelectbarPanel.Controls.Add(this.panel1);
@@ -145,9 +146,9 @@
             // 
             // checkPanel
             // 
-            this.checkPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.checkPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(209)))), ((int)(((byte)(209)))));
+            this.checkPanel.BackColor = System.Drawing.Color.Moccasin;
             this.checkPanel.BorderColor = System.Drawing.Color.White;
             this.checkPanel.Edge = 20;
             this.checkPanel.Location = new System.Drawing.Point(85, 576);
@@ -159,7 +160,7 @@
             // custom_button1
             // 
             this.custom_button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.custom_button1.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.custom_button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(93)))), ((int)(((byte)(64)))));
             this.custom_button1.FlatAppearance.BorderSize = 0;
             this.custom_button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.custom_button1.ForeColor = System.Drawing.Color.White;
@@ -173,11 +174,11 @@
             // 
             // MenuPanel
             // 
-            this.MenuPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.MenuPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MenuPanel.AutoScroll = true;
-            this.MenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(224)))), ((int)(((byte)(220)))));
+            this.MenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(151)))), ((int)(((byte)(115)))));
             this.MenuPanel.BorderColor = System.Drawing.Color.White;
             this.MenuPanel.Edge = 20;
             this.MenuPanel.Location = new System.Drawing.Point(125, 150);
@@ -189,8 +190,9 @@
             // cost_panel
             // 
             this.cost_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cost_panel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cost_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(52)))), ((int)(((byte)(48)))));
             this.cost_panel.BorderColor = System.Drawing.Color.White;
+            this.cost_panel.Controls.Add(this.label1);
             this.cost_panel.Controls.Add(this.cost_lbl);
             this.cost_panel.Edge = 20;
             this.cost_panel.Location = new System.Drawing.Point(249, 577);
@@ -200,18 +202,19 @@
             // 
             // cost_lbl
             // 
-            this.cost_lbl.AutoSize = true;
+            this.cost_lbl.BackColor = System.Drawing.Color.Moccasin;
             this.cost_lbl.Font = new System.Drawing.Font("Noto Sans KR", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.cost_lbl.Location = new System.Drawing.Point(22, 73);
+            this.cost_lbl.Location = new System.Drawing.Point(0, 61);
             this.cost_lbl.Name = "cost_lbl";
-            this.cost_lbl.Size = new System.Drawing.Size(84, 35);
+            this.cost_lbl.Size = new System.Drawing.Size(129, 114);
             this.cost_lbl.TabIndex = 0;
             this.cost_lbl.Text = "label1";
+            this.cost_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cancel_button
             // 
             this.cancel_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cancel_button.BackColor = System.Drawing.Color.IndianRed;
+            this.cancel_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(151)))), ((int)(((byte)(124)))));
             this.cancel_button.FlatAppearance.BorderSize = 0;
             this.cancel_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancel_button.Font = new System.Drawing.Font("Noto Sans KR", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
@@ -223,6 +226,18 @@
             this.cancel_button.Text = "전체\r\n취소";
             this.cancel_button.UseVisualStyleBackColor = false;
             this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Noto Sans KR", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(218)))), ((int)(((byte)(156)))));
+            this.label1.Location = new System.Drawing.Point(0, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(129, 34);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "총 금액";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
@@ -241,13 +256,11 @@
             this.Name = "MainForm";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.panel1.ResumeLayout(false);
             this.SelectbarPanel.ResumeLayout(false);
             this.SelectbarPanel.PerformLayout();
             this.cost_panel.ResumeLayout(false);
-            this.cost_panel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -274,6 +287,7 @@
         private Custom.Custom_panel cost_panel;
         private System.Windows.Forms.Label cost_lbl;
         private Custom.Custom_button cancel_button;
+        private System.Windows.Forms.Label label1;
     }
 }
 
