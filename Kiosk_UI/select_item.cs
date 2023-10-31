@@ -9,11 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
+
+
 namespace Kiosk_UI
 {
     public partial class select_item : UserControl
     {
         private int _count;
+
+        public static int ct_flag = 0;
+
         public event EventHandler OnSelect = null;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -44,6 +49,7 @@ namespace Kiosk_UI
         private void plus_button_Click(object sender, EventArgs e)
         {
             Count += 1;
+
         }
 
         private void minus_button_Click(object sender, EventArgs e)
@@ -58,7 +64,7 @@ namespace Kiosk_UI
             }
             
         }
-
+        
 
     }
 

@@ -73,6 +73,7 @@ namespace Kiosk_UI
                 };
 
             }
+            
         }
         
 
@@ -101,13 +102,11 @@ namespace Kiosk_UI
                         {
                             sl_itm.Count += 1;
                             count_flag = sl_itm.Count;
-                            cost_flag = cost_flag + sl_itm.Cost2 * sl_itm.Count;
                         }
                     }
                     if (count_flag == 1)
                     {
                         AddItem2(name, cost, count_flag, icon);
-                        cost_flag = cost_flag + cost * count_flag;
                         
                     }
                     else
@@ -137,13 +136,11 @@ namespace Kiosk_UI
                         {
                             sl_itm.Count += 1;
                             count_flag = sl_itm.Count;
-                            cost_flag = cost_flag + sl_itm.Cost2 * sl_itm.Count;
                         }
                     }
                     if (count_flag == 1)
                     {
                         AddItem2(name, cost, count_flag, icon);
-                        cost_flag = cost_flag + cost * count_flag;
 
                     }
                     else
@@ -152,6 +149,8 @@ namespace Kiosk_UI
                     }
                 };
             }
+            
+            cost_lbl.Text = cost_flag.ToString();
          }
 
         private void cancel_button_Click(object sender, EventArgs e)
@@ -293,8 +292,9 @@ namespace Kiosk_UI
                 itm.Visible = true;
             }
 
-
         }
+
+        
         private void AllmenuButton_Click(object sender, EventArgs e)
         {
             /*
