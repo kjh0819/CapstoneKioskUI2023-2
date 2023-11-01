@@ -170,7 +170,6 @@
             this.custom_button1.TabIndex = 0;
             this.custom_button1.Text = "custom_button1";
             this.custom_button1.UseVisualStyleBackColor = false;
-            this.custom_button1.Click += new System.EventHandler(this.custom_button1_Click);
             // 
             // MenuPanel
             // 
