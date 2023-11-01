@@ -307,13 +307,8 @@ namespace Kiosk_UI
                 var itm = (item)type;
                 itm.Visible = true;
             }
-            
-            DrinkButton.BackColor = System.Drawing.Color.Moccasin;
-            DessertButton.BackColor = System.Drawing.Color.Moccasin;
-            VoiceButton.BackColor = System.Drawing.Color.Moccasin;
-            DrinkButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
-            DessertButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
-            VoiceButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
+
+
         }
         private void AllmenuButton_Click(object sender, EventArgs e)
         {
@@ -329,14 +324,6 @@ namespace Kiosk_UI
                 var itm = (item)type;
                 itm.Visible = true;
             }
-            AllmenuButton.BackColor = System.Drawing.Color.FromArgb(109, 151, 115);
-            AllmenuButton.ForeColor = System.Drawing.Color.White;
-            DrinkButton.BackColor = System.Drawing.Color.Moccasin;
-            DessertButton.BackColor = System.Drawing.Color.Moccasin;
-            VoiceButton.BackColor = System.Drawing.Color.Moccasin;
-            DrinkButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
-            DessertButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
-            VoiceButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
         }
 
         private void DrinkButton_Click(object sender, EventArgs e)
@@ -350,14 +337,6 @@ namespace Kiosk_UI
                 }
                 else { itm.Visible = false; }
             }
-            DrinkButton.BackColor = System.Drawing.Color.FromArgb(109, 151, 115);
-            DrinkButton.ForeColor = System.Drawing.Color.White;
-            AllmenuButton.BackColor = System.Drawing.Color.Moccasin;
-            DessertButton.BackColor = System.Drawing.Color.Moccasin;
-            VoiceButton.BackColor = System.Drawing.Color.Moccasin;
-            AllmenuButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
-            DessertButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
-            VoiceButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
         }
         private void DessertButton_Click(object sender, EventArgs e)
         {
@@ -370,15 +349,6 @@ namespace Kiosk_UI
                 }
                 else { itm.Visible = false; }
             }
-            DessertButton.BackColor = System.Drawing.Color.FromArgb(109, 151, 115);
-            DessertButton.ForeColor = System.Drawing.Color.White;
-            AllmenuButton.BackColor = System.Drawing.Color.Moccasin;
-            DrinkButton.BackColor = System.Drawing.Color.Moccasin;
-            VoiceButton.BackColor = System.Drawing.Color.Moccasin;
-            AllmenuButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
-            DrinkButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
-            VoiceButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
-
         }
 
 
@@ -598,17 +568,9 @@ namespace Kiosk_UI
                     tts.Speak(text);
                     count++;
                 }
-                VoiceButton.BackColor = System.Drawing.Color.FromArgb(109, 151, 115);
-                VoiceButton.ForeColor = System.Drawing.Color.White;
-                AllmenuButton.BackColor = System.Drawing.Color.Moccasin;
-                DessertButton.BackColor = System.Drawing.Color.Moccasin;
-                DrinkButton.BackColor = System.Drawing.Color.Moccasin;
-                AllmenuButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
-                DessertButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
-                DrinkButton.ForeColor = System.Drawing.Color.FromArgb(21, 52, 48);
             }
 
-         }
+            }
 
         private async void custom_button1_Click(object sender, EventArgs e)
         {
