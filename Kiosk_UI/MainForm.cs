@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-
 using System.Windows.Forms;
 using System.IO;
 using Kiosk_UI.Properties;
@@ -19,9 +18,6 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace Kiosk_UI
 {
-
-
-
     public partial class MainForm : Form
     {
         protected override CreateParams CreateParams
@@ -33,11 +29,8 @@ namespace Kiosk_UI
                 return handleParams;
             }
         }
-
-
         int count_flag = 1;
         int cost_flag = 0;
-        
 
         private MqttClient client = new MqttClient("kjh0819.duckdns.org");
         const string csv = "resources/menu.csv";
