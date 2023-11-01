@@ -50,7 +50,7 @@ namespace TTSLib
                     }
                 }
 
-                speechSynthesizer.Speak(text);
+                await Task.Run(() => speechSynthesizer.Speak(text));
             }
         }
 

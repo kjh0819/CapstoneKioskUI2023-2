@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-
 using System.Windows.Forms;
 using System.IO;
 using Kiosk_UI.Properties;
@@ -19,9 +18,6 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace Kiosk_UI
 {
-
-
-
     public partial class MainForm : Form
     {
         protected override CreateParams CreateParams
@@ -33,11 +29,8 @@ namespace Kiosk_UI
                 return handleParams;
             }
         }
-
-
         int count_flag = 1;
         int cost_flag = 0;
-        
 
         private MqttClient client = new MqttClient("kjh0819.duckdns.org");
         const string csv = "resources/menu.csv";
@@ -451,19 +444,23 @@ namespace Kiosk_UI
                 {
                     if (texts[i] == "원/NNB")
                     {
-                        int price = Int32.Parse(texts[i - 1].Split('/')[0]);
-                        foreach (var item in MenuPanel.Controls)
+                        try
                         {
-
-                            var itm = (item)item;
-                            //if (itm.Title.Contains( searchString))
-                            if (itm.Cost <= price)
+                            int price = Int32.Parse(texts[i - 1].Split('/')[0]);
+                            foreach (var item in MenuPanel.Controls)
                             {
-                                searchResults.Add(itm.Title);
-                                flagForSearch = true;
-                            }
 
+                                var itm = (item)item;
+                                //if (itm.Title.Contains( searchString))
+                                if (itm.Cost <= price)
+                                {
+                                    searchResults.Add(itm.Title);
+                                    flagForSearch = true;
+                                }
+
+                            }
                         }
+                        catch { }
 
                     }
                     foreach (var text in texts)
@@ -569,8 +566,7 @@ namespace Kiosk_UI
                     count++;
                 }
             }
-
-            }
+        }
 
         private async void custom_button1_Click(object sender, EventArgs e)
         {

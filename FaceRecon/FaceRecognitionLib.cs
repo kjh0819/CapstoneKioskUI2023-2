@@ -10,11 +10,11 @@ namespace FaceRecognition
 {
     public class FaceRecognition
     {
+        VideoCapture photo = new VideoCapture(0);
+        Mat frame = new Mat();
+        Mat grayImage = new Mat();
         public async Task<string> Recognition()
         {
-            VideoCapture photo = new VideoCapture(0);
-            Mat frame = new Mat();
-            Mat grayImage = new Mat();
 
             string apiKey = "11d9174165dc4e2eb2a55f15c0302487"; // Azure Face API 키
             string endpoint = "https://facelocate.cognitiveservices.azure.com/"; // Azure Face API 엔드포인트
@@ -49,8 +49,6 @@ namespace FaceRecognition
                 }
             }
             Console.Write(detectedFaces[MostBigFace].FaceRectangle.Top);
-            frame.Dispose();
-            photo.Release();
 
             return detectedFaces[MostBigFace].FaceRectangle.Top.ToString();
         }
