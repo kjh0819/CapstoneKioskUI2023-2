@@ -53,11 +53,11 @@ namespace Kiosk_UI
         private void DisableButton()
         {
             AllmenuButton.BackColor = Color.Moccasin;
-            AllmenuButton.ForeColor = Color.FromArgb(21, 52, 48);
+            AllmenuButton.ForeColor = Color.FromArgb(68, 62, 45);
             if (curbutton != null)
             {
                 curbutton.BackColor = Color.Moccasin;
-                curbutton.ForeColor = Color.FromArgb(21, 52, 48);
+                curbutton.ForeColor = Color.FromArgb(68, 62, 45);
             }
         }
         private void Reset()
@@ -619,26 +619,39 @@ namespace Kiosk_UI
                 }
             }
         }
-
-        private async void custom_button1_Click(object sender, EventArgs e)
-        {
-            PayCheck Obj = new PayCheck();
-            Obj.Show();
-            this.Hide();
-        }
-
-        /*  private void checkPanel_ControlAdded(object sender, ControlEventArgs e)
-          {
-              cost_lbl.Text = final_cost.ToString() + "원"; 
-          }*/
-
         int count_flag = 1;
         public int final_cost = 0;
         public int mycost
         {
             get { return final_cost; }
-            set { final_cost = value; 
-                cost_lbl.Text = final_cost.ToString() + "원"; }
+            set
+            {
+                final_cost = value;
+                cost_lbl.Text = final_cost.ToString() + "원";
+            }
+        }
+        PayCheck newform = new PayCheck();
+        public Action<DataTable> SendDataTable;
+        private async void custom_button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            newform.ShowDialog();
+            this.Show();
+
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add(" ", typeof(string)); //사진
+            dt.Columns.Add("이름", typeof(string));
+            dt.Columns.Add("가격", typeof(string));
+            dt.Columns.Add("개수", typeof(string));
+            foreach ( var item in checkPanel.Controls)
+            {
+                var itm = (select_item)item;
+                dt.Rows.Add(itm.Icon2.ToString());
+                dt.Rows.Add(itm.Title2.ToString());
+                dt.Rows.Add(itm.Cost2.ToString());
+                dt.Rows.Add(itm.Count.ToString());
+            }
         }
 
     }

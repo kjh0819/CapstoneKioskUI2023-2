@@ -22,11 +22,16 @@ namespace Kiosk_UI
 
         }
 
-        private void Yesbutton_Click(object sender, EventArgs e)
+        private void Nobutton_Click(object sender, EventArgs e)
         {
-            MainForm Obj = new MainForm();
-            Obj.Show();
+            this.DialogResult = DialogResult.OK;
             this.Hide();
+
+        }
+
+        private void PayCheck_Shown(object sender, EventArgs e)
+        {
+            
         }
     }
 }
