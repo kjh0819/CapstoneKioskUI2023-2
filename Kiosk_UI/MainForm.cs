@@ -18,6 +18,7 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace Kiosk_UI
 {
+    
     public partial class MainForm : Form
     {
         protected override CreateParams CreateParams
@@ -30,7 +31,9 @@ namespace Kiosk_UI
             }
         }
         int count_flag = 1;
-        int cost_flag = 0;
+        public int final_cost = 0;
+
+       
 
         private MqttClient client = new MqttClient("kjh0819.duckdns.org");
         const string csv = "resources/menu.csv";
@@ -61,6 +64,15 @@ namespace Kiosk_UI
                 n.OnSelect += (ss, ee) =>
                 {
                     checkPanel.Controls.Remove(n);
+                    mycost -= cost2;
+                };
+                n.plusbt += (ss, ee) =>
+                {
+                    mycost += cost2;
+                };
+                n.minusbt += (ss, ee) =>
+                {
+                    mycost -= cost2;
                 };
 
             }
@@ -104,23 +116,23 @@ namespace Kiosk_UI
                     foreach (var sl in checkPanel.Controls)
                     {
                         var sl_itm = (select_item)sl;
-                        if(name.ToString() == sl_itm.Title2)
+                        if(name.ToString() == sl_itm.Title2) //아이템 클릭시 장바구니에 중복된 값이 있을때
                         {
-                            sl_itm.Count += 1;
+                            sl_itm.Count += 1; //장바구니 카운트 추가
                             count_flag = sl_itm.Count;
-                            cost_flag = cost_flag + sl_itm.Cost2 * sl_itm.Count;
+                            mycost += sl_itm.Cost2;;
                         }
                     }
-                    if (count_flag == 1)
+                    if (count_flag == 1) //장바구니에 없는 항목 추가
                     {
-                        AddItem2(name, cost, count_flag, icon);
-                        cost_flag = cost_flag + cost * count_flag;
-                        
+                        AddItem2(name, cost, count_flag, icon); //장바구니에 추가
+                        mycost += cost;
                     }
                     else
                     {
                         count_flag = 1;
                     }
+                    //cost_lbl.Text = final_cost.ToString() + "원";
                 };
             }
             catch {
@@ -137,33 +149,36 @@ namespace Kiosk_UI
                 i.OnSelect += (ss, ee) =>
                 {
 
+                    
                     foreach (var sl in checkPanel.Controls)
                     {
                         var sl_itm = (select_item)sl;
-                        if (name.ToString() == sl_itm.Title2)
+                        if(name.ToString() == sl_itm.Title2) //아이템 클릭시 장바구니에 중복된 값이 있을때
                         {
-                            sl_itm.Count += 1;
+                            sl_itm.Count += 1; //장바구니 카운트 추가
                             count_flag = sl_itm.Count;
-                            cost_flag = cost_flag + sl_itm.Cost2 * sl_itm.Count;
+                            mycost += sl_itm.Cost2;;
                         }
                     }
-                    if (count_flag == 1)
+                    if (count_flag == 1) //장바구니에 없는 항목 추가
                     {
-                        AddItem2(name, cost, count_flag, icon);
-                        cost_flag = cost_flag + cost * count_flag;
-
+                        AddItem2(name, cost, count_flag, icon); //장바구니에 추가
+                        mycost += cost;
                     }
                     else
                     {
                         count_flag = 1;
                     }
+                    //cost_lbl.Text = final_cost.ToString() + "원";
                 };
             }
          }
 
         private void cancel_button_Click(object sender, EventArgs e)
         {
-            checkPanel.Controls.Clear();
+            checkPanel.Controls.Clear();//장바구니 전체 삭제
+            final_cost = 0;
+            cost_lbl.Text = final_cost.ToString() + "원";
         }
 
         public void RemoveItem(string name)
@@ -301,6 +316,7 @@ namespace Kiosk_UI
                 itm.Visible = true;
             }
 
+            cost_lbl.Text = final_cost.ToString() + "원";
 
         }
         private void AllmenuButton_Click(object sender, EventArgs e)
@@ -341,6 +357,7 @@ namespace Kiosk_UI
                     itm.Visible = true;
                 }
                 else { itm.Visible = false; }
+
             }
         }
 
@@ -573,6 +590,17 @@ namespace Kiosk_UI
             PayCheck Obj = new PayCheck();
             Obj.Show();
             this.Hide();
+        }
+
+      /*  private void checkPanel_ControlAdded(object sender, ControlEventArgs e)
+        {
+            cost_lbl.Text = final_cost.ToString() + "원"; 
+        }*/
+        public int mycost
+        {
+            get { return final_cost; }
+            set { final_cost = value; 
+                cost_lbl.Text = final_cost.ToString() + "원"; }
         }
 
     }

@@ -48,8 +48,8 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.Color.Transparent;
@@ -124,7 +124,7 @@
             // 
             // TopPanel
             // 
-            this.TopPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.TopPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TopPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(9)))), ((int)(((byte)(93)))), ((int)(((byte)(64)))));
             this.TopPanel.Location = new System.Drawing.Point(9, 12);
@@ -134,7 +134,7 @@
             // 
             // SelectbarPanel
             // 
-            this.SelectbarPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.SelectbarPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.SelectbarPanel.BackColor = System.Drawing.Color.Transparent;
             this.SelectbarPanel.Controls.Add(this.panel1);
@@ -145,9 +145,9 @@
             // 
             // checkPanel
             // 
-            this.checkPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.checkPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(209)))), ((int)(((byte)(209)))));
+            this.checkPanel.BackColor = System.Drawing.Color.Moccasin;
             this.checkPanel.BorderColor = System.Drawing.Color.White;
             this.checkPanel.Edge = 20;
             this.checkPanel.Location = new System.Drawing.Point(85, 576);
@@ -173,11 +173,11 @@
             // 
             // MenuPanel
             // 
-            this.MenuPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.MenuPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MenuPanel.AutoScroll = true;
-            this.MenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(224)))), ((int)(((byte)(220)))));
+            this.MenuPanel.BackColor = System.Drawing.Color.Moccasin;
             this.MenuPanel.BorderColor = System.Drawing.Color.White;
             this.MenuPanel.Edge = 20;
             this.MenuPanel.Location = new System.Drawing.Point(125, 150);
@@ -189,7 +189,7 @@
             // cost_panel
             // 
             this.cost_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cost_panel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cost_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(73)))), ((int)(((byte)(51)))));
             this.cost_panel.BorderColor = System.Drawing.Color.White;
             this.cost_panel.Controls.Add(this.cost_lbl);
             this.cost_panel.Edge = 20;
@@ -200,18 +200,19 @@
             // 
             // cost_lbl
             // 
-            this.cost_lbl.AutoSize = true;
+            this.cost_lbl.BackColor = System.Drawing.Color.White;
             this.cost_lbl.Font = new System.Drawing.Font("Noto Sans KR", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.cost_lbl.Location = new System.Drawing.Point(22, 73);
+            this.cost_lbl.Location = new System.Drawing.Point(0, 67);
             this.cost_lbl.Name = "cost_lbl";
-            this.cost_lbl.Size = new System.Drawing.Size(84, 35);
+            this.cost_lbl.Size = new System.Drawing.Size(129, 108);
             this.cost_lbl.TabIndex = 0;
             this.cost_lbl.Text = "label1";
+            this.cost_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cancel_button
             // 
             this.cancel_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cancel_button.BackColor = System.Drawing.Color.IndianRed;
+            this.cancel_button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
             this.cancel_button.FlatAppearance.BorderSize = 0;
             this.cancel_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancel_button.Font = new System.Drawing.Font("Noto Sans KR", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
@@ -241,13 +242,11 @@
             this.Name = "MainForm";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.panel1.ResumeLayout(false);
             this.SelectbarPanel.ResumeLayout(false);
             this.SelectbarPanel.PerformLayout();
             this.cost_panel.ResumeLayout(false);
-            this.cost_panel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -272,8 +271,8 @@
         }
 
         private Custom.Custom_panel cost_panel;
-        private System.Windows.Forms.Label cost_lbl;
         private Custom.Custom_button cancel_button;
+        public System.Windows.Forms.Label cost_lbl;
     }
 }
 
