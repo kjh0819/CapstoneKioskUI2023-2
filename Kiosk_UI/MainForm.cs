@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.IO;
 using Kiosk_UI.Properties;
+using Kiosk_UI.Custom;
 using TTSLib;
 using System.Collections;
 using uPLibrary.Networking.M2Mqtt;
@@ -18,9 +19,10 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace Kiosk_UI
 {
-    
     public partial class MainForm : Form
     {
+        private Custom_button curbutton;
+
         protected override CreateParams CreateParams
         {
             get
@@ -30,15 +32,41 @@ namespace Kiosk_UI
                 return handleParams;
             }
         }
-        int count_flag = 1;
-        public int final_cost = 0;
 
-       
 
         private MqttClient client = new MqttClient("kjh0819.duckdns.org");
         const string csv = "resources/menu.csv";
         bool flagForNewFile=false;
 
+
+        private void actbutton(object senderBtn)
+        {
+            
+            if (senderBtn != null)
+            {
+                DisableButton();
+                curbutton = (Custom_button)senderBtn;
+                curbutton.BackColor = Color.FromArgb(109, 151, 115);
+                curbutton.ForeColor = Color.White;
+            }
+        }
+        private void DisableButton()
+        {
+            AllmenuButton.BackColor = Color.Moccasin;
+            AllmenuButton.ForeColor = Color.FromArgb(21, 52, 48);
+            if (curbutton != null)
+            {
+                curbutton.BackColor = Color.Moccasin;
+                curbutton.ForeColor = Color.FromArgb(21, 52, 48);
+            }
+        }
+        private void Reset()
+        {
+            DisableButton();
+            AllmenuButton.BackColor = Color.FromArgb(100, 151, 115);
+            AllmenuButton.ForeColor = Color.White;
+
+        }
         public MainForm()
         {
             InitializeComponent();
@@ -315,10 +343,12 @@ namespace Kiosk_UI
                 var itm = (item)type;
                 itm.Visible = true;
             }
-
             cost_lbl.Text = final_cost.ToString() + "원";
 
+            Reset();
+
         }
+
         private void AllmenuButton_Click(object sender, EventArgs e)
         {
             /*
@@ -328,15 +358,18 @@ namespace Kiosk_UI
             } while (!flagForNewFile);
             flagForNewFile = false;
             */
+            actbutton(sender);
             foreach (var type in MenuPanel.Controls)
             {
                 var itm = (item)type;
                 itm.Visible = true;
             }
+            
         }
 
         private void DrinkButton_Click(object sender, EventArgs e)
         {
+            actbutton(sender);
             foreach (var type in MenuPanel.Controls)
             {
                 var itm = (item)type;
@@ -349,6 +382,7 @@ namespace Kiosk_UI
         }
         private void DessertButton_Click(object sender, EventArgs e)
         {
+            actbutton(sender);
             foreach (var type in MenuPanel.Controls)
             {
                 var itm = (item)type;
@@ -364,6 +398,7 @@ namespace Kiosk_UI
 
         private async void VoiceButton_Click(object sender, EventArgs e)
         {
+            actbutton(sender);
             var tts = new TextToSpeechConverter();
             //모든 메뉴 가리기
             foreach (var type in MenuPanel.Controls)
@@ -592,10 +627,13 @@ namespace Kiosk_UI
             this.Hide();
         }
 
-      /*  private void checkPanel_ControlAdded(object sender, ControlEventArgs e)
-        {
-            cost_lbl.Text = final_cost.ToString() + "원"; 
-        }*/
+        /*  private void checkPanel_ControlAdded(object sender, ControlEventArgs e)
+          {
+              cost_lbl.Text = final_cost.ToString() + "원"; 
+          }*/
+
+        int count_flag = 1;
+        public int final_cost = 0;
         public int mycost
         {
             get { return final_cost; }
