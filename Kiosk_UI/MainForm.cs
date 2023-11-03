@@ -630,26 +630,29 @@ namespace Kiosk_UI
                 cost_lbl.Text = final_cost.ToString() + "원";
             }
         }
+        PayCheck newform = new PayCheck();
         public Action<DataTable> SendDataTable;
-        DataTable dt = new DataTable();
         private async void custom_button1_Click(object sender, EventArgs e)
         {
+            this.Hide();
+            newform.ShowDialog();
+            this.Show();
 
-            dt.Columns.Add("이미지", typeof(string)); //사진
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add(" ", typeof(string)); //사진
             dt.Columns.Add("이름", typeof(string));
             dt.Columns.Add("가격", typeof(string));
             dt.Columns.Add("개수", typeof(string));
             foreach ( var item in checkPanel.Controls)
             {
                 var itm = (select_item)item;
-                dt.Rows.Add(itm.Icon2.ToString(), itm.Title2.ToString(), itm.Count, itm.Cost2);
+                dt.Rows.Add(itm.Icon2.ToString());
+                dt.Rows.Add(itm.Title2.ToString());
+                dt.Rows.Add(itm.Cost2.ToString());
+                dt.Rows.Add(itm.Count.ToString());
             }
-            PayCheck pay = new PayCheck(dt);
-            this.Hide();
-            pay.ShowDialog();
-            this.Show();
         }
-        
 
     }
 
