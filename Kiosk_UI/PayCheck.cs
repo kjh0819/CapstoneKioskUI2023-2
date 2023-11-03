@@ -12,6 +12,7 @@ namespace Kiosk_UI
 {
     public partial class PayCheck : Form
     {
+        DataTable passedIndt;
         public PayCheck()
         {
             InitializeComponent();
@@ -24,14 +25,34 @@ namespace Kiosk_UI
 
         private void Nobutton_Click(object sender, EventArgs e)
         {
+
             this.DialogResult = DialogResult.OK;
             this.Hide();
+            foreach (DataRow row in passedIndt.Rows)
+            {
+                foreach (var item in row.ItemArray)
+                {
+                    Console.WriteLine(item.ToString());
+                }
+            }
 
         }
 
         private void PayCheck_Shown(object sender, EventArgs e)
         {
-            
+            dataGridView1.DataSource = passedIndt;
+        }
+        public PayCheck(DataTable table)
+        {
+            InitializeComponent();
+
+            this.passedIndt = table;
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            dataGridView1.ClearSelection();
         }
     }
 }
+
