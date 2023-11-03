@@ -204,5 +204,7 @@
         private Custom.Custom_button Yesbutton;
         private Custom.Custom_button Nobutton;
         private System.Windows.Forms.Label label1;
+
+       
     }
 }
