@@ -12,9 +12,10 @@ namespace Kiosk_UI
 {
     public partial class PayCheck : Form
     {
-        public PayCheck()
+
+        public PayCheck(DataTable table)
         {
-            InitializeComponent();
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -31,7 +32,6 @@ namespace Kiosk_UI
 
         private void PayCheck_Shown(object sender, EventArgs e)
         {
-            
         }
     }
 }
