@@ -42,15 +42,24 @@ namespace FaceRecognition
                     );
                 faceSize[faceCount] = face.FaceRectangle.Width * face.FaceRectangle.Height;
 
-                if (faceCount != 0)
+                if (detectedFaces.Count != 0)
                 {
                     if (faceSize[faceCount] > faceSize[MostBigFace])
                         MostBigFace = faceCount;
                 }
-            }
-            Console.Write(detectedFaces[MostBigFace].FaceRectangle.Top);
+                else
+                    return "error";
+                faceCount += 1;
 
-            return detectedFaces[MostBigFace].FaceRectangle.Top.ToString();
-        }
+            }
+            //Console.Write(detectedFaces[MostBigFace].FaceRectangle.Top);
+            try {
+                return (detectedFaces[MostBigFace].FaceRectangle.Top - detectedFaces[MostBigFace].FaceRectangle.Height / 2).ToString();
+            }
+            catch
+            {
+                return "error";
+            }
+            }
     }
 }
