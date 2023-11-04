@@ -317,9 +317,6 @@ namespace Kiosk_UI
                     File.WriteAllText(csv, m);
                     flagForNewFile = true;
                     break;
-                case "Menu/Update":
-                    updateItem();
-                    break;
             }
         }
         private void MainForm_Shown(object sender, EventArgs e)
@@ -330,8 +327,11 @@ namespace Kiosk_UI
             byte code = client.Connect(clientId, username, password);
             client.MqttMsgPublishReceived += client_MqttMsgPublishReceived; // 메시지 수신 이벤트 핸들러 등록
             client.Subscribe(new string[] { "Menu/NewImage", "Menu/exist", "Menu/request", "Menu/NewFile" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE }); // test/topic 토픽을 QoS 1로 구독
-            client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
-            do { updateItem(); } while (!flagForNewFile);
+            client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+            
+            while (!flagForNewFile)
+                ;
+            updateItem();
 
             flagForNewFile = false;
             foreach (var type in MenuPanel.Controls)
