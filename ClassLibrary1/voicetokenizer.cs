@@ -101,8 +101,6 @@ public class Tokenizer
         phraseList.AddPhrase($"녹차");
         phraseList.AddPhrase($"마카롱");
 
-        var tts = new TextToSpeechConverter();
-        tts.Speak("음성인식을 시작합니다");
         var speechRecognitionResult = await speechRecognizer.RecognizeOnceAsync();
         string result = await OutputSpeechRecognitionResult(speechRecognitionResult);
         try
