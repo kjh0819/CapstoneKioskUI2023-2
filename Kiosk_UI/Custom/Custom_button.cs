@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace Kiosk_UI.Custom
 {
@@ -17,7 +11,7 @@ namespace Kiosk_UI.Custom
         private int borderSize = 0;
         private int borderRadius = 20;
         private Color borderColor = Color.Black;
-        
+
         public Custom_button()
         {
             this.FlatStyle = FlatStyle.Flat;
@@ -45,14 +39,14 @@ namespace Kiosk_UI.Custom
             pevent.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             RectangleF rectSurface = new RectangleF(0, 0, this.Width, this.Height);
-            RectangleF rectBorder = new RectangleF(1, 1, this.Width-0, this.Height-1);
+            RectangleF rectBorder = new RectangleF(1, 1, this.Width - 0, this.Height - 1);
 
-            if(borderRadius > 2)
+            if (borderRadius > 2)
             {
                 using (GraphicsPath pathSurface = GetFigurePath(rectSurface, borderRadius))
                 using (GraphicsPath pathBorder = GetFigurePath(rectBorder, borderRadius - 1F))
-                using (Pen penSurface = new Pen(this.Parent.BackColor,2))
-                using(Pen PenBorder = new Pen(borderColor, borderSize))
+                using (Pen penSurface = new Pen(this.Parent.BackColor, 2))
+                using (Pen PenBorder = new Pen(borderColor, borderSize))
                 {
                     PenBorder.Alignment = PenAlignment.Inset;
                     this.Region = new Region(pathSurface);
@@ -65,7 +59,7 @@ namespace Kiosk_UI.Custom
             else
             {
                 this.Region = new Region(rectSurface);
-                if(borderSize >=1)
+                if (borderSize >= 1)
                 {
                     using (Pen penBorder = new Pen(borderColor, borderSize))
                     {
@@ -77,7 +71,7 @@ namespace Kiosk_UI.Custom
         }
         private void Container_BackColorChanged(Object sender, EventArgs e)
         {
-            if(this.DesignMode)
+            if (this.DesignMode)
                 this.Invalidate();
         }
     }
