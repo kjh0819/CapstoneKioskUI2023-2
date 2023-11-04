@@ -1,19 +1,13 @@
-﻿using System;
+﻿using Kiosk_UI.Custom;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Forms;
-using System.IO;
-using Kiosk_UI.Properties;
-using Kiosk_UI.Custom;
 using TTSLib;
-using System.Collections;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
@@ -36,12 +30,12 @@ namespace Kiosk_UI
 
         private MqttClient client = new MqttClient("kjh0819.duckdns.org");
         const string csv = "resources/menu.csv";
-        bool flagForNewFile=false;
+        bool flagForNewFile = false;
 
 
         private void actbutton(object senderBtn)
         {
-            
+
             if (senderBtn != null)
             {
                 DisableButton();
@@ -80,7 +74,8 @@ namespace Kiosk_UI
         }
         public void AddItem2(string name2, int cost2, int count, string icon2)
         {
-            try {
+            try
+            {
                 var n = new select_item()
                 {
                     Title2 = name2,
@@ -121,7 +116,7 @@ namespace Kiosk_UI
 
             }
         }
-        
+
 
         public void AddItem(string name, int cost, categories category, string icon, string[] detail)
         {
@@ -140,15 +135,15 @@ namespace Kiosk_UI
 
                 i.OnSelect += (ss, ee) =>
                 {
-                    
+
                     foreach (var sl in checkPanel.Controls)
                     {
                         var sl_itm = (select_item)sl;
-                        if(name.ToString() == sl_itm.Title2) //아이템 클릭시 장바구니에 중복된 값이 있을때
+                        if (name.ToString() == sl_itm.Title2) //아이템 클릭시 장바구니에 중복된 값이 있을때
                         {
                             sl_itm.Count += 1; //장바구니 카운트 추가
                             count_flag = sl_itm.Count;
-                            mycost += sl_itm.Cost2;;
+                            mycost += sl_itm.Cost2; ;
                         }
                     }
                     if (count_flag == 1) //장바구니에 없는 항목 추가
@@ -163,7 +158,8 @@ namespace Kiosk_UI
                     //cost_lbl.Text = final_cost.ToString() + "원";
                 };
             }
-            catch {
+            catch
+            {
                 var i = new item()
                 {
                     Title = name,
@@ -177,15 +173,15 @@ namespace Kiosk_UI
                 i.OnSelect += (ss, ee) =>
                 {
 
-                    
+
                     foreach (var sl in checkPanel.Controls)
                     {
                         var sl_itm = (select_item)sl;
-                        if(name.ToString() == sl_itm.Title2) //아이템 클릭시 장바구니에 중복된 값이 있을때
+                        if (name.ToString() == sl_itm.Title2) //아이템 클릭시 장바구니에 중복된 값이 있을때
                         {
                             sl_itm.Count += 1; //장바구니 카운트 추가
                             count_flag = sl_itm.Count;
-                            mycost += sl_itm.Cost2;;
+                            mycost += sl_itm.Cost2; ;
                         }
                     }
                     if (count_flag == 1) //장바구니에 없는 항목 추가
@@ -200,7 +196,7 @@ namespace Kiosk_UI
                     //cost_lbl.Text = final_cost.ToString() + "원";
                 };
             }
-         }
+        }
 
         private void cancel_button_Click(object sender, EventArgs e)
         {
@@ -232,7 +228,7 @@ namespace Kiosk_UI
             {
                 RemoveItemAll();
                 var lines = File.ReadAllText(csv);
-                if (lines.Length < 100 ) { return;}
+                if (lines.Length < 100) { return; }
                 foreach (string line in lines.Split('*'))
                 {
                     string[] result = line.Split(',');
@@ -250,7 +246,7 @@ namespace Kiosk_UI
                 flagForNewFile = true;
             }
         }
-        public List<string> Search(string searchString,bool include)
+        public List<string> Search(string searchString, bool include)
         {
             List<string> result = new List<string>();
             if (include)
@@ -259,12 +255,12 @@ namespace Kiosk_UI
                     {
                         var itm = (item)item;
                         //if (itm.Title.Contains( searchString))
-                        if(itm.Title==searchString)
+                        if (itm.Title == searchString)
                         {
                             result.Add(itm.Title);
                         }
                         else
-                            foreach(var d in itm.Detail)
+                            foreach (var d in itm.Detail)
                             {
                                 if (d == searchString)
                                 {
@@ -275,7 +271,7 @@ namespace Kiosk_UI
                 }
             else
                 foreach (var item in MenuPanel.Controls)
-                {                  
+                {
                     {
                         var itm = (item)item;
                         if (!(itm.Title == searchString || itm.Detail.Contains(searchString)))
@@ -336,7 +332,7 @@ namespace Kiosk_UI
             client.Subscribe(new string[] { "Menu/NewImage", "Menu/exist", "Menu/request", "Menu/NewFile" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE }); // test/topic 토픽을 QoS 1로 구독
             client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
             do { updateItem(); } while (!flagForNewFile);
-                
+
             flagForNewFile = false;
             foreach (var type in MenuPanel.Controls)
             {
@@ -364,7 +360,7 @@ namespace Kiosk_UI
                 var itm = (item)type;
                 itm.Visible = true;
             }
-            
+
         }
 
         private void DrinkButton_Click(object sender, EventArgs e)
@@ -412,7 +408,7 @@ namespace Kiosk_UI
             Console.WriteLine(token);
             if (token.Contains("error"))
             {
-                tts.Speak("에러가 발생하였습니다."); 
+                tts.Speak("에러가 발생하였습니다.");
                 foreach (var type in MenuPanel.Controls)
                 {
                     var itm = (item)type;
@@ -421,7 +417,7 @@ namespace Kiosk_UI
                 return;
             }
             List<string> searchResults = new List<string>();
-            token=token.Replace('+', ' ');
+            token = token.Replace('+', ' ');
             string[] texts = token.Split(' ');
 
             bool flagForSearch = false; // 검색 결과 초기화를 위한 플래그
@@ -429,14 +425,14 @@ namespace Kiosk_UI
 
 
             string[][] words = new string[texts.Length][];
-            for (int i = 0; i < texts.Length-1; i++)
+            for (int i = 0; i < texts.Length - 1; i++)
             {
                 string[] word = texts[i].Split('/');
-                words[i]= word;
+                words[i] = word;
 
             }
             bool foundNNGOrNNP = false;
-            for (int i = 0; i < texts.Length-1; i++)
+            for (int i = 0; i < texts.Length - 1; i++)
             {
                 Console.WriteLine(words[i][0] + words[i][1]);
                 if (!foundNNGOrNNP && (words[i][1] == "NNG" || words[i][1] == "NNP"))
@@ -527,7 +523,7 @@ namespace Kiosk_UI
                     }
                 }
             }
-        
+
             if (texts.Contains("들어가/VV"))
                 foreach (var text in texts)
                 {
@@ -540,9 +536,9 @@ namespace Kiosk_UI
                         if (flagForSearch && Result.Count > 0)
                         {
                             // 이미 결과가 존재하면 결과와 교차(intersect)시키기
-                                searchResults = searchResults.Intersect(Result).ToList();
+                            searchResults = searchResults.Intersect(Result).ToList();
                         }
-                        else if(Result.Count>0)
+                        else if (Result.Count > 0)
                         {
                             // 처음 검색 결과를 설정
                             searchResults = Result;
@@ -562,7 +558,7 @@ namespace Kiosk_UI
                             // 이미 결과가 존재하면 결과와 교차(intersect)시키기
                             searchResults = searchResults.Intersect(Result).ToList();
                         }
-                        else if (!flagForSearch&&Result.Count > 0)
+                        else if (!flagForSearch && Result.Count > 0)
                         {
                             Result = Search(morps[0], false);
                             // 처음 검색 결과를 설정
@@ -572,7 +568,7 @@ namespace Kiosk_UI
                     }
 
                 }
-            else if(searchResults.Count==0)
+            else if (searchResults.Count == 0)
                 foreach (var text in texts)
                 {
                     string[] morps = text.Split('/');
@@ -595,7 +591,8 @@ namespace Kiosk_UI
                 }
                 return;
             }
-            else {
+            else
+            {
                 foreach (var item in MenuPanel.Controls)
                 {
                     var control = (item)item;
@@ -631,26 +628,42 @@ namespace Kiosk_UI
             }
         }
         public Action<DataTable> SendDataTable;
-        private async void custom_button1_Click(object sender, EventArgs e)
+
+        private void custom_button1_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("아이템", typeof(string)); //사진
-            dt.Columns.Add("이름", typeof(string));
-            dt.Columns.Add("개수", typeof(int));
-            dt.Columns.Add("가격", typeof(int));
-            dt.Columns.Add("합계", typeof(int));
-            foreach (var item in checkPanel.Controls)
+            if (cost_lbl.Text == "0원")
             {
-                var itm = (select_item)item;
-                dt.Rows.Add(itm.Icon2, itm.Title2.ToString(), itm.Count,itm.Cost2, itm.Cost2 * itm.Count);
+                Form modalbackground = new Form();
+                using (warning modal = new warning())
+                {
+                    modal.ShowDialog();
+                    modalbackground.Dispose();
+                }
             }
-            PayCheck newform = new PayCheck(dt);
+            else
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add(" ", typeof(Bitmap)); //사진
+                dt.Columns.Add("이름", typeof(string));
+                dt.Columns.Add("개수", typeof(int));
+                dt.Columns.Add("가격", typeof(int));
+                dt.Columns.Add("합계", typeof(int));
+                foreach (var item in checkPanel.Controls)
+                {
+                    var itm = (select_item)item;
+                    Bitmap original = (Bitmap)itm.Icon2;
+                    Bitmap resized = new Bitmap(original, new Size(original.Width / 2, original.Height / 2));
 
-            this.Hide();
-            newform.ShowDialog();
-            this.Show();
+                    dt.Rows.Add(resized, itm.Title2.ToString(), itm.Count, itm.Cost2, itm.Cost2 * itm.Count);
+                }
+
+                PayCheck newform = new PayCheck(dt);
+
+                this.Hide();
+                newform.ShowDialog();
+                this.Show();
+            }
+
         }
-
     }
-
 }

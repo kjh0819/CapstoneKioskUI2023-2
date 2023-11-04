@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Kiosk_UI.Custom;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Kiosk_UI.Custom;
 
 namespace Kiosk_UI
 {
@@ -33,7 +28,7 @@ namespace Kiosk_UI
             {
                 control.MouseDown += MouseDown;
                 control.MouseMove += MouseMove;
-                foreach(Control child in control.Controls)
+                foreach (Control child in control.Controls)
                 {
                     AssignEvent(child);
                 }
