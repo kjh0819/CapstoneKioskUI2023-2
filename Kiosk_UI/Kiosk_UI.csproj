@@ -176,6 +176,12 @@
       <DependentUpon>select_item.cs</DependentUpon>
     </Compile>
     <Compile Include="Touch.cs" />
+    <Compile Include="warning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="warning.Designer.cs">
+      <DependentUpon>warning.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -192,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="select_item.resx">
       <DependentUpon>select_item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="warning.resx">
+      <DependentUpon>warning.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
