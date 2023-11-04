@@ -354,6 +354,11 @@ namespace Kiosk_UI
             } while (!flagForNewFile);
             flagForNewFile = false;
             */
+            client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+            do
+            {
+                updateItem();
+            } while (!flagForNewFile);
             actbutton(sender);
             foreach (var type in MenuPanel.Controls)
             {
@@ -402,7 +407,7 @@ namespace Kiosk_UI
                 var itm = (item)type;
                 itm.Visible = false;
             }
-
+            tts.Speak("음성인식을 시작합니다");
 
             string token = await Tokenizer.VoiceTokenizer();
             Console.WriteLine(token);
@@ -445,8 +450,16 @@ namespace Kiosk_UI
                 {
                     searchResults = Search(words[i - 1][0] + words[i][0], true);
                     if (searchResults.Count == 0)
-                        searchResults = Search(words[i - 2][0] + words[i][0], true);
-                    flagForSearch = true;
+                        try
+                        {
+                            searchResults = Search(words[i - 2][0] + words[i][0], true);
+                            flagForSearch = true;
+                        }
+                        catch { }
+                    else
+                    {
+                        flagForSearch = true;
+                    }
                 }
                 else
                 {
