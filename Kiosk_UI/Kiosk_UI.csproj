@@ -149,6 +149,12 @@
     <Compile Include="Custom\Custom_panel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FinishForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FinishForm.Designer.cs">
+      <DependentUpon>FinishForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,6 +181,12 @@
     <Compile Include="select_item.Designer.cs">
       <DependentUpon>select_item.cs</DependentUpon>
     </Compile>
+    <Compile Include="TakeoutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TakeoutForm.Designer.cs">
+      <DependentUpon>TakeoutForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Touch.cs" />
     <Compile Include="warning.cs">
       <SubType>Form</SubType>
@@ -182,6 +194,9 @@
     <Compile Include="warning.Designer.cs">
       <DependentUpon>warning.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FinishForm.resx">
+      <DependentUpon>FinishForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -198,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="select_item.resx">
       <DependentUpon>select_item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TakeoutForm.resx">
+      <DependentUpon>TakeoutForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="warning.resx">
       <DependentUpon>warning.cs</DependentUpon>
@@ -377,10 +395,19 @@
     <EmbeddedResource Include="icons\greentea_ddung.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="icons\cafe.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="icons\icons8-메뉴-500.png" />
     <Content Include="icons\menu.png" />
     <None Include="icons\menu_3.png" />
     <EmbeddedResource Include="icons\strawberry_ddung.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\warning.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\motorcycle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="icons\z_icons8_menu.png" />
