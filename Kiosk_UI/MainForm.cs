@@ -629,7 +629,9 @@ namespace Kiosk_UI
         }
         public Action<DataTable> SendDataTable;
 
-        private void custom_button1_Click(object sender, EventArgs e)
+        public static int parentX, parentY;
+
+        private async void custom_button1_Click(object sender, EventArgs e)
         {
             if (cost_lbl.Text == "0원")
             {
@@ -638,6 +640,10 @@ namespace Kiosk_UI
                 {
                     modal.ShowDialog();
                     modalbackground.Dispose();
+
+                    parentX = this.ClientSize.Width/2;
+                    parentY = this.ClientSize.Height/2;
+                    Console.WriteLine(parentX.ToString()+ parentY.ToString());
                 }
             }
             else
@@ -658,6 +664,7 @@ namespace Kiosk_UI
                 }
 
                 PayCheck newform = new PayCheck(dt);
+                newform.labeltxt = this.cost_lbl.Text;
 
                 this.Hide();
                 newform.ShowDialog();

@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.TopPanel = new System.Windows.Forms.Panel();
+            this.SelectbarPanel = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.VoiceButton = new Kiosk_UI.Custom.Custom_button();
+            this.DessertButton = new Kiosk_UI.Custom.Custom_button();
+            this.DrinkButton = new Kiosk_UI.Custom.Custom_button();
+            this.AllmenuButton = new Kiosk_UI.Custom.Custom_button();
             this.cancel_button = new Kiosk_UI.Custom.Custom_button();
             this.cost_panel = new Kiosk_UI.Custom.Custom_panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -36,15 +42,9 @@
             this.checkPanel = new Kiosk_UI.Custom.Custom_flowpanel();
             this.custom_button1 = new Kiosk_UI.Custom.Custom_button();
             this.MenuPanel = new Kiosk_UI.Custom.Custom_flowpanel();
-            this.SelectbarPanel = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.VoiceButton = new Kiosk_UI.Custom.Custom_button();
-            this.DessertButton = new Kiosk_UI.Custom.Custom_button();
-            this.DrinkButton = new Kiosk_UI.Custom.Custom_button();
-            this.AllmenuButton = new Kiosk_UI.Custom.Custom_button();
-            this.cost_panel.SuspendLayout();
             this.SelectbarPanel.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.cost_panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // TopPanel
@@ -57,104 +57,6 @@
             this.TopPanel.Name = "TopPanel";
             this.TopPanel.Size = new System.Drawing.Size(481, 79);
             this.TopPanel.TabIndex = 2;
-            // 
-            // cancel_button
-            // 
-            this.cancel_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cancel_button.BackColor = System.Drawing.Color.IndianRed;
-            this.cancel_button.FlatAppearance.BorderSize = 0;
-            this.cancel_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancel_button.Font = new System.Drawing.Font("Noto Sans KR", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.cancel_button.ForeColor = System.Drawing.Color.White;
-            this.cancel_button.Location = new System.Drawing.Point(9, 576);
-            this.cancel_button.Name = "cancel_button";
-            this.cancel_button.Size = new System.Drawing.Size(70, 172);
-            this.cancel_button.TabIndex = 7;
-            this.cancel_button.Text = "전체\r\n취소";
-            this.cancel_button.UseVisualStyleBackColor = false;
-            this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
-            // 
-            // cost_panel
-            // 
-            this.cost_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cost_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(73)))), ((int)(((byte)(51)))));
-            this.cost_panel.BorderColor = System.Drawing.Color.White;
-            this.cost_panel.Controls.Add(this.label1);
-            this.cost_panel.Controls.Add(this.cost_lbl);
-            this.cost_panel.Edge = 20;
-            this.cost_panel.Location = new System.Drawing.Point(249, 577);
-            this.cost_panel.Name = "cost_panel";
-            this.cost_panel.Size = new System.Drawing.Size(129, 172);
-            this.cost_panel.TabIndex = 6;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(133)))), ((int)(((byte)(96)))));
-            this.label1.Font = new System.Drawing.Font("Noto Sans KR", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(223)))), ((int)(((byte)(173)))));
-            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 67);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "총 금액";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cost_lbl
-            // 
-            this.cost_lbl.BackColor = System.Drawing.Color.Moccasin;
-            this.cost_lbl.Font = new System.Drawing.Font("Noto Sans KR", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.cost_lbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(62)))), ((int)(((byte)(45)))));
-            this.cost_lbl.Location = new System.Drawing.Point(0, 67);
-            this.cost_lbl.Name = "cost_lbl";
-            this.cost_lbl.Size = new System.Drawing.Size(129, 108);
-            this.cost_lbl.TabIndex = 0;
-            this.cost_lbl.Text = "label1";
-            this.cost_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // checkPanel
-            // 
-            this.checkPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkPanel.BackColor = System.Drawing.Color.OldLace;
-            this.checkPanel.BorderColor = System.Drawing.Color.White;
-            this.checkPanel.Edge = 20;
-            this.checkPanel.Location = new System.Drawing.Point(85, 576);
-            this.checkPanel.Name = "checkPanel";
-            this.checkPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.checkPanel.Size = new System.Drawing.Size(158, 173);
-            this.checkPanel.TabIndex = 5;
-            // 
-            // custom_button1
-            // 
-            this.custom_button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.custom_button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(73)))), ((int)(((byte)(72)))));
-            this.custom_button1.FlatAppearance.BorderSize = 0;
-            this.custom_button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.custom_button1.Font = new System.Drawing.Font("Noto Sans KR", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.custom_button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(223)))), ((int)(((byte)(173)))));
-            this.custom_button1.Location = new System.Drawing.Point(384, 577);
-            this.custom_button1.Name = "custom_button1";
-            this.custom_button1.Size = new System.Drawing.Size(97, 172);
-            this.custom_button1.TabIndex = 0;
-            this.custom_button1.Text = "결제\r\n하기";
-            this.custom_button1.UseVisualStyleBackColor = false;
-            this.custom_button1.Click += new System.EventHandler(this.custom_button1_Click);
-            // 
-            // MenuPanel
-            // 
-            this.MenuPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.MenuPanel.AutoScroll = true;
-            this.MenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(151)))), ((int)(((byte)(115)))));
-            this.MenuPanel.BorderColor = System.Drawing.Color.White;
-            this.MenuPanel.Edge = 20;
-            this.MenuPanel.Location = new System.Drawing.Point(125, 150);
-            this.MenuPanel.Name = "MenuPanel";
-            this.MenuPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.MenuPanel.Size = new System.Drawing.Size(347, 399);
-            this.MenuPanel.TabIndex = 4;
             // 
             // SelectbarPanel
             // 
@@ -243,6 +145,105 @@
             this.AllmenuButton.UseVisualStyleBackColor = false;
             this.AllmenuButton.Click += new System.EventHandler(this.AllmenuButton_Click);
             // 
+            // cancel_button
+            // 
+            this.cancel_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cancel_button.BackColor = System.Drawing.Color.IndianRed;
+            this.cancel_button.FlatAppearance.BorderSize = 0;
+            this.cancel_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cancel_button.Font = new System.Drawing.Font("Noto Sans KR", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.cancel_button.ForeColor = System.Drawing.Color.White;
+            this.cancel_button.Location = new System.Drawing.Point(9, 576);
+            this.cancel_button.Name = "cancel_button";
+            this.cancel_button.Size = new System.Drawing.Size(70, 172);
+            this.cancel_button.TabIndex = 7;
+            this.cancel_button.Text = "전체\r\n취소";
+            this.cancel_button.UseVisualStyleBackColor = false;
+            this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
+            // 
+            // cost_panel
+            // 
+            this.cost_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cost_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(73)))), ((int)(((byte)(51)))));
+            this.cost_panel.BorderColor = System.Drawing.Color.White;
+            this.cost_panel.Controls.Add(this.label1);
+            this.cost_panel.Controls.Add(this.cost_lbl);
+            this.cost_panel.Edge = 20;
+            this.cost_panel.Location = new System.Drawing.Point(249, 577);
+            this.cost_panel.Name = "cost_panel";
+            this.cost_panel.Size = new System.Drawing.Size(129, 172);
+            this.cost_panel.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(133)))), ((int)(((byte)(96)))));
+            this.label1.Font = new System.Drawing.Font("Noto Sans KR", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(223)))), ((int)(((byte)(173)))));
+            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(129, 67);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "총 금액";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cost_lbl
+            // 
+            this.cost_lbl.BackColor = System.Drawing.Color.Moccasin;
+            this.cost_lbl.Font = new System.Drawing.Font("Noto Sans KR", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.cost_lbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(62)))), ((int)(((byte)(45)))));
+            this.cost_lbl.Location = new System.Drawing.Point(0, 67);
+            this.cost_lbl.Name = "cost_lbl";
+            this.cost_lbl.Size = new System.Drawing.Size(129, 108);
+            this.cost_lbl.TabIndex = 0;
+            this.cost_lbl.Text = "label1";
+            this.cost_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // checkPanel
+            // 
+            this.checkPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkPanel.AutoScroll = true;
+            this.checkPanel.BackColor = System.Drawing.Color.OldLace;
+            this.checkPanel.BorderColor = System.Drawing.Color.White;
+            this.checkPanel.Edge = 20;
+            this.checkPanel.Location = new System.Drawing.Point(85, 576);
+            this.checkPanel.Name = "checkPanel";
+            this.checkPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.checkPanel.Size = new System.Drawing.Size(158, 173);
+            this.checkPanel.TabIndex = 8;
+            // 
+            // custom_button1
+            // 
+            this.custom_button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.custom_button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(73)))), ((int)(((byte)(72)))));
+            this.custom_button1.FlatAppearance.BorderSize = 0;
+            this.custom_button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.custom_button1.Font = new System.Drawing.Font("Noto Sans KR", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.custom_button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(223)))), ((int)(((byte)(173)))));
+            this.custom_button1.Location = new System.Drawing.Point(384, 577);
+            this.custom_button1.Name = "custom_button1";
+            this.custom_button1.Size = new System.Drawing.Size(97, 172);
+            this.custom_button1.TabIndex = 0;
+            this.custom_button1.Text = "결제\r\n하기";
+            this.custom_button1.UseVisualStyleBackColor = false;
+            this.custom_button1.Click += new System.EventHandler(this.custom_button1_Click);
+            // 
+            // MenuPanel
+            // 
+            this.MenuPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.MenuPanel.AutoScroll = true;
+            this.MenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(151)))), ((int)(((byte)(115)))));
+            this.MenuPanel.BorderColor = System.Drawing.Color.White;
+            this.MenuPanel.Edge = 20;
+            this.MenuPanel.Location = new System.Drawing.Point(125, 150);
+            this.MenuPanel.Name = "MenuPanel";
+            this.MenuPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.MenuPanel.Size = new System.Drawing.Size(347, 399);
+            this.MenuPanel.TabIndex = 4;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -261,10 +262,10 @@
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Shown += new System.EventHandler(this.MainForm_Shown);
-            this.cost_panel.ResumeLayout(false);
             this.SelectbarPanel.ResumeLayout(false);
             this.SelectbarPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.cost_panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
