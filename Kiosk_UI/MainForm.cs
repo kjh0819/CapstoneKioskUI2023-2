@@ -31,6 +31,7 @@ namespace Kiosk_UI
         private MqttClient client = new MqttClient("kjh0819.duckdns.org");
         const string csv = "resources/menu.csv";
         bool flagForNewFile = false;
+        int menuUpdateCounter = 0;
 
 
         private void actbutton(object senderBtn)
@@ -200,6 +201,7 @@ namespace Kiosk_UI
 
         private void cancel_button_Click(object sender, EventArgs e)
         {
+
             checkPanel.Controls.Clear();//장바구니 전체 삭제
             final_cost = 0;
             cost_lbl.Text = final_cost.ToString() + "원";
@@ -314,7 +316,14 @@ namespace Kiosk_UI
                     File.WriteAllBytes("../../../test.png", e.Message);
                     break;
                 case "Menu/NewFile":
-                    File.WriteAllText(csv, m);
+                    try
+                    {
+                        File.WriteAllText(csv, m);
+                    }
+                    catch(Exception ex)
+                    {
+                        break;
+                    }
                     flagForNewFile = true;
                     break;
             }
@@ -354,11 +363,19 @@ namespace Kiosk_UI
             } while (!flagForNewFile);
             flagForNewFile = false;
             */
-            client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
-            do
+            menuUpdateCounter++;
+            if (menuUpdateCounter == 10)
             {
-                updateItem();
-            } while (!flagForNewFile);
+                TextToSpeechConverter tts = new TextToSpeechConverter();
+                tts.Speak("메뉴 업데이트를 시작합니다.");
+                client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                do
+                {
+                    updateItem();
+                } while (!flagForNewFile);
+                menuUpdateCounter = 0;
+            }
+
             actbutton(sender);
             foreach (var type in MenuPanel.Controls)
             {
@@ -370,6 +387,7 @@ namespace Kiosk_UI
 
         private void DrinkButton_Click(object sender, EventArgs e)
         {
+            menuUpdateCounter = 0;
             actbutton(sender);
             foreach (var type in MenuPanel.Controls)
             {
@@ -383,6 +401,7 @@ namespace Kiosk_UI
         }
         private void DessertButton_Click(object sender, EventArgs e)
         {
+            menuUpdateCounter = 0;
             actbutton(sender);
             foreach (var type in MenuPanel.Controls)
             {
@@ -399,6 +418,7 @@ namespace Kiosk_UI
 
         private async void VoiceButton_Click(object sender, EventArgs e)
         {
+            menuUpdateCounter = 0;
             actbutton(sender);
             var tts = new TextToSpeechConverter();
             //모든 메뉴 가리기
