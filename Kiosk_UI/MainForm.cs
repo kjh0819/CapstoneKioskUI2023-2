@@ -31,6 +31,7 @@ namespace Kiosk_UI
         private MqttClient client = new MqttClient("kjh0819.duckdns.org");
         const string csv = "resources/menu.csv";
         bool flagForNewFile = false;
+        int menuUpdateCounter = 0;
 
 
         private void actbutton(object senderBtn)
@@ -200,6 +201,7 @@ namespace Kiosk_UI
 
         private void cancel_button_Click(object sender, EventArgs e)
         {
+
             checkPanel.Controls.Clear();//장바구니 전체 삭제
             final_cost = 0;
             cost_lbl.Text = final_cost.ToString() + "원";
@@ -314,11 +316,15 @@ namespace Kiosk_UI
                     File.WriteAllBytes("../../../test.png", e.Message);
                     break;
                 case "Menu/NewFile":
-                    File.WriteAllText(csv, m);
+                    try
+                    {
+                        File.WriteAllText(csv, m);
+                    }
+                    catch(Exception ex)
+                    {
+                        break;
+                    }
                     flagForNewFile = true;
-                    break;
-                case "Menu/Update":
-                    updateItem();
                     break;
             }
         }
@@ -330,8 +336,11 @@ namespace Kiosk_UI
             byte code = client.Connect(clientId, username, password);
             client.MqttMsgPublishReceived += client_MqttMsgPublishReceived; // 메시지 수신 이벤트 핸들러 등록
             client.Subscribe(new string[] { "Menu/NewImage", "Menu/exist", "Menu/request", "Menu/NewFile" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE }); // test/topic 토픽을 QoS 1로 구독
-            client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
-            do { updateItem(); } while (!flagForNewFile);
+            client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+            
+            while (!flagForNewFile)
+                ;
+            updateItem();
 
             flagForNewFile = false;
             foreach (var type in MenuPanel.Controls)
@@ -354,6 +363,19 @@ namespace Kiosk_UI
             } while (!flagForNewFile);
             flagForNewFile = false;
             */
+            menuUpdateCounter++;
+            if (menuUpdateCounter == 10)
+            {
+                TextToSpeechConverter tts = new TextToSpeechConverter();
+                tts.Speak("메뉴 업데이트를 시작합니다.");
+                client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                do
+                {
+                    updateItem();
+                } while (!flagForNewFile);
+                menuUpdateCounter = 0;
+            }
+
             actbutton(sender);
             foreach (var type in MenuPanel.Controls)
             {
@@ -365,6 +387,7 @@ namespace Kiosk_UI
 
         private void DrinkButton_Click(object sender, EventArgs e)
         {
+            menuUpdateCounter = 0;
             actbutton(sender);
             foreach (var type in MenuPanel.Controls)
             {
@@ -378,6 +401,7 @@ namespace Kiosk_UI
         }
         private void DessertButton_Click(object sender, EventArgs e)
         {
+            menuUpdateCounter = 0;
             actbutton(sender);
             foreach (var type in MenuPanel.Controls)
             {
@@ -394,6 +418,7 @@ namespace Kiosk_UI
 
         private async void VoiceButton_Click(object sender, EventArgs e)
         {
+            menuUpdateCounter = 0;
             actbutton(sender);
             var tts = new TextToSpeechConverter();
             //모든 메뉴 가리기
@@ -402,7 +427,7 @@ namespace Kiosk_UI
                 var itm = (item)type;
                 itm.Visible = false;
             }
-
+            tts.Speak("음성인식을 시작합니다");
 
             string token = await Tokenizer.VoiceTokenizer();
             Console.WriteLine(token);
@@ -445,8 +470,16 @@ namespace Kiosk_UI
                 {
                     searchResults = Search(words[i - 1][0] + words[i][0], true);
                     if (searchResults.Count == 0)
-                        searchResults = Search(words[i - 2][0] + words[i][0], true);
-                    flagForSearch = true;
+                        try
+                        {
+                            searchResults = Search(words[i - 2][0] + words[i][0], true);
+                            flagForSearch = true;
+                        }
+                        catch { }
+                    else
+                    {
+                        flagForSearch = true;
+                    }
                 }
                 else
                 {
