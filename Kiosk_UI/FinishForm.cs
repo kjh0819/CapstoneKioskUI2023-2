@@ -12,9 +12,24 @@ namespace Kiosk_UI
 {
     public partial class FinishForm : Form
     {
+        private System.Windows.Forms.Timer tmr;
+
         public FinishForm()
         {
             InitializeComponent();
+
+            tmr = new System.Windows.Forms.Timer();
+            tmr.Tick += delegate
+            {
+                MainForm frm = new MainForm();
+
+                tmr.Stop();
+                this.Close();
+                
+            };
+            tmr.Interval = (int)TimeSpan.FromSeconds(3).TotalMilliseconds;
+            tmr.Start();
         }
+
     }
 }

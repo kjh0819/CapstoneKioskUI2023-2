@@ -51,10 +51,10 @@ namespace Kiosk_UI
 
         private void Yesbutton_Click(object sender, EventArgs e)
         {
-            TakeoutForm newform = new TakeoutForm();
+            TakeoutForm takeout = new TakeoutForm();
 
             this.Hide();
-            newform.ShowDialog();
+            takeout.ShowDialog();
             this.Show();
         }
     }
