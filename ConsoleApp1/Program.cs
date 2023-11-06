@@ -9,9 +9,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace ConsoleApp1
 {
-    public class SerialFromArduino
+    public class Program
     {
-        public void Main() 
+        static void Main(string[] args)
         {
             SerialPort port1;
             string receivedData = "";
@@ -20,46 +20,68 @@ namespace ConsoleApp1
             port1.DataReceived += (sender, e) =>
             {
                 SerialPort port = (SerialPort)sender;
-                string data = port.ReadTo("\n");
-                switch(data)
+                string data = port.ReadLine();
+                Console.WriteLine(data);
+                switch (data)
                 {
-                    case ("on"):
+                    case ("in\r"):
                         var face = new FaceRecognition.FaceRecognition();
                         string faceLocate="";
-                        for(int i = 0; i<20;i++)
+                        for(int i = 0; i<3;i++)
                         {
                             faceLocate = face.Recognition().Result;
                             Console.WriteLine(faceLocate);
 
-                            if (faceLocate != "error")
+                            if (faceLocate == "error")
+                            {
+                                Console.WriteLine("error");
                                 break;
+                            }
+                            else if(Int32.TryParse(faceLocate, out var res))
+                            {
+                                break;
+                            }
+                            else if (i == 2)
+                            {
+                                port1.WriteLine("3")
+                            }
                         }
                         if (Int32.TryParse(faceLocate, out var result))
                         {
+                            Console.WriteLine(result);
                             if (result > 400)
-                                port1.WriteLine("1 4000");
+                            {
+                                port1.WriteLine("1 0000");
+
+                            }
                             else if (result > 300)
-                                port1.WriteLine("1 3000");
+                            {
+                                port1.WriteLine("1 1000");
+                            }
                             else if (result > 200)
                                 port1.WriteLine("1 2000");
                             else if (result > 100)
-                                port1.WriteLine("1 1000");
+                                port1.WriteLine("1 3000");
+                            else
+                                port1.WriteLine("1 4000");
+                            port1.WriteLine("3");
                         }
                         break;
-                    case ("off"):
+                    case ("out\r"):
                         port1.WriteLine("2 5000");
                         break;
                     default: 
                         break;
                 }
-                Console.WriteLine(data);
             };
+
             port1.BaudRate = 9600;
             port1.DataBits = 8;
             port1.StopBits = StopBits.One;
             port1.Parity = Parity.None;
             port1.ReadTimeout = 1000;
             port1.Open();
+            port1.WriteLine("2 5000");
 
             Console.WriteLine("Press Enter to quit");
             Console.ReadLine();
