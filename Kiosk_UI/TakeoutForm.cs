@@ -66,7 +66,6 @@ namespace Kiosk_UI
 
             this.Hide();
             finishForm.ShowDialog();
-            //this.DialogResult = DialogResult.Cancel;
         }
 
     }

@@ -21,11 +21,9 @@ namespace Kiosk_UI
             tmr = new System.Windows.Forms.Timer();
             tmr.Tick += delegate
             {
-                MainForm frm = new MainForm();
-
                 tmr.Stop();
                 this.Close();
-                
+
             };
             tmr.Interval = (int)TimeSpan.FromSeconds(3).TotalMilliseconds;
             tmr.Start();

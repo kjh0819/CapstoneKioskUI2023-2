@@ -697,13 +697,22 @@ namespace Kiosk_UI
                 }
 
                 PayCheck newform = new PayCheck(dt);
-                newform.labeltxt = this.cost_lbl.Text;
-
                 this.Hide();
-                newform.ShowDialog();
-                this.Show();
-            }
+                newform.labeltxt = this.cost_lbl.Text;
+                DialogResult result1 = newform.ShowDialog();
+                
+                if (result1 == DialogResult.OK)
+                {
+                    this.Show();
+                }
+                else if (result1 == DialogResult.Cancel)
+                {
+                    MainForm mainForm = new MainForm();
+                    mainForm.Show();
+                }
 
+            }
         }
+
     }
 }

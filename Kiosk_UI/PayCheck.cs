@@ -7,6 +7,7 @@ namespace Kiosk_UI
     public partial class PayCheck : Form
     {
         DataTable passedIndt;
+
         public PayCheck()
         {
             InitializeComponent();
@@ -51,11 +52,23 @@ namespace Kiosk_UI
 
         private void Yesbutton_Click(object sender, EventArgs e)
         {
+            this.Hide();
             TakeoutForm takeout = new TakeoutForm();
 
+            DialogResult result1 = takeout.ShowDialog();
             this.Hide();
-            takeout.ShowDialog();
-            this.Show();
+            if (result1 == DialogResult.OK)
+            {
+                this.Show();
+            }
+            else
+            {
+                this.Close();
+            }
+
+
+            //this.Hide();
+            //takeout.ShowDialog();
         }
     }
 }
