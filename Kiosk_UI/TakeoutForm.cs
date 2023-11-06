@@ -41,7 +41,6 @@ namespace Kiosk_UI
 
         private void Nobutton_Click(object sender, EventArgs e)
         {
-
             this.DialogResult = DialogResult.OK;
             this.Hide();
         }
@@ -58,9 +57,17 @@ namespace Kiosk_UI
 
         private void Yesbutton_Click(object sender, EventArgs e)
         {
-            FinishForm obj = new FinishForm();
-            obj.Show();
+            /* using(var frm = new FinishForm())
+             {
+                 frm.ShowDialog();
+             }*/
+            
+            FinishForm finishForm = new FinishForm();
+
             this.Hide();
+            finishForm.ShowDialog();
+            //this.DialogResult = DialogResult.Cancel;
         }
+
     }
 }
