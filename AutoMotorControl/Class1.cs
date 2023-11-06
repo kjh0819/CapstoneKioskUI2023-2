@@ -7,16 +7,23 @@ using System.Threading.Tasks;
 using FaceRecognition;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace ConsoleApp1
+namespace AutoMotorControl
 {
-    public class Program
+    public class MotorControl
     {
-        static void Main(string[] args)
-        {
-            SerialPort port1;
-            string receivedData = "";
-            port1 = new SerialPort("COM5");
+        private static SerialPort port1 = new SerialPort("COM5");
 
+        public void Finished()
+        {
+            port1.WriteLine("3");
+            //키오스크 사용 완료를 알림
+        }
+        public void MenualControl(string vector,string miliSeconds) 
+        {
+            port1.WriteLine(vector + " " + miliSeconds);
+        }
+        public void AutoControl()
+        {
             port1.DataReceived += (sender, e) =>
             {
                 SerialPort port = (SerialPort)sender;
@@ -26,8 +33,8 @@ namespace ConsoleApp1
                 {
                     case ("in\r"):
                         var face = new FaceRecognition.FaceRecognition();
-                        string faceLocate="";
-                        for(int i = 0; i<3;i++)
+                        string faceLocate = "";
+                        for (int i = 0; i < 3; i++)
                         {
                             faceLocate = face.Recognition().Result;
                             Console.WriteLine(faceLocate);
@@ -37,13 +44,9 @@ namespace ConsoleApp1
                                 Console.WriteLine("error");
                                 break;
                             }
-                            else if(Int32.TryParse(faceLocate, out var res))
+                            else if (Int32.TryParse(faceLocate, out var res))
                             {
                                 break;
-                            }
-                            else if (i == 2)
-                            {
-                                port1.WriteLine("3");
                             }
                         }
                         if (Int32.TryParse(faceLocate, out var result))
@@ -51,30 +54,23 @@ namespace ConsoleApp1
                             Console.WriteLine(result);
                             if (result > 400)
                             {
+
                                 port1.WriteLine("1 0000");
 
                             }
-                            else if (result > 300)
-                            {
-                                port1.WriteLine("1 1000");
-                            }
-                            else if (result > 200)
-                                port1.WriteLine("1 2000");
-                            else if (result > 100)
-                                port1.WriteLine("1 3000");
                             else
-                                port1.WriteLine("1 4000");
-                            port1.WriteLine("3");
+                            {
+                                port1.WriteLine("1 " + (10 * (400 - result)));
+                            }
                         }
                         break;
                     case ("out\r"):
                         port1.WriteLine("2 5000");
                         break;
-                    default: 
+                    default:
                         break;
                 }
             };
-
             port1.BaudRate = 9600;
             port1.DataBits = 8;
             port1.StopBits = StopBits.One;
@@ -82,10 +78,6 @@ namespace ConsoleApp1
             port1.ReadTimeout = 1000;
             port1.Open();
             port1.WriteLine("2 5000");
-
-            Console.WriteLine("Press Enter to quit");
-            Console.ReadLine();
         }
     }
-    
 }

@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceRecon", "FaceRecon\Face
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{DA08F50C-8745-4A76-8547-FE517A6ACAA1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMotorControl", "AutoMotorControl\AutoMotorControl.csproj", "{EAB98E4F-263C-48B1-8E99-E0BA47B007D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,18 @@ Global
 		{DA08F50C-8745-4A76-8547-FE517A6ACAA1}.Relese|Any CPU.Build.0 = Release|Any CPU
 		{DA08F50C-8745-4A76-8547-FE517A6ACAA1}.Relese|x64.ActiveCfg = Release|Any CPU
 		{DA08F50C-8745-4A76-8547-FE517A6ACAA1}.Relese|x64.Build.0 = Release|Any CPU
+		{EAB98E4F-263C-48B1-8E99-E0BA47B007D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAB98E4F-263C-48B1-8E99-E0BA47B007D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAB98E4F-263C-48B1-8E99-E0BA47B007D7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EAB98E4F-263C-48B1-8E99-E0BA47B007D7}.Debug|x64.Build.0 = Debug|Any CPU
+		{EAB98E4F-263C-48B1-8E99-E0BA47B007D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAB98E4F-263C-48B1-8E99-E0BA47B007D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAB98E4F-263C-48B1-8E99-E0BA47B007D7}.Release|x64.ActiveCfg = Release|Any CPU
+		{EAB98E4F-263C-48B1-8E99-E0BA47B007D7}.Release|x64.Build.0 = Release|Any CPU
+		{EAB98E4F-263C-48B1-8E99-E0BA47B007D7}.Relese|Any CPU.ActiveCfg = Release|Any CPU
+		{EAB98E4F-263C-48B1-8E99-E0BA47B007D7}.Relese|Any CPU.Build.0 = Release|Any CPU
+		{EAB98E4F-263C-48B1-8E99-E0BA47B007D7}.Relese|x64.ActiveCfg = Release|Any CPU
+		{EAB98E4F-263C-48B1-8E99-E0BA47B007D7}.Relese|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
