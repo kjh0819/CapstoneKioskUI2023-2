@@ -413,6 +413,10 @@
     <Content Include="icons\z_icons8_menu.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoMotorControl\AutoMotorControl.csproj">
+      <Project>{eab98e4f-263c-48b1-8e99-e0ba47b007d7}</Project>
+      <Name>AutoMotorControl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClassLibrary1\VoiceTokenizer.csproj">
       <Project>{3744f4ed-f8c7-4d1b-b585-c349528f5ed9}</Project>
       <Name>VoiceTokenizer</Name>
