@@ -65,7 +65,7 @@ namespace Kiosk_UI
         public MainForm()
         {
             InitializeComponent();
-            //this.FormClosing += MainForm_FormClosing;
+            this.FormClosing += MainForm_FormClosing;
 
             new Touch(MenuPanel);
         }

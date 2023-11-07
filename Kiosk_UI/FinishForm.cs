@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMotorControl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,16 @@ namespace Kiosk_UI
 
         public FinishForm()
         {
+            try
+            {
+                MotorControl motorControl = new MotorControl();
+                motorControl.Finished();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("모터제어 오류 FinishForm");
+                Console.WriteLine(ex.Message);
+            }
             InitializeComponent();
 
             tmr = new System.Windows.Forms.Timer();
@@ -27,6 +38,7 @@ namespace Kiosk_UI
             };
             tmr.Interval = (int)TimeSpan.FromSeconds(3).TotalMilliseconds;
             tmr.Start();
+            
         }
 
     }
