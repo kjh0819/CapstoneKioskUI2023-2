@@ -9,6 +9,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace AutoMotorControl
 {
+
     public class MotorControl
     {
         private static SerialPort port1 = new SerialPort("COM5");
@@ -32,6 +33,7 @@ namespace AutoMotorControl
                 switch (data)
                 {
                     case ("in\r"):
+
                         var face = new FaceRecognition.FaceRecognition();
                         string faceLocate = "";
                         for (int i = 0; i < 3; i++)
