@@ -261,6 +261,7 @@
             this.Name = "MainForm";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.SelectbarPanel.ResumeLayout(false);
             this.SelectbarPanel.PerformLayout();
