@@ -669,6 +669,12 @@ namespace Kiosk_UI
 
         public static int parentX, parentY;
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            //TextToSpeechConverter tts = new TextToSpeechConverter();
+            //tts.Speak("안녕하세요. 음성안내를 이용하시려면 키패드의 아무 버튼을 눌러주세요.");
+        }
+
         private async void custom_button1_Click(object sender, EventArgs e)
         {
             if (cost_lbl.Text == "0원")
@@ -712,8 +718,10 @@ namespace Kiosk_UI
                 }
                 else if (result1 == DialogResult.Cancel)
                 {
-                    MainForm mainForm = new MainForm();
-                    mainForm.Show();
+                    this.Show();
+                    checkPanel.Controls.Clear();//장바구니 전체 삭제
+                    final_cost = 0;
+                    cost_lbl.Text = final_cost.ToString() + "원";
                 }
 
             }
