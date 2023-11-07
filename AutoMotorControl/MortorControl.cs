@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FaceRecognition;
 using static System.Net.Mime.MediaTypeNames;
+using TTSLib;
 
 namespace AutoMotorControl
 {
@@ -22,7 +23,7 @@ namespace AutoMotorControl
         {
             port1.WriteLine(vector + " " + miliSeconds);
         }
-        public void AutoControl()
+        public async void AutoControl()
         {
             port1.DataReceived += (sender, e) =>
             {
@@ -76,8 +77,17 @@ namespace AutoMotorControl
             port1.StopBits = StopBits.One;
             port1.Parity = Parity.None;
             port1.ReadTimeout = 1000;
-            port1.Open();
-            port1.WriteLine("2 5000");
+            try 
+            { 
+                port1.Open();
+                port1.WriteLine("2 5000");
+            }
+            catch {
+                Console.WriteLine("시리얼 포트 개방 실패");
+                TextToSpeechConverter tts = new TextToSpeechConverter();
+                tts.Speak("아두이노와 시리얼 통신을 실패하였습니다.");
+                
+            }
         }
     }
 }
