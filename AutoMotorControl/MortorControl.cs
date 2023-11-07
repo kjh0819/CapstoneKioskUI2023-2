@@ -23,6 +23,10 @@ namespace AutoMotorControl
         {
             port1.WriteLine(vector + " " + miliSeconds);
         }
+        public void init()
+        {
+            port1.WriteLine("4");
+        }
         public async void AutoControl()
         {
             port1.DataReceived += (sender, e) =>
