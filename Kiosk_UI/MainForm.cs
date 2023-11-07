@@ -32,7 +32,7 @@ namespace Kiosk_UI
         const string csv = "resources/menu.csv";
         bool flagForNewFile = false;
         int menuUpdateCounter = 0;
-
+        int programExitCounter = 0;
 
         private void actbutton(object senderBtn)
         {
@@ -364,6 +364,7 @@ namespace Kiosk_UI
             flagForNewFile = false;
             */
             menuUpdateCounter++;
+            programExitCounter = 0;
             if (menuUpdateCounter == 10)
             {
                 TextToSpeechConverter tts = new TextToSpeechConverter();
@@ -402,6 +403,7 @@ namespace Kiosk_UI
         private void DessertButton_Click(object sender, EventArgs e)
         {
             menuUpdateCounter = 0;
+            programExitCounter = 0;
             actbutton(sender);
             foreach (var type in MenuPanel.Controls)
             {
@@ -419,6 +421,9 @@ namespace Kiosk_UI
         private async void VoiceButton_Click(object sender, EventArgs e)
         {
             menuUpdateCounter = 0;
+            programExitCounter++;
+            if(programExitCounter==10)
+                System.Environment.Exit(0);
             actbutton(sender);
             var tts = new TextToSpeechConverter();
             //모든 메뉴 가리기
