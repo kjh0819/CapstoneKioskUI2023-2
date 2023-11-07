@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using AutoMotorControl;
 
 namespace Kiosk_UI
 {
@@ -12,6 +13,17 @@ namespace Kiosk_UI
         [STAThread]
         static void Main()
         {
+            try
+            {
+                MotorControl motorControl = new AutoMotorControl.MotorControl();
+                motorControl.AutoControl();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("모터 제어 오류 Main");
+                Console.WriteLine(ex.Message);
+            }
+
             var csv = "resources/menu.csv";
 
             if (!Directory.Exists("resources"))

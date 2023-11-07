@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="MortorControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +51,10 @@
     <ProjectReference Include="..\FaceRecon\FaceRecon.csproj">
       <Project>{5dc360f4-4c4e-48f5-bfa4-4965533ee6c7}</Project>
       <Name>FaceRecon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TTSLib\TTSLib.csproj">
+      <Project>{c124252e-c298-40a6-b3df-c4d3cfb99f0e}</Project>
+      <Name>TTSLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
