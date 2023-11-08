@@ -38,7 +38,8 @@ namespace AutoMotorControl
                 switch (data)
                 {
                     case ("in\r"):
-
+                        TextToSpeechConverter tts = new TextToSpeechConverter();
+                        tts.Speak("높이조절을 시작합니다.");
                         var face = new FaceRecognition.FaceRecognition();
                         string faceLocate = "";
                         for (int i = 0; i < 3; i++)
