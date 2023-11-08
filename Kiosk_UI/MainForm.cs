@@ -249,6 +249,7 @@ namespace Kiosk_UI
                 flagForNewFile = true;
             }
         }
+
         public List<string> Search(string searchString, bool include)
         {
             List<string> result = new List<string>();
@@ -419,6 +420,7 @@ namespace Kiosk_UI
                 else { itm.Visible = false; }
 
             }
+
         }
 
 
