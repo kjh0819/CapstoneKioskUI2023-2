@@ -685,7 +685,16 @@ namespace Kiosk_UI
             if  (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)
               {
                 var tts = new TextToSpeechConverter();
-                tts.Speak("음료를 원하시면 일번을, 디저트를 원하시면 이번을, 음성검색을 원하시면 삼번을 눌러주세요. 다시 듣고싶다면 영번을 눌러주세요.");
+                tts.Speak("음료를 원하시면 일번을, 디저트를 원하시면 이번을, 음성검색을 원하시면 삼번을 눌러주세요. 다시 듣고싶다면 영번, 처음으로 돌아가고 싶으시면 구번을 눌러주세요");
+                if(e.KeyCode == Keys.NumPad0)
+                {
+                    return;
+                }
+                else if(e.KeyCode == Keys.NumPad1)
+                {
+                    tts.Speak("커피를 원하시면 1번, 논커피를 원하시면 2번을 눌러주세요. 다시듣고싶으시면 0번을, 돌아가고 싶으시면 9번을 눌러주세요.");
+                }
+                
             }
 
         }
