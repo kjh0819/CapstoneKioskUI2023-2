@@ -16,6 +16,7 @@ namespace Kiosk_UI
     public partial class MainForm : Form
     {
         private Custom_button curbutton;
+        TextToSpeechConverter tts = new TextToSpeechConverter();
 
         protected override CreateParams CreateParams
         {
@@ -356,6 +357,8 @@ namespace Kiosk_UI
 
         private void AllmenuButton_Click(object sender, EventArgs e)
         {
+
+            tts.StopSpeak();
             /*
             client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
             do{
@@ -367,7 +370,6 @@ namespace Kiosk_UI
             programExitCounter = 0;
             if (menuUpdateCounter == 10)
             {
-                TextToSpeechConverter tts = new TextToSpeechConverter();
                 tts.Speak("메뉴 업데이트를 시작합니다.");
                 client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
                 do
@@ -388,6 +390,7 @@ namespace Kiosk_UI
 
         private void DrinkButton_Click(object sender, EventArgs e)
         {
+            tts.StopSpeak();
             menuUpdateCounter = 0;
             actbutton(sender);
             foreach (var type in MenuPanel.Controls)
@@ -402,6 +405,7 @@ namespace Kiosk_UI
         }
         private void DessertButton_Click(object sender, EventArgs e)
         {
+            tts.StopSpeak();
             menuUpdateCounter = 0;
             programExitCounter = 0;
             actbutton(sender);
@@ -425,7 +429,6 @@ namespace Kiosk_UI
             if(programExitCounter==10)
                 System.Environment.Exit(0);
             actbutton(sender);
-            var tts = new TextToSpeechConverter();
             //모든 메뉴 가리기
             foreach (var type in MenuPanel.Controls)
             {
@@ -433,6 +436,7 @@ namespace Kiosk_UI
                 itm.Visible = false;
             }
             tts.Speak("음성인식을 시작합니다");
+            tts.StopSpeak();
 
             string token = await Tokenizer.VoiceTokenizer();
             Console.WriteLine(token);
