@@ -17,6 +17,7 @@ namespace Kiosk_UI
             {
                 MotorControl motorControl = new AutoMotorControl.MotorControl();
                 motorControl.AutoControl();
+                motorControl.init();
             }
             catch (Exception ex)
             {

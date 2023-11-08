@@ -32,7 +32,7 @@ namespace Kiosk_UI
         const string csv = "resources/menu.csv";
         bool flagForNewFile = false;
         int menuUpdateCounter = 0;
-
+        int programExitCounter = 0;
 
         private void actbutton(object senderBtn)
         {
@@ -305,7 +305,7 @@ namespace Kiosk_UI
                         string message = File.ReadAllText(csv);
                         string topic = "Menu/exist";
                         Console.Write(message);
-                        client.Publish(topic, Encoding.UTF8.GetBytes(message), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                        client.Publish(topic, Encoding.UTF8.GetBytes(message), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
                     }
                     catch
                     {
@@ -335,7 +335,7 @@ namespace Kiosk_UI
             string password = "08190919";
             byte code = client.Connect(clientId, username, password);
             client.MqttMsgPublishReceived += client_MqttMsgPublishReceived; // 메시지 수신 이벤트 핸들러 등록
-            client.Subscribe(new string[] { "Menu/NewImage", "Menu/exist", "Menu/request", "Menu/NewFile" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE }); // test/topic 토픽을 QoS 1로 구독
+            client.Subscribe(new string[] { "Menu/NewImage", "Menu/exist", "Menu/request", "Menu/NewFile" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE }); // test/topic 토픽을 QoS 1로 구독
             client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
             
             while (!flagForNewFile)
@@ -357,18 +357,19 @@ namespace Kiosk_UI
         private void AllmenuButton_Click(object sender, EventArgs e)
         {
             /*
-            client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+            client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
             do{
                 updateItem();
             } while (!flagForNewFile);
             flagForNewFile = false;
             */
             menuUpdateCounter++;
+            programExitCounter = 0;
             if (menuUpdateCounter == 10)
             {
                 TextToSpeechConverter tts = new TextToSpeechConverter();
                 tts.Speak("메뉴 업데이트를 시작합니다.");
-                client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, false);
+                client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
                 do
                 {
                     updateItem();
@@ -402,6 +403,7 @@ namespace Kiosk_UI
         private void DessertButton_Click(object sender, EventArgs e)
         {
             menuUpdateCounter = 0;
+            programExitCounter = 0;
             actbutton(sender);
             foreach (var type in MenuPanel.Controls)
             {
@@ -419,6 +421,9 @@ namespace Kiosk_UI
         private async void VoiceButton_Click(object sender, EventArgs e)
         {
             menuUpdateCounter = 0;
+            programExitCounter++;
+            if(programExitCounter==10)
+                System.Environment.Exit(0);
             actbutton(sender);
             var tts = new TextToSpeechConverter();
             //모든 메뉴 가리기
