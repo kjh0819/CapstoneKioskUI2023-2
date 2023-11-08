@@ -675,8 +675,17 @@ namespace Kiosk_UI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //TextToSpeechConverter tts = new TextToSpeechConverter();
-            //tts.Speak("안녕하세요. 음성안내를 이용하시려면 키패드의 아무 버튼을 눌러주세요.");
+            this.KeyPreview = true;
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if  (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)
+              {
+                var tts = new TextToSpeechConverter();
+                tts.Speak("음료를 원하시면 일번을, 디저트를 원하시면 이번을, 음성검색을 원하시면 삼번을 눌러주세요. 다시 듣고싶다면 영번을 눌러주세요.");
+            }
+
         }
 
         private async void custom_button1_Click(object sender, EventArgs e)

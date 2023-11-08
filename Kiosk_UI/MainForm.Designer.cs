@@ -263,6 +263,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.SelectbarPanel.ResumeLayout(false);
             this.SelectbarPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
