@@ -34,7 +34,8 @@ namespace AutoMotorControl
                 switch (data)
                 {
                     case ("in\r"):
-
+                        TextToSpeechConverter tts = new TextToSpeechConverter();
+                        tts.Speak("안녕하세요. 음성안내를 이용하시려면 키패드의 아무 버튼을 눌러주세요.");
                         var face = new FaceRecognition.FaceRecognition();
                         string faceLocate = "";
                         for (int i = 0; i < 3; i++)
