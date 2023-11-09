@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Azure.CognitiveServices.Vision.Face;
 using OpenCvSharp;
-using Microsoft.Azure.CognitiveServices.Vision.Face;
+using System;
+using System.Threading.Tasks;
 
 namespace FaceRecognition
 {
     public class FaceRecognition
     {
-        
+
         public async Task<string> Recognition()
         {
             VideoCapture photo = new VideoCapture(0);
@@ -78,7 +75,7 @@ namespace FaceRecognition
                 frame.Dispose();
                 return "재시도";
             }
-            
-            }
+
+        }
     }
 }

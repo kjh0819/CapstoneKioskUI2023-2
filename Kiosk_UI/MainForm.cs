@@ -1,4 +1,5 @@
-﻿using Kiosk_UI.Custom;
+﻿using AutoMotorControl;
+using Kiosk_UI.Custom;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Threading;
 using TTSLib;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
@@ -63,12 +65,44 @@ namespace Kiosk_UI
             AllmenuButton.ForeColor = Color.White;
 
         }
+        private DispatcherTimer inputTimer;
         public MainForm()
         {
             InitializeComponent();
-            this.FormClosing += MainForm_FormClosing;
+            inputTimer = new DispatcherTimer();
+            inputTimer.Interval = TimeSpan.FromSeconds(60);
+            inputTimer.Tick += InputTimer_Tick;
+            PreviewKeyDown += ResetInputTimer;
+            MouseDown += ResetInputTimer;
+            StartInputTimer();
 
+            this.FormClosing += MainForm_FormClosing;
             new Touch(MenuPanel);
+        }
+        private void ResetInputTimer(object sender, EventArgs e)
+        {
+            StartInputTimer();
+        }
+        private void StartInputTimer()
+        {
+            inputTimer.Stop();
+            inputTimer.Start();
+        }
+
+        private void InputTimer_Tick(object sender, EventArgs e)
+        {
+            Console.WriteLine("비동작 감지됨");
+            checkPanel.Controls.Clear();//장바구니 전체 삭제
+            final_cost = 0;
+            cost_lbl.Text = final_cost.ToString() + "원";
+            AllmenuButton.PerformClick();
+            tts.Speak("사용이 종료되었습니다.");
+            try
+            {
+                MotorControl mtr = new MotorControl();
+                mtr.Finished();
+            }
+            catch { }//모터 초기화 예외처리, 아두이노 미연결시 스킵
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -322,7 +356,7 @@ namespace Kiosk_UI
                     {
                         File.WriteAllText(csv, m);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         break;
                     }
@@ -339,7 +373,7 @@ namespace Kiosk_UI
             client.MqttMsgPublishReceived += client_MqttMsgPublishReceived; // 메시지 수신 이벤트 핸들러 등록
             client.Subscribe(new string[] { "Menu/NewImage", "Menu/exist", "Menu/request", "Menu/NewFile" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE }); // test/topic 토픽을 QoS 1로 구독
             client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
-            
+
             while (!flagForNewFile)
                 ;
             updateItem();
@@ -428,8 +462,11 @@ namespace Kiosk_UI
         {
             menuUpdateCounter = 0;
             programExitCounter++;
-            if(programExitCounter==10)
+            if (programExitCounter == 10)
+            {
+                tts.Speak("프로그램을 종료합니다.");
                 System.Environment.Exit(0);
+            }
             actbutton(sender);
             //모든 메뉴 가리기
             foreach (var type in MenuPanel.Controls)
@@ -437,13 +474,24 @@ namespace Kiosk_UI
                 var itm = (item)type;
                 itm.Visible = false;
             }
-            tts.Speak("음성인식을 시작합니다");
             tts.StopSpeak();
+            tts.Speak("음성인식을 시작합니다");
 
             string token = await Tokenizer.VoiceTokenizer();
             Console.WriteLine(token);
             if (token.Contains("error"))
             {
+                if (token.Contains("error NOMATCH: Speech could not be recognized."))
+                {
+                    tts.Speak("잘 알아듣지 못했습니다.");
+                    foreach (var type in MenuPanel.Controls)
+                    {
+                        var itm = (item)type;
+                        itm.Visible = true;
+                    }
+                    return;
+
+                }
                 tts.Speak("에러가 발생하였습니다.");
                 foreach (var type in MenuPanel.Controls)
                 {
@@ -682,19 +730,19 @@ namespace Kiosk_UI
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if  (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)
-              {
+            if (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)
+            {
                 var tts = new TextToSpeechConverter();
                 tts.Speak("음료를 원하시면 일번을, 디저트를 원하시면 이번을, 음성검색을 원하시면 삼번을 눌러주세요. 다시 듣고싶다면 영번, 처음으로 돌아가고 싶으시면 구번을 눌러주세요");
-                if(e.KeyCode == Keys.NumPad0)
+                if (e.KeyCode == Keys.NumPad0)
                 {
                     return;
                 }
-                else if(e.KeyCode == Keys.NumPad1)
+                else if (e.KeyCode == Keys.NumPad1)
                 {
                     tts.Speak("커피를 원하시면 1번, 논커피를 원하시면 2번을 눌러주세요. 다시듣고싶으시면 0번을, 돌아가고 싶으시면 9번을 눌러주세요.");
                 }
-                
+
             }
 
         }
@@ -709,9 +757,9 @@ namespace Kiosk_UI
                     modal.ShowDialog();
                     modalbackground.Dispose();
 
-                    parentX = this.ClientSize.Width/2;
-                    parentY = this.ClientSize.Height/2;
-                    Console.WriteLine(parentX.ToString()+ parentY.ToString());
+                    parentX = this.ClientSize.Width / 2;
+                    parentY = this.ClientSize.Height / 2;
+                    Console.WriteLine(parentX.ToString() + parentY.ToString());
                 }
             }
             else
@@ -735,7 +783,7 @@ namespace Kiosk_UI
                 this.Hide();
                 newform.labeltxt = this.cost_lbl.Text;
                 DialogResult result1 = newform.ShowDialog();
-                
+
                 if (result1 == DialogResult.OK)
                 {
                     this.Show();

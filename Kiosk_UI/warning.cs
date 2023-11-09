@@ -12,7 +12,7 @@ namespace Kiosk_UI
         private void warning_Load(object sender, System.EventArgs e)
         {
             this.Location = new System.Drawing.Point(
-                this.Location.X+this.Width, this.Location.Y+this.Height);
+                this.Location.X + this.Width, this.Location.Y + this.Height);
         }
 
         private void custom_button1_Click(object sender, System.EventArgs e)

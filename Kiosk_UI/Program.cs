@@ -1,7 +1,7 @@
-﻿using System;
+﻿using AutoMotorControl;
+using System;
 using System.IO;
 using System.Windows.Forms;
-using AutoMotorControl;
 
 namespace Kiosk_UI
 {
