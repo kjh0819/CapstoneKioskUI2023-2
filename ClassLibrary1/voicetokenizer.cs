@@ -1,13 +1,10 @@
 ﻿using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
-using System.Text;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Xml.Linq;
-using TTSLib;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 
 public class Tokenizer
 {
@@ -94,7 +91,7 @@ public class Tokenizer
         {
             phraseList.AddPhrase($"{i}잔");
         }
-        for (int i = 0; i < 10000; i+=100)
+        for (int i = 0; i < 10000; i += 100)
             phraseList.AddPhrase($"{i}");
         phraseList.AddPhrase($"카페라떼");
         phraseList.AddPhrase($"우유");
