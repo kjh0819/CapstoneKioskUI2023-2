@@ -475,8 +475,6 @@ namespace Kiosk_UI
                 itm.Visible = false;
             }
             tts.StopSpeak();
-            tts.Speak("음성인식을 시작합니다");
-
             string token = await Tokenizer.VoiceTokenizer();
             Console.WriteLine(token);
             if (token.Contains("error"))

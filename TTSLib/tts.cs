@@ -85,6 +85,30 @@ namespace TTSLib
         {
             Speak(text, null); // Use the provided voice or the default voice
         }
+        public async void SpeakSynchronous(string text, string voiceName)
+        {
+            
+            if (speechSynthesizer != null)
+            {
+                if (!string.IsNullOrEmpty(voiceName))
+                {
+                    try
+                    {
+                        speechSynthesizer.SelectVoice(voiceName);
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Invalid voice name or voice not available.");
+                        return;
+                    }
+                }
+                speechSynthesizer.Speak(text);
+            }
+        }
+        public async void SpeakSynchronous(string text)
+        {
+            SpeakSynchronous(text, null); // Use the provided voice or the default voice
+        }
 
         public void ListAvailableVoices()
         {
