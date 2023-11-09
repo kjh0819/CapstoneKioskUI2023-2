@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FaceRecognition;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ConsoleApp1
 {
@@ -26,8 +20,8 @@ namespace ConsoleApp1
                 {
                     case ("in\r"):
                         var face = new FaceRecognition.FaceRecognition();
-                        string faceLocate="";
-                        for(int i = 0; i<3;i++)
+                        string faceLocate = "";
+                        for (int i = 0; i < 3; i++)
                         {
                             faceLocate = face.Recognition().Result;
                             Console.WriteLine(faceLocate);
@@ -37,7 +31,7 @@ namespace ConsoleApp1
                                 Console.WriteLine("error");
                                 break;
                             }
-                            else if(Int32.TryParse(faceLocate, out var res))
+                            else if (Int32.TryParse(faceLocate, out var res))
                             {
                                 break;
                             }
@@ -70,7 +64,7 @@ namespace ConsoleApp1
                     case ("out\r"):
                         port1.WriteLine("2 5000");
                         break;
-                    default: 
+                    default:
                         break;
                 }
             };
@@ -87,5 +81,5 @@ namespace ConsoleApp1
             Console.ReadLine();
         }
     }
-    
+
 }

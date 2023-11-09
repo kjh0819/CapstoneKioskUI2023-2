@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kiosk_UI
@@ -61,7 +55,7 @@ namespace Kiosk_UI
              {
                  frm.ShowDialog();
              }*/
-            
+
             FinishForm finishForm = new FinishForm();
 
             this.Hide();
