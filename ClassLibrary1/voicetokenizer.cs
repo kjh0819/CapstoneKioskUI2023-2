@@ -1,14 +1,11 @@
 ﻿using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
-using System.Text;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Xml.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using TTSLib;
-
 public class Tokenizer
 {
     const string speechKey = "e947dbc053864f8780d47813eeae6fc1"; //고정값 유출하지 말것
@@ -94,13 +91,17 @@ public class Tokenizer
         {
             phraseList.AddPhrase($"{i}잔");
         }
-        for (int i = 0; i < 10000; i+=100)
+        for (int i = 0; i < 10000; i += 100)
             phraseList.AddPhrase($"{i}");
         phraseList.AddPhrase($"카페라떼");
         phraseList.AddPhrase($"우유");
         phraseList.AddPhrase($"녹차");
         phraseList.AddPhrase($"마카롱");
+        phraseList.AddPhrase($"쿠키");
+        phraseList.AddPhrase($"빵");
 
+        TextToSpeechConverter tts =  new TextToSpeechConverter();
+        tts.SpeakSynchronous("음성인식을 시작합니다");
         var speechRecognitionResult = await speechRecognizer.RecognizeOnceAsync();
         string result = await OutputSpeechRecognitionResult(speechRecognitionResult);
         try

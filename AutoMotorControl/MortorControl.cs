@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FaceRecognition;
-using static System.Net.Mime.MediaTypeNames;
 using TTSLib;
 
 namespace AutoMotorControl
@@ -20,7 +14,7 @@ namespace AutoMotorControl
             port1.WriteLine("3");
             //키오스크 사용 완료를 알림
         }
-        public void MenualControl(string vector,string miliSeconds) 
+        public void MenualControl(string vector, string miliSeconds)
         {
             port1.WriteLine(vector + " " + miliSeconds);
         }
@@ -84,16 +78,17 @@ namespace AutoMotorControl
             port1.StopBits = StopBits.One;
             port1.Parity = Parity.None;
             port1.ReadTimeout = 1000;
-            try 
-            { 
+            try
+            {
                 port1.Open();
                 port1.WriteLine("2 5000");
             }
-            catch {
+            catch
+            {
                 Console.WriteLine("시리얼 포트 개방 실패");
                 TextToSpeechConverter tts = new TextToSpeechConverter();
                 tts.Speak("아두이노와 시리얼 통신을 실패하였습니다.");
-                
+
             }
         }
     }
