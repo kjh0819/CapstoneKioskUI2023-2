@@ -82,7 +82,7 @@
             this.panel1.Controls.Add(this.AllmenuButton);
             this.panel1.Location = new System.Drawing.Point(6, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(127, 396);
+            this.panel1.Size = new System.Drawing.Size(127, 397);
             this.panel1.TabIndex = 3;
             // 
             // VoiceButton
@@ -90,11 +90,11 @@
             this.VoiceButton.BackColor = System.Drawing.Color.Moccasin;
             this.VoiceButton.FlatAppearance.BorderSize = 0;
             this.VoiceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.VoiceButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.VoiceButton.Font = new System.Drawing.Font("Noto Sans KR Medium", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.VoiceButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(62)))), ((int)(((byte)(45)))));
             this.VoiceButton.Location = new System.Drawing.Point(0, 324);
             this.VoiceButton.Name = "VoiceButton";
-            this.VoiceButton.Size = new System.Drawing.Size(124, 56);
+            this.VoiceButton.Size = new System.Drawing.Size(124, 70);
             this.VoiceButton.TabIndex = 8;
             this.VoiceButton.Text = "음성검색";
             this.VoiceButton.UseVisualStyleBackColor = false;
@@ -105,11 +105,11 @@
             this.DessertButton.BackColor = System.Drawing.Color.Moccasin;
             this.DessertButton.FlatAppearance.BorderSize = 0;
             this.DessertButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DessertButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.DessertButton.Font = new System.Drawing.Font("Noto Sans KR Medium", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.DessertButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(62)))), ((int)(((byte)(45)))));
             this.DessertButton.Location = new System.Drawing.Point(0, 224);
             this.DessertButton.Name = "DessertButton";
-            this.DessertButton.Size = new System.Drawing.Size(124, 56);
+            this.DessertButton.Size = new System.Drawing.Size(124, 70);
             this.DessertButton.TabIndex = 7;
             this.DessertButton.Text = "디저트";
             this.DessertButton.UseVisualStyleBackColor = false;
@@ -120,11 +120,11 @@
             this.DrinkButton.BackColor = System.Drawing.Color.Moccasin;
             this.DrinkButton.FlatAppearance.BorderSize = 0;
             this.DrinkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DrinkButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.DrinkButton.Font = new System.Drawing.Font("Noto Sans KR Medium", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.DrinkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(62)))), ((int)(((byte)(45)))));
             this.DrinkButton.Location = new System.Drawing.Point(0, 124);
             this.DrinkButton.Name = "DrinkButton";
-            this.DrinkButton.Size = new System.Drawing.Size(124, 56);
+            this.DrinkButton.Size = new System.Drawing.Size(124, 70);
             this.DrinkButton.TabIndex = 6;
             this.DrinkButton.Text = "음료";
             this.DrinkButton.UseVisualStyleBackColor = false;
@@ -135,11 +135,11 @@
             this.AllmenuButton.BackColor = System.Drawing.Color.Moccasin;
             this.AllmenuButton.FlatAppearance.BorderSize = 0;
             this.AllmenuButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AllmenuButton.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.AllmenuButton.Font = new System.Drawing.Font("Noto Sans KR Medium", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.AllmenuButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(62)))), ((int)(((byte)(45)))));
             this.AllmenuButton.Location = new System.Drawing.Point(0, 24);
             this.AllmenuButton.Name = "AllmenuButton";
-            this.AllmenuButton.Size = new System.Drawing.Size(124, 56);
+            this.AllmenuButton.Size = new System.Drawing.Size(124, 70);
             this.AllmenuButton.TabIndex = 0;
             this.AllmenuButton.Text = "모든메뉴";
             this.AllmenuButton.UseVisualStyleBackColor = false;
@@ -151,7 +151,7 @@
             this.cancel_button.BackColor = System.Drawing.Color.IndianRed;
             this.cancel_button.FlatAppearance.BorderSize = 0;
             this.cancel_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancel_button.Font = new System.Drawing.Font("Noto Sans KR", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.cancel_button.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.cancel_button.ForeColor = System.Drawing.Color.White;
             this.cancel_button.Location = new System.Drawing.Point(9, 576);
             this.cancel_button.Name = "cancel_button";
@@ -219,7 +219,7 @@
             this.custom_button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(73)))), ((int)(((byte)(72)))));
             this.custom_button1.FlatAppearance.BorderSize = 0;
             this.custom_button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.custom_button1.Font = new System.Drawing.Font("Noto Sans KR", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.custom_button1.Font = new System.Drawing.Font("Noto Sans KR Medium", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.custom_button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(223)))), ((int)(((byte)(173)))));
             this.custom_button1.Location = new System.Drawing.Point(384, 577);
             this.custom_button1.Name = "custom_button1";
