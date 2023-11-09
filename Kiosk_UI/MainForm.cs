@@ -321,7 +321,7 @@ namespace Kiosk_UI
                     {
                         File.WriteAllText(csv, m);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         break;
                     }
@@ -338,7 +338,7 @@ namespace Kiosk_UI
             client.MqttMsgPublishReceived += client_MqttMsgPublishReceived; // 메시지 수신 이벤트 핸들러 등록
             client.Subscribe(new string[] { "Menu/NewImage", "Menu/exist", "Menu/request", "Menu/NewFile" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE }); // test/topic 토픽을 QoS 1로 구독
             client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
-            
+
             while (!flagForNewFile)
                 ;
             updateItem();
@@ -370,6 +370,7 @@ namespace Kiosk_UI
             programExitCounter = 0;
             if (menuUpdateCounter == 10)
             {
+                tts.StopSpeak();
                 tts.Speak("메뉴 업데이트를 시작합니다.");
                 client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
                 do
@@ -393,6 +394,7 @@ namespace Kiosk_UI
             tts.StopSpeak();
             menuUpdateCounter = 0;
             actbutton(sender);
+            int a = 1;
             foreach (var type in MenuPanel.Controls)
             {
                 var itm = (item)type;
@@ -402,6 +404,7 @@ namespace Kiosk_UI
                 }
                 else { itm.Visible = false; }
             }
+            
         }
         private void DessertButton_Click(object sender, EventArgs e)
         {
@@ -424,9 +427,10 @@ namespace Kiosk_UI
 
         private async void VoiceButton_Click(object sender, EventArgs e)
         {
+            tts.StopSpeak();
             menuUpdateCounter = 0;
             programExitCounter++;
-            if(programExitCounter==10)
+            if (programExitCounter == 10)
                 System.Environment.Exit(0);
             actbutton(sender);
             //모든 메뉴 가리기
@@ -435,10 +439,11 @@ namespace Kiosk_UI
                 var itm = (item)type;
                 itm.Visible = false;
             }
+
             tts.Speak("음성인식을 시작합니다");
             tts.StopSpeak();
-
             string token = await Tokenizer.VoiceTokenizer();
+
             Console.WriteLine(token);
             if (token.Contains("error"))
             {
@@ -625,6 +630,7 @@ namespace Kiosk_UI
             //검색 결과 출력
             if (searchResults.Count == 0)
             {
+                tts.StopSpeak();
                 tts.Speak("죄송합니다 메뉴를 찾을수 없었습니다.");
                 foreach (var type in MenuPanel.Controls)
                 {
@@ -678,21 +684,45 @@ namespace Kiosk_UI
             this.KeyPreview = true;
         }
 
+        public static int key_flag = 0;
+        public static int key_flag2 = 0;
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if  (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)
-              {
-                var tts = new TextToSpeechConverter();
-                tts.Speak("음료를 원하시면 일번을, 디저트를 원하시면 이번을, 음성검색을 원하시면 삼번을 눌러주세요. 다시 듣고싶다면 영번, 처음으로 돌아가고 싶으시면 구번을 눌러주세요");
-                if(e.KeyCode == Keys.NumPad0)
-                {
-                    return;
-                }
-                else if(e.KeyCode == Keys.NumPad1)
-                {
-                    tts.Speak("커피를 원하시면 1번, 논커피를 원하시면 2번을 눌러주세요. 다시듣고싶으시면 0번을, 돌아가고 싶으시면 9번을 눌러주세요.");
-                }
-                
+            //1번 시나리오
+            if (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9)
+            {
+                //var tts = new TextToSpeechConverter();
+                key_flag = 1;
+                tts.StopSpeak();
+                tts.Speak("음료를 원하시면 일번을, 디저트를 원하시면 이번을, " +
+                    "음성검색을 원하시면 삼번을 눌러주세요. 다시 듣고싶다면 영번, 종료하고싶으시면 구번을 눌러주세요.");
+            }
+            //2번 시나리오
+            if (e.KeyCode == Keys.NumPad1 && key_flag == 1)
+            {
+                 key_flag = 2; key_flag2 = 1;
+                tts.StopSpeak(); //음료
+                DrinkButton.PerformClick();
+                tts.StopSpeak();
+                tts.Speak("커피를 원하시면 1번, 커피가 아닌 음료를 원하시면 2번을 눌러주세요.");
+            }
+            else if (e.KeyCode == Keys.NumPad2 && key_flag == 1)
+            {
+                key_flag = 2; key_flag2 = 2; 
+                tts.StopSpeak(); //디저트
+                DessertButton.PerformClick();
+                tts.StopSpeak();
+                tts.Speak("빵류를 원하시면 1번, 과자류를 원하시면 2번을 눌러주세요.");
+            }
+            else if (e.KeyCode == Keys.NumPad3 && key_flag == 1)
+            {
+                key_flag = 2; key_flag2 = 3; //음성인식
+                VoiceButton.PerformClick();
+            }
+            else if (e.KeyCode == Keys.NumPad0 && key_flag == 1)
+            {
+                key_flag = 0; tts.StopSpeak();
+                return;
             }
 
         }
@@ -707,9 +737,9 @@ namespace Kiosk_UI
                     modal.ShowDialog();
                     modalbackground.Dispose();
 
-                    parentX = this.ClientSize.Width/2;
-                    parentY = this.ClientSize.Height/2;
-                    Console.WriteLine(parentX.ToString()+ parentY.ToString());
+                    parentX = this.ClientSize.Width / 2;
+                    parentY = this.ClientSize.Height / 2;
+                    Console.WriteLine(parentX.ToString() + parentY.ToString());
                 }
             }
             else
@@ -733,17 +763,18 @@ namespace Kiosk_UI
                 this.Hide();
                 newform.labeltxt = this.cost_lbl.Text;
                 DialogResult result1 = newform.ShowDialog();
-                
+
                 if (result1 == DialogResult.OK)
                 {
                     this.Show();
                 }
                 else if (result1 == DialogResult.Cancel)
                 {
-                    this.Show();
+                    AllmenuButton.PerformClick();
                     checkPanel.Controls.Clear();//장바구니 전체 삭제
                     final_cost = 0;
                     cost_lbl.Text = final_cost.ToString() + "원";
+                    this.Show();
                 }
 
             }
