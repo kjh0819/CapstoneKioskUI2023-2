@@ -10,6 +10,17 @@ except:
     import filecmp
     import zipfile
 
+def releaseOrDebug():
+    print("1. 디버그 \n2. 릴리즈")
+    debugOrRelease = input("값을 입력하세요 :")
+    if int(debugOrRelease) == 1:
+        return "Kiosk_UI\\bin\Debug\\"
+    elif int(debugOrRelease) == 2:
+        return "Kiosk_UI\\bin\\x64\\Release\\"
+    else:
+        print("올바른 값을 입력하세요.")
+        return 0
+
 host = "capstonekiosk.koreacentral.cloudapp.azure.com"
 port = 22
 
@@ -30,8 +41,12 @@ while(count):
 if count == 0:
     print("에러가 발생하였습니다. username,password를 확인하세요.")
 else:
+    directory_path=0
+    while(directory_path == 0):
+        directory_path=releaseOrDebug()
+        print("선택된 디렉토리 경로:", directory_path)
     print("키오스크 실행파일 압축 시작")
-    directory_path = "Kiosk_UI\\bin\Debug\\"
+    
     output_zip_path =  "Kiosk.zip"
     with zipfile.ZipFile(output_zip_path, "w") as zipFile:
         for root, dirs, files in os.walk(directory_path):
