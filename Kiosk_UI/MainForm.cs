@@ -736,7 +736,77 @@ namespace Kiosk_UI
         public static int key_flag2 = 0;
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            ARSscene.ARS1(e);
+            ARS(e);
+        }
+        void ARS(KeyEventArgs e)
+        {
+
+            if (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9 && key_flag == 0)
+            {
+                tts.StopSpeak();
+                tts.Speak("음료를 원하시면 일번을, 디저트를 원하시면 이번을, " +
+                       "음성검색을 원하시면 삼번을 눌러주세요. 다시 듣고싶다면 영번, 종료하고싶으시면 구번을 눌러주세요.");
+                key_flag = 1;
+            }
+            else if (e.KeyCode == Keys.NumPad1 && key_flag == 1) //1번 누를시
+            {
+                DrinkButton.PerformClick();
+                tts.StopSpeak();
+                tts.Speak("커피를 원하시면 일번, 커피가 아닌 음료를 원하시면 이번을 눌러주세요. 다시듣고싶다면 팔번을, 돌아가기는 구번을 눌러주세요.");
+                key_flag = 2;
+            }
+            else if (e.KeyCode == Keys.NumPad2 && key_flag == 1) //2번 누를시
+            {
+                DessertButton.PerformClick();
+                tts.StopSpeak();
+                tts.Speak("빵류를 원하시면 일번, 과자류를 원하시면 이번을 눌러주세요.다시듣고싶다면 팔번을, 돌아가기는 구번을 눌러주세요.");
+                key_flag = 3;
+            }
+            else if(e.KeyCode == Keys.NumPad1 && key_flag == 3&& key_flag2 == 0)
+            {
+                //빵류
+            }
+            else if(e.KeyCode == Keys.NumPad2 && key_flag == 3&& key_flag2 == 0)
+            {
+                //디저트류
+            }
+            else if (e.KeyCode == Keys.NumPad3 && key_flag == 1) //3번 누를시
+            {
+                VoiceButton.PerformClick();
+                key_flag = 2;
+            }
+            else if (e.KeyCode == Keys.NumPad1 && key_flag == 2) //1-1번
+            {
+                DrinkButton.PerformClick();
+                tts.StopSpeak();
+                tts.Speak("우유가 들어간 커피를 원하시면 일번을, 아닌 커피는 이번을 눌러주세요.");
+                key_flag = 3;
+                key_flag2 = 1;
+            }
+            else if (e.KeyCode == Keys.NumPad2 && key_flag == 2) //1-2번
+            {
+                tts.StopSpeak();
+                tts.Speak("우유가 들어간 음료를 원하시면 일번을, 아닌 음료는 이번을 눌러주세요.");
+                key_flag = 3;
+                key_flag2 = 2;
+            }
+            else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 1)
+            {
+                //우유가 들어간 커피
+            }
+            else if(e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 1)
+            {
+                //우유가 안들어간 커피
+            }
+            else if(e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 2)
+            {
+                //우유가 들어간 음료
+            }
+            else if(e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 2)
+            {
+                //우유가 안들어간 음료
+            }
+
         }
 
         private async void custom_button1_Click(object sender, EventArgs e)
