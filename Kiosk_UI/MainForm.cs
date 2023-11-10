@@ -97,6 +97,7 @@ namespace Kiosk_UI
             cost_lbl.Text = final_cost.ToString() + "원";
             AllmenuButton.PerformClick();
             tts.Speak("사용이 종료되었습니다.");
+
             try
             {
                 MotorControl mtr = new MotorControl();
@@ -748,9 +749,8 @@ namespace Kiosk_UI
                     modal.ShowDialog();
                     modalbackground.Dispose();
 
-                    parentX = this.ClientSize.Width / 2;
-                    parentY = this.ClientSize.Height / 2;
-                    Console.WriteLine(parentX.ToString() + parentY.ToString());
+                    this.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
+                        (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
                 }
             }
             else
