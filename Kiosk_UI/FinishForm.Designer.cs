@@ -37,11 +37,11 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Font = new System.Drawing.Font("Noto Sans KR", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Font = new System.Drawing.Font("Noto Sans KR", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label1.ForeColor = System.Drawing.Color.DarkOrange;
-            this.label1.Location = new System.Drawing.Point(-3, 195);
+            this.label1.Location = new System.Drawing.Point(-3, 160);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(487, 140);
+            this.label1.Size = new System.Drawing.Size(487, 192);
             this.label1.TabIndex = 0;
             this.label1.Text = "결제가 \r\n완료되었습니다!";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -49,9 +49,9 @@
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.Font = new System.Drawing.Font("Noto Sans KR", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.Font = new System.Drawing.Font("Noto Sans KR", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label2.ForeColor = System.Drawing.Color.Moccasin;
-            this.label2.Location = new System.Drawing.Point(0, 352);
+            this.label2.Location = new System.Drawing.Point(0, 374);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(484, 143);
             this.label2.TabIndex = 1;
