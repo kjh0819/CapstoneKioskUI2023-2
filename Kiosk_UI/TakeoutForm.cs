@@ -34,6 +34,22 @@ namespace Kiosk_UI
             InitializeComponent();
         }
 
+        public int _form_timer
+        {
+            get {  return form_timer; }
+            set
+            {
+                form_timer = value;
+                if(form_timer == 1)
+                {
+                    this.DialogResult = DialogResult.Cancel;
+                    this.Close();
+                    form_timer = 0;
+                    Console.WriteLine("state");
+                }
+            }
+        }
+        public static int form_timer = 0;
         private void Nobutton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
