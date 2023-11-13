@@ -70,7 +70,7 @@ namespace Kiosk_UI
         {
             InitializeComponent();
             inputTimer = new DispatcherTimer();
-            inputTimer.Interval = TimeSpan.FromSeconds(10);
+            inputTimer.Interval = TimeSpan.FromSeconds(60);
             inputTimer.Tick += InputTimer_Tick;
             PreviewKeyDown += ResetInputTimer;
             MouseDown += ResetInputTimer;
@@ -96,12 +96,6 @@ namespace Kiosk_UI
             cost_lbl.Text = final_cost.ToString() + "원";
             AllmenuButton.PerformClick();
             tts.Speak("사용이 종료되었습니다.");
-
-            TakeoutForm.form_timer = 1;
-            
-            key_flag = 0;
-            key_flag2 = 0;
-            back_flag = 0;
             
             
 
