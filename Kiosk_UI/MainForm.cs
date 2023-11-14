@@ -88,7 +88,6 @@ namespace Kiosk_UI
             inputTimer.Stop();
             inputTimer.Start();
         }
-
         private void InputTimer_Tick(object sender, EventArgs e)
         {
             Console.WriteLine("비동작 감지됨");
@@ -97,6 +96,8 @@ namespace Kiosk_UI
             cost_lbl.Text = final_cost.ToString() + "원";
             AllmenuButton.PerformClick();
             tts.Speak("사용이 종료되었습니다.");
+            
+            
 
             //try
             //{
@@ -735,6 +736,7 @@ namespace Kiosk_UI
 
         public static int key_flag = 0;
         public static int key_flag2 = 0;
+        public static int back_flag = 0;
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             ARS(e);
@@ -742,70 +744,186 @@ namespace Kiosk_UI
         void ARS(KeyEventArgs e)
         {
 
-            if (e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9 && key_flag == 0)
+            if (e.KeyCode == Keys.NumPad9 && key_flag == 1)
+            {
+                key_flag = 0;
+                key_flag2 = 0;
+                back_flag = 0;
+                tts.StopSpeak();
+                tts.Speak("에이알에스가 종료되었습니다. 이용해주셔서 감사합니다.");
+            }
+            else if ((e.KeyCode >= Keys.NumPad0 && e.KeyCode <= Keys.NumPad9 && key_flag == 0) || (e.KeyCode == Keys.NumPad9 && back_flag == 1))
             {
                 tts.StopSpeak();
                 tts.Speak("음료를 원하시면 일번을, 디저트를 원하시면 이번을, " +
-                       "음성검색을 원하시면 삼번을 눌러주세요. 다시 듣고싶다면 영번, 종료하고싶으시면 구번을 눌러주세요.");
+                       "음성검색을 원하시면 삼번을 눌러주세요. 다시 듣고싶다면 영번, 장바구니는 팔번, 종료하고싶으시면 구번을 눌러주세요.");
                 key_flag = 1;
+                back_flag = 0;
             }
-            else if (e.KeyCode == Keys.NumPad1 && key_flag == 1) //1번 누를시
+            else if ((e.KeyCode == Keys.NumPad1 && key_flag == 1 || e.KeyCode == Keys.NumPad9 && back_flag == 3)) //1번 누를시
             {
                 DrinkButton.PerformClick();
                 tts.StopSpeak();
                 tts.Speak("커피를 원하시면 일번, 커피가 아닌 음료를 원하시면 이번을 눌러주세요. 다시듣고싶다면 팔번을, 돌아가기는 구번을 눌러주세요.");
                 key_flag = 2;
+                back_flag = 1;
             }
-            else if (e.KeyCode == Keys.NumPad2 && key_flag == 1) //2번 누를시
+            else if (e.KeyCode == Keys.NumPad2 && key_flag == 1 || e.KeyCode == Keys.NumPad9 && back_flag == 2) //2번 누를시
             {
                 DessertButton.PerformClick();
                 tts.StopSpeak();
                 tts.Speak("빵류를 원하시면 일번, 과자류를 원하시면 이번을 눌러주세요.다시듣고싶다면 팔번을, 돌아가기는 구번을 눌러주세요.");
                 key_flag = 3;
+                back_flag = 1;
             }
-            else if(e.KeyCode == Keys.NumPad1 && key_flag == 3&& key_flag2 == 0)
+            else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 0) //빵류
             {
                 //빵류
+                tts.StopSpeak();
+                string search = "빵";
+                foreach (var type in MenuPanel.Controls)
+                {
+                    var itm = (item)type;
+                    {
+                        if (itm.Detail.Contains(search) && itm.Visible == true)
+                        {
+                            tts.Speak(itm.Title.ToString()); }
+                    }
+                }
+                back_flag = 2;
+
             }
-            else if(e.KeyCode == Keys.NumPad2 && key_flag == 3&& key_flag2 == 0)
+
+            else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 0)//과자류
             {
-                //디저트류
+                //과자류
+                tts.StopSpeak();
+                string search = "쿠키";
+                foreach (var type in MenuPanel.Controls)
+                {
+                    var itm = (item)type;
+                    {
+                        if (itm.Detail.Contains(search) && itm.Visible == true)
+                        {
+                            tts.Speak(itm.Title.ToString());
+                        }
+                    }
+                }
+                back_flag = 2;
             }
+
             else if (e.KeyCode == Keys.NumPad3 && key_flag == 1) //3번 누를시
             {
                 VoiceButton.PerformClick();
                 key_flag = 2;
+                back_flag = 2;
             }
-            else if (e.KeyCode == Keys.NumPad1 && key_flag == 2) //1-1번
+            else if (e.KeyCode == Keys.NumPad1 && key_flag == 2 || e.KeyCode == Keys.NumPad9 && back_flag == 4) //1-1번
             {
                 DrinkButton.PerformClick();
                 tts.StopSpeak();
-                tts.Speak("우유가 들어간 커피를 원하시면 일번을, 아닌 커피는 이번을 눌러주세요.");
+                tts.Speak("우유가 들어간 커피를 원하시면 일번을, 아닌 커피는 이번을 눌러주세요. 돌아가기는 구번을 눌러주세요.");
                 key_flag = 3;
                 key_flag2 = 1;
+                back_flag = 3;
+                
             }
-            else if (e.KeyCode == Keys.NumPad2 && key_flag == 2) //1-2번
+            else if (e.KeyCode == Keys.NumPad2 && key_flag == 2 || e.KeyCode == Keys.NumPad9 && back_flag == 5) //1-2번
             {
                 tts.StopSpeak();
-                tts.Speak("우유가 들어간 음료를 원하시면 일번을, 아닌 음료는 이번을 눌러주세요.");
+                tts.Speak("우유가 들어간 음료를 원하시면 일번을, 아닌 음료는 이번을 눌러주세요. 돌아가기는 구번을 눌러주세요.");
                 key_flag = 3;
                 key_flag2 = 2;
+                back_flag = 3;
             }
-            else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 1)
+            else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 1) 
             {
                 //우유가 들어간 커피
+                tts.StopSpeak();
+                string search = "우유"; string search2 = "커피";
+                foreach (var type in MenuPanel.Controls)
+                {
+                    var itm = (item)type;
+                    {
+                        var result = Search("우유", true);
+                        result = result.Intersect(Search("커피", true)).ToList();
+                        for (int i = 0; i < result.Count; i++)
+                        {
+
+                            tts.Speak($"{result[i]}{i}번 ");
+                        } 
+                    }
+                }
+                tts.Speak("가 있습니다. 돌아가기는 구번을 눌러주세요.");
+                back_flag = 4;
             }
-            else if(e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 1)
+            else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 1)
             {
                 //우유가 안들어간 커피
+                tts.StopSpeak();
+                string search = "우유"; string search2 = "커피";
+                foreach (var type in MenuPanel.Controls)
+                {
+                    var itm = (item)type;
+                    {
+                        if (!itm.Detail.Contains(search) && itm.Detail.Contains(search2) && itm.Visible == true)
+                        {
+                            tts.Speak(itm.Title.ToString());
+                        }
+                    }
+                }
+
+                tts.Speak("가 있습니다. 돌아가기는 구번을 눌러주세요.");
+                back_flag = 4;
             }
-            else if(e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 2)
+            else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 2)
             {
                 //우유가 들어간 음료
+                tts.StopSpeak();
+                string search = "우유"; string search2 = "커피";
+                foreach (var type in MenuPanel.Controls)
+                {
+                    var itm = (item)type;
+                    {
+                        if (itm.Detail.Contains(search) && !itm.Detail.Contains(search2) && itm.Visible == true)
+                        {
+                            tts.Speak(itm.Title.ToString());
+                        }
+                    }
+                }
+                tts.Speak("가 있습니다. 돌아가기는 구번을 눌러주세요.");
+                back_flag = 5;
             }
-            else if(e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 2)
+            else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 2)
             {
                 //우유가 안들어간 음료
+                tts.StopSpeak();
+                string search = "우유"; string search2 = "커피";
+                foreach (var type in MenuPanel.Controls)
+                {
+                    var itm = (item)type;
+                    {
+                        if (!itm.Detail.Contains(search) && !itm.Detail.Contains(search2)&& itm.Visible == true)
+                        {
+                            tts.Speak(itm.Title.ToString());
+                        }
+                    }
+                }
+                tts.Speak("가 있습니다. 돌아가기는 구번을 눌러주세요.");
+                back_flag = 5;
+            }
+            else if( e.KeyCode == Keys.NumPad8)
+            {
+                int a = 1;
+                //장바구니
+                tts.StopSpeak();
+                foreach ( var type in checkPanel.Controls)
+                {
+                    var itm = (select_item)type;
+                    tts.Speak(a + itm.Title2 +" "+ itm.Count+"개");
+                    a++;
+                }
+                tts.Speak("를 선택하셨습니다 더하거나 빼시려면 메뉴에 상응하는 번호를 누르고 더하기 버튼이나 빼기 버튼을 눌러주세요.");
             }
 
         }

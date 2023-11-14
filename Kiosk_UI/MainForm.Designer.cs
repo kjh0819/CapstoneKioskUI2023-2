@@ -151,7 +151,7 @@
             this.cancel_button.BackColor = System.Drawing.Color.IndianRed;
             this.cancel_button.FlatAppearance.BorderSize = 0;
             this.cancel_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancel_button.Font = new System.Drawing.Font("Noto Sans KR", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.cancel_button.Font = new System.Drawing.Font("Noto Sans KR Medium", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.cancel_button.ForeColor = System.Drawing.Color.White;
             this.cancel_button.Location = new System.Drawing.Point(9, 576);
             this.cancel_button.Name = "cancel_button";
@@ -177,7 +177,7 @@
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(133)))), ((int)(((byte)(96)))));
-            this.label1.Font = new System.Drawing.Font("Noto Sans KR", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Font = new System.Drawing.Font("Noto Sans KR Medium", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(223)))), ((int)(((byte)(173)))));
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label1.Location = new System.Drawing.Point(0, 0);
