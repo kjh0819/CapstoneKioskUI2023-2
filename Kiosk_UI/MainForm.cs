@@ -838,23 +838,22 @@ namespace Kiosk_UI
             }
             else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 1) 
             {
+                string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
                 //우유가 들어간 커피
                 tts.StopSpeak();
                 string search = "우유"; string search2 = "커피";
-                foreach (var type in MenuPanel.Controls)
-                {
-                    var itm = (item)type;
-                    {
+                   
                         var result = Search("우유", true);
                         result = result.Intersect(Search("커피", true)).ToList();
+                    string TextResult = "";
                         for (int i = 0; i < result.Count; i++)
                         {
-
-                            tts.Speak($"{result[i]}{i}번 ");
-                        } 
-                    }
-                }
-                tts.Speak("가 있습니다. 돌아가기는 구번을 눌러주세요.");
+                        Console.WriteLine(i);
+                        TextResult += $"{result[i]} {numberMap[i]}번 ";
+                        }
+                    
+                
+                tts.Speak(TextResult+"가 있습니다. 돌아가기는 구번을 눌러주세요.");
                 back_flag = 4;
             }
             else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 1)
