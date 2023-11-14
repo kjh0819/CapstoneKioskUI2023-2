@@ -844,10 +844,13 @@ namespace Kiosk_UI
                 {
                     var itm = (item)type;
                     {
-                        if (itm.Detail.Contains(search) && itm.Detail.Contains(search2) && itm.Visible == true)
+                        var result = Search("우유", true);
+                        result = result.Intersect(Search("커피", true)).ToList();
+                        for (int i = 0; i < result.Count; i++)
                         {
-                            tts.Speak(itm.Title.ToString());
-                        }
+
+                            tts.Speak($"{result[i]}{i}번 ");
+                        } 
                     }
                 }
                 tts.Speak("가 있습니다. 돌아가기는 구번을 눌러주세요.");
