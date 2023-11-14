@@ -98,12 +98,13 @@ namespace Kiosk_UI
             AllmenuButton.PerformClick();
             tts.Speak("사용이 종료되었습니다.");
 
-            try
-            {
+            //try
+            //{
                 MotorControl mtr = new MotorControl();
-                mtr.Finished();
-            }
-            catch { }//모터 초기화 예외처리, 아두이노 미연결시 스킵
+                mtr.MenualControl("2","4000");
+                mtr.init();
+            //}
+            //catch { }//모터 초기화 예외처리, 아두이노 미연결시 스킵
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
