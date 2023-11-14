@@ -95,7 +95,7 @@
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(3, 139);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(478, 245);
+            this.panel2.Size = new System.Drawing.Size(478, 255);
             this.panel2.TabIndex = 15;
             // 
             // takeout
@@ -106,7 +106,7 @@
             this.takeout.Image = ((System.Drawing.Image)(resources.GetObject("takeout.Image")));
             this.takeout.Location = new System.Drawing.Point(12, 13);
             this.takeout.Name = "takeout";
-            this.takeout.Size = new System.Drawing.Size(207, 196);
+            this.takeout.Size = new System.Drawing.Size(207, 206);
             this.takeout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.takeout.TabIndex = 11;
             this.takeout.TabStop = false;
@@ -120,7 +120,7 @@
             this.cafe.Image = ((System.Drawing.Image)(resources.GetObject("cafe.Image")));
             this.cafe.Location = new System.Drawing.Point(262, 13);
             this.cafe.Name = "cafe";
-            this.cafe.Size = new System.Drawing.Size(207, 196);
+            this.cafe.Size = new System.Drawing.Size(207, 206);
             this.cafe.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.cafe.TabIndex = 10;
             this.cafe.TabStop = false;
@@ -130,10 +130,10 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.Font = new System.Drawing.Font("Noto Sans KR", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label3.Font = new System.Drawing.Font("Noto Sans KR", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label3.Location = new System.Drawing.Point(28, 212);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(191, 33);
+            this.label3.Size = new System.Drawing.Size(191, 43);
             this.label3.TabIndex = 13;
             this.label3.Text = "포장";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -142,10 +142,10 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.Font = new System.Drawing.Font("Noto Sans KR", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.Font = new System.Drawing.Font("Noto Sans KR", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label2.Location = new System.Drawing.Point(266, 212);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(191, 33);
+            this.label2.Size = new System.Drawing.Size(191, 43);
             this.label2.TabIndex = 12;
             this.label2.Text = "매장";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -156,7 +156,7 @@
             this.Yesbutton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(73)))), ((int)(((byte)(72)))));
             this.Yesbutton.FlatAppearance.BorderSize = 0;
             this.Yesbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Yesbutton.Font = new System.Drawing.Font("Noto Sans KR", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Yesbutton.Font = new System.Drawing.Font("Noto Sans KR Medium", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Yesbutton.ForeColor = System.Drawing.Color.White;
             this.Yesbutton.Location = new System.Drawing.Point(281, 547);
             this.Yesbutton.Name = "Yesbutton";
@@ -172,7 +172,7 @@
             this.Nobutton.BackColor = System.Drawing.Color.IndianRed;
             this.Nobutton.FlatAppearance.BorderSize = 0;
             this.Nobutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Nobutton.Font = new System.Drawing.Font("Noto Sans KR", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Nobutton.Font = new System.Drawing.Font("Noto Sans KR Medium", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Nobutton.ForeColor = System.Drawing.Color.White;
             this.Nobutton.Location = new System.Drawing.Point(33, 547);
             this.Nobutton.Name = "Nobutton";
