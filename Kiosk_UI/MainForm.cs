@@ -836,23 +836,20 @@ namespace Kiosk_UI
                 key_flag2 = 2;
                 back_flag = 3;
             }
-            else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 1) 
+            else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 1)
             {
                 string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
                 //우유가 들어간 커피
                 tts.StopSpeak();
-                string search = "우유"; string search2 = "커피";
-                   
-                        var result = Search("우유", true);
-                        result = result.Intersect(Search("커피", true)).ToList();
-                    string TextResult = "";
-                        for (int i = 0; i < result.Count; i++)
-                        {
-                        Console.WriteLine(i);
-                        TextResult += $"{result[i]} {numberMap[i]}번 ";
-                        }
-                    
-                
+                string search = "우유"; string search2 = "커피";   
+                var result = Search("우유", true);
+                result = result.Intersect(Search("커피", true)).ToList();
+                string TextResult = "";
+                for (int i = 0; i < result.Count; i++)
+                {
+                    Console.WriteLine(i);
+                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                }
                 tts.Speak(TextResult+"가 있습니다. 돌아가기는 구번을 눌러주세요.");
                 back_flag = 4;
             }
