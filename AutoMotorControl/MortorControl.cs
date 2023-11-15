@@ -7,7 +7,7 @@ namespace AutoMotorControl
 
     public class MotorControl
     {
-        private static SerialPort port1 = new SerialPort("COM5");
+        private static SerialPort port1 = new SerialPort("COM4");
 
         public void Finished()
         {
