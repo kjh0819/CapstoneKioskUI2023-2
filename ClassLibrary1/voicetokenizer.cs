@@ -93,6 +93,7 @@ public class Tokenizer
         }
         for (int i = 0; i < 10000; i += 100)
             phraseList.AddPhrase($"{i}");
+        phraseList.AddPhrase($"초코");
         phraseList.AddPhrase($"카페라떼");
         phraseList.AddPhrase($"우유");
         phraseList.AddPhrase($"녹차");
@@ -101,7 +102,7 @@ public class Tokenizer
         phraseList.AddPhrase($"빵");
 
         TextToSpeechConverter tts =  new TextToSpeechConverter();
-        tts.SpeakSynchronous("음성인식을 시작합니다");
+        tts.Speak("음성인식을 시작합니다");
         var speechRecognitionResult = await speechRecognizer.RecognizeOnceAsync();
         string result = await OutputSpeechRecognitionResult(speechRecognitionResult);
         try

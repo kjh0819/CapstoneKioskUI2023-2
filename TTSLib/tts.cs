@@ -70,6 +70,7 @@ namespace TTSLib
                             // For example:
                             Console.WriteLine("음성 합성이 취소되었습니다.");
                         }
+                        catch { }
                     }, cancellationToken);
                 }
                 catch (OperationCanceledException)
