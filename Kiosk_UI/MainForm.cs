@@ -736,11 +736,7 @@ namespace Kiosk_UI
         public static int key_flag = 0;
         public static int key_flag2 = 0;
         public static int back_flag = 0;
-
-        public int num;
-        public string NumtoString;
-        
-    private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             ARS(e);
         }
@@ -839,11 +835,11 @@ namespace Kiosk_UI
                 key_flag2 = 2;
                 back_flag = 3;
             }
-
             else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 1) 
             {
                 //우유가 들어간 커피
                 tts.StopSpeak();
+                string search = "우유"; string search2 = "커피";
                 foreach (var type in MenuPanel.Controls)
                 {
                     var itm = (item)type;
@@ -852,8 +848,8 @@ namespace Kiosk_UI
                         result = result.Intersect(Search("커피", true)).ToList();
                         for (int i = 0; i < result.Count; i++)
                         {
-                            num = i;
-                            tts.Speak($"{result[i]}{i}번");
+
+                            tts.Speak($"{result[i]}{i}번 ");
                         } 
                     }
                 }
@@ -864,16 +860,14 @@ namespace Kiosk_UI
             {
                 //우유가 안들어간 커피
                 tts.StopSpeak();
+                string search = "우유"; string search2 = "커피";
                 foreach (var type in MenuPanel.Controls)
                 {
                     var itm = (item)type;
                     {
-                        var result = Search("우유", false);
-                        result = result.Intersect(Search("커피", true)).ToList();
-                        for (int i = 0; i < result.Count; i++)
+                        if (!itm.Detail.Contains(search) && itm.Detail.Contains(search2) && itm.Visible == true)
                         {
-                            num = i;
-                            tts.Speak($"{result[i]}{i}번");
+                            tts.Speak(itm.Title.ToString());
                         }
                     }
                 }
@@ -885,17 +879,14 @@ namespace Kiosk_UI
             {
                 //우유가 들어간 음료
                 tts.StopSpeak();
+                string search = "우유"; string search2 = "커피";
                 foreach (var type in MenuPanel.Controls)
                 {
                     var itm = (item)type;
                     {
-                        var result = Search("우유", true);
-                        result = result.Intersect(Search("커피", false)).ToList();
-                        result = result.Intersect(Search("category.dessert", false)).ToList();
-                        for (int i = 0; i < result.Count; i++)
+                        if (itm.Detail.Contains(search) && !itm.Detail.Contains(search2) && itm.Visible == true)
                         {
-                            num = i;
-                            tts.Speak($"{result[i]}{i}번");
+                            tts.Speak(itm.Title.ToString());
                         }
                     }
                 }
@@ -906,16 +897,14 @@ namespace Kiosk_UI
             {
                 //우유가 안들어간 음료
                 tts.StopSpeak();
+                string search = "우유"; string search2 = "커피";
                 foreach (var type in MenuPanel.Controls)
                 {
                     var itm = (item)type;
                     {
-                        var result = Search("우유", false);
-                        result = result.Intersect(Search("커피", false)).ToList();
-                        for (int i = 0; i < result.Count; i++)
+                        if (!itm.Detail.Contains(search) && !itm.Detail.Contains(search2)&& itm.Visible == true)
                         {
-                            num = i;
-                            tts.Speak($"{result[i]}{i}번");
+                            tts.Speak(itm.Title.ToString());
                         }
                     }
                 }
