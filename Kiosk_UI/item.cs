@@ -27,7 +27,7 @@ namespace Kiosk_UI
             InitializeComponent();
         }
 
-        private void txtImg_Click(object sender, EventArgs e)
+        public void txtImg_Click(object sender, EventArgs e)
         {
             OnSelect?.Invoke(this, e);
         }
