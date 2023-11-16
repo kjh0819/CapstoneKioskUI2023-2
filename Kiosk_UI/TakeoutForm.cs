@@ -77,7 +77,7 @@ namespace Kiosk_UI
              {
                  frm.ShowDialog();
              }*/
-            
+
         }
     }
 }

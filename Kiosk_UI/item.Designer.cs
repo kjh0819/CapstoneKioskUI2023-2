@@ -116,9 +116,9 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox txtImg;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblCost;
+        public System.Windows.Forms.PictureBox txtImg;
     }
 }
