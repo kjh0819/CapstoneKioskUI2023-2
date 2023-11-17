@@ -21,7 +21,6 @@ namespace AutoMotorControl
         public void init()
         {
             port1.WriteLine("4");
-            //키오스크 설정
         }
         public async void AutoControl()
         {
