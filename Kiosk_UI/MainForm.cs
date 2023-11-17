@@ -813,7 +813,7 @@ namespace Kiosk_UI
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
-                tts.Speak(TextResult + "가 있습니다. 다시듣기는 8번, 돌아가기는 구번을 눌러주세요.");
+                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
                 Console.WriteLine(TextResult);
                 back_flag = 2;
                 interrupt = 1;
@@ -849,7 +849,7 @@ namespace Kiosk_UI
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
-                tts.Speak(TextResult + "가 있습니다. 다시듣기는 8번, 돌아가기는 구번을 눌러주세요.");
+                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
                 Console.WriteLine(TextResult);
                 back_flag = 2;
                 interrupt = 2;
@@ -911,7 +911,7 @@ namespace Kiosk_UI
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
-                tts.Speak(TextResult + "가 있습니다. 다시듣기는 8번, 돌아가기는 구번을 눌러주세요.");
+                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
                 Console.WriteLine(TextResult);
                 back_flag = 4;
                 interrupt = 3;
@@ -938,8 +938,9 @@ namespace Kiosk_UI
 
                 names.Clear();
                 numbers.Clear();
-                var result = Search("우유", false);
-                result = result.Intersect(Search("커피", true)).ToList();
+
+                var result = Search("커피", false);
+                result = result.Intersect(Search("우유", false)).ToList();
                 string TextResult = "";
 
                 for (int i = 0; i < result.Count && i < 8; i++)
@@ -949,7 +950,7 @@ namespace Kiosk_UI
                     numbers.Add(i);
                 }
 
-                tts.Speak(TextResult + "가 있습니다. 다시듣기는 8번, 돌아가기는 구번을 눌러주세요.");
+                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
                 Console.WriteLine(TextResult);
                 back_flag = 4;
                 interrupt = 4;
@@ -971,19 +972,24 @@ namespace Kiosk_UI
             else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 2)
             {
                 //우유가 들어간 음료
+                string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
                 tts.StopSpeak();
-                string search = "우유"; string search2 = "커피";
-                foreach (var type in MenuPanel.Controls)
+
+                names.Clear();
+                numbers.Clear();
+                var result = Search("우유", false);
+                result = result.Intersect(Search("커피", false)).ToList();
+                string TextResult = "";
+
+                for (int i = 0; i < result.Count && i < 8; i++)
                 {
-                    var itm = (item)type;
-                    {
-                        if (itm.Detail.Contains(search) && !itm.Detail.Contains(search2) && itm.Visible == true)
-                        {
-                            tts.Speak(itm.Title.ToString());
-                        }
-                    }
+                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                    names.Add(result[i]);
+                    numbers.Add(i);
                 }
-                tts.Speak("가 있습니다. 돌아가기는 구번을 눌러주세요.");
+
+                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
+                Console.WriteLine(TextResult);
                 back_flag = 5;
             }
             else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 2)
