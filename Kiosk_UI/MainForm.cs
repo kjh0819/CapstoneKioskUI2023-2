@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Threading;
-using System.Timers;
 using TTSLib;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
@@ -66,63 +65,47 @@ namespace Kiosk_UI
             AllmenuButton.ForeColor = Color.White;
 
         }
-
-        private System.Timers.Timer aTimer;
+        private DispatcherTimer inputTimer;
         public MainForm()
         {
             InitializeComponent();
-
-            SetTimer();
+            inputTimer = new DispatcherTimer();
+            inputTimer.Interval = TimeSpan.FromSeconds(60);
+            inputTimer.Tick += InputTimer_Tick;
+            PreviewKeyDown += ResetInputTimer;
+            MouseDown += ResetInputTimer;
+            StartInputTimer();
 
             this.FormClosing += MainForm_FormClosing;
             new Touch(MenuPanel);
         }
-
-        private void SetTimer()
-        {
-            // Create a timer with a two second interval.
-            aTimer = new System.Timers.Timer(60000);
-            // Hook up the Elapsed event for the timer. 
-            aTimer.Elapsed += OnTimedEvent;
-            aTimer.AutoReset = true;
-            aTimer.Enabled = true;
-        }
-
         private void ResetInputTimer(object sender, EventArgs e)
         {
             StartInputTimer();
         }
         private void StartInputTimer()
         {
-            aTimer.Stop();
-            aTimer.Dispose();
-            SetTimer();
+            inputTimer.Stop();
+            inputTimer.Start();
         }
-        private void OnTimedEvent(object sender, EventArgs e)
+        private void InputTimer_Tick(object sender, EventArgs e)
         {
             Console.WriteLine("비동작 감지됨");
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new Action(() => OnTimedEvent(sender, e)));
-                return;
-            }
-
             checkPanel.Controls.Clear();//장바구니 전체 삭제
             final_cost = 0;
             cost_lbl.Text = final_cost.ToString() + "원";
             AllmenuButton.PerformClick();
             tts.Speak("사용이 종료되었습니다.");
 
-            try
-            {
+
+
+            //try
+            //{
             MotorControl mtr = new MotorControl();
             mtr.MenualControl("2", "4000");
             mtr.init();
-            }
-            catch 
-            {
-                tts.Speak("아두이노가 없습니다.");
-            }//모터 초기화 예외처리, 아두이노 미연결시 스킵
+            //}
+            //catch { }//모터 초기화 예외처리, 아두이노 미연결시 스킵
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -267,8 +250,7 @@ namespace Kiosk_UI
 
         private void cancel_button_Click(object sender, EventArgs e)
         {
-            MotorControl mtr = new MotorControl();
-            mtr.Finished();//모터 초기화
+
             checkPanel.Controls.Clear();//장바구니 전체 삭제
             final_cost = 0;
             cost_lbl.Text = final_cost.ToString() + "원";
