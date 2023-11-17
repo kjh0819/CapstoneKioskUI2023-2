@@ -12,6 +12,7 @@ using System.Windows.Threading;
 using TTSLib;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
+using static Kiosk_UI.MainForm;
 
 namespace Kiosk_UI
 {
@@ -96,8 +97,6 @@ namespace Kiosk_UI
             cost_lbl.Text = final_cost.ToString() + "원";
             AllmenuButton.PerformClick();
             tts.Speak("사용이 종료되었습니다.");
-
-
 
             //try
             //{
@@ -222,8 +221,6 @@ namespace Kiosk_UI
                 MenuPanel.Controls.Add(i);
                 i.OnSelect += (ss, ee) =>
                 {
-
-
                     foreach (var sl in checkPanel.Controls)
                     {
                         var sl_itm = (select_item)sl;
@@ -250,7 +247,8 @@ namespace Kiosk_UI
 
         private void cancel_button_Click(object sender, EventArgs e)
         {
-
+            MotorControl mtr = new MotorControl();
+            mtr.Finished();
             checkPanel.Controls.Clear();//장바구니 전체 삭제
             final_cost = 0;
             cost_lbl.Text = final_cost.ToString() + "원";
@@ -939,8 +937,13 @@ namespace Kiosk_UI
                 names.Clear();
                 numbers.Clear();
 
+<<<<<<< HEAD
+                var result = Search("우유", false);
+                result = result.Intersect(Search("커피", true)).ToList();
+=======
                 var result = Search("커피", false);
                 result = result.Intersect(Search("우유", false)).ToList();
+>>>>>>> 52824b34535cb16679bb546eda3c616ef2858917
                 string TextResult = "";
 
                 for (int i = 0; i < result.Count && i < 8; i++)
@@ -971,12 +974,45 @@ namespace Kiosk_UI
             }
             else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 2)
             {
+<<<<<<< HEAD
+                string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
+                //우유가 안들어간 커피
+=======
                 //우유가 들어간 음료
                 string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
+>>>>>>> 52824b34535cb16679bb546eda3c616ef2858917
                 tts.StopSpeak();
 
                 names.Clear();
                 numbers.Clear();
+<<<<<<< HEAD
+
+                var result = Search("우유", false);
+                result = result.Intersect(Search("커피", false)).ToList();
+
+                List<string>drinks=new List<string>();
+                foreach (var type in MenuPanel.Controls)
+                {
+                    var itm = (item)type;
+                    if (itm.Category.ToString() == "drink")
+                    {
+                        drinks.Add(itm.Title);
+                    }
+                }
+                result=result.Intersect(drinks).ToList();
+
+                string TextResult = "";
+                for (int i = 0; i < result.Count && i < 8; i++)
+                {
+                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                    names.Add(result[i]);
+                    numbers.Add(i);
+                }
+
+                tts.Speak(TextResult + "가 있습니다. 다시듣기는 8번, 돌아가기는 구번을 눌러주세요.");
+                Console.WriteLine(TextResult);
+
+=======
                 var result = Search("우유", false);
                 result = result.Intersect(Search("커피", false)).ToList();
                 string TextResult = "";
@@ -990,6 +1026,7 @@ namespace Kiosk_UI
 
                 tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
                 Console.WriteLine(TextResult);
+>>>>>>> 52824b34535cb16679bb546eda3c616ef2858917
                 back_flag = 5;
             }
             else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 2)
