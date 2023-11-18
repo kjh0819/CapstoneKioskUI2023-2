@@ -80,22 +80,23 @@ namespace Kiosk_UI
 
         private void SetTimer()
         {
-            // Create a timer with a two second interval.
-            aTimer = new System.Timers.Timer(60000);
-            // Hook up the Elapsed event for the timer. 
-            aTimer.Elapsed += OnTimedEvent;
-            aTimer.AutoReset = true;
-            aTimer.Enabled = true;
+            if (aTimer == null)
+            {
+                // If it doesn't exist, create a new timer
+                aTimer = new System.Timers.Timer(60000);
+                aTimer.Elapsed += OnTimedEvent;
+                aTimer.AutoReset = true;
+                aTimer.Enabled = true;
+            }
+            else
+            {
+                // If it exists, reset the interval (reuse the existing timer)
+                aTimer.Interval = 60000;
+            }
         }
 
-        private void ResetInputTimer(object sender, EventArgs e)
-        {
-            StartInputTimer();
-        }
         private void StartInputTimer()
         {
-            aTimer.Stop();
-            aTimer.Dispose();
             SetTimer();
         }
         private void OnTimedEvent(object sender, EventArgs e)
@@ -126,6 +127,8 @@ namespace Kiosk_UI
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            MotorControl mtr = new MotorControl();
+            mtr.MenualControl("2", "4000");
             System.Environment.Exit(0);
         }
         public void AddItem2(string name2, int cost2, int count, string icon2)
@@ -263,10 +266,12 @@ namespace Kiosk_UI
                     //cost_lbl.Text = final_cost.ToString() + "원";
                 };
             }
+            StartInputTimer();
         }
 
         private void cancel_button_Click(object sender, EventArgs e)
         {
+            StartInputTimer();
             MotorControl mtr = new MotorControl();
             mtr.Finished();//모터 초기화
             checkPanel.Controls.Clear();//장바구니 전체 삭제
@@ -437,7 +442,7 @@ namespace Kiosk_UI
             if (menuUpdateCounter == 10)
             {
                 tts.StopSpeak();
-                tts.Speak("메뉴 업데이트를 시작합니다.");
+                tts.SpeakSynchronous("메뉴 업데이트를 시작합니다.");
                 client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
                 do
                 {
@@ -452,6 +457,7 @@ namespace Kiosk_UI
                 var itm = (item)type;
                 itm.Visible = true;
             }
+            StartInputTimer();
 
         }
 
@@ -469,6 +475,7 @@ namespace Kiosk_UI
                 }
                 else { itm.Visible = false; }
             }
+            StartInputTimer();
 
         }
 
@@ -488,6 +495,7 @@ namespace Kiosk_UI
                 else { itm.Visible = false; }
 
             }
+            StartInputTimer();
 
         }
 
@@ -499,7 +507,7 @@ namespace Kiosk_UI
             programExitCounter++;
             if (programExitCounter == 10)
             {
-                tts.Speak("프로그램을 종료합니다.");
+                tts.SpeakSynchronous("프로그램을 종료합니다.");
                 System.Environment.Exit(0);
             }
             actbutton(sender);
@@ -509,8 +517,8 @@ namespace Kiosk_UI
                 var itm = (item)type;
                 itm.Visible = false;
             }
-            tts.StopSpeak();
             string token = await Tokenizer.VoiceTokenizer();
+            StartInputTimer();
 
             Console.WriteLine(token);
             if (token.Contains("error"))
@@ -742,6 +750,7 @@ namespace Kiosk_UI
                     count++;
                 }
             }
+            StartInputTimer();
         }
         int count_flag = 1;
         public int final_cost = 0;
@@ -780,6 +789,7 @@ namespace Kiosk_UI
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             ARS(e);
+            StartInputTimer();
         }
         void ARS( KeyEventArgs e)
         {
@@ -1097,6 +1107,7 @@ namespace Kiosk_UI
                     AllmenuButton.PerformClick();
                 }
             }
+            StartInputTimer();
         }
 
     }
