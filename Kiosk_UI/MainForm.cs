@@ -802,9 +802,21 @@ namespace Kiosk_UI
                 string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
                 names.Clear();
                 numbers.Clear();
-                var result = Search("커피", false);
-                result = result.Intersect(Search("빵", true)).ToList();
+
                 string TextResult = "";
+
+                var result = Search("빵", true);
+                result = result.Intersect(Search("쿠키", false)).ToList();
+                List<string> dessert = new List<string>();
+                foreach (var type in MenuPanel.Controls)
+                {
+                    var itm = (item)type;
+                    if (itm.Category.ToString() == "dessert")
+                    {
+                        dessert.Add(itm.Title);
+                    }
+                }
+                result = result.Intersect(dessert).ToList();
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
                     TextResult += $"{result[i]} {numberMap[i]}번 ";
@@ -813,6 +825,7 @@ namespace Kiosk_UI
                 }
                 tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
                 Console.WriteLine(TextResult);
+
                 back_flag = 2;
                 interrupt = 1;
 
@@ -838,15 +851,31 @@ namespace Kiosk_UI
                 string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
                 names.Clear();
                 numbers.Clear();
-                var result = Search("커피", false);
-                result = result.Intersect(Search("쿠키", true)).ToList();
+                tts.StopSpeak();
+
                 string TextResult = "";
+
+                var result = Search("빵", false);
+                result = result.Intersect(Search("쿠키", true)).ToList();
+                List<string> dessert = new List<string>();
+                foreach (var type in MenuPanel.Controls)
+                {
+                    var itm = (item)type;
+                    if (itm.Category.ToString() == "dessert")
+                    {
+                        dessert.Add(itm.Title);
+                    }
+                }
+                result = result.Intersect(dessert).ToList();
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
                     TextResult += $"{result[i]} {numberMap[i]}번 ";
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
+                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
+                Console.WriteLine(TextResult);
+
                 tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
                 Console.WriteLine(TextResult);
                 back_flag = 2;
@@ -937,13 +966,8 @@ namespace Kiosk_UI
                 names.Clear();
                 numbers.Clear();
 
-<<<<<<< HEAD
-                var result = Search("우유", false);
-                result = result.Intersect(Search("커피", true)).ToList();
-=======
                 var result = Search("커피", false);
                 result = result.Intersect(Search("우유", false)).ToList();
->>>>>>> 52824b34535cb16679bb546eda3c616ef2858917
                 string TextResult = "";
 
                 for (int i = 0; i < result.Count && i < 8; i++)
@@ -972,24 +996,19 @@ namespace Kiosk_UI
                     }
                 }
             }
-            else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 2)
+            else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 2 && interrupt != 5)
             {
-<<<<<<< HEAD
-                string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
-                //우유가 안들어간 커피
-=======
                 //우유가 들어간 음료
                 string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
->>>>>>> 52824b34535cb16679bb546eda3c616ef2858917
                 tts.StopSpeak();
 
                 names.Clear();
                 numbers.Clear();
-<<<<<<< HEAD
 
-                var result = Search("우유", false);
+                var result = Search("우유", true);
                 result = result.Intersect(Search("커피", false)).ToList();
 
+                string TextResult = "";
                 List<string>drinks=new List<string>();
                 foreach (var type in MenuPanel.Controls)
                 {
@@ -1000,8 +1019,6 @@ namespace Kiosk_UI
                     }
                 }
                 result=result.Intersect(drinks).ToList();
-
-                string TextResult = "";
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
                     TextResult += $"{result[i]} {numberMap[i]}번 ";
@@ -1011,12 +1028,47 @@ namespace Kiosk_UI
 
                 tts.Speak(TextResult + "가 있습니다. 다시듣기는 8번, 돌아가기는 구번을 눌러주세요.");
                 Console.WriteLine(TextResult);
+                back_flag = 5;
+                interrupt = 5;
+            }
+            else if (96 <= e.KeyValue && e.KeyValue <= 95 + names.Count && key_flag == 3 && key_flag2 == 2 && interrupt == 5)
+            {
+                //우유가 들어간 음료 장바구니
+                tts.StopSpeak();
+                foreach (var type in MenuPanel.Controls)
+                {
+                    var itm = (item)type;
+                    if (itm.Title.ToString() == names[e.KeyValue - 96])
+                    {
+                        itm.txtImg_Click(itm, e);
+                        tts.Speak(itm.Title + "추가됨");
+                    }
+                }
 
-=======
+            }
+            else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 2 && interrupt!=6)
+            {
+                //우유가 안들어간 음료
+                string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
+                tts.StopSpeak();
+
+                names.Clear();
+                numbers.Clear();
+
                 var result = Search("우유", false);
                 result = result.Intersect(Search("커피", false)).ToList();
-                string TextResult = "";
 
+                string TextResult = "";
+                List<string> drinks = new List<string>();
+                foreach (var type in MenuPanel.Controls)
+                {
+                    var itm = (item)type;
+                    if (itm.Category.ToString() == "drink")
+                    {
+                        drinks.Add(itm.Title);
+                    }
+                }
+                result = result.Intersect(drinks).ToList();
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
                     TextResult += $"{result[i]} {numberMap[i]}번 ";
@@ -1024,32 +1076,27 @@ namespace Kiosk_UI
                     numbers.Add(i);
                 }
 
-                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
+                tts.Speak(TextResult + "가 있습니다. 다시듣기는 8번, 돌아가기는 구번을 눌러주세요.");
                 Console.WriteLine(TextResult);
->>>>>>> 52824b34535cb16679bb546eda3c616ef2858917
                 back_flag = 5;
+                interrupt = 6;
             }
-            else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 2)
+            else if (96 <= e.KeyValue && e.KeyValue <= 95 + names.Count && key_flag == 3 && key_flag2 == 2 && interrupt == 6)
             {
-                //우유가 안들어간 음료
+                //우유가 안들어간 음료 장바구니
                 tts.StopSpeak();
-                string search = "우유"; string search2 = "커피";
                 foreach (var type in MenuPanel.Controls)
                 {
                     var itm = (item)type;
+                    if (itm.Title.ToString() == names[e.KeyValue - 96])
                     {
-                        if (!itm.Detail.Contains(search) && !itm.Detail.Contains(search2) && itm.Visible == true)
-                        {
-                            tts.Speak(itm.Title.ToString());
-                        }
+                        itm.txtImg_Click(itm, e);
+                        tts.Speak(itm.Title + "추가됨");
                     }
                 }
-                tts.Speak("가 있습니다. 돌아가기는 구번을 눌러주세요.");
-                back_flag = 5;
             }
 
         }
-
 
         private async void custom_button1_Click(object sender, EventArgs e)
         {
