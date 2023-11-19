@@ -16,7 +16,11 @@ namespace AutoMotorControl
         }
         public void MenualControl(string vector, string miliSeconds)
         {
-            port1.WriteLine(vector + " " + miliSeconds);
+            try 
+            {
+                port1.WriteLine(vector + " " + miliSeconds);
+            }
+            catch { }
         }
         public void init()
         {
@@ -81,7 +85,6 @@ namespace AutoMotorControl
             try
             {
                 port1.Open();
-                port1.WriteLine("2 5000");
             }
             catch
             {
