@@ -282,8 +282,13 @@ namespace Kiosk_UI
         private void cancel_button_Click(object sender, EventArgs e)
         {
             StartInputTimer();
-            MotorControl mtr = new MotorControl();
-            mtr.Finished();//모터 초기화
+            try
+            {
+                MotorControl mtr = new MotorControl();
+                mtr.Finished();//모터 초기화
+            }
+            catch { }
+
             checkPanel.Controls.Clear();//장바구니 전체 삭제
             final_cost = 0;
             cost_lbl.Text = final_cost.ToString() + "원";
