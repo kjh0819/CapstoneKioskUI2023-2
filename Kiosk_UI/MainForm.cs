@@ -82,7 +82,6 @@ namespace Kiosk_UI
         {
             if (aTimer == null)
             {
-                // If it doesn't exist, create a new timer
                 aTimer = new System.Timers.Timer(60000);
                 aTimer.Elapsed += OnTimedEvent;
                 aTimer.AutoReset = true;
@@ -90,7 +89,6 @@ namespace Kiosk_UI
             }
             else
             {
-                // If it exists, reset the interval (reuse the existing timer)
                 aTimer.Interval = 60000;
             }
         }
@@ -108,23 +106,35 @@ namespace Kiosk_UI
                 return;
             }
 
-            checkPanel.Controls.Clear();//장바구니 전체 삭제
-            final_cost = 0;
-            cost_lbl.Text = final_cost.ToString() + "원";
-            AllmenuButton.PerformClick();
-            tts.Speak("사용이 종료되었습니다.");
+            //checkPanel.Controls.Clear();//장바구니 전체 삭제
+            //final_cost = 0;
+            //cost_lbl.Text = final_cost.ToString() + "원";
+            //AllmenuButton.PerformClick();
+            //tts.Speak("사용이 종료되었습니다.");
 
             try
             {
-            MotorControl mtr = new MotorControl();
-            mtr.MenualControl("2", "4000");
-            mtr.init();
+                MotorControl mtr = new MotorControl();
+                mtr.MenualControl("2", "4000");
+                mtr.init();
             }
-            catch 
+            catch
             {
                 tts.Speak("아두이노가 없습니다.");
             }//모터 초기화 예외처리, 아두이노 미연결시 스킵
-        }
+            if(ActiveForm != null)
+                tts.SpeakSynchronous(ActiveForm.Name+"종료");
+            switch (ActiveForm.Name)
+            {
+                case "PayCheck":
+                    ActiveForm.Close(); break;
+                case "TakeoutForm":
+                    ActiveForm.Close(); break;
+                case "FinishForm":
+                    ActiveForm.Close(); break;
+                default: break;
+            }
+            }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             MotorControl mtr = new MotorControl();
