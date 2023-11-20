@@ -426,8 +426,16 @@ namespace Kiosk_UI
             client.Subscribe(new string[] { "Menu/NewImage", "Menu/exist", "Menu/request", "Menu/NewFile" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE }); // test/topic 토픽을 QoS 1로 구독
             client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
 
+            menuUpdateCounter = 0;
             while (!flagForNewFile)
-                ;
+            {
+                menuUpdateCounter++;
+                if (menuUpdateCounter < 0)
+                {
+                    tts.Speak("서버가 응답하지 않습니다. 메뉴업데이트를 중단합니다.");
+                    flagForNewFile = true;
+                }
+            }
             updateItem();
 
             flagForNewFile = false;
@@ -459,9 +467,16 @@ namespace Kiosk_UI
                 tts.StopSpeak();
                 tts.SpeakSynchronous("메뉴 업데이트를 시작합니다.");
                 client.Publish("Menu/Update", Encoding.UTF8.GetBytes(""), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+                menuUpdateCounter=0;
                 do
                 {
                     updateItem();
+                    menuUpdateCounter++;
+                    if (menuUpdateCounter > 100000000)
+                    {
+                        flagForNewFile = true;
+                        tts.Speak("업데이트에 실패하였습니다.");
+                    }
                 } while (!flagForNewFile);
                 menuUpdateCounter = 0;
             }
