@@ -14,23 +14,31 @@ public class Tokenizer
     const string apiKey = "koba-2WZSTOQ-MSXU3TA-WLNVRHY-ZIIMQJY"; //유출금지
 
 
-    public static async Task<string> TextTokenizer(string String)
+    public static async Task<string> TextTokenizer(string inputString)
     {
         string responseText = string.Empty;
-
-        string data = $"{{\"document\": {{\"content\": \"{String}\",\"language\": \"ko-KR\"}}, \"encoding_type\": \"UTF8\", \"custom_domain\": \"cafe\"}}";
-
+        string data = $"{{\"document\": {{\"content\": \"{inputString}\",\"language\": \"ko-KR\"}}, \"encoding_type\": \"UTF8\", \"custom_domain\": \"cafe\"}}";
         Console.WriteLine("data : " + data);
 
         using (var client = new HttpClient())
         {
             client.DefaultRequestHeaders.Add("api-key", apiKey);
-
             var content = new StringContent(data, Encoding.UTF8, "application/json");
 
             try
             {
-                var response = await client.PostAsync(url, content);
+                var timeoutTask = Task.Delay(TimeSpan.FromSeconds(3));
+                var responseTask = client.PostAsync(url, content);
+
+                var completedTask = await Task.WhenAny(responseTask, timeoutTask);
+                if (completedTask == timeoutTask)
+                {
+                    // Timeout occurred
+                    Console.WriteLine("Request timed out after 3 seconds.");
+                    return "Request timed out.";
+                }
+
+                var response = await responseTask;
                 response.EnsureSuccessStatusCode();
                 responseText = await response.Content.ReadAsStringAsync();
             }

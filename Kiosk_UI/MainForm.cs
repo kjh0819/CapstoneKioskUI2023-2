@@ -553,23 +553,20 @@ namespace Kiosk_UI
             Console.WriteLine(token);
             if (token.Contains("error"))
             {
-                if (token.Contains("error NOMATCH: Speech could not be recognized."))
+                if (token==("error NOMATCH: Speech could not be recognized."))
                 {
-                    tts.Speak("잘 알아듣지 못했습니다.");
-                    foreach (var type in MenuPanel.Controls)
-                    {
-                        var itm = (item)type;
-                        itm.Visible = true;
-                    }
+                    tts.SpeakSynchronous("잘 알아듣지 못했습니다.");
+                    AllmenuButton.PerformClick();
                     return;
-
                 }
-                tts.Speak("에러가 발생하였습니다.");
-                foreach (var type in MenuPanel.Controls)
+                else if(token== "error Request timed out.")
                 {
-                    var itm = (item)type;
-                    itm.Visible = true;
+                    tts.SpeakSynchronous("서버가 응답하지 않습니다.");
+                    AllmenuButton.PerformClick();
+                    return;
                 }
+                tts.SpeakSynchronous("에러가 발생하였습니다.");
+                AllmenuButton.PerformClick();
                 return;
             }
             List<string> searchResults = new List<string>();
@@ -749,11 +746,7 @@ namespace Kiosk_UI
             {
                 tts.StopSpeak();
                 tts.Speak("죄송합니다 메뉴를 찾을수 없었습니다.");
-                foreach (var type in MenuPanel.Controls)
-                {
-                    var itm = (item)type;
-                    itm.Visible = true;
-                }
+                AllmenuButton.PerformClick();
                 return;
             }
             else
