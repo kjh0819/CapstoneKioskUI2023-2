@@ -812,10 +812,10 @@ namespace Kiosk_UI
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             ARS(e);
-            StartInputTimer();
         }
         void ARS( KeyEventArgs e)
         {
+            StartInputTimer();
             if (e.KeyCode == Keys.NumPad9 && key_flag == 1)
             {
                 key_flag = 0;
