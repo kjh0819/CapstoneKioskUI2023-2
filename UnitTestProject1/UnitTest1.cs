@@ -21,9 +21,9 @@ public class ARSTests
         mainForm.ARS(keyEvent);
 
         // 종료 시나리오에 대한 검증 로직 추가
-        Assert.Equals(0, mainForm.key_flag);
-        Assert.Equals(0, mainForm.key_flag2);
-        Assert.Equals(0, mainForm.back_flag);
+        Assert.AreEqual(0, mainForm.key_flag);
+        Assert.AreEqual(0, mainForm.key_flag2);
+        Assert.AreEqual(0, mainForm.back_flag);
         // 추가 검증 로직 추가
     }
 
