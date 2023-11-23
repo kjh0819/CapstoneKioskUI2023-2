@@ -106,11 +106,7 @@ namespace Kiosk_UI
                 return;
             }
 
-            //checkPanel.Controls.Clear();//장바구니 전체 삭제
-            //final_cost = 0;
-            //cost_lbl.Text = final_cost.ToString() + "원";
-            //AllmenuButton.PerformClick();
-            //tts.Speak("사용이 종료되었습니다.");
+            tts.SpeakSynchronous("사용이 종료되었습니다.");
 
             try
             {
@@ -132,6 +128,12 @@ namespace Kiosk_UI
                     ActiveForm.Close(); break;
                 case "FinishForm":
                     ActiveForm.Close(); break;
+                case "MainForm":
+                    checkPanel.Controls.Clear();//장바구니 전체 삭제
+                    final_cost = 0;
+                    cost_lbl.Text = final_cost.ToString() + "원";
+                    AllmenuButton.PerformClick();
+                    break;
                 default: break;
             }
             }
@@ -809,11 +811,11 @@ namespace Kiosk_UI
                 CollectionDic = new Dictionary<string, string>();
             }
         }
-        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        public void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             ARS(e);
         }
-        void ARS( KeyEventArgs e)
+        public void ARS( KeyEventArgs e)
         {
             StartInputTimer();
             if (e.KeyCode == Keys.NumPad9 && key_flag == 1)
@@ -872,7 +874,7 @@ namespace Kiosk_UI
                 result = result.Intersect(dessert).ToList();
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
-                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                    TextResult += $"{result[i]} {numberMap[i]}번, ";
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
@@ -922,7 +924,7 @@ namespace Kiosk_UI
                 result = result.Intersect(dessert).ToList();
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
-                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                    TextResult += $"{result[i]} {numberMap[i]}번,  ";
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
@@ -987,7 +989,7 @@ namespace Kiosk_UI
                 string TextResult = "";
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
-                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                    TextResult += $"{result[i]} {numberMap[i]}번,  ";
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
@@ -1025,7 +1027,7 @@ namespace Kiosk_UI
 
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
-                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                    TextResult += $"{result[i]} {numberMap[i]}번,  ";
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
@@ -1074,7 +1076,7 @@ namespace Kiosk_UI
                 result=result.Intersect(drinks).ToList();
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
-                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                    TextResult += $"{result[i]} {numberMap[i]}번,  ";
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
@@ -1124,7 +1126,7 @@ namespace Kiosk_UI
                 result = result.Intersect(drinks).ToList();
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
-                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                    TextResult += $"{result[i]} {numberMap[i]}번,  ";
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
