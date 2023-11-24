@@ -9,10 +9,18 @@ namespace Kiosk_UI
     {
         DataTable passedIndt;
 
-        private void PayCheck_KeyDown(object sender, KeyEventArgs e)
+        private void PayCheck_KeyDown_1(object sender, KeyEventArgs e)
         {
             // Call arsKey method when Enter key is pressed
-            arsKey(e);
+            if (e.KeyCode == Keys.Enter)
+            {
+                arsKey(e);
+                Yesbutton.PerformClick();
+            }
+            if (e.KeyCode == Keys.Back)
+            {
+                Nobutton.PerformClick();
+            }
         }
         public void arsKey(KeyEventArgs e)
         {
@@ -85,17 +93,7 @@ namespace Kiosk_UI
             //takeout.ShowDialog();
         }
 
-        private void PayCheck_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
-            {
-                Yesbutton.PerformClick();
-            }
-            if (e.KeyCode == Keys.Back)
-            {
-                Nobutton.PerformClick();
-            }
-        }
+      
     }
 }
 
