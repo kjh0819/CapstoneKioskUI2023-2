@@ -36,7 +36,7 @@ namespace Kiosk_UI
 
         private void Nobutton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            this.DialogResult = DialogResult.Cancel;
             this.Hide();
         }
 
@@ -78,6 +78,18 @@ namespace Kiosk_UI
                  frm.ShowDialog();
              }*/
 
+        }
+
+        private void TakeoutForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Yesbutton.PerformClick();
+            }
+            if (e.KeyCode == Keys.Back)
+            {
+                Nobutton.PerformClick();
+            }
         }
     }
 }
