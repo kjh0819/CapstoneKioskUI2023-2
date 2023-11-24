@@ -115,11 +115,7 @@ namespace Kiosk_UI
                 return;
             }
 
-            //checkPanel.Controls.Clear();//장바구니 전체 삭제
-            //final_cost = 0;
-            //cost_lbl.Text = final_cost.ToString() + "원";
-            //AllmenuButton.PerformClick();
-            //tts.Speak("사용이 종료되었습니다.");
+            tts.SpeakSynchronous("사용이 종료되었습니다.");
 
             try
             {
@@ -141,6 +137,12 @@ namespace Kiosk_UI
                     ActiveForm.Close(); break;
                 case "FinishForm":
                     ActiveForm.Close(); break;
+                case "MainForm":
+                    checkPanel.Controls.Clear();//장바구니 전체 삭제
+                    final_cost = 0;
+                    cost_lbl.Text = final_cost.ToString() + "원";
+                    AllmenuButton.PerformClick();
+                    break;
                 default: break;
             }
             }
@@ -828,13 +830,51 @@ namespace Kiosk_UI
                 CollectionDic = new Dictionary<string, string>();
             }
         }
-        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        public void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             ARS(e);
         }
-        void ARS( KeyEventArgs e)
+
+        int ArsAutoDemoCounter = 0;
+        public void ARS( KeyEventArgs e)
         {
             StartInputTimer();
+            //ars 자동 데모
+            if (e.KeyCode == Keys.NumPad0 && ArsAutoDemoCounter < 3)
+            {
+                ArsAutoDemoCounter++;
+            }
+            else if (ArsAutoDemoCounter == 3)
+            {
+                tts.StopSpeak();
+                tts.SpeakSynchronous("에이알에스 데모를 시작합니다.");
+                ArsAutoDemoCounter = 0;
+                //음료
+                var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad1);
+                this.ARS(keyEvent);
+
+                System.Threading.Thread.Sleep(10000);
+                //커피가 아닌 음료
+                keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad2);
+                this.ARS(keyEvent);
+                System.Threading.Thread.Sleep(10000);
+                //우유가 들어간 음료
+                keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad2);
+                this.ARS(keyEvent);
+                System.Threading.Thread.Sleep(10000);
+                //민트초코 추가
+                keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad4);
+                this.ARS(keyEvent);
+                System.Threading.Thread.Sleep(10000);
+                //주문하기
+                keyEvent =new KeyEventArgs(Keys.Enter);
+                this.ARS(keyEvent);
+            }
+            //엔터키로 주문 하기
+            if(e.KeyCode == Keys.Enter) 
+                custom_button1.PerformClick();
+            
+            //ars_ver1
             if (e.KeyCode == Keys.NumPad9 && key_flag == 1)
             {
                 key_flag = 0;
@@ -886,16 +926,30 @@ namespace Kiosk_UI
                     if (itm.Category.ToString() == "dessert")
                     {
                         dessert.Add(itm.Title);
+                        itm.Visible = false;
                     }
                 }
                 result = result.Intersect(dessert).ToList();
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
-                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                    TextResult += $"{result[i]} {numberMap[i]}번, ";
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
-                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
+
+                foreach (var item in MenuPanel.Controls)
+                {
+                    var control = (item)item;
+                    if (control != null)
+                    {
+                        foreach (var text in result)
+                        {
+                            if (text == control.Title)
+                                control.Visible = true;
+                        }
+                    }
+                }
+                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번, 주문 완료는 확인을 눌러주세요.");
                 Console.WriteLine(TextResult);
 
                 back_flag = 2;
@@ -936,19 +990,29 @@ namespace Kiosk_UI
                     if (itm.Category.ToString() == "dessert")
                     {
                         dessert.Add(itm.Title);
+                        itm.Visible = false;
                     }
                 }
                 result = result.Intersect(dessert).ToList();
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
-                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                    TextResult += $"{result[i]} {numberMap[i]}번,  ";
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
-                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
-                Console.WriteLine(TextResult);
-
-                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
+                foreach (var item in MenuPanel.Controls)
+                {
+                    var control = (item)item;
+                    if (control != null)
+                    {
+                        foreach (var text in result)
+                        {
+                            if (text == control.Title)
+                                control.Visible = true;
+                        }
+                    }
+                }
+                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번, 주문 완료는 확인을 눌러주세요.");
                 Console.WriteLine(TextResult);
                 back_flag = 2;
                 interrupt = 2;
@@ -1006,11 +1070,28 @@ namespace Kiosk_UI
                 string TextResult = "";
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
-                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                    TextResult += $"{result[i]} {numberMap[i]}번,  ";
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
-                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
+                foreach (var item in MenuPanel.Controls)
+                {
+                    var control = (item)item;
+                    control.Visible = false;
+                }
+                foreach (var item in MenuPanel.Controls)
+                {
+                    var control = (item)item;
+                    if (control != null)
+                    {
+                        foreach (var text in result)
+                        {
+                            if (text == control.Title)
+                                control.Visible = true;
+                        }
+                    }
+                }
+                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번, 주문 완료는 확인을 눌러주세요.");
                 Console.WriteLine(TextResult);
                 back_flag = 4;
                 interrupt = 3;
@@ -1044,16 +1125,21 @@ namespace Kiosk_UI
 
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
-                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                    TextResult += $"{result[i]} {numberMap[i]}번,  ";
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
-
-                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번을 눌러주세요.");
+               foreach (var item in MenuPanel.Controls)
+                {
+                    var control = (item)item;
+                    control.Visible = false;
+                }
+                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번, 주문 완료는 확인을 눌러주세요.");
                 Console.WriteLine(TextResult);
                 back_flag = 4;
                 interrupt = 4;
             }
+ 
             else if (96 <= e.KeyValue && e.KeyValue <= 95 + names.Count && key_flag == 3 && key_flag2 == 1 && interrupt == 4)
             {
                 //우유가 안들어간 커피 장바구니
@@ -1088,17 +1174,41 @@ namespace Kiosk_UI
                     if (itm.Category.ToString() == "drink")
                     {
                         drinks.Add(itm.Title);
+                        itm.Visible = false;
                     }
                 }
                 result=result.Intersect(drinks).ToList();
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
-                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                    TextResult += $"{result[i]} {numberMap[i]}번,  ";
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
-
-                tts.Speak(TextResult + "가 있습니다. 다시듣기는 8번, 돌아가기는 구번을 눌러주세요.");
+                foreach (var item in MenuPanel.Controls)
+                {
+                    var control = (item)item;
+                    if (control != null)
+                    {
+                        foreach (var text in result)
+                        {
+                            if (text == control.Title)
+                                control.Visible = true;
+                        }
+                    }
+                }
+                foreach (var item in MenuPanel.Controls)
+                {
+                    var control = (item)item;
+                    if (control != null)
+                    {
+                        foreach (var text in result)
+                        {
+                            if (text == control.Title)
+                                control.Visible = true;
+                        }
+                    }
+                }
+                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번, 주문 완료는 확인을 눌러주세요.");
                 Console.WriteLine(TextResult);
                 back_flag = 5;
                 interrupt = 5;
@@ -1138,17 +1248,30 @@ namespace Kiosk_UI
                     if (itm.Category.ToString() == "drink")
                     {
                         drinks.Add(itm.Title);
+                        itm.Visible = false;
+                    }
+                }
+                foreach (var item in MenuPanel.Controls)
+                {
+                    var control = (item)item;
+                    if (control != null)
+                    {
+                        foreach (var text in result)
+                        {
+                            if (text == control.Title)
+                                control.Visible = true;
+                        }
                     }
                 }
                 result = result.Intersect(drinks).ToList();
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
-                    TextResult += $"{result[i]} {numberMap[i]}번 ";
+                    TextResult += $"{result[i]} {numberMap[i]}번,  ";
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
 
-                tts.Speak(TextResult + "가 있습니다. 다시듣기는 8번, 돌아가기는 구번을 눌러주세요.");
+                tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번, 주문 완료는 확인을 눌러주세요.");
                 Console.WriteLine(TextResult);
                 back_flag = 5;
                 interrupt = 6;
