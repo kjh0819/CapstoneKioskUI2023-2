@@ -78,7 +78,7 @@ namespace Kiosk_UI
 
             DialogResult result1 = takeout.ShowDialog();
             this.Hide();
-            if (result1 == DialogResult.Cancel)
+            if (result1 == DialogResult.OK)
             {
                 this.Show();
             }
