@@ -8,6 +8,8 @@ namespace Kiosk_UI
     {
         DataTable passedIndt;
 
+
+
         public PayCheck()
         {
             InitializeComponent();
@@ -21,7 +23,7 @@ namespace Kiosk_UI
         private void Nobutton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-            this.Hide();
+            //this.Hide();
         }
 
         private void PayCheck_Shown(object sender, EventArgs e)
@@ -57,18 +59,31 @@ namespace Kiosk_UI
 
             DialogResult result1 = takeout.ShowDialog();
             this.Hide();
-            if (result1 == DialogResult.OK)
+            if (result1 == DialogResult.Cancel)
             {
                 this.Show();
             }
             else
             {
                 this.Close();
+
             }
 
 
             //this.Hide();
             //takeout.ShowDialog();
+        }
+
+        private void PayCheck_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Yesbutton.PerformClick();
+            }
+            if (e.KeyCode == Keys.Back)
+            {
+                Nobutton.PerformClick();
+            }
         }
     }
 }

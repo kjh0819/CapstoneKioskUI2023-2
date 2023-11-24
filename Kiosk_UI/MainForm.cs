@@ -1281,6 +1281,7 @@ namespace Kiosk_UI
                 Form modalbackground = new Form();
                 using (warning modal = new warning())
                 {
+                    tts.Speak("메뉴를 선택해주세요.");
                     modal.ShowDialog();
                     modalbackground.Dispose();
 

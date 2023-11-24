@@ -53,7 +53,7 @@
             this.label1.Location = new System.Drawing.Point(25, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(395, 46);
-            this.label1.TabIndex = 11;
+            this.label1.TabIndex = 0;
             this.label1.Text = "매장과 포장 중 선택해주세요";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -73,7 +73,7 @@
             this.custom_panel1.Margin = new System.Windows.Forms.Padding(0);
             this.custom_panel1.Name = "custom_panel1";
             this.custom_panel1.Size = new System.Drawing.Size(484, 658);
-            this.custom_panel1.TabIndex = 10;
+            this.custom_panel1.TabIndex = 0;
             // 
             // custom_flowpanel1
             // 
@@ -84,7 +84,7 @@
             this.custom_flowpanel1.Location = new System.Drawing.Point(241, 60);
             this.custom_flowpanel1.Name = "custom_flowpanel1";
             this.custom_flowpanel1.Size = new System.Drawing.Size(10, 470);
-            this.custom_flowpanel1.TabIndex = 9;
+            this.custom_flowpanel1.TabIndex = 0;
             // 
             // panel2
             // 
@@ -96,7 +96,7 @@
             this.panel2.Location = new System.Drawing.Point(3, 139);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(478, 255);
-            this.panel2.TabIndex = 15;
+            this.panel2.TabIndex = 0;
             // 
             // takeout
             // 
@@ -134,7 +134,7 @@
             this.label3.Location = new System.Drawing.Point(28, 212);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(191, 43);
-            this.label3.TabIndex = 13;
+            this.label3.TabIndex = 0;
             this.label3.Text = "포장";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -146,7 +146,7 @@
             this.label2.Location = new System.Drawing.Point(266, 212);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(191, 43);
-            this.label2.TabIndex = 12;
+            this.label2.TabIndex = 0;
             this.label2.Text = "매장";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -161,7 +161,7 @@
             this.Yesbutton.Location = new System.Drawing.Point(281, 547);
             this.Yesbutton.Name = "Yesbutton";
             this.Yesbutton.Size = new System.Drawing.Size(176, 63);
-            this.Yesbutton.TabIndex = 8;
+            this.Yesbutton.TabIndex = 1;
             this.Yesbutton.Text = "결제하기";
             this.Yesbutton.UseVisualStyleBackColor = false;
             this.Yesbutton.Click += new System.EventHandler(this.Yesbutton_Click);
@@ -177,7 +177,7 @@
             this.Nobutton.Location = new System.Drawing.Point(33, 547);
             this.Nobutton.Name = "Nobutton";
             this.Nobutton.Size = new System.Drawing.Size(176, 63);
-            this.Nobutton.TabIndex = 7;
+            this.Nobutton.TabIndex = 2;
             this.Nobutton.Text = "다시 선택하기";
             this.Nobutton.UseVisualStyleBackColor = false;
             this.Nobutton.Click += new System.EventHandler(this.Nobutton_Click);
@@ -190,9 +190,11 @@
             this.ClientSize = new System.Drawing.Size(484, 761);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.custom_panel1);
+            this.KeyPreview = true;
             this.Name = "TakeoutForm";
             this.Text = "TakeoutForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TakeoutForm_KeyDown);
             this.custom_panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.takeout)).EndInit();
