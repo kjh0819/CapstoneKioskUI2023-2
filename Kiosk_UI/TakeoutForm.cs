@@ -36,7 +36,7 @@ namespace Kiosk_UI
 
         private void Nobutton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            this.DialogResult = DialogResult.OK;
             this.Hide();
         }
 
