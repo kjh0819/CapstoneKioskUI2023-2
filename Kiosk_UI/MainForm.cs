@@ -118,23 +118,25 @@ namespace Kiosk_UI
             {
                 tts.Speak("아두이노가 없습니다.");
             }//모터 초기화 예외처리, 아두이노 미연결시 스킵
-            if(ActiveForm != null)
-                tts.SpeakSynchronous(ActiveForm.Name+"종료");
-            switch (ActiveForm.Name)
+            if (ActiveForm != null)
             {
-                case "PayCheck":
-                    ActiveForm.Close(); break;
-                case "TakeoutForm":
-                    ActiveForm.Close(); break;
-                case "FinishForm":
-                    ActiveForm.Close(); break;
-                case "MainForm":
-                    checkPanel.Controls.Clear();//장바구니 전체 삭제
-                    final_cost = 0;
-                    cost_lbl.Text = final_cost.ToString() + "원";
-                    AllmenuButton.PerformClick();
-                    break;
-                default: break;
+                tts.SpeakSynchronous(ActiveForm.Name + "종료");
+                switch (ActiveForm.Name)
+                {
+                    case "PayCheck":
+                        ActiveForm.Close(); break;
+                    case "TakeoutForm":
+                        ActiveForm.Close(); break;
+                    case "FinishForm":
+                        ActiveForm.Close(); break;
+                    case "MainForm":
+                        checkPanel.Controls.Clear();//장바구니 전체 삭제
+                        final_cost = 0;
+                        cost_lbl.Text = final_cost.ToString() + "원";
+                        AllmenuButton.PerformClick();
+                        break;
+                    default: break;
+                }
             }
             }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -286,8 +288,9 @@ namespace Kiosk_UI
             StartInputTimer();
             try
             {
-                MotorControl mtr = new MotorControl();
-                mtr.Finished();//모터 초기화
+                FinishForm finishForm = new FinishForm();
+
+                finishForm.ShowDialog();
             }
             catch { }
 

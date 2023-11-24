@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kiosk_UI.Custom;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -8,9 +9,21 @@ namespace Kiosk_UI
     {
         DataTable passedIndt;
 
+        private void PayCheck_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Call arsKey method when Enter key is pressed
+            arsKey(e);
+        }
+        public void arsKey(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                Yesbutton.PerformClick();
+        }
         public PayCheck()
         {
             InitializeComponent();
+
+            this.AcceptButton = Yesbutton;
         }
 
         private void label1_Click(object sender, EventArgs e)
