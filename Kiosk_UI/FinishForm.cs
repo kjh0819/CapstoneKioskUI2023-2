@@ -1,4 +1,5 @@
 ﻿using AutoMotorControl;
+using Kiosk_UI.Custom;
 using System;
 using System.Windows.Forms;
 
@@ -8,6 +9,7 @@ namespace Kiosk_UI
     {
         private System.Windows.Forms.Timer tmr;
 
+        
         public FinishForm()
         {
             try
