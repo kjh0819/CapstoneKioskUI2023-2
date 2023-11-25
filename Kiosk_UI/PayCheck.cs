@@ -29,7 +29,6 @@ namespace Kiosk_UI
         }
         public PayCheck()
         {
-            this.KeyPreview = true;
             InitializeComponent();
 
             this.AcceptButton = Yesbutton;
@@ -94,25 +93,7 @@ namespace Kiosk_UI
             //takeout.ShowDialog();
         }
 
-        private void PayCheck_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
-            {
-                this.Hide();
-                TakeoutForm takeout = new TakeoutForm();
-
-                DialogResult result1 = takeout.ShowDialog();
-                this.Hide();
-                if (result1 == DialogResult.OK)
-                {
-                    this.Show();
-                }
-                else
-                {
-                    this.Close();
-                }
-            }
-        }
+      
     }
 }
 

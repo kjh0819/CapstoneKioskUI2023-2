@@ -21,15 +21,6 @@ namespace Kiosk_UI
         private Custom_button curbutton;
         TextToSpeechConverter tts = new TextToSpeechConverter();
 
-        private int ImgPosX = 0;
-        private int ImgPosY = 0;
-        private int click_X;
-        private int click_Y;
-
-        private int MoveStepX = 1;
-        private int click_flag;
-        private Image BounceImg;
-
         protected override CreateParams CreateParams
         {
             get
@@ -229,13 +220,6 @@ namespace Kiosk_UI
 
                 i.OnSelect += (ss, ee) =>
                 {
-                    click_X = Cursor.Position.X;
-                    click_Y = Cursor.Position.Y;
-                    Console.WriteLine("X좌표"+click_X.ToString() +"Y좌표"+ click_Y.ToString());
-                    click_flag = 1;
-                    ImgPosX = click_X;
-                    BounceTimer.Start();
-                    BounceImg = i.Icon;
                     foreach (var sl in checkPanel.Controls)
                     {
                         var sl_itm = (select_item)sl;
@@ -298,10 +282,7 @@ namespace Kiosk_UI
             }
             StartInputTimer();
         }
-        private void PaintImg(object sendeer, PaintEventArgs e)
-        {
-            e.Graphics.DrawImage(BounceImg, ImgPosX, ImgPosY);
-        }
+
         private void cancel_button_Click(object sender, EventArgs e)
         {
             StartInputTimer();
@@ -1294,25 +1275,6 @@ namespace Kiosk_UI
                 }
             }
 
-        }
-
-        private void BounceTick(object sender, EventArgs e)
-        {
-            if(click_flag >= 1)
-            {
-                ImgPosY = ((ImgPosX - click_X) * (ImgPosX - click_X)) / 100 + click_Y;
-                ImgPosX += MoveStepX;
-                MoveStepX++;
-
-                MenuPanel.Paint += new PaintEventHandler(PaintImg);
-                MenuPanel.Refresh();
-                if (ImgPosX > ClientSize.Height)
-                {
-                    BounceTimer.Stop();
-                    click_flag = 0;
-                    MoveStepX = 1;
-                }
-            }
         }
 
         private async void custom_button1_Click(object sender, EventArgs e)

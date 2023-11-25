@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.SelectbarPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -43,7 +42,6 @@
             this.checkPanel = new Kiosk_UI.Custom.Custom_flowpanel();
             this.custom_button1 = new Kiosk_UI.Custom.Custom_button();
             this.MenuPanel = new Kiosk_UI.Custom.Custom_flowpanel();
-            this.BounceTimer = new System.Windows.Forms.Timer(this.components);
             this.SelectbarPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.cost_panel.SuspendLayout();
@@ -246,12 +244,6 @@
             this.MenuPanel.Size = new System.Drawing.Size(347, 399);
             this.MenuPanel.TabIndex = 4;
             // 
-            // BounceTimer
-            // 
-            this.BounceTimer.Enabled = true;
-            this.BounceTimer.Interval = 10;
-            this.BounceTimer.Tick += new System.EventHandler(this.BounceTick);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -303,7 +295,6 @@
         private Custom.Custom_button DrinkButton;
         private Custom.Custom_button AllmenuButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Timer BounceTimer;
     }
 }
 
