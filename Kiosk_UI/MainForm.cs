@@ -837,22 +837,28 @@ namespace Kiosk_UI
                 var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad1);
                 this.ARS(keyEvent);
 
-                System.Threading.Thread.Sleep(10000);
+                System.Threading.Thread.Sleep(15000);
                 //커피가 아닌 음료
                 keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad2);
                 this.ARS(keyEvent);
-                System.Threading.Thread.Sleep(10000);
-                //우유가 들어간 음료
+                System.Threading.Thread.Sleep(8000);
+                //우유가 안들어간 음료
                 keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad2);
                 this.ARS(keyEvent);
                 System.Threading.Thread.Sleep(10000);
-                //민트초코 추가
+                //캐모마일 추가
                 keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad4);
                 this.ARS(keyEvent);
-                System.Threading.Thread.Sleep(10000);
+                System.Threading.Thread.Sleep(2000);
                 //주문하기
                 keyEvent =new KeyEventArgs(Keys.Enter);
                 this.ARS(keyEvent);
+                System.Threading.Thread.Sleep(5000);
+
+
+                keyEvent = new KeyEventArgs(Keys.Enter);
+                this.ARS(keyEvent);
+                System.Threading.Thread.Sleep(5000);
             }
             //엔터키로 주문 하기
             if(e.KeyCode == Keys.Enter) 
@@ -1294,6 +1300,11 @@ namespace Kiosk_UI
             }
             else
             {
+                //결제하기 버튼 누르면 ars 초기화
+                key_flag = 0;
+                key_flag2 = 0;
+                back_flag = 0;
+
                 DataTable dt = new DataTable();
                 dt.Columns.Add(" ", typeof(Bitmap)); //사진
                 dt.Columns.Add("이름", typeof(string));
