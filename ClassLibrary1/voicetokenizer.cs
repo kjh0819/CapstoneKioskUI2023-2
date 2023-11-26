@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using TTSLib;
+using System.Linq;
+
 public class Tokenizer
 {
     const string speechKey = "e947dbc053864f8780d47813eeae6fc1"; //고정값 유출하지 말것
@@ -27,7 +29,7 @@ public class Tokenizer
 
             try
             {
-                var timeoutTask = Task.Delay(TimeSpan.FromSeconds(3));
+                var timeoutTask = Task.Delay(TimeSpan.FromSeconds(5));
                 var responseTask = client.PostAsync(url, content);
 
                 var completedTask = await Task.WhenAny(responseTask, timeoutTask);
@@ -83,7 +85,6 @@ public class Tokenizer
         }
         return speechRecognitionResult.Text;
     }
-
     public async static Task<string> VoiceTokenizer()
     {
 
@@ -91,7 +92,7 @@ public class Tokenizer
         speechConfig.SpeechRecognitionLanguage = "ko-KR";
 
         var audioConfig = AudioConfig.FromDefaultMicrophoneInput();
-        var speechRecognizer = new SpeechRecognizer(speechConfig, audioConfig);
+        var speechRecognizer = new Microsoft.CognitiveServices.Speech.SpeechRecognizer(speechConfig, audioConfig);
 
         var phraseList = PhraseListGrammar.FromRecognizer(speechRecognizer);
 
@@ -108,9 +109,8 @@ public class Tokenizer
         phraseList.AddPhrase($"마카롱");
         phraseList.AddPhrase($"쿠키");
         phraseList.AddPhrase($"빵");
+        
 
-        TextToSpeechConverter tts =  new TextToSpeechConverter();
-        tts.Speak("음성인식을 시작합니다");
         var speechRecognitionResult = await speechRecognizer.RecognizeOnceAsync();
         string result = await OutputSpeechRecognitionResult(speechRecognitionResult);
         try

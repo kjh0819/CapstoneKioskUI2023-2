@@ -20,7 +20,7 @@ namespace AutoMotorControl
             {
                 port1.WriteLine(vector + " " + miliSeconds);
             }
-            catch { }
+            catch { Console.WriteLine("제어 오류 아두이노 확인요망"); }
         }
         public void init()
         {

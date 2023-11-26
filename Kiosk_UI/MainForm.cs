@@ -13,6 +13,9 @@ using System.Timers;
 using TTSLib;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
+using Microsoft.Speech.Recognition;
+using System.Threading.Tasks;
+
 
 namespace Kiosk_UI
 {
@@ -66,13 +69,76 @@ namespace Kiosk_UI
             AllmenuButton.ForeColor = Color.White;
 
         }
+        private SpeechRecognitionEngine recognizer;
+        private async Task CallingKeywordJobs()
+        {
+            StartInputTimer();
+            MotorControl mtr = new MotorControl();
+            tts.SpeakSynchronous("무엇을 도와드릴까요?"); 
+            string token = await Tokenizer.VoiceTokenizer();
+            Console.WriteLine(token);
 
+            if (token.Contains("error NOMATCH: Speech could not be recognized."))
+            {
+                tts.Speak("잘 알아듣지 못했습니다.");
+            }
+            else if (token.Contains("검색"))
+                VoiceButton.PerformClick();
+            else if (token.Contains("올리/VV"))
+                mtr.MenualControl("1", "1000");
+            else if (token.Contains("내리/VV"))
+                mtr.MenualControl("2", "1000");
+
+
+            StartInputTimer();
+        }
+        private async Task CallingKeyword()
+        {
+            recognizer = new SpeechRecognitionEngine();
+                bool calledFlag=false;
+                // 음성 인식 이벤트 핸들러 등록
+                recognizer.SpeechRecognized += async (s, e) =>
+                {
+                    Console.WriteLine($"Recognized: {e.Result.Text}");
+
+                    // 여기에서 특정 키워드를 감지하고 원하는 동작 수행
+                    if (e.Result.Text.Contains("음성검색"))
+                    {
+                        recognizer.RecognizeAsyncStop();
+                        VoiceButton.PerformClick(); 
+                        CallingKeyword();
+                    }
+                    else if (e.Result.Text.Contains("설명서"))
+                    { 
+                        
+                        Console.WriteLine("설명서 감지됨"); 
+                        recognizer.RecognizeAsyncStop();
+                        await CallingKeywordJobs();
+                        CallingKeyword();
+                    }
+                    
+                };
+
+                // Grammar 생성 및 로드
+                var grammar = new Microsoft.Speech.Recognition.Grammar(new Choices("설명서"));
+                if (grammar != null)
+                {
+                    recognizer.LoadGrammar(grammar);
+                }
+                var choices = new Choices("설명서");
+                Console.WriteLine(choices);
+                // 음성 인식 시작
+                recognizer.SetInputToDefaultAudioDevice();
+                recognizer.RecognizeAsync(RecognizeMode.Multiple);
+            
+        }
         private System.Timers.Timer aTimer;
         public MainForm()
         {
             InitializeComponent();
 
             SetTimer();
+            CallingKeyword();
 
             this.FormClosing += MainForm_FormClosing;
             new Touch(MenuPanel);
@@ -138,7 +204,7 @@ namespace Kiosk_UI
                     default: break;
                 }
             }
-            }
+        }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             MotorControl mtr = new MotorControl();
@@ -552,6 +618,8 @@ namespace Kiosk_UI
                 var itm = (item)type;
                 itm.Visible = false;
             }
+            tts.Speak("음성인식을 시작합니다");
+            await Task.Delay(TimeSpan.FromSeconds(3));
             string token = await Tokenizer.VoiceTokenizer();
             StartInputTimer();
 
