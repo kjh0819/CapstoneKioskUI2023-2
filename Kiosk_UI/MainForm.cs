@@ -77,10 +77,13 @@ namespace Kiosk_UI
             tts.SpeakSynchronous("무엇을 도와드릴까요?"); 
             string token = await Tokenizer.VoiceTokenizer();
             Console.WriteLine(token);
-
             if (token.Contains("error NOMATCH: Speech could not be recognized."))
             {
                 tts.Speak("잘 알아듣지 못했습니다.");
+            }
+            else if (token.Contains("error Request timed out."))
+            {
+                tts.Speak("음성 분석 서버가 응답하지 않습니다.");
             }
             else if (token.Contains("검색"))
                 VoiceButton.PerformClick();
@@ -90,14 +93,36 @@ namespace Kiosk_UI
                 mtr.MenualControl("2", "1000");
             else if (token.Contains("주문"))
             {
+                //오류발생 왠지 몰?루
+                //if (Search(token.Split('/')[0], true).Count == 1)
+                //{
+                //    List<string> searchedMenu = Search(token, true);
+                //    foreach (var type in MenuPanel.Controls)
+                //    {
+                //        var itm = (item)type;
+                //        if (itm.Title.ToString() == searchedMenu[0])
+                //        {
+                //            //itm.txtImg_Click(itm, e); //메뉴를 장바구니에 담는 코드
+                //            tts.Speak(itm.Title + "추가됨");
+                //        }
+                //    }
+
+                //}
                 key_flag = 0;
                 key_flag2 = 0;
                 back_flag = 0;
                 var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad1);
                 this.ARS(keyEvent);
             }
-
-
+            else if(token.Contains("무엇")&&token.Contains("하/VV+ㄹ/ETM"))
+            {
+                tts.Speak("음성검색,화면올려줘,화면내려줘,주문할게 와 같이 말씀해주세요");
+            }
+            else
+            {
+                
+                tts.Speak("죄송합니다. 음성검색,화면올려줘,화면내려줘,주문할게 와 같이 말씀해주세요");
+            }
             StartInputTimer();
         }
         private async Task CallingKeyword()

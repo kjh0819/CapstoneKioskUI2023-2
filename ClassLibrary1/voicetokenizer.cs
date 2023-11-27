@@ -36,7 +36,7 @@ public class Tokenizer
                 if (completedTask == timeoutTask)
                 {
                     // Timeout occurred
-                    Console.WriteLine("Request timed out after 3 seconds.");
+                    Console.WriteLine("Request timed out after 5 seconds.");
                     return "Request timed out.";
                 }
 
