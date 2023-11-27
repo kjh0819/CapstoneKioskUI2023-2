@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.CognitiveServices.Speech;
+using Microsoft.Speech.Recognition;
+using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kiosk_UI
@@ -18,6 +21,42 @@ namespace Kiosk_UI
                 curbutton.BackColor = Color.FromArgb(244, 211, 123);
             }
         }
+        private SpeechRecognitionEngine recognizer;
+        private async Task CallingKeyword()
+        {
+            recognizer = new SpeechRecognitionEngine();
+
+            // 음성 인식 이벤트 핸들러 등록
+            recognizer.SpeechRecognized += async (s, e) =>
+            {
+                recognizer.RecognizeAsyncStop();
+                Console.WriteLine($"Recognized: {e.Result.Text}");
+                if (e.Result.Text.Contains("매장"))
+                {
+                    select_check = 1;
+                    Yesbutton.PerformClick();
+                }
+                else if (e.Result.Text.Contains("포장"))
+                {
+                    select_check = 1;
+                    Yesbutton.PerformClick();
+                }
+                CallingKeyword();
+            };
+
+            // Grammar 생성 및 로드
+            var grammar = new Microsoft.Speech.Recognition.Grammar(new Choices("매장","포장"));
+            if (grammar != null)
+            {
+                recognizer.LoadGrammar(grammar);
+            }
+            var choices = new Choices("설명서");
+            Console.WriteLine(choices);
+            // 음성 인식 시작
+            recognizer.SetInputToDefaultAudioDevice();
+            recognizer.RecognizeAsync(RecognizeMode.Multiple);
+
+        }
         private void DisableButton()
         {
             if (curbutton != null)
@@ -32,6 +71,7 @@ namespace Kiosk_UI
         public TakeoutForm()
         {
             InitializeComponent();
+            CallingKeyword();
         }
 
         private void Nobutton_Click(object sender, EventArgs e)

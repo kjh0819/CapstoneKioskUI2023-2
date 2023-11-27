@@ -88,6 +88,14 @@ namespace Kiosk_UI
                 mtr.MenualControl("1", "1000");
             else if (token.Contains("내리/VV"))
                 mtr.MenualControl("2", "1000");
+            else if (token.Contains("주문"))
+            {
+                key_flag = 0;
+                key_flag2 = 0;
+                back_flag = 0;
+                var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad1);
+                this.ARS(keyEvent);
+            }
 
 
             StartInputTimer();
@@ -99,28 +107,101 @@ namespace Kiosk_UI
                 // 음성 인식 이벤트 핸들러 등록
                 recognizer.SpeechRecognized += async (s, e) =>
                 {
+                    StartInputTimer();
+                    recognizer.RecognizeAsyncStop();
                     Console.WriteLine($"Recognized: {e.Result.Text}");
 
                     // 여기에서 특정 키워드를 감지하고 원하는 동작 수행
                     if (e.Result.Text.Contains("음성검색"))
                     {
-                        recognizer.RecognizeAsyncStop();
                         VoiceButton.PerformClick(); 
                         CallingKeyword();
                     }
                     else if (e.Result.Text.Contains("설명서"))
                     { 
-                        
                         Console.WriteLine("설명서 감지됨"); 
-                        recognizer.RecognizeAsyncStop();
                         await CallingKeywordJobs();
                         CallingKeyword();
                     }
-                    
+                    else if (e.Result.Text.Contains("영번"))
+                    {
+                        var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad0);
+                        this.ARS(keyEvent);
+                        CallingKeyword();
+                    }
+                    else if (e.Result.Text.Contains("일번"))
+                    {
+                        var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad1);
+                        this.ARS(keyEvent);
+                        CallingKeyword();
+                    }
+                    else if (e.Result.Text.Contains("이번"))
+                    {
+                        var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad2);
+                        this.ARS(keyEvent);
+                        CallingKeyword();
+                    }
+                    else if (e.Result.Text.Contains("삼번"))
+                    {
+                        var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad3);
+                        this.ARS(keyEvent);
+                        CallingKeyword();
+                    }
+                    else if (e.Result.Text.Contains("사번"))
+                    {
+                        var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad4);
+                        this.ARS(keyEvent);
+                        CallingKeyword();
+                    }
+                    else if (e.Result.Text.Contains("오번"))
+                    {
+                        var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad5);
+                        this.ARS(keyEvent);
+                        CallingKeyword();
+                    }
+                    else if (e.Result.Text.Contains("육번"))
+                    {
+                        var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad6);
+                        this.ARS(keyEvent);
+                        CallingKeyword();
+                    }
+                    else if (e.Result.Text.Contains("칠번"))
+                    {
+                        var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad7);
+                        this.ARS(keyEvent);
+                        CallingKeyword();
+                    }
+                    else if (e.Result.Text.Contains("팔번"))
+                    {
+                        var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad8);
+                        this.ARS(keyEvent);
+                        CallingKeyword();
+                    }
+                    else if (e.Result.Text.Contains("구번"))
+                    {
+                        var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad9);
+                        this.ARS(keyEvent);
+                        CallingKeyword();
+                    }
+                    else if (e.Result.Text.Contains("확인"))
+                    {
+                        var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.Enter);
+                        this.ARS(keyEvent);
+                        CallingKeyword();
+                    }
+                    else if (e.Result.Text.Contains("주문"))
+                    {
+                        key_flag = 0;
+                        key_flag2 = 0;
+                        back_flag = 0;
+                        var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad7);
+                        this.ARS(keyEvent);
+                        CallingKeyword();
+                    }
                 };
 
                 // Grammar 생성 및 로드
-                var grammar = new Microsoft.Speech.Recognition.Grammar(new Choices("설명서"));
+                var grammar = new Microsoft.Speech.Recognition.Grammar(new Choices("설명서", "음성검색", "영번", "일번", "이번","삼번","사번","오번","육번","칠번","팔번","구번","확인","주문"));
                 if (grammar != null)
                 {
                     recognizer.LoadGrammar(grammar);
@@ -166,6 +247,9 @@ namespace Kiosk_UI
         private void OnTimedEvent(object sender, EventArgs e)
         {
             Console.WriteLine("비동작 감지됨");
+            key_flag = 0;
+            key_flag2 = 0;
+            back_flag = 0;
             if (this.InvokeRequired)
             {
                 this.Invoke(new Action(() => OnTimedEvent(sender, e)));
@@ -618,7 +702,7 @@ namespace Kiosk_UI
                 var itm = (item)type;
                 itm.Visible = false;
             }
-            tts.Speak("음성인식을 시작합니다");
+            tts.Speak("음성 검색을 시작합니다");
             await Task.Delay(TimeSpan.FromSeconds(3));
             string token = await Tokenizer.VoiceTokenizer();
             StartInputTimer();
@@ -1384,7 +1468,6 @@ namespace Kiosk_UI
                     var itm = (select_item)item;
                     Bitmap original = (Bitmap)itm.Icon2;
                     Bitmap resized = new Bitmap(original, new Size(original.Width / 2, original.Height / 2));
-
                     dt.Rows.Add(resized, itm.Title2.ToString(), itm.Count, itm.Cost2, itm.Cost2 * itm.Count);
                 }
 

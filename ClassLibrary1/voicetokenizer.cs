@@ -109,6 +109,7 @@ public class Tokenizer
         phraseList.AddPhrase($"마카롱");
         phraseList.AddPhrase($"쿠키");
         phraseList.AddPhrase($"빵");
+        phraseList.AddPhrase("주문");
         
 
         var speechRecognitionResult = await speechRecognizer.RecognizeOnceAsync();

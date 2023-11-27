@@ -1,6 +1,8 @@
 ﻿using Kiosk_UI.Custom;
+using Microsoft.Speech.Recognition;
 using System;
 using System.Data;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Kiosk_UI
@@ -8,6 +10,41 @@ namespace Kiosk_UI
     public partial class PayCheck : Form
     {
         DataTable passedIndt;
+
+        private SpeechRecognitionEngine recognizer;
+        private async Task CallingKeyword()
+        {
+            recognizer = new SpeechRecognitionEngine();
+
+            // 음성 인식 이벤트 핸들러 등록
+            recognizer.SpeechRecognized += async (s, e) =>
+            {
+                recognizer.RecognizeAsyncStop();
+                Console.WriteLine($"Recognized: {e.Result.Text}");
+                if (e.Result.Text.Contains("결제"))
+                {
+                    Yesbutton.PerformClick();
+                }
+                else if (e.Result.Text.Contains("취소"))
+                {
+                    Nobutton.PerformClick();
+                }
+                CallingKeyword();
+            };
+
+            // Grammar 생성 및 로드
+            var grammar = new Microsoft.Speech.Recognition.Grammar(new Choices("결제", "취소"));
+            if (grammar != null)
+            {
+                recognizer.LoadGrammar(grammar);
+            }
+            var choices = new Choices("설명서");
+            Console.WriteLine(choices);
+            // 음성 인식 시작
+            recognizer.SetInputToDefaultAudioDevice();
+            recognizer.RecognizeAsync(RecognizeMode.Multiple);
+
+        }
 
         private void PayCheck_KeyDown_1(object sender, KeyEventArgs e)
         {
@@ -30,7 +67,7 @@ namespace Kiosk_UI
         public PayCheck()
         {
             InitializeComponent();
-
+            CallingKeyword();
             this.AcceptButton = Yesbutton;
         }
 
