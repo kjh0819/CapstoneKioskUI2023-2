@@ -1077,9 +1077,11 @@ namespace Kiosk_UI
                 tts.StopSpeak();
                 tts.Speak("빵류를 원하시면 일번, 과자류를 원하시면 이번을 눌러주세요.다시듣고싶다면 팔번을, 돌아가기는 구번을 눌러주세요.");
                 key_flag = 3;
+                key_flag2 = 0;
                 back_flag = 1;
+                interrupt = 0;
             }
-            else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 0 && interrupt == 0) //빵류
+            else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 0 && back_flag == 1) //빵류
             {
                 //빵류
                 tts.StopSpeak();
@@ -1128,7 +1130,7 @@ namespace Kiosk_UI
                 interrupt = 1;
 
             }
-            else if (96 <= e.KeyValue && e.KeyValue <= 95 + names.Count && key_flag == 3 && key_flag2 == 0 && interrupt <= 1 )
+            else if (96 <= e.KeyValue && e.KeyValue <= 95 + names.Count && key_flag == 3 && key_flag2 == 0 && interrupt == 1)
             { //빵류 장바구니
                 tts.StopSpeak();
                 foreach (var type in MenuPanel.Controls)
@@ -1142,7 +1144,7 @@ namespace Kiosk_UI
                 }
             }
 
-            else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 0 && interrupt != 2)
+            else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 0 && back_flag == 1)
             {
                 //과자류
                 tts.StopSpeak();
@@ -1291,7 +1293,7 @@ namespace Kiosk_UI
                 names.Clear();
                 numbers.Clear();
 
-                var result = Search("커피", false);
+                var result = Search("커피", true);
                 result = result.Intersect(Search("우유", false)).ToList();
                 string TextResult = "";
 
@@ -1301,10 +1303,22 @@ namespace Kiosk_UI
                     names.Add(result[i]);
                     numbers.Add(i);
                 }
-               foreach (var item in MenuPanel.Controls)
+                foreach (var item in MenuPanel.Controls)
                 {
                     var control = (item)item;
                     control.Visible = false;
+                }
+                foreach (var item in MenuPanel.Controls)
+                {
+                    var control = (item)item;
+                    if (control != null)
+                    {
+                        foreach (var text in result)
+                        {
+                            if (text == control.Title)
+                                control.Visible = true;
+                        }
+                    }
                 }
                 tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번, 주문 완료는 확인을 눌러주세요.");
                 Console.WriteLine(TextResult);
@@ -1359,19 +1373,7 @@ namespace Kiosk_UI
                 foreach (var item in MenuPanel.Controls)
                 {
                     var control = (item)item;
-                    if (control != null)
-                    {
-                        foreach (var text in result)
-                        {
-                            if (text == control.Title)
-                                control.Visible = true;
-                        }
-                    }
-                }
-                foreach (var item in MenuPanel.Controls)
-                {
-                    var control = (item)item;
-                    if (control != null)
+                    if (control == null)
                     {
                         foreach (var text in result)
                         {
