@@ -94,6 +94,7 @@ namespace Kiosk_UI
         public PayCheck(DataTable table)
         {
             InitializeComponent();
+            CallingKeyword();
             this.passedIndt = table;
 
         }
