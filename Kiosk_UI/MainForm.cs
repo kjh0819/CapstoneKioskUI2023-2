@@ -86,12 +86,12 @@ namespace Kiosk_UI
             }
             else if (token.Contains("검색"))
                 VoiceButton.PerformClick();
-            else if (token.Contains("올리/VV"))
+            else if (token.Contains("올리/VV")||token.Contains("높이/VV+어/EC"))
             {
                 MotorControl mtr = new MotorControl();
                 mtr.MenualControl("1", "1000");
             }
-            else if (token.Contains("내리/VV"))
+            else if (token.Contains("내리/VV")||token.Contains("낮추/VV"))
             {
                 MotorControl mtr = new MotorControl();
                 mtr.MenualControl("2", "1000");
