@@ -70,6 +70,7 @@ namespace Kiosk_UI
 
         }
         private SpeechRecognitionEngine recognizer;
+        bool arsMode = false;
         private async Task CallingKeywordJobs()
         {
             StartInputTimer();
@@ -117,6 +118,7 @@ namespace Kiosk_UI
                 key_flag2 = 0;
                 back_flag = 0;
                 var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad1);
+                arsMode = true;
                 this.ARS(keyEvent);
             }
             else if (token.Contains("무엇") && token.Contains("하/VV+ㄹ/ETM"))
@@ -153,73 +155,73 @@ namespace Kiosk_UI
                         await CallingKeywordJobs();
                         CallingKeyword();
                     }
-                    else if (e.Result.Text.Contains("영번"))
+                    else if (e.Result.Text.Contains("영번") && arsMode)
                     {
                         var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad0);
                         this.ARS(keyEvent);
                         CallingKeyword();
                     }
-                    else if (e.Result.Text.Contains("일번"))
+                    else if (e.Result.Text.Contains("일번") && arsMode)
                     {
                         var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad1);
                         this.ARS(keyEvent);
                         CallingKeyword();
                     }
-                    else if (e.Result.Text.Contains("이번"))
+                    else if (e.Result.Text.Contains("이번") && arsMode)
                     {
                         var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad2);
                         this.ARS(keyEvent);
                         CallingKeyword();
                     }
-                    else if (e.Result.Text.Contains("삼번"))
+                    else if (e.Result.Text.Contains("삼번") && arsMode)
                     {
                         var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad3);
                         this.ARS(keyEvent);
                         CallingKeyword();
                     }
-                    else if (e.Result.Text.Contains("사번"))
+                    else if (e.Result.Text.Contains("사번") && arsMode)
                     {
                         var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad4);
                         this.ARS(keyEvent);
                         CallingKeyword();
                     }
-                    else if (e.Result.Text.Contains("오번"))
+                    else if (e.Result.Text.Contains("오번") && arsMode)
                     {
                         var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad5);
                         this.ARS(keyEvent);
                         CallingKeyword();
                     }
-                    else if (e.Result.Text.Contains("육번"))
+                    else if (e.Result.Text.Contains("육번") && arsMode)
                     {
                         var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad6);
                         this.ARS(keyEvent);
                         CallingKeyword();
                     }
-                    else if (e.Result.Text.Contains("칠번"))
+                    else if (e.Result.Text.Contains("칠번") && arsMode)
                     {
                         var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad7);
                         this.ARS(keyEvent);
                         CallingKeyword();
                     }
-                    else if (e.Result.Text.Contains("팔번"))
+                    else if (e.Result.Text.Contains("팔번") && arsMode)
                     {
                         var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad8);
                         this.ARS(keyEvent);
                         CallingKeyword();
                     }
-                    else if (e.Result.Text.Contains("구번"))
+                    else if (e.Result.Text.Contains("구번") && arsMode)
                     {
                         var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad9);
                         this.ARS(keyEvent);
                         CallingKeyword();
                     }
-                    else if (e.Result.Text.Contains("확인"))
+                    else if (e.Result.Text.Contains("확인") && arsMode)
                     {
                         var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.Enter);
                         this.ARS(keyEvent);
                         CallingKeyword();
                     }
-                    else if (e.Result.Text.Contains("주문"))
+                    else if (e.Result.Text.Contains("주문") && arsMode)
                     {
                         key_flag = 0;
                         key_flag2 = 0;
@@ -466,6 +468,7 @@ namespace Kiosk_UI
         private void cancel_button_Click(object sender, EventArgs e)
         {
             StartInputTimer();
+            arsMode = false;
             try
             {
                 FinishForm finishForm = new FinishForm();
@@ -473,7 +476,6 @@ namespace Kiosk_UI
                 finishForm.ShowDialog();
             }
             catch { }
-
             checkPanel.Controls.Clear();//장바구니 전체 삭제
             final_cost = 0;
             cost_lbl.Text = final_cost.ToString() + "원";
@@ -1488,6 +1490,7 @@ namespace Kiosk_UI
                 key_flag = 0;
                 key_flag2 = 0;
                 back_flag = 0;
+                arsMode = false;
 
                 DataTable dt = new DataTable();
                 dt.Columns.Add(" ", typeof(Bitmap)); //사진
