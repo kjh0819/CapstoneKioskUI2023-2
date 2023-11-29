@@ -74,7 +74,9 @@ namespace Kiosk_UI
         private async Task CallingKeywordJobs()
         {
             StartInputTimer();
-            tts.SpeakSynchronous("무엇을 도와드릴까요?"); 
+            tts.StopSpeak();
+            tts.Speak("무엇을 도와드릴까요?");
+            await Task.Delay(TimeSpan.FromSeconds(1));
             string token = await Tokenizer.VoiceTokenizer();
             Console.WriteLine(token);
             if (token.Contains("error NOMATCH: Speech could not be recognized."))
@@ -127,7 +129,6 @@ namespace Kiosk_UI
             }
             else
             {
-
                 tts.Speak("죄송합니다. 음성검색,화면올려줘,화면내려줘,주문할게 와 같이 말씀해주세요");
             }
             StartInputTimer();
@@ -146,12 +147,12 @@ namespace Kiosk_UI
                     // 여기에서 특정 키워드를 감지하고 원하는 동작 수행
                     if (e.Result.Text.Contains("음성검색"))
                     {
-                        VoiceButton.PerformClick(); 
+                        VoiceButton.PerformClick();
                         CallingKeyword();
                     }
                     else if (e.Result.Text.Contains("설명서"))
-                    { 
-                        Console.WriteLine("설명서 감지됨"); 
+                    {
+                        Console.WriteLine("설명서 감지됨");
                         await CallingKeywordJobs();
                         CallingKeyword();
                     }
@@ -230,6 +231,8 @@ namespace Kiosk_UI
                         this.ARS(keyEvent);
                         CallingKeyword();
                     }
+                    else
+                        CallingKeyword();
                 };
 
                 // Grammar 생성 및 로드
