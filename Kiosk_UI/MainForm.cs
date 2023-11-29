@@ -988,6 +988,7 @@ namespace Kiosk_UI
         public static int key_flag2 = 0;
         public static int back_flag = 0;
         public static int interrupt = 0;
+        public static bool min_flag = false;
         public List<int> numbers = new List<int>();
         public List<string> names = new List<string>();
         public class _result
@@ -1047,7 +1048,7 @@ namespace Kiosk_UI
             //엔터키로 주문 하기
             if(e.KeyCode == Keys.Enter) 
                 custom_button1.PerformClick();
-            
+
             //ars_ver1
             if (e.KeyCode == Keys.NumPad9 && key_flag == 1)
             {
@@ -1132,19 +1133,51 @@ namespace Kiosk_UI
                 interrupt = 1;
 
             }
+            else if (e.KeyCode == Keys.Subtract && key_flag == 3 && key_flag2 == 0 && interrupt == 1)
+            {
+                tts.StopSpeak();
+                if (min_flag == false)
+                {
+                    tts.Speak("빼기모드");
+                    min_flag = true;
+                }
+                else if (min_flag == true)
+                {
+                    tts.Speak("빼기모드 취소됨");
+                    min_flag = false;
+                }
+            }
             else if (96 <= e.KeyValue && e.KeyValue <= 95 + names.Count && key_flag == 3 && key_flag2 == 0 && interrupt == 1)
             { //빵류 장바구니
                 tts.StopSpeak();
-                foreach (var type in MenuPanel.Controls)
+                if (min_flag == false)
                 {
-                    var itm = (item)type;
-                    if (itm.Title.ToString() == names[e.KeyValue - 96])
+                    foreach (var type in MenuPanel.Controls)
                     {
-                        itm.txtImg_Click(itm, e);
-                        tts.Speak(itm.Title + "추가됨");
+                        var itm = (item)type;
+                        if (itm.Title.ToString() == names[e.KeyValue - 96])
+                        {
+                            itm.txtImg_Click(itm, e);
+                            tts.Speak(itm.Title + "추가됨");
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var type in checkPanel.Controls)
+                    {
+                        var slt = (select_item)type;
+                        if (slt.Title2.ToString() == names[e.KeyValue - 96])
+                        {
+                            slt.minus_button_Click(slt, e);
+                            tts.Speak(slt.Title2 + "빼기");
+                        }
                     }
                 }
             }
+
+
+
 
             else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 0 && back_flag == 1)
             {
@@ -1193,17 +1226,45 @@ namespace Kiosk_UI
                 back_flag = 2;
                 interrupt = 2;
             }
+            else if(e.KeyCode == Keys.Subtract && key_flag == 3 && key_flag2 == 0 && interrupt == 2)
+            {
+                tts.StopSpeak();
+                if (min_flag == false)
+                {
+                    tts.Speak("빼기모드");
+                    min_flag = true;
+                }
+                else if (min_flag == true)
+                {
+                    tts.Speak("빼기모드 취소됨");
+                    min_flag = false;
+                }
+            }
             else if (96 <= e.KeyValue && e.KeyValue <= 95 + names.Count && key_flag == 3 && key_flag2 == 0 && interrupt == 2)
             {
-                //과자류 장바구니
                 tts.StopSpeak();
-                foreach (var type in MenuPanel.Controls)
+                if (min_flag == false)
                 {
-                    var itm = (item)type;
-                    if (itm.Title.ToString() == names[e.KeyValue - 96])
+                    foreach (var type in MenuPanel.Controls)
                     {
-                        itm.txtImg_Click(itm, e);
-                        tts.Speak(itm.Title + "추가됨");
+                        var itm = (item)type;
+                        if (itm.Title.ToString() == names[e.KeyValue - 96])
+                        {
+                            itm.txtImg_Click(itm, e);
+                            tts.Speak(itm.Title + "추가됨");
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var type in checkPanel.Controls)
+                    {
+                        var slt = (select_item)type;
+                        if (slt.Title2.ToString() == names[e.KeyValue - 96])
+                        {
+                            slt.minus_button_Click(slt, e);
+                            tts.Speak(slt.Title2 + "빼기");
+                        }
                     }
                 }
             }
@@ -1272,21 +1333,50 @@ namespace Kiosk_UI
                 back_flag = 4;
                 interrupt = 3;
             }
+            else if(e.KeyCode == Keys.Subtract && key_flag == 3 && key_flag2 == 1 && interrupt == 3)
+            {
+                tts.StopSpeak();
+                if (min_flag == false)
+                {
+                    tts.Speak("빼기모드");
+                    min_flag = true;
+                }
+                else if (min_flag == true)
+                {
+                    tts.Speak("빼기모드 취소됨");
+                    min_flag = false;
+                }
+            }
             else if (96 <= e.KeyValue && e.KeyValue <= 95 + names.Count && key_flag == 3 && key_flag2 == 1 && interrupt == 3)
             {
                 //우유가 들어간 커피 장바구니
                 tts.StopSpeak();
-                foreach (var type in MenuPanel.Controls)
+                if (min_flag == false)
                 {
-                    var itm = (item)type;
-                    if (itm.Title.ToString() == names[e.KeyValue - 96])
+                    foreach (var type in MenuPanel.Controls)
                     {
-                        itm.txtImg_Click(itm, e);
-                        tts.Speak(itm.Title + "추가됨");
+                        var itm = (item)type;
+                        if (itm.Title.ToString() == names[e.KeyValue - 96])
+                        {
+                            itm.txtImg_Click(itm, e);
+                            tts.Speak(itm.Title + "추가됨");
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var type in checkPanel.Controls)
+                    {
+                        var slt = (select_item)type;
+                        if (slt.Title2.ToString() == names[e.KeyValue - 96])
+                        {
+                            slt.minus_button_Click(slt, e);
+                            tts.Speak(slt.Title2 + "빼기");
+                        }
                     }
                 }
             }
-            else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 1&&interrupt != 4)
+            else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 1 && interrupt != 4)
             {
                 string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
                 //우유가 안들어간 커피
@@ -1327,18 +1417,47 @@ namespace Kiosk_UI
                 back_flag = 4;
                 interrupt = 4;
             }
- 
+
+            else if (e.KeyCode == Keys.Subtract && key_flag == 3 && key_flag2 == 1 && interrupt == 4)
+            {
+                tts.StopSpeak();
+                if (min_flag == false)
+                {
+                    tts.Speak("빼기모드");
+                    min_flag = true;
+                }
+                else if (min_flag == true)
+                {
+                    tts.Speak("빼기모드 취소됨");
+                    min_flag = false;
+                }
+            }
             else if (96 <= e.KeyValue && e.KeyValue <= 95 + names.Count && key_flag == 3 && key_flag2 == 1 && interrupt == 4)
             {
                 //우유가 안들어간 커피 장바구니
                 tts.StopSpeak();
-                foreach (var type in MenuPanel.Controls)
+                if (min_flag == false)
                 {
-                    var itm = (item)type;
-                    if (itm.Title.ToString() == names[e.KeyValue - 96])
+                    foreach (var type in MenuPanel.Controls)
                     {
-                        itm.txtImg_Click(itm, e);
-                        tts.Speak(itm.Title + "추가됨");
+                        var itm = (item)type;
+                        if (itm.Title.ToString() == names[e.KeyValue - 96])
+                        {
+                            itm.txtImg_Click(itm, e);
+                            tts.Speak(itm.Title + "추가됨");
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var type in checkPanel.Controls)
+                    {
+                        var slt = (select_item)type;
+                        if (slt.Title2.ToString() == names[e.KeyValue - 96])
+                        {
+                            slt.minus_button_Click(slt, e);
+                            tts.Speak(slt.Title2 + "빼기");
+                        }
                     }
                 }
             }
@@ -1355,7 +1474,7 @@ namespace Kiosk_UI
                 result = result.Intersect(Search("커피", false)).ToList();
 
                 string TextResult = "";
-                List<string>drinks=new List<string>();
+                List<string> drinks = new List<string>();
                 foreach (var type in MenuPanel.Controls)
                 {
                     var itm = (item)type;
@@ -1365,7 +1484,7 @@ namespace Kiosk_UI
                         itm.Visible = false;
                     }
                 }
-                result=result.Intersect(drinks).ToList();
+                result = result.Intersect(drinks).ToList();
                 for (int i = 0; i < result.Count && i < 8; i++)
                 {
                     TextResult += $"{result[i]} {numberMap[i]}번,  ";
@@ -1389,22 +1508,51 @@ namespace Kiosk_UI
                 back_flag = 5;
                 interrupt = 5;
             }
+            else if (e.KeyCode == Keys.Subtract && key_flag == 3 && key_flag2 == 2 && interrupt == 5)
+            {
+                tts.StopSpeak();
+                if (min_flag == false)
+                {
+                    tts.Speak("빼기모드");
+                    min_flag = true;
+                }
+                else if (min_flag == true)
+                {
+                    tts.Speak("빼기모드 취소됨");
+                    min_flag = false;
+                }
+            }
             else if (96 <= e.KeyValue && e.KeyValue <= 95 + names.Count && key_flag == 3 && key_flag2 == 2 && interrupt == 5)
             {
                 //우유가 들어간 음료 장바구니
                 tts.StopSpeak();
-                foreach (var type in MenuPanel.Controls)
+                if (min_flag == false)
                 {
-                    var itm = (item)type;
-                    if (itm.Title.ToString() == names[e.KeyValue - 96])
+                    foreach (var type in MenuPanel.Controls)
                     {
-                        itm.txtImg_Click(itm, e);
-                        tts.Speak(itm.Title + "추가됨");
+                        var itm = (item)type;
+                        if (itm.Title.ToString() == names[e.KeyValue - 96])
+                        {
+                            itm.txtImg_Click(itm, e);
+                            tts.Speak(itm.Title + "추가됨");
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var type in checkPanel.Controls)
+                    {
+                        var slt = (select_item)type;
+                        if (slt.Title2.ToString() == names[e.KeyValue - 96])
+                        {
+                            slt.minus_button_Click(slt, e);
+                            tts.Speak(slt.Title2 + "빼기");
+                        }
                     }
                 }
 
             }
-            else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 2 && interrupt!=6)
+            else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 2 && interrupt != 6)
             {
                 //우유가 안들어간 음료
                 string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
@@ -1452,17 +1600,46 @@ namespace Kiosk_UI
                 back_flag = 5;
                 interrupt = 6;
             }
+            else if (e.KeyCode == Keys.Subtract && key_flag == 3 && key_flag2 == 2 && interrupt == 6)
+            {
+                tts.StopSpeak();
+                if (min_flag == false)
+                {
+                    tts.Speak("빼기모드");
+                    min_flag = true;
+                }
+                else if (min_flag == true)
+                {
+                    tts.Speak("빼기모드 취소됨");
+                    min_flag = false;
+                }
+            }
             else if (96 <= e.KeyValue && e.KeyValue <= 95 + names.Count && key_flag == 3 && key_flag2 == 2 && interrupt == 6)
             {
                 //우유가 안들어간 음료 장바구니
                 tts.StopSpeak();
-                foreach (var type in MenuPanel.Controls)
+                if (min_flag == false)
                 {
-                    var itm = (item)type;
-                    if (itm.Title.ToString() == names[e.KeyValue - 96])
+                    foreach (var type in MenuPanel.Controls)
                     {
-                        itm.txtImg_Click(itm, e);
-                        tts.Speak(itm.Title + "추가됨");
+                        var itm = (item)type;
+                        if (itm.Title.ToString() == names[e.KeyValue - 96])
+                        {
+                            itm.txtImg_Click(itm, e);
+                            tts.Speak(itm.Title + "추가됨");
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var type in checkPanel.Controls)
+                    {
+                        var slt = (select_item)type;
+                        if (slt.Title2.ToString() == names[e.KeyValue - 96])
+                        {
+                            slt.minus_button_Click(slt, e);
+                            tts.Speak(slt.Title2 + "빼기");
+                        }
                     }
                 }
             }
