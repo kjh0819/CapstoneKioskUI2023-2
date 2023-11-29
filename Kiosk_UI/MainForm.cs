@@ -74,7 +74,9 @@ namespace Kiosk_UI
         private async Task CallingKeywordJobs()
         {
             StartInputTimer();
-            tts.SpeakSynchronous("무엇을 도와드릴까요?"); 
+            tts.StopSpeak();
+            tts.Speak("무엇을 도와드릴까요?");
+            await Task.Delay(TimeSpan.FromSeconds(3));
             string token = await Tokenizer.VoiceTokenizer();
             Console.WriteLine(token);
             if (token.Contains("error NOMATCH: Speech could not be recognized."))
@@ -127,7 +129,6 @@ namespace Kiosk_UI
             }
             else
             {
-
                 tts.Speak("죄송합니다. 음성검색,화면올려줘,화면내려줘,주문할게 와 같이 말씀해주세요");
             }
             StartInputTimer();
