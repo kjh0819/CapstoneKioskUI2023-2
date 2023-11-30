@@ -46,7 +46,7 @@ namespace Kiosk_UI
             plusbt?.Invoke(this, e);
         }
 
-        private void minus_button_Click(object sender, EventArgs e)
+        public void minus_button_Click(object sender, EventArgs e)
         {
             if (Count > 1)
             {
