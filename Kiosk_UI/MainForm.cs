@@ -99,12 +99,6 @@ namespace Kiosk_UI
                 MotorControl mtr = new MotorControl();
                 mtr.MenualControl("2", "1000");
             }
-            else if (token.Contains("높이") && token.Contains("조절"))
-            {
-                MotorControl mtr= new MotorControl();
-                mtr.faceReconMotorControl();
-
-            }
             else if (token.Contains("주문"))
             {
                 //오류발생 왠지 몰?루

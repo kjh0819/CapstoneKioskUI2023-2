@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO.Ports;
-using System.Threading.Tasks;
 using TTSLib;
 
 namespace AutoMotorControl
@@ -27,40 +26,6 @@ namespace AutoMotorControl
         {
             port1.WriteLine("4");
         }
-        public async Task faceReconMotorControl()
-        {
-            var face = new FaceRecognition.FaceRecognition();
-            string faceLocate = "";
-            for (int i = 0; i < 5; i++)
-            {
-                faceLocate = face.Recognition().Result;
-                Console.WriteLine(faceLocate);
-
-                if (faceLocate == "error")
-                {
-                    Console.WriteLine("error");
-                    break;
-                }
-                else if (Int32.TryParse(faceLocate, out var res))
-                {
-                    break;
-                }
-            }
-            if (Int32.TryParse(faceLocate, out var result))
-            {
-                Console.WriteLine(result);
-                if (result > 400)
-                {
-
-                    port1.WriteLine("1 0000");
-
-                }
-                else
-                {
-                    port1.WriteLine("1 " + (10 * (400 - result)));
-                }
-            }
-        }
         public async void AutoControl()
         {
             port1.DataReceived += (sender, e) =>
@@ -73,38 +38,37 @@ namespace AutoMotorControl
                     case ("in\r"):
                         TextToSpeechConverter tts = new TextToSpeechConverter();
                         tts.Speak("안녕하세요. 음성안내를 이용하시려면 키패드의 아무 버튼을 눌러주세요.");
-                        faceReconMotorControl();
-                        //var face = new FaceRecognition.FaceRecognition();
-                        //string faceLocate = "";
-                        //for (int i = 0; i < 5; i++)
-                        //{
-                        //    faceLocate = face.Recognition().Result;
-                        //    Console.WriteLine(faceLocate);
+                        var face = new FaceRecognition.FaceRecognition();
+                        string faceLocate = "";
+                        for (int i = 0; i < 5; i++)
+                        {
+                            faceLocate = face.Recognition().Result;
+                            Console.WriteLine(faceLocate);
 
-                        //    if (faceLocate == "error")
-                        //    {
-                        //        Console.WriteLine("error");
-                        //        break;
-                        //    }
-                        //    else if (Int32.TryParse(faceLocate, out var res))
-                        //    {
-                        //        break;
-                        //    }
-                        //}
-                        //if (Int32.TryParse(faceLocate, out var result))
-                        //{
-                        //    Console.WriteLine(result);
-                        //    if (result > 400)
-                        //    {
+                            if (faceLocate == "error")
+                            {
+                                Console.WriteLine("error");
+                                break;
+                            }
+                            else if (Int32.TryParse(faceLocate, out var res))
+                            {
+                                break;
+                            }
+                        }
+                        if (Int32.TryParse(faceLocate, out var result))
+                        {
+                            Console.WriteLine(result);
+                            if (result > 400)
+                            {
 
-                        //        port1.WriteLine("1 0000");
+                                port1.WriteLine("1 0000");
 
-                        //    }
-                        //    else
-                        //    {
-                        //        port1.WriteLine("1 " + (10 * (400 - result)));
-                        //    }
-                        //}
+                            }
+                            else
+                            {
+                                port1.WriteLine("1 " + (10 * (400 - result)));
+                            }
+                        }
                         break;
                     case ("out\r"):
                         port1.WriteLine("2 5000");
