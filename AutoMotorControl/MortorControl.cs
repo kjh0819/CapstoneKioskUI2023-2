@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO.Ports;
+using System.Threading.Tasks;
 using TTSLib;
 
 namespace AutoMotorControl
@@ -26,6 +27,7 @@ namespace AutoMotorControl
         {
             port1.WriteLine("4");
         }
+        
         public async void AutoControl()
         {
             port1.DataReceived += (sender, e) =>
@@ -38,6 +40,7 @@ namespace AutoMotorControl
                     case ("in\r"):
                         TextToSpeechConverter tts = new TextToSpeechConverter();
                         tts.Speak("안녕하세요. 음성안내를 이용하시려면 키패드의 아무 버튼을 눌러주세요.");
+
                         var face = new FaceRecognition.FaceRecognition();
                         string faceLocate = "";
                         for (int i = 0; i < 5; i++)

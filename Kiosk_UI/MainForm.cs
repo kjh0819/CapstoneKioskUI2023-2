@@ -92,13 +92,19 @@ namespace Kiosk_UI
             else if (token.Contains("올리/VV")||token.Contains("높이/VV+어/EC"))
             {
                 MotorControl mtr = new MotorControl();
-                mtr.MenualControl("1", "1000");
+                mtr.MenualControl("1", "1500");
             }
             else if (token.Contains("내리/VV")||token.Contains("낮추/VV"))
             {
                 MotorControl mtr = new MotorControl();
                 mtr.MenualControl("2", "1000");
             }
+            //else if (token.Contains("높이") && token.Contains("조절"))
+            //{
+            //    MotorControl mtr= new MotorControl();
+            //    mtr.faceReconMotorControl();
+
+            //}
             else if (token.Contains("주문"))
             {
                 //오류발생 왠지 몰?루
@@ -801,6 +807,8 @@ namespace Kiosk_UI
                     {
                         flagForSearch = true;
                     }
+                    if(searchResults.Count==0||searchResults==null)
+                        flagForSearch= false;
                 }
                 else
                 {
@@ -933,13 +941,23 @@ namespace Kiosk_UI
                     }
                 }
 
-
+            if(searchResults.Count == 0) 
+                foreach (var text in texts)
+                {
+                    string[] morps = text.Split('/');
+                    List<string> Result = Search(morps[0], true);
+                    if ((morps.Length >= 2 && (morps[1] == "NNP" || morps[1] == "NNG")))
+                    {
+                        foreach(var r in Result)
+                            searchResults.Add(r);
+                    }
+                }
             //검색 결과 출력
             if (searchResults.Count == 0)
             {
-                tts.StopSpeak();
-                tts.Speak("죄송합니다 메뉴를 찾을수 없었습니다.");
+                tts.StopSpeak(); 
                 AllmenuButton.PerformClick();
+                tts.Speak("죄송합니다 메뉴를 찾을수 없었습니다.");
                 return;
             }
             else
