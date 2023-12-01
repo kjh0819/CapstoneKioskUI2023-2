@@ -745,7 +745,7 @@ namespace Kiosk_UI
                 itm.Visible = false;
             }
             tts.Speak("음성 검색을 시작합니다");
-            await Task.Delay(TimeSpan.FromSeconds(3));
+            await Task.Delay(TimeSpan.FromSeconds(1));
             string token = await Tokenizer.VoiceTokenizer();
             StartInputTimer();
 
