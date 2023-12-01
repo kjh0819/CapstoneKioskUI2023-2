@@ -292,7 +292,8 @@ namespace Kiosk_UI
             }
 
             tts.SpeakSynchronous("사용이 종료되었습니다.");
-
+            checkPanel.Controls.Clear();
+            AllmenuButton.PerformClick();
             try
             {
                 MotorControl mtr = new MotorControl();
@@ -1086,8 +1087,9 @@ namespace Kiosk_UI
                 key_flag2 = 0;
                 back_flag = 1;
                 interrupt = 0;
+                min_flag = false;
             }
-            else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 0 && back_flag == 1) //빵류
+            else if ((e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 0 && back_flag == 1)||(e.KeyCode == Keys.NumPad8 && key_flag == 3 && key_flag2 == 0 && interrupt == 1)) //빵류
             {
                 //빵류
                 tts.StopSpeak();
@@ -1182,7 +1184,7 @@ namespace Kiosk_UI
 
 
 
-            else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 0 && back_flag == 1)
+            else if ((e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 0 && back_flag == 1)||(e.KeyCode == Keys.NumPad8 && key_flag == 3 && key_flag2 == 0 && interrupt == 2))
             {
                 //과자류
                 tts.StopSpeak();
@@ -1286,6 +1288,7 @@ namespace Kiosk_UI
                 key_flag2 = 1;
                 back_flag = 3;
                 interrupt = 0;
+                min_flag = false;
             }
             else if (e.KeyCode == Keys.NumPad2 && key_flag == 2 || e.KeyCode == Keys.NumPad9 && back_flag == 5) //1-2번
             {
@@ -1295,9 +1298,10 @@ namespace Kiosk_UI
                 key_flag2 = 2;
                 back_flag = 3;
                 interrupt = 0;
+                min_flag = false;
             }
 
-            else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 1 && back_flag != 4)
+            else if ((e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 1 && back_flag != 4)||(e.KeyCode == Keys.NumPad8 && key_flag == 3 && key_flag2 == 1 && interrupt == 3))
             {
                 string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
                 //우유가 들어간 커피
@@ -1379,7 +1383,7 @@ namespace Kiosk_UI
                     }
                 }
             }
-            else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 1 && interrupt != 4)
+            else if ((e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 1 && interrupt != 4)||(e.KeyCode == Keys.NumPad8 && key_flag == 3 && key_flag2 == 1 && interrupt == 4))
             {
                 string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
                 //우유가 안들어간 커피
@@ -1464,7 +1468,7 @@ namespace Kiosk_UI
                     }
                 }
             }
-            else if (e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 2 && interrupt != 5)
+            else if ((e.KeyCode == Keys.NumPad1 && key_flag == 3 && key_flag2 == 2 && back_flag == 3)||(e.KeyCode == Keys.NumPad8 && key_flag == 3 && key_flag2 == 2 && interrupt == 5))
             {
                 //우유가 들어간 음료
                 string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
@@ -1497,7 +1501,12 @@ namespace Kiosk_UI
                 foreach (var item in MenuPanel.Controls)
                 {
                     var control = (item)item;
-                    if (control == null)
+                    control.Visible = false;
+                }
+                foreach (var item in MenuPanel.Controls)
+                {
+                    var control = (item)item;
+                    if (control != null)
                     {
                         foreach (var text in result)
                         {
@@ -1555,7 +1564,7 @@ namespace Kiosk_UI
                 }
 
             }
-            else if (e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 2 && interrupt != 6)
+            else if ((e.KeyCode == Keys.NumPad2 && key_flag == 3 && key_flag2 == 2 && back_flag == 3)||(e.KeyCode == Keys.NumPad8 && key_flag == 3 && key_flag2 == 2 && interrupt == 6))
             {
                 //우유가 안들어간 음료
                 string[] numberMap = { "영", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
@@ -1578,6 +1587,18 @@ namespace Kiosk_UI
                         itm.Visible = false;
                     }
                 }
+                result = result.Intersect(drinks).ToList();
+                for (int i = 0; i < result.Count && i < 8; i++)
+                {
+                    TextResult += $"{result[i]} {numberMap[i]}번,  ";
+                    names.Add(result[i]);
+                    numbers.Add(i);
+                }
+                foreach (var item in MenuPanel.Controls)
+                {
+                    var control = (item)item;
+                    control.Visible = false;
+                }
                 foreach (var item in MenuPanel.Controls)
                 {
                     var control = (item)item;
@@ -1590,14 +1611,6 @@ namespace Kiosk_UI
                         }
                     }
                 }
-                result = result.Intersect(drinks).ToList();
-                for (int i = 0; i < result.Count && i < 8; i++)
-                {
-                    TextResult += $"{result[i]} {numberMap[i]}번,  ";
-                    names.Add(result[i]);
-                    numbers.Add(i);
-                }
-
                 tts.Speak(TextResult + "가 있습니다. 다시듣기는 팔번, 돌아가기는 구번, 주문 완료는 확인을 눌러주세요.");
                 Console.WriteLine(TextResult);
                 back_flag = 5;

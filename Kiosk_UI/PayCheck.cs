@@ -4,6 +4,8 @@ using System;
 using System.Data;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TTSLib;
+using System.Linq;
 
 namespace Kiosk_UI
 {
@@ -12,6 +14,9 @@ namespace Kiosk_UI
         DataTable passedIndt;
 
         private SpeechRecognitionEngine recognizer;
+        TextToSpeechConverter tts = new TextToSpeechConverter();
+
+        public string tbl;
         private async Task CallingKeyword()
         {
             recognizer = new SpeechRecognitionEngine();
@@ -52,7 +57,6 @@ namespace Kiosk_UI
             if (e.KeyCode == Keys.Enter)
             {
                 arsKey(e);
-                Yesbutton.PerformClick();
             }
             if (e.KeyCode == Keys.Back)
             {
@@ -85,6 +89,7 @@ namespace Kiosk_UI
         private void PayCheck_Shown(object sender, EventArgs e)
         {
             dataGridView1.DataSource = passedIndt;
+            //tts.Speak(tbl);
         }
         public string labeltxt
         {
@@ -95,8 +100,10 @@ namespace Kiosk_UI
         {
             InitializeComponent();
             CallingKeyword();
+            //tbl = Convert.ToString(passedIndt.Rows[0][1]);
             this.passedIndt = table;
-
+            
+            
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
