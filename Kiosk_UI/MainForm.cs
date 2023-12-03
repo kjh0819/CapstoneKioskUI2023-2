@@ -15,6 +15,7 @@ using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using Microsoft.Speech.Recognition;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 
 namespace Kiosk_UI
@@ -99,12 +100,12 @@ namespace Kiosk_UI
                 MotorControl mtr = new MotorControl();
                 mtr.MenualControl("2", "1000");
             }
-            //else if (token.Contains("높이") && token.Contains("조절"))
-            //{
-            //    MotorControl mtr= new MotorControl();
-            //    mtr.faceReconMotorControl();
+            else if (token.Contains("높/VA+이/NR") && token.Contains("조절/NNG"))
+            {
+                MotorControl mtr = new MotorControl();
+                mtr.faceReconMotorControl();
 
-            //}
+            }
             else if (token.Contains("주문"))
             {
                 //오류발생 왠지 몰?루
@@ -138,6 +139,7 @@ namespace Kiosk_UI
                 tts.Speak("죄송합니다. 음성검색,화면올려줘,화면내려줘,주문할게 와 같이 말씀해주세요");
             }
             StartInputTimer();
+            CallingKeyword();
         }
         private async Task CallingKeyword()
         {
@@ -159,8 +161,7 @@ namespace Kiosk_UI
                     else if (e.Result.Text.Contains("설명서"))
                     {
                         Console.WriteLine("설명서 감지됨");
-                        await CallingKeywordJobs();
-                        CallingKeyword();
+                        CallingKeywordJobs();
                     }
                     else if (e.Result.Text.Contains("영번") && arsMode)
                     {
@@ -260,7 +261,7 @@ namespace Kiosk_UI
             InitializeComponent();
 
             SetTimer();
-            CallingKeyword();
+            CallingKeyword(); //음성 호출어 사용시 카메라 관련 렉 발생하는 버그 있으므로 비활성화
 
             this.FormClosing += MainForm_FormClosing;
             new Touch(MenuPanel);
@@ -690,6 +691,8 @@ namespace Kiosk_UI
 
         private void DrinkButton_Click(object sender, EventArgs e)
         {
+            //MotorControl mtr = new MotorControl();
+            //mtr.faceReconMotorControl();
             tts.StopSpeak();
             menuUpdateCounter = 0;
             actbutton(sender);

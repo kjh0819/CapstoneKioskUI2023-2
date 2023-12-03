@@ -27,7 +27,26 @@ namespace AutoMotorControl
         {
             port1.WriteLine("4");
         }
-        
+        public async void faceReconMotorControl()
+        {
+            var face = new FaceRecognition.FaceRecognition();
+            string faceLocate = "";
+            for (int i = 0; i < 5; i++)
+            {
+                faceLocate = face.Recognition().Result;
+                Console.WriteLine(faceLocate);
+
+                if (faceLocate == "error")
+                {
+                    Console.WriteLine("error");
+                    break;
+                }
+                else if (Int32.TryParse(faceLocate, out var res))
+                {
+                    break;
+                }
+            }
+        }
         public async void AutoControl()
         {
             port1.DataReceived += (sender, e) =>

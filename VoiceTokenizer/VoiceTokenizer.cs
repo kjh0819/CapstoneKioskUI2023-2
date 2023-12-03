@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TTSLib;
 using System.Linq;
+using System.Xml.Linq;
 
 public class Tokenizer
 {
@@ -110,7 +111,7 @@ public class Tokenizer
         phraseList.AddPhrase($"쿠키");
         phraseList.AddPhrase($"빵");
         phraseList.AddPhrase("주문");
-        
+
 
         var speechRecognitionResult = await speechRecognizer.RecognizeOnceAsync();
         string result = await OutputSpeechRecognitionResult(speechRecognitionResult);
