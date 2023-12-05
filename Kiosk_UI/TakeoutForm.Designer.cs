@@ -190,6 +190,7 @@
             this.ClientSize = new System.Drawing.Size(484, 761);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.custom_panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
             this.Name = "TakeoutForm";
             this.Text = "TakeoutForm";
