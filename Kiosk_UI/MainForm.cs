@@ -261,7 +261,7 @@ namespace Kiosk_UI
             InitializeComponent();
 
             SetTimer();
-            CallingKeyword(); //음성 호출어 사용시 카메라 관련 렉 발생하는 버그 있으므로 비활성화
+            CallingKeyword(); 
 
             this.FormClosing += MainForm_FormClosing;
             new Touch(MenuPanel);
@@ -298,13 +298,13 @@ namespace Kiosk_UI
                 return;
             }
 
-            tts.SpeakSynchronous("사용이 종료되었습니다.");
+            //tts.SpeakSynchronous("사용이 종료되었습니다.");
             checkPanel.Controls.Clear();
             AllmenuButton.PerformClick();
             try
             {
                 MotorControl mtr = new MotorControl();
-                mtr.MenualControl("2", "4000");
+                //mtr.MenualControl("2", "4000");
                 mtr.Finished();
             }
             catch
@@ -313,7 +313,7 @@ namespace Kiosk_UI
             }//모터 초기화 예외처리, 아두이노 미연결시 스킵
             if (ActiveForm != null)
             {
-                tts.SpeakSynchronous(ActiveForm.Name + "종료");
+                //tts.SpeakSynchronous(ActiveForm.Name + "종료");
                 switch (ActiveForm.Name)
                 {
                     case "PayCheck":
@@ -480,16 +480,18 @@ namespace Kiosk_UI
         {
             StartInputTimer();
             arsMode = false;
-            try
-            {
-                FinishForm finishForm = new FinishForm();
+            //try
+            //{
+            //    FinishForm finishForm = new FinishForm();
 
-                finishForm.ShowDialog();
-            }
-            catch { }
+            //    finishForm.ShowDialog();
+            //}
+            //catch { }
             checkPanel.Controls.Clear();//장바구니 전체 삭제
             final_cost = 0;
             cost_lbl.Text = final_cost.ToString() + "원";
+            MotorControl mtr = new MotorControl();
+            mtr.Finished();
         }
 
         public void RemoveItem(string name)

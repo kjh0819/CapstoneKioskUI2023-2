@@ -12,7 +12,14 @@ namespace AutoMotorControl
 
         public void Finished()
         {
-            port1.WriteLine("3");
+            try
+            {
+                port1.WriteLine("3");
+            }
+            catch 
+            {
+                Console.WriteLine("motor error");
+            }
             //키오스크 사용 완료를 알림
         }
         public void MenualControl(string vector, string miliSeconds)
