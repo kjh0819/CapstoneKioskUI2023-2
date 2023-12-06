@@ -258,6 +258,7 @@
             this.Controls.Add(this.MenuPanel);
             this.Controls.Add(this.TopPanel);
             this.Controls.Add(this.SelectbarPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
