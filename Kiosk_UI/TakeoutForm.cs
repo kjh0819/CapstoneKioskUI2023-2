@@ -4,6 +4,7 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TTSLib;
 
 namespace Kiosk_UI
 {
@@ -11,6 +12,8 @@ namespace Kiosk_UI
     {
         public int select_check = 0;
         private PictureBox curbutton;
+
+        TextToSpeechConverter tts = new TextToSpeechConverter();
         private void actbutton(object senderBtn)
         {
 
@@ -130,6 +133,11 @@ namespace Kiosk_UI
             {
                 Nobutton.PerformClick();
             }
+        }
+
+        private void TakeoutForm_Shown(object sender, EventArgs e)
+        {
+           // tts.Speak("포장은 1번, 매장은 2번을 눌러주세요. 확인은 엔터키를, 다시 선택하시려면 뒤로가기키를 눌러주세요.");
         }
     }
 }

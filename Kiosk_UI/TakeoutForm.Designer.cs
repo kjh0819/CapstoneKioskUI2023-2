@@ -195,6 +195,7 @@
             this.Name = "TakeoutForm";
             this.Text = "TakeoutForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Shown += new System.EventHandler(this.TakeoutForm_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TakeoutForm_KeyDown);
             this.custom_panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -210,11 +211,11 @@
         private Custom.Custom_button Nobutton;
         private System.Windows.Forms.Label label1;
         private Custom.Custom_flowpanel custom_flowpanel1;
-        private System.Windows.Forms.PictureBox cafe;
-        private System.Windows.Forms.PictureBox takeout;
         private Custom.Custom_panel custom_panel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.PictureBox cafe;
+        private System.Windows.Forms.PictureBox takeout;
     }
 }

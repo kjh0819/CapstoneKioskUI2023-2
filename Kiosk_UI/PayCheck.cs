@@ -26,7 +26,7 @@ namespace Kiosk_UI
             {
                 recognizer.RecognizeAsyncStop();
                 Console.WriteLine($"Recognized: {e.Result.Text}");
-                if (e.Result.Text.Contains("결제"))
+                if (e.Result.Text.Contains("확인"))
                 {
                     Yesbutton.PerformClick();
                 }
@@ -38,7 +38,7 @@ namespace Kiosk_UI
             };
 
             // Grammar 생성 및 로드
-            var grammar = new Microsoft.Speech.Recognition.Grammar(new Choices("결제", "취소"));
+            var grammar = new Microsoft.Speech.Recognition.Grammar(new Choices("확인", "취소"));
             if (grammar != null)
             {
                 recognizer.LoadGrammar(grammar);
@@ -83,12 +83,19 @@ namespace Kiosk_UI
         private void Nobutton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+            tts.StopSpeak();
             //this.Hide();
         }
 
         private void PayCheck_Shown(object sender, EventArgs e)
         {
             dataGridView1.DataSource = passedIndt;
+                for (int i = 0; i < passedIndt.Rows.Count; i++)
+                {
+                    tts.Speak(Convert.ToString(passedIndt.Rows[i][1]) + Convert.ToString(passedIndt.Rows[i][2]) + "개");
+                }
+                tts.Speak("총 금액" + costtxt.Text + "입니다. 다시 고르시려면 뒤로가기 버튼을 눌러주세요.");
+            
             //tts.Speak(tbl);
         }
         public string labeltxt
@@ -100,7 +107,7 @@ namespace Kiosk_UI
         {
             InitializeComponent();
             CallingKeyword();
-            //tbl = Convert.ToString(passedIndt.Rows[0][1]);
+            //tbl = Convert.ToString(passedIndt.Rows[1][2]);
             this.passedIndt = table;
             
             
@@ -118,6 +125,7 @@ namespace Kiosk_UI
 
         private void Yesbutton_Click(object sender, EventArgs e)
         {
+            tts.StopSpeak();
             this.Hide();
             TakeoutForm takeout = new TakeoutForm();
 

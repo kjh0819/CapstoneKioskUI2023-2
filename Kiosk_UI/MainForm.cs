@@ -1082,6 +1082,8 @@ namespace Kiosk_UI
                 key_flag = 0;
                 key_flag2 = 0;
                 back_flag = 0;
+                interrupt = 0;
+                min_flag = false;
                 tts.StopSpeak();
                 tts.Speak("에이알에스가 종료되었습니다. 이용해주셔서 감사합니다.");
             }
@@ -1687,6 +1689,7 @@ namespace Kiosk_UI
 
         private async void custom_button1_Click(object sender, EventArgs e)
         {
+            tts.StopSpeak();
             if (cost_lbl.Text == "0원")
             {
                 Form modalbackground = new Form();

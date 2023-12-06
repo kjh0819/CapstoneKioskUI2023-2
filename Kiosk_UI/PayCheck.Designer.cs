@@ -175,7 +175,7 @@
             this.Yesbutton.Name = "Yesbutton";
             this.Yesbutton.Size = new System.Drawing.Size(176, 63);
             this.Yesbutton.TabIndex = 1;
-            this.Yesbutton.Text = "결제하기";
+            this.Yesbutton.Text = "확인";
             this.Yesbutton.UseVisualStyleBackColor = false;
             this.Yesbutton.Click += new System.EventHandler(this.Yesbutton_Click);
             // 
