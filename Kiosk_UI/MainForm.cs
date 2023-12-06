@@ -271,14 +271,14 @@ namespace Kiosk_UI
         {
             if (aTimer == null)
             {
-                aTimer = new System.Timers.Timer(60000);
+                aTimer = new System.Timers.Timer(30000);
                 aTimer.Elapsed += OnTimedEvent;
                 aTimer.AutoReset = true;
                 aTimer.Enabled = true;
             }
             else
             {
-                aTimer.Interval = 60000;
+                aTimer.Interval = 30000;
             }
         }
 
