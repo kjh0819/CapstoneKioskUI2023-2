@@ -126,11 +126,11 @@ namespace Kiosk_UI
         private void Yesbutton_Click(object sender, EventArgs e)
         {
             tts.StopSpeak();
-            this.Hide();
+            //this.Hide();
             TakeoutForm takeout = new TakeoutForm();
 
             DialogResult result1 = takeout.ShowDialog();
-            this.Hide();
+            //this.Hide();
             if (result1 == DialogResult.OK)
             {
                 this.Show();

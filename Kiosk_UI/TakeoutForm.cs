@@ -116,8 +116,12 @@ namespace Kiosk_UI
             {
                 FinishForm finishForm = new FinishForm();
 
-                this.Hide();
+                //this.Hide();
                 finishForm.ShowDialog();
+                if(finishForm.DialogResult == DialogResult.Cancel)
+                {
+                    this.Close();
+                }
             }
             /* using(var frm = new FinishForm())
              {

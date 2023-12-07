@@ -1709,6 +1709,7 @@ namespace Kiosk_UI
                 key_flag = 0;
                 key_flag2 = 0;
                 back_flag = 0;
+                interrupt = 0;
                 arsMode = false;
 
                 DataTable dt = new DataTable();
@@ -1726,7 +1727,7 @@ namespace Kiosk_UI
                 }
 
                 PayCheck newform = new PayCheck(dt);
-                this.Hide();
+                //this.Hide();
                 newform.labeltxt = this.cost_lbl.Text;
                 DialogResult result1 = newform.ShowDialog();
 

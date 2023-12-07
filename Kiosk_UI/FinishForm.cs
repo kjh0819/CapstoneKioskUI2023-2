@@ -31,9 +31,10 @@ namespace Kiosk_UI
             {
                 tmr.Stop();
                 this.Close();
+                this.DialogResult = DialogResult.Cancel;
 
             };
-            tmr.Interval = (int)TimeSpan.FromSeconds(3).TotalMilliseconds;
+            tmr.Interval = (int)TimeSpan.FromSeconds(5).TotalMilliseconds;
             tmr.Start();
 
         }
