@@ -79,6 +79,7 @@ namespace Kiosk_UI
 
         private void Nobutton_Click(object sender, EventArgs e)
         {
+            tts.StopSpeak();
             this.DialogResult = DialogResult.OK;
             this.Hide();
         }
@@ -97,8 +98,10 @@ namespace Kiosk_UI
 
         private void Yesbutton_Click(object sender, EventArgs e)
         {
+            tts.StopSpeak();
             if (select_check < 1)
             {
+                tts.Speak("매장과 포장 중 선택해주세요");
                 Form modalbackground = new Form();
                 using (warning modal = new warning())
                 {
@@ -125,6 +128,14 @@ namespace Kiosk_UI
 
         private void TakeoutForm_KeyDown(object sender, KeyEventArgs e)
         {
+            if(e.KeyCode == Keys.NumPad2)
+            {
+                takeout_Click(this.takeout, e);
+            }
+            else if(e.KeyCode == Keys.NumPad1)
+            {
+                cafe_Click(this.cafe, e);
+            }
             if(e.KeyCode == Keys.Enter)
             {
                 Yesbutton.PerformClick();
@@ -137,7 +148,7 @@ namespace Kiosk_UI
 
         private void TakeoutForm_Shown(object sender, EventArgs e)
         {
-           // tts.Speak("포장은 1번, 매장은 2번을 눌러주세요. 확인은 엔터키를, 다시 선택하시려면 뒤로가기키를 눌러주세요.");
+           tts.Speak("매장은 일번, 포장은 이번을 눌러주세요. 확인은 엔터키를, 다시 선택하시려면 뒤로가기키를 눌러주세요.");
         }
     }
 }

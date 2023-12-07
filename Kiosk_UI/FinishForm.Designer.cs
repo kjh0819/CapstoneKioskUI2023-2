@@ -70,6 +70,7 @@
             this.Name = "FinishForm";
             this.Text = "FinishForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Shown += new System.EventHandler(this.FinishForm_Shown);
             this.ResumeLayout(false);
 
         }

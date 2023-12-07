@@ -2,6 +2,7 @@
 using Kiosk_UI.Custom;
 using System;
 using System.Windows.Forms;
+using TTSLib;
 
 namespace Kiosk_UI
 {
@@ -9,7 +10,8 @@ namespace Kiosk_UI
     {
         private System.Windows.Forms.Timer tmr;
 
-        
+        TextToSpeechConverter tts = new TextToSpeechConverter();
+
         public FinishForm()
         {
             try
@@ -36,5 +38,9 @@ namespace Kiosk_UI
 
         }
 
+        private void FinishForm_Shown(object sender, EventArgs e)
+        {
+            tts.Speak("결제가 완료되었습니다. 이용해주셔서 감사합니다");
+        }
     }
 }
