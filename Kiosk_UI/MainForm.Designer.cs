@@ -156,7 +156,7 @@
             this.cancel_button.Location = new System.Drawing.Point(9, 576);
             this.cancel_button.Name = "cancel_button";
             this.cancel_button.Size = new System.Drawing.Size(70, 172);
-            this.cancel_button.TabIndex = 7;
+            this.cancel_button.TabIndex = 1;
             this.cancel_button.Text = "전체\r\n취소";
             this.cancel_button.UseVisualStyleBackColor = false;
             this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
