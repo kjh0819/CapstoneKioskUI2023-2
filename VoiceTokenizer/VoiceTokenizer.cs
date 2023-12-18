@@ -13,7 +13,7 @@ public class Tokenizer
 {
     const string speechKey = "e947dbc053864f8780d47813eeae6fc1"; //고정값 유출하지 말것
     const string speechRegion = "koreacentral";
-    const string url = "http://capstonekiosk.koreacentral.cloudapp.azure.com:5757/bareun/api/v1/analyze"; //유출금지
+    const string url = "http://localhost:5757/bareun/api/v1/analyze"; //로컬로 변경
     const string apiKey = "koba-2WZSTOQ-MSXU3TA-WLNVRHY-ZIIMQJY"; //유출금지
 
 
