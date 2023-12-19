@@ -108,27 +108,47 @@ namespace Kiosk_UI
             }
             else if (token.Contains("주문"))
             {
-                //오류발생 왠지 몰?루
-                //if (Search(token.Split('/')[0], true).Count == 1)
-                //{
-                //    List<string> searchedMenu = Search(token, true);
-                //    foreach (var type in MenuPanel.Controls)
-                //    {
-                //        var itm = (item)type;
-                //        if (itm.Title.ToString() == searchedMenu[0])
-                //        {
-                //            //itm.txtImg_Click(itm, e); //메뉴를 장바구니에 담는 코드
-                //            tts.Speak(itm.Title + "추가됨");
-                //        }
-                //    }
+                bool ordered = false;
+                if (Search(token.Split('/')[0], true).Count == 1)
+                {
+                    List<string> morps = new List<string>();
+                    var texts = token.Split(' ');
+                    foreach ( var text in texts)
+                    {
+                        morps.Add(text);
+                    }
 
-                //}
-                key_flag = 0;
-                key_flag2 = 0;
-                back_flag = 0;
-                var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad1);
-                arsMode = true;
-                this.ARS(keyEvent);
+                    List<string> searchedMenu=new List<string>();
+
+                    foreach ( var text in morps)
+                    {
+                        searchedMenu=(Search(text.Split('/')[0], true));
+                        if(searchedMenu.Count > 0)
+                        {
+                            break;
+                        }
+                    }
+                    foreach (var type in MenuPanel.Controls)
+                    {
+                        var itm = (item)type;
+                        if (itm.Title.ToString() == searchedMenu[0])
+                        {
+                            var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.Enter);
+                            itm.txtImg_Click(itm, keyEvent); //메뉴를 장바구니에 담는 코드
+                            tts.SpeakSynchronous(itm.Title + "추가됨");
+                            ordered=true; break;
+                        }
+                    }
+                }
+                if (!ordered)
+                {
+                    key_flag = 0;
+                    key_flag2 = 0;
+                    back_flag = 0;
+                    var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.NumPad1);
+                    arsMode = true;
+                    this.ARS(keyEvent);
+                }
             }
             else if (token.Contains("무엇") && token.Contains("하/VV+ㄹ/ETM"))
             {
@@ -271,7 +291,7 @@ namespace Kiosk_UI
         {
             if (aTimer == null)
             {
-                aTimer = new System.Timers.Timer(30000);
+                aTimer = new System.Timers.Timer(90000);
                 aTimer.Elapsed += OnTimedEvent;
                 aTimer.AutoReset = true;
                 aTimer.Enabled = true;
