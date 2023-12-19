@@ -136,7 +136,9 @@ namespace Kiosk_UI
                             var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.Enter);
                             itm.txtImg_Click(itm, keyEvent); //메뉴를 장바구니에 담는 코드
                             tts.SpeakSynchronous(itm.Title + "추가됨");
-                            ordered=true; break;
+                            ordered=true;
+                            arsMode = true;
+                            break;
                         }
                     }
                 }
