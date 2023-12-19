@@ -90,12 +90,12 @@ namespace Kiosk_UI
             }
             else if (token.Contains("검색"))
                 VoiceButton.PerformClick();
-            else if (token.Contains("올리/VV")||token.Contains("높이/VV+어/EC"))
+            else if (token.Contains("올리/VV") || token.Contains("높이/VV+어/EC"))
             {
                 MotorControl mtr = new MotorControl();
                 mtr.MenualControl("1", "1500");
             }
-            else if (token.Contains("내리/VV")||token.Contains("낮추/VV"))
+            else if (token.Contains("내리/VV") || token.Contains("낮추/VV"))
             {
                 MotorControl mtr = new MotorControl();
                 mtr.MenualControl("2", "1000");
@@ -109,36 +109,25 @@ namespace Kiosk_UI
             else if (token.Contains("주문"))
             {
                 bool ordered = false;
-                if (Search(token.Split('/')[0], true).Count == 1)
+                var tokens = token.Split(' ');
+                foreach (var t in tokens)
                 {
-                    List<string> morps = new List<string>();
-                    var texts = token.Split(' ');
-                    foreach ( var text in texts)
+                    var searchData = Search(t.Split('/')[0], true);
+                    if (searchData.Count == 1)
                     {
-                        morps.Add(text);
-                    }
-
-                    List<string> searchedMenu=new List<string>();
-
-                    foreach ( var text in morps)
-                    {
-                        searchedMenu=(Search(text.Split('/')[0], true));
-                        if(searchedMenu.Count > 0)
+                        
+                        foreach (var type in MenuPanel.Controls)
                         {
-                            break;
-                        }
-                    }
-                    foreach (var type in MenuPanel.Controls)
-                    {
-                        var itm = (item)type;
-                        if (itm.Title.ToString() == searchedMenu[0])
-                        {
-                            var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.Enter);
-                            itm.txtImg_Click(itm, keyEvent); //메뉴를 장바구니에 담는 코드
-                            tts.SpeakSynchronous(itm.Title + "추가됨");
-                            ordered=true;
-                            arsMode = true;
-                            break;
+                            var itm = (item)type;
+                            if (itm.Title.ToString() == searchData[0])
+                            {
+                                var keyEvent = new System.Windows.Forms.KeyEventArgs(Keys.Enter);
+                                itm.txtImg_Click(itm, keyEvent); //메뉴를 장바구니에 담는 코드
+                                tts.SpeakSynchronous(itm.Title + "추가됨");
+                                ordered = true;
+                                arsMode = true;
+                                break;
+                            }
                         }
                     }
                 }
