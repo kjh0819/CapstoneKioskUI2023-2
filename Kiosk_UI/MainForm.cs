@@ -90,7 +90,7 @@ namespace Kiosk_UI
             }
             else if (token.Contains("검색"))
                 VoiceButton.PerformClick();
-            else if (token.Contains("올리/VV") || token.Contains("높이/VV+어/EC"))
+            else if (token.Contains("올리/VV") || token.Contains("높이/VV"))
             {
                 MotorControl mtr = new MotorControl();
                 mtr.MenualControl("1", "1500");
@@ -271,7 +271,7 @@ namespace Kiosk_UI
         {
             InitializeComponent();
 
-            SetTimer();
+            //SetTimer();
             CallingKeyword(); 
 
             this.FormClosing += MainForm_FormClosing;
