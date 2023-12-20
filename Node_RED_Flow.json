@@ -1,0 +1,495 @@
+[
+    {
+        "id": "73585c0e719a2983",
+        "type": "tab",
+        "label": "김진훈",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ca0e8a1823d9c161",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "kjh0819.duckdns.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "068e1e92a4071244",
+        "type": "ui_tab",
+        "name": "MenuUpdater",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "1cea41d4e6e48faa",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "59e685f3e967ecc6",
+        "type": "ui_group",
+        "name": "Menu",
+        "tab": "068e1e92a4071244",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "27f0900d.f39298",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "28a2abb.2c733d4",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "28a2abb.2c733d4",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "b7cab7003afd8301",
+        "type": "debug",
+        "z": "73585c0e719a2983",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "aa0900bcd505bd48",
+        "type": "inject",
+        "z": "73585c0e719a2983",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Menu",
+        "payloadType": "str",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "465c13c10f2f6089"
+            ]
+        ]
+    },
+    {
+        "id": "6ad0d75bdeae29e0",
+        "type": "ui_dropdown",
+        "z": "73585c0e719a2983",
+        "name": "",
+        "label": "menu selector",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "59e685f3e967ecc6",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": false,
+        "options": [],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 420,
+        "y": 180,
+        "wires": [
+            [
+                "cf1bdba418226a93"
+            ]
+        ]
+    },
+    {
+        "id": "2ad8365396b97c49",
+        "type": "function",
+        "z": "73585c0e719a2983",
+        "name": "split menu and push to menu selector",
+        "func": "var data=msg.payload.split('*')\nfor (var i=0;i<data.length;i++)\n    if(i+1===data.length){\n                data[i]=data[i].replace('\\n','')\n            }\nfor (var i = 0; i < data.length; i++)\n    if (i === 0) {\n        data[i] = data[i].replace('*', '')\n    }\nmsg.options=data\nmsg.options.push (\"새 메뉴\")\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "6ad0d75bdeae29e0"
+            ]
+        ]
+    },
+    {
+        "id": "05518c855a959218",
+        "type": "ui_ui_control",
+        "z": "73585c0e719a2983",
+        "name": "",
+        "events": "all",
+        "x": 120,
+        "y": 100,
+        "wires": [
+            [
+                "465c13c10f2f6089"
+            ]
+        ]
+    },
+    {
+        "id": "cf1bdba418226a93",
+        "type": "function",
+        "z": "73585c0e719a2983",
+        "name": "function 3",
+        "func": "var text = msg.payload;\nvar values = text.split(',');\nif(msg.payload===\"새 메뉴\"){\n  msg.payload = {\n    품명: \"\",\n    가격: '',\n    '디저트/음료': '',\n    이미지이름: '',\n    '디테일(/로구분)': ''\n  };\n  return msg\n}\n// 문자열 \"true\"를 불리언 값 true로 변환\n// 그 외의 모든 문자열을 불리언 값 false로 변환\nvalues[2] = (values[2] === \"categories.drink\");\nparseInt\nmsg.payload = {\n  품명: values[0],\n  가격: parseInt(values[1]),\n  '디저트/음료': values[2],\n  이미지이름: values[3],\n  '디테일(/로구분)': values[4]\n};\n\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 180,
+        "wires": [
+            [
+                "fa9c0ecee66005fa"
+            ]
+        ]
+    },
+    {
+        "id": "fa9c0ecee66005fa",
+        "type": "ui_form",
+        "z": "73585c0e719a2983",
+        "name": "",
+        "label": "menu editor",
+        "group": "59e685f3e967ecc6",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "품명",
+                "value": "품명",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "가격",
+                "value": "가격",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "디저트/음료",
+                "value": "디저트/음료",
+                "type": "switch",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "이미지경로",
+                "value": "이미지이름",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "디테일(/로구분)",
+                "value": "디테일(/로구분)",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "삭제",
+                "value": "삭제",
+                "type": "checkbox",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "품명": "",
+            "가격": "",
+            "디저트/음료": false,
+            "이미지이름": "",
+            "디테일(/로구분)": "",
+            "삭제": false
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 730,
+        "y": 180,
+        "wires": [
+            [
+                "1063b5dcaaeac28b",
+                "bde97fc11ba677f9"
+            ]
+        ]
+    },
+    {
+        "id": "1063b5dcaaeac28b",
+        "type": "function",
+        "z": "73585c0e719a2983",
+        "name": "save edited menu.csv",
+        "func": "\nvar payload = msg.payload;\n\nif (payload.삭제 === true) {\n    // 삭제 플래그가 true일 때, 해당 제품을 찾아 제거\n    fs.readFile('/home/azureuser/menu.csv', 'utf-8', function (err, data) {\n        if (err) {\n            // 에러 처리\n            console.error(err);\n        } else {\n            data = data.toString(); // 버퍼를 문자열로 변환\n\n            // 특정 행을 찾아서 제거\n            var dataArray = data.split('*');\n            var editedFlag = false;\n            for (var i = 0; i < dataArray.length; i++) {\n                if (dataArray[i].includes(payload.품명) && !editedFlag) {\n                    dataArray.splice(i,1)\n                    editedFlag = true;\n                }\n            }\n\n            // 배열을 문자열로 다시 조합\n            data = dataArray.join('*');\n            \n            // 문자열에서 중복 개행 문자를 제거\n            data = data.replace('\\n', '*');\n\n            // 문자열을 버퍼로 다시 변환\n            data = Buffer.from(data);\n\n            // 수정된 데이터를 파일에 씁니다.\n            fs.writeFile('/home/azureuser/menu.csv', data, function (err) {\n                if (err) {\n                    // 에러 처리\n                    console.error(err);\n                } else {\n                    // 파일이 성공적으로 업데이트되었습니다.\n                    console.log('파일이 업데이트되었습니다.');\n                }\n            });\n        }\n    });\n}\nelse {\n    msg.payload = '';\n    msg.payload += payload.품명;\n    msg.payload += ',';\n    msg.payload += String(payload.가격);\n    msg.payload += ',';\n\n    if (payload['디저트/음료'] === true) {\n        msg.payload += 'categories.drink';\n    } else {\n        msg.payload += 'categories.dessert';\n    }\n    msg.payload += ',';\n    msg.payload += payload.이미지이름;\n    msg.payload += ',';\n    msg.payload += payload['디테일(/로구분)'];\n\n    // 파일을 읽고 수정한 데이터로 업데이트\n    fs.readFile('/home/azureuser/menu.csv', 'utf-8', function (err, data) {\n        if (err) {\n            // 에러 처리\n            console.error(err);\n        } else {\n            data = data.split('*');\n            var editedFlag = false;\n            for (var i = 0; i < data.length; i++) {\n                if (data[i].includes(payload.품명) && (!editedFlag)) {\n                    data[i] = msg.payload;\n                    editedFlag = true;\n                }\n                if (i + 1 === data.length) {\n                    data[i] = data[i].replace('\\n', '')\n                }\n            }\n            //새 메뉴 추가\n            if (!editedFlag) {\n                data[data.length] = msg.payload;\n            }\n            data = data.join('*');\n            msg.payload = data;\n\n            // 수정된 데이터를 파일에 씁니다.\n            fs.writeFile('/home/azureuser/menu.csv', data, 'utf-8', function (err) {\n                if (err) {\n                    // 에러 처리\n                    console.error(err);\n                } else {\n                    // 파일이 성공적으로 업데이트되었습니다.\n                    console.log('파일이 업데이트되었습니다.');\n                }\n            });\n        }\n        return msg;\n    });\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "fs",
+                "module": "fs"
+            }
+        ],
+        "x": 940,
+        "y": 180,
+        "wires": [
+            [
+                "b7cab7003afd8301",
+                "465c13c10f2f6089"
+            ]
+        ]
+    },
+    {
+        "id": "e6cb59c6c823cf70",
+        "type": "watch",
+        "z": "73585c0e719a2983",
+        "name": "if menu changed",
+        "files": "/home/azureuser/menu.csv",
+        "recursive": "",
+        "x": 100,
+        "y": 60,
+        "wires": [
+            [
+                "465c13c10f2f6089"
+            ]
+        ]
+    },
+    {
+        "id": "1acc9c6f8a264b12",
+        "type": "mqtt out",
+        "z": "73585c0e719a2983",
+        "name": "",
+        "topic": "Menu/NewFile",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ca0e8a1823d9c161",
+        "x": 660,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ac8f7c57b778a065",
+        "type": "mqtt in",
+        "z": "73585c0e719a2983",
+        "name": "",
+        "topic": "Menu/Update",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ca0e8a1823d9c161",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 20,
+        "wires": [
+            [
+                "465c13c10f2f6089"
+            ]
+        ]
+    },
+    {
+        "id": "465c13c10f2f6089",
+        "type": "file in",
+        "z": "73585c0e719a2983",
+        "name": "read /home/azureuser/menu.csv",
+        "filename": "/home/azureuser/menu.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 390,
+        "y": 120,
+        "wires": [
+            [
+                "2ad8365396b97c49",
+                "1acc9c6f8a264b12"
+            ]
+        ]
+    },
+    {
+        "id": "bde97fc11ba677f9",
+        "type": "debug",
+        "z": "73585c0e719a2983",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 240,
+        "wires": []
+    }
+]
